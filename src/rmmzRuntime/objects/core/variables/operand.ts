@@ -11,7 +11,7 @@ export const operateValue = (
   return operantion === 0 ? value : -value;
 };
 
-interface ProvideActo<T> {
+export interface Provider_Target<T> {
   allMembers: () => T[];
   gameActor: (actorId: number) => T | undefined;
 }
@@ -19,7 +19,7 @@ interface ProvideActo<T> {
 export const resolveTargets = <T>(
   param1: 0 | 1,
   param2: number,
-  provider: ProvideActo<T>,
+  provider: Provider_Target<T>,
   variables: Rmmz_Variables,
 ): T[] => {
   if (param1 === 0) {
@@ -29,7 +29,7 @@ export const resolveTargets = <T>(
   return actorsById(provider, actorId);
 };
 
-const actorsById = <T>(provider: ProvideActo<T>, actorId: number): T[] => {
+const actorsById = <T>(provider: Provider_Target<T>, actorId: number): T[] => {
   if (actorId === 0) {
     return provider.allMembers();
   }
