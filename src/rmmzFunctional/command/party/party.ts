@@ -7,6 +7,21 @@ import type { Provider_RpgItems } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_UnitPlayer, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import { operateValue } from "@RpgTypes/rmmzRuntime";
 
+export const executeChangeGold = (
+  command: Command_ChangeItems,
+  party: Rmmz_UnitPlayer,
+  variables: Rmmz_Variables,
+): boolean => {
+  const amount = operateValue(
+    variables,
+    command.parameters[0],
+    command.parameters[1],
+    command.parameters[3],
+  );
+  party.gainGold(amount);
+  return true;
+};
+
 export const executeChangeItems = (
   command: Command_ChangeItems,
   provider: Provider_RpgItems,
@@ -14,12 +29,11 @@ export const executeChangeItems = (
   variables: Rmmz_Variables,
 ): boolean => {
   const item = provider.dataItem(command.parameters[0]);
-  if (!item) {
-    return true;
+  if (item) {
+    const amount = resolveItemAmount(command, variables);
+    party.gainItem(item, amount, false);
   }
 
-  const amount = resolveItemAmount(command, variables);
-  party.gainItem(item, amount, false);
   return true;
 };
 
@@ -30,11 +44,11 @@ export const executeChangeWeapons = (
   variables: Rmmz_Variables,
 ): boolean => {
   const weapon = provider.dataWeapon(command.parameters[0]);
-  if (!weapon) {
-    return true;
+  if (weapon) {
+    const amount = resolveItemAmount(command, variables);
+    party.gainItem(weapon, amount, false);
   }
-  const amount = resolveItemAmount(command, variables);
-  party.gainItem(weapon, amount, false);
+
   return true;
 };
 
@@ -45,11 +59,10 @@ export const executeChangeArmors = (
   variables: Rmmz_Variables,
 ): boolean => {
   const armor = provider.dataArmor(command.parameters[0]);
-  if (!armor) {
-    return true;
+  if (armor) {
+    const amount = resolveItemAmount(command, variables);
+    party.gainItem(armor, amount, false);
   }
-  const amount = resolveItemAmount(command, variables);
-  party.gainItem(armor, amount, false);
   return true;
 };
 
