@@ -73,6 +73,34 @@ const testCases: TestCase[] = [
     validFn: () => true,
   },
   {
+    name: "multiple valid encounters",
+    totalWeight: 30,
+    randomValue: 15,
+    encounter: () => {
+      const e1: Encounter = { regionSet: [], troopId: 1, weight: 10 };
+      const e2: Encounter = { regionSet: [], troopId: 2, weight: 20 };
+      return {
+        list: [e1, e2],
+        expectedEncounter: e2,
+      };
+    },
+    validFn: () => true,
+  },
+  {
+    name: "multiple encounters with some invalid",
+    totalWeight: 2,
+    randomValue: 1,
+    encounter: () => {
+      const e1: Encounter = { regionSet: [22], troopId: 1, weight: 2 };
+      const e2: Encounter = { regionSet: [], troopId: 2, weight: 20 };
+      return {
+        list: [e1, e2],
+        expectedEncounter: e1,
+      };
+    },
+    validFn: (e) => e.regionSet.length > 0,
+  },
+  {
     name: "all encounters invalid",
     totalWeight: 0,
     randomValue: 0,
