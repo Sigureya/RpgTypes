@@ -1,5 +1,6 @@
 import type {
   Command_ChangeArmors,
+  Command_ChangeGold,
   Command_ChangeItems,
   Command_ChangeWeapons,
 } from "@RpgTypes/rmmz/eventCommand";
@@ -8,7 +9,7 @@ import type { Rmmz_UnitPlayer, Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import { operateValue } from "@RpgTypes/rmmzRuntime";
 
 export const executeChangeGold = (
-  command: Command_ChangeItems,
+  command: Command_ChangeGold,
   party: Rmmz_UnitPlayer,
   variables: Rmmz_Variables,
 ): boolean => {
@@ -16,7 +17,7 @@ export const executeChangeGold = (
     variables,
     command.parameters[0],
     command.parameters[1],
-    command.parameters[3],
+    command.parameters[2],
   );
   party.gainGold(amount);
   return true;
