@@ -4,8 +4,8 @@ import type {
   Rmmz_Variables,
   Rmmz_PlayerCharactor,
 } from "@RpgTypes/rmmzRuntime";
-import { ggTroopId } from "./battle/battle";
-import type { InterprterState } from "./types";
+import { ggTroopId } from "./command/battle/battle";
+import type { InterprterState } from "./command/types";
 
 interface BattleResult {
   win: boolean;
