@@ -1,57 +1,20 @@
-import type { MoveRouteCommandUnknown, AudioFileParams } from "@RpgTypes/libs";
-import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import type { Encounter } from "./encounter";
-import type { MapEvent } from "./event";
-import type { MapEventContainer } from "./types/mapEventContainer";
+import { selectEncounters } from "./encounter/encounter";
+import { mapRegionId } from "./tiles";
+import type { Map_EncounterSoucre } from "./types";
 
-export interface Data_MapUnknown<
-  CommandType extends EventCommandUnknown = EventCommand,
-  MoveRoute extends MoveRouteCommandUnknown = MoveRouteCommandUnknown,
-> extends MapEventContainer<CommandType> {
-  data: number[];
-  battleback1Name: string;
-  battleback2Name: string;
-  specifyBattleback: boolean;
-
-  parallaxLoopX: boolean;
-  parallaxLoopY: boolean;
-  parallaxName: string;
-  parallaxShow: boolean;
-  parallaxSx: number;
-  parallaxSy: number;
-
-  width: number;
-  height: number;
-  note: string;
-
-  displayName: string;
-  disableDashing: boolean;
-
-  bgm: AudioFileParams;
-  bgs: AudioFileParams;
-  autoplayBgm: boolean;
-  autoplayBgs: boolean;
-  scrollType: number;
-  tilesetId: number;
-  encounterStep: number;
-  encounterList: Encounter[];
-  events: Array<MapEvent<CommandType, MoveRoute> | null>;
-}
-
-export type Map_ImageFiles = Pick<
-  Data_MapUnknown,
-  "battleback1Name" | "battleback2Name" | "parallaxName"
->;
-export type Map_Parallax = Pick<
-  Data_MapUnknown,
-  | "parallaxLoopX"
-  | "parallaxLoopY"
-  | "parallaxShow"
-  | "parallaxSx"
-  | "parallaxSy"
->;
-export type Map_Audios = Pick<
-  Data_MapUnknown,
-  "bgm" | "bgs" | "autoplayBgm" | "autoplayBgs"
->;
+export const selectMapEncounters = (
+  map: Map_EncounterSoucre,
+  x: number,
+  y: number,
+  random: (max: number) => number,
+): Encounter | null => {
+  const regionId: number = mapRegionId(map, x, y);
+  return selectEncounters(
+    map.encounterList,
+    (e) => {
+      return e.regionSet.includes(regionId);
+    },
+    random,
+  );
+};

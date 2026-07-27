@@ -1,9 +1,9 @@
 import type { MoveRouteCommandUnknown } from "@RpgTypes/libs";
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import { makeMapEvent, makeMapEventPage } from "./event";
-import type { Data_MapUnknown } from "./map";
 import type { MapFileInfo } from "./mapFileInfo";
 import type { Data_MapInfo } from "./mapInfo";
+import type { Data_MapUnknown } from "./types";
 
 export const makeMapFileInfo = <T>(
   info: Data_MapInfo,
