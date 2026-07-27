@@ -26,11 +26,11 @@ import {
   makeCommandVariableFromActorMdf,
 } from "@RpgTypes/rmmz/eventCommand";
 import { ACTOR_STATUS } from "@RpgTypes/rmmz/eventCommand/commands/variable/gamedata/actor/dataSource";
-import { variableFromActor } from "@RpgTypes/rmmzFunctional/command/variable/battler";
+import { variableFromActor } from "@RpgTypes/rmmzFunctional/interpreter/command/variable/battler";
 import type {
   Rmmz_VariableSourceActor,
   Rmmz_VariableSourceProvider,
-} from "@RpgTypes/rmmzFunctional/command/variable/types";
+} from "@RpgTypes/rmmzFunctional/interpreter/command/variable/types";
 import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
 import type { FakeMap } from "./fakes/types";
 import { Game_Interpreter } from "./rmmz_objects";
