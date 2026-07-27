@@ -2,8 +2,7 @@ import type { MoveRouteCommandUnknown, AudioFileParams } from "@RpgTypes/libs";
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import type { Encounter } from "./encounter";
-import type { MapEvent } from "./event";
-import type { MapEventContainer } from "./types/mapEventContainer";
+import type { MapEvent, MapEventContainer } from "./event";
 
 export interface Data_MapUnknown<
   CommandType extends EventCommandUnknown = EventCommand,

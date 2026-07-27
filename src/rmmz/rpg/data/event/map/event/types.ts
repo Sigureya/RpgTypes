@@ -1,6 +1,6 @@
 export interface MapEventContainer<
   Command = unknown,
-  Event extends object = {}
+  Event extends object = {},
 > {
   events: Array<
     | (Event & {
