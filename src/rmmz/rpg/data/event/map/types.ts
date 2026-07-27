@@ -3,11 +3,17 @@ import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 import type { Encounter } from "./encounter";
 import type { MapEvent, MapEventContainer } from "./event";
+import type { Data_MapTiles } from "./tiles";
+
+export type Map_EncounterSoucre = Data_MapTiles & {
+  encounterList: Encounter[];
+};
 
 export interface Data_MapUnknown<
   CommandType extends EventCommandUnknown = EventCommand,
   MoveRoute extends MoveRouteCommandUnknown = MoveRouteCommandUnknown,
-> extends MapEventContainer<CommandType> {
+>
+  extends MapEventContainer<CommandType>, Map_EncounterSoucre {
   data: number[];
   battleback1Name: string;
   battleback2Name: string;

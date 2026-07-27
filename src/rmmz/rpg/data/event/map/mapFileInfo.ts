@@ -1,4 +1,4 @@
-import type { Data_MapUnknown } from "./map";
+import type { Data_MapUnknown } from "./types";
 
 export interface MapFileInfo<Data = Data_MapUnknown> {
   map: Data;
