@@ -1,7 +1,7 @@
 import type { Encounter } from "./types";
 
 export const selectEncounters = (
-  encounterList: readonly Encounter[],
+  encounterList: ReadonlyArray<Encounter>,
   isEncounterValid: (
     e: Encounter,
     index: number,
