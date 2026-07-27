@@ -8,7 +8,7 @@ export const isValidMapPosition = (
   return x >= 0 && y >= 0 && x < map.width && y < map.height;
 };
 
-export const mapTileIdToIndex = (
+export const mapTileId = (
   map: Data_MapTiles,
   x: number,
   y: number,
@@ -17,4 +17,12 @@ export const mapTileIdToIndex = (
   const width = map.width;
   const height = map.height;
   return map.data[(z * height + y) * width + x] || 0;
+};
+
+export const mapRegionId = (
+  map: Data_MapTiles,
+  x: number,
+  y: number,
+): number => {
+  return isValidMapPosition(map, x, y) ? mapTileId(map, x, y, 5) : 0;
 };
