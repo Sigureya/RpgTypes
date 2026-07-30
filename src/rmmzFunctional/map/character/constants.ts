@@ -1,0 +1,25 @@
+import { DIRECTION, type Direction8 } from "@RpgTypes/rmmz/utils";
+
+export const REVERSE_DIRECTION_BASE = 10;
+export const DEFAULT_CHARACTER_SEARCH_LIMIT = 12;
+
+export const CARDINAL_DIRECTIONS = [
+  DIRECTION.DOWN,
+  DIRECTION.LEFT,
+  DIRECTION.RIGHT,
+  DIRECTION.UP,
+] as const satisfies ReadonlyArray<Direction8>;
+
+export const TURN_RIGHT_90_TABLE: Readonly<Record<Direction8, Direction8>> = {
+  [DIRECTION.DOWN]: DIRECTION.LEFT,
+  [DIRECTION.LEFT]: DIRECTION.UP,
+  [DIRECTION.RIGHT]: DIRECTION.DOWN,
+  [DIRECTION.UP]: DIRECTION.RIGHT,
+};
+
+export const TURN_LEFT_90_TABLE: Readonly<Record<Direction8, Direction8>> = {
+  [DIRECTION.DOWN]: DIRECTION.RIGHT,
+  [DIRECTION.LEFT]: DIRECTION.DOWN,
+  [DIRECTION.RIGHT]: DIRECTION.UP,
+  [DIRECTION.UP]: DIRECTION.LEFT,
+};
