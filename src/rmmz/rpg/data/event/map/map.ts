@@ -55,9 +55,9 @@ export const mapDeltaX = (
   x1: number,
   x2: number,
 ): number => {
-  let result = x1 - x2;
+  const result = x1 - x2;
   if (mapIsLoopHorizontal(map) && Math.abs(result) > map.width / 2) {
-    result = result < 0 ? result + map.width : result - map.width;
+    return result < 0 ? result + map.width : result - map.width;
   }
   return result;
 };
@@ -67,9 +67,9 @@ export const mapDeltaY = (
   y1: number,
   y2: number,
 ): number => {
-  let result = y1 - y2;
+  const result = y1 - y2;
   if (mapIsLoopVertical(map) && Math.abs(result) > map.height / 2) {
-    result = result < 0 ? result + map.height : result - map.height;
+    return result < 0 ? result + map.height : result - map.height;
   }
   return result;
 };
