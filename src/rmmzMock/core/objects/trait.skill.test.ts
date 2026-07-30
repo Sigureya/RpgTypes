@@ -59,7 +59,7 @@ const createMockedBattlerBase = (
       id,
     );
   });
-  const traitsSet = vi.fn((code: number): boolean => {
+  const traitsSet = vi.fn((code: number): number[] => {
     return Game_BattlerBase.prototype.traitsSet.call({ traits: traits }, code);
   });
 
