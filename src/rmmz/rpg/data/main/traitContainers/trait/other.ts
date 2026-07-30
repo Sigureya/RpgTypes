@@ -1,4 +1,8 @@
-import { FLAG_ID_PRESERVE_TP, TRAIT_SPECIAL_FLAG } from "./core";
+import {
+  FLAG_ID_PRESERVE_TP,
+  TRAIT_COLLAPSE_TYPE,
+  TRAIT_SPECIAL_FLAG,
+} from "./core";
 import type { Trait } from "./types";
 
 export const traitIsPreserveTp = (trait: readonly Trait[]): boolean => {
@@ -6,4 +10,15 @@ export const traitIsPreserveTp = (trait: readonly Trait[]): boolean => {
     (trait) =>
       trait.code === TRAIT_SPECIAL_FLAG && trait.dataId === FLAG_ID_PRESERVE_TP,
   );
+};
+
+export const traitCollapseType = (traits: readonly Trait[]): number => {
+  return traits.reduce(accCollapse, 0);
+};
+
+const accCollapse = (acc: number, tarits: Trait) => {
+  if (tarits.code === TRAIT_COLLAPSE_TYPE) {
+    return Math.max(acc, tarits.dataId);
+  }
+  return acc;
 };
