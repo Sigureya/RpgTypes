@@ -7,7 +7,7 @@ export interface Rmmz_TraitContainer {
   traitsPi(code: number, id: number): number;
   traitsSum(code: number, id: number): number;
   traitsSumAll(code: number): number;
-  traitsSet(code: number): boolean;
+  traitsSet(code: number): number[];
   elementRate(elementId: number): number;
   debuffRate(paramId: number): number;
   stateRate(stateId: number): number;
