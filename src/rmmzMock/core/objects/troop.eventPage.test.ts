@@ -4,12 +4,12 @@ import type {
   BattleEventPage,
   Troop_EventConditions,
 } from "@RpgTypes/rmmz/rpg";
+import type { TroopMM } from "@RpgTypes/rmmzFunctional/troop";
+import { meetsBattleEventConditions } from "@RpgTypes/rmmzFunctional/troop";
 import type { Rmmz_ActorsReadonly, Rmmz_Troop } from "@RpgTypes/rmmzRuntime";
 import type { Rmmz_BattleManager_State } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
 import type { Rmmz_BattlerBase_Values } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/base/values";
 import type { Rmmz_Switches } from "@RpgTypes/rmmzRuntime/objects/core/variables";
-import type { TroopMM } from "@RpgTypes/rpgNext/troop";
-import { meetsBattleEventConditions } from "@RpgTypes/rpgNext/troop";
 import type { FakeMap } from "./fakes/types";
 import { Game_Troop } from "./rmmz_objects";
 

@@ -8,11 +8,8 @@ import {
   ENEMY_ACTION_CONDITION_TURN,
   filterUsableSkillsEx,
 } from "@RpgTypes/rmmz";
-import type {
-  Rmmz_Enemy,
-  Rmmz_Party,
-  Rmmz_Switches,
-} from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Party, Rmmz_Switches } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_EnemyActionConditionType } from "./types";
 
 // TS上でのテスト簡単にするための型指定
 // C#移植の際は通常のPartyのままで良い。仮想関数オーバーヘッドを避ける
@@ -20,7 +17,7 @@ type Rmmz_Party_highestLevel = Pick<Rmmz_Party, "highestLevel">;
 
 export const filterUsableEnemyActions = (
   actions: ReadonlyArray<Enemy_Action>,
-  battler: Rmmz_Enemy,
+  battler: Rmmz_EnemyActionConditionType,
   party: Rmmz_Party_highestLevel,
   switches: Rmmz_Switches,
   skillFn: (action: Enemy_Action) => Data_Skill | null | undefined,
@@ -43,20 +40,20 @@ export const filterEnemyActionByRating = (
   actions: ReadonlyArray<Enemy_Action>,
   ratingDistance: number = 3, // デフォルト値はRPGツクールMZの仕様に合わせる
 ): Enemy_Action[] => {
-  const maxRating: number = findMaxRating(actions);
+  // C#実装はforループの方が速いはず。
+  // このライブラリはforやletを禁止しているのでreduceしている
+  const maxRating: number = actions.reduce(accFindMaxRating, 0);
   const ratingZero: number = maxRating - ratingDistance;
   return actions.filter((action) => action.rating > ratingZero);
 };
 
-const findMaxRating = (actions: ReadonlyArray<Enemy_Action>): number => {
-  // C#実装はforループの方が速いはず。
-  // このライブラリはforやletを禁止しているのでreduceしている
-  return actions.reduce((max, action) => Math.max(max, action.rating), 0);
+const accFindMaxRating = (max: number, action: Enemy_Action): number => {
+  return Math.max(max, action.rating);
 };
 
 export const enemyActionMeetsCondition = (
   action: Enemy_Action,
-  enemy: Rmmz_Enemy,
+  enemy: Rmmz_EnemyActionConditionType,
   party: Rmmz_Party_highestLevel,
   switches: Rmmz_Switches,
 ): boolean => {
@@ -110,5 +107,5 @@ const enemyActionMeetsConditionPointRate = (
   action: Enemy_Action,
   point: number,
 ): boolean => {
-  return point >= action.conditionParam1 && point <= action.conditionParam2;
+  return action.conditionParam1 <= point && point <= action.conditionParam2;
 };
