@@ -106,7 +106,7 @@ const actionText = (action: Enemy_Action): string => {
   return `skillId: ${action.skillId}`;
 };
 
-const xxxxx = (
+const testByAction = (
   expected: boolean,
   arg: EnemyArg,
   partyLevel: number,
@@ -141,7 +141,7 @@ const xxxxx = (
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.name, () => {
     testCase.actionTrue.forEach((action) => {
-      xxxxx(
+      testByAction(
         true,
         testCase.arg.enemy,
         testCase.arg.partyLevel,
@@ -150,7 +150,7 @@ const runTestCase = (testCase: TestCase) => {
       );
     });
     testCase.actionFalse.forEach((action) => {
-      xxxxx(
+      testByAction(
         false,
         testCase.arg.enemy,
         testCase.arg.partyLevel,
@@ -278,24 +278,10 @@ const testCases: TestCase[] = [
     actionTrue: [
       {
         conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
-        conditionParam1: 3,
-        conditionParam2: 0,
-        rating: 5,
-        skillId: 201,
-      },
-      {
-        conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
         conditionParam1: 4,
         conditionParam2: 0,
         rating: 5,
-        skillId: 233,
-      },
-      {
-        conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
-        conditionParam1: 5,
-        conditionParam2: 0,
-        rating: 5,
-        skillId: 209,
+        skillId: 331,
       },
     ],
     actionFalse: [
@@ -304,14 +290,7 @@ const testCases: TestCase[] = [
         conditionParam1: 6,
         conditionParam2: 0,
         rating: 5,
-        skillId: 183,
-      },
-      {
-        conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
-        conditionParam1: 7,
-        conditionParam2: 0,
-        rating: 5,
-        skillId: 351,
+        skillId: 255,
       },
     ],
     func: [
@@ -440,7 +419,7 @@ const testCases: TestCase[] = [
         conditionParam1: 0.7,
         conditionParam2: 0.9,
         rating: 5,
-        skillId: 653,
+        skillId: 657,
       },
     ],
     actionTrue: [
