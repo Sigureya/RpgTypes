@@ -3,6 +3,7 @@ import { describe, expect, test, vi } from "vitest";
 import type { Enemy_Action, Trait } from "@RpgTypes/rmmz/rpg";
 import {
   ENEMY_ACTION_CONDITION_PARTY_LEVEL,
+  ENEMY_ACTION_CONDITION_SWITCH,
   ENEMY_ACTION_CONDITION_TURN,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Party, Rmmz_Switches } from "@RpgTypes/rmmzRuntime";
@@ -72,6 +73,13 @@ const expectSwwitchNotCalled = ({ switches }: TestContext) => {
 
 const expectPartyNotCalled = ({ party }: TestContext) => {
   expect(party.highestLevel).not.toHaveBeenCalled();
+};
+
+const expectEnemyNotCalled = ({ enemy }: TestContext) => {
+  expect(enemy.turnCount).not.toHaveBeenCalled();
+  expect(enemy.hpRate).not.toHaveBeenCalled();
+  expect(enemy.mpRate).not.toHaveBeenCalled();
+  expect(enemy.isStateAffected).not.toHaveBeenCalled();
 };
 
 interface TestCase {
@@ -304,8 +312,47 @@ const testCases: TestCase[] = [
       },
     ],
     func: [
+      expectEnemyNotCalled,
       ({ party }) => {
         expect(party.highestLevel).toHaveBeenCalledOnce();
+      },
+    ],
+  },
+  {
+    name: "switch",
+    arg: {
+      partyLevel: 1,
+      enemy: {
+        hpRate: 1,
+        mpRate: 1,
+        turnCount: 1,
+        affectedStates: [],
+        traits: [],
+      },
+    },
+    actionTrue: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_SWITCH,
+        conditionParam1: VALID_SWITCH_ID,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 129,
+      },
+    ],
+    actionFalse: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_SWITCH,
+        conditionParam1: 333,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 653,
+      },
+    ],
+    func: [
+      expectPartyNotCalled,
+      expectEnemyNotCalled,
+      ({ switches }) => {
+        expect(switches.value).toHaveBeenCalledOnce();
       },
     ],
   },
