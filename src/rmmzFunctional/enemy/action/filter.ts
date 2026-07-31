@@ -107,5 +107,5 @@ const enemyActionMeetsConditionPointRate = (
   action: Enemy_Action,
   point: number,
 ): boolean => {
-  return point >= action.conditionParam1 && point <= action.conditionParam2;
+  return action.conditionParam1 <= point && point <= action.conditionParam2;
 };
