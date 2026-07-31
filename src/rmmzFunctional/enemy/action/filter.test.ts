@@ -10,7 +10,7 @@ import {
   ENEMY_ACTION_CONDITION_TURN,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Party, Rmmz_Switches } from "@RpgTypes/rmmzRuntime";
-import { enemyActionMeetsCondition } from "./filter";
+import { enemyActionMeetsCondition, filterUsableEnemyActions } from "./filter";
 import type { Rmmz_EnemyActionConditionType } from "./types";
 
 type FakeParty = Pick<Rmmz_Party, "highestLevel">;
@@ -140,23 +140,43 @@ const testByAction = (
 
 const runTestCase = (testCase: TestCase) => {
   describe(testCase.name, () => {
-    testCase.actionTrue.forEach((action) => {
-      testByAction(
-        true,
-        testCase.arg.enemy,
-        testCase.arg.partyLevel,
-        action,
-        testCase.func,
-      );
+    describe("trueのaction", () => {
+      testCase.actionTrue.forEach((action) => {
+        testByAction(
+          true,
+          testCase.arg.enemy,
+          testCase.arg.partyLevel,
+          action,
+          testCase.func,
+        );
+      });
     });
-    testCase.actionFalse.forEach((action) => {
-      testByAction(
-        false,
-        testCase.arg.enemy,
-        testCase.arg.partyLevel,
-        action,
-        testCase.func,
-      );
+    describe("falseのaction", () => {
+      testCase.actionFalse.forEach((action) => {
+        testByAction(
+          false,
+          testCase.arg.enemy,
+          testCase.arg.partyLevel,
+          action,
+          testCase.func,
+        );
+      });
+      test("filterUsableEnemyActions", () => {
+        const context = createTestContext(
+          testCase.arg.enemy,
+          testCase.arg.partyLevel,
+        );
+        const skillFn = vi.fn(() => null);
+        const result = filterUsableEnemyActions(
+          testCase.actionFalse,
+          context.enemy,
+          context.party,
+          context.switches,
+          skillFn,
+        );
+        expect(result).toEqual([]);
+        expect(skillFn).not.toHaveBeenCalled();
+      });
     });
   });
 };
