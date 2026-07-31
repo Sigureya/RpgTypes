@@ -1,10 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import {
-  ENEMY_ACTION_CONDITION_TURN,
-  type Enemy_Action,
-  type Trait,
-} from "@RpgTypes/rmmz/rpg";
+import type { Enemy_Action, Trait } from "@RpgTypes/rmmz/rpg";
+import { ENEMY_ACTION_CONDITION_TURN } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Party, Rmmz_Switches } from "@RpgTypes/rmmzRuntime";
 import { enemyActionMeetsCondition } from "./filter";
 import type { Rmmz_EnemyActionConditionType } from "./types";
@@ -72,8 +69,8 @@ const expectSwwitchNotCalled = ({ switches }: TestContext) => {
 
 interface TestCase {
   name: string;
-  action: Enemy_Action;
-  expected: boolean;
+  actionTrue: Enemy_Action[];
+  actionFalse: Enemy_Action[];
   func: ((context: TestContext) => void)[];
   arg: {
     partyLevel: number;
@@ -87,49 +84,78 @@ interface TestContext {
   enemy: MockedObject<Rmmz_EnemyActionConditionType>;
 }
 
-const runTestCase = (testCase: TestCase) => {
-  describe(testCase.name, () => {
+const actionText = (action: Enemy_Action): string => {
+  return `skillId: ${action.skillId}`;
+};
+
+const xxxxx = (
+  expected: boolean,
+  arg: EnemyArg,
+  partyLevel: number,
+  action: Enemy_Action,
+  func: ((context: TestContext) => void)[],
+): void => {
+  describe(actionText(action), () => {
     test("戻り値", () => {
-      const context = createTestContext(
-        testCase.arg.enemy,
-        testCase.arg.partyLevel,
-      );
+      const context = createTestContext(arg, partyLevel);
       const result = enemyActionMeetsCondition(
-        testCase.action,
+        action,
         context.enemy,
         context.party,
         context.switches,
       );
-      expect(result).toBe(testCase.expected);
+      expect(result).toBe(expected);
     });
     test("関数の呼び出し", () => {
-      const context = createTestContext(
-        testCase.arg.enemy,
-        testCase.arg.partyLevel,
-      );
-
+      const context = createTestContext(arg, partyLevel);
       enemyActionMeetsCondition(
-        testCase.action,
+        action,
         context.enemy,
         context.party,
         context.switches,
       );
       expect(context.enemy.allTraits).not.toHaveBeenCalled();
-      testCase.func.forEach((f) => f(context));
+      func.forEach((f) => f(context));
+    });
+  });
+};
+
+const runTestCase = (testCase: TestCase) => {
+  describe(testCase.name, () => {
+    testCase.actionTrue.forEach((action) => {
+      xxxxx(
+        true,
+        testCase.arg.enemy,
+        testCase.arg.partyLevel,
+        action,
+        testCase.func,
+      );
+    });
+    testCase.actionFalse.forEach((action) => {
+      xxxxx(
+        false,
+        testCase.arg.enemy,
+        testCase.arg.partyLevel,
+        action,
+        testCase.func,
+      );
     });
   });
 };
 
 const testCases: TestCase[] = [
   {
-    action: {
-      conditionType: 0,
-      conditionParam1: 1,
-      conditionParam2: 0,
-      rating: 5,
-      skillId: 1,
-    },
     name: "条件なし",
+    actionTrue: [
+      {
+        conditionType: 0,
+        conditionParam1: 0,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 1,
+      },
+    ],
+    actionFalse: [],
     arg: {
       partyLevel: 1,
       enemy: {
@@ -140,7 +166,6 @@ const testCases: TestCase[] = [
         traits: [],
       },
     },
-    expected: true,
     func: [
       expectSwwitchNotCalled,
       ({ party, enemy }) => {
@@ -153,54 +178,56 @@ const testCases: TestCase[] = [
     ],
   },
   {
-    action: {
-      conditionType: ENEMY_ACTION_CONDITION_TURN,
-      conditionParam1: 1,
-      conditionParam2: 0,
-      rating: 5,
-      skillId: 1,
-    },
-    name: "ターン条件: 1ターン目",
-    arg: {
-      partyLevel: 1,
-      enemy: {
-        hpRate: 1,
-        mpRate: 1,
-        turnCount: 1,
-        affectedStates: [],
-        traits: [],
+    name: "ターン条件: 6ターン目",
+    actionTrue: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_TURN,
+        conditionParam1: 6,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 113,
       },
-    },
-    expected: true,
-    func: [
-      expectSwwitchNotCalled,
-      ({ enemy }) => {
-        expect(enemy.turnCount).toHaveBeenCalledOnce();
-        expect(enemy.hpRate).not.toHaveBeenCalled();
-        expect(enemy.mpRate).not.toHaveBeenCalled();
+      {
+        conditionType: ENEMY_ACTION_CONDITION_TURN,
+        conditionParam1: 0,
+        conditionParam2: 3,
+        rating: 5,
+        skillId: 211,
+      },
+      {
+        conditionType: ENEMY_ACTION_CONDITION_TURN,
+        conditionParam1: 0,
+        conditionParam2: 2,
+        rating: 5,
+        skillId: 231,
       },
     ],
-  },
-  {
-    action: {
-      conditionType: ENEMY_ACTION_CONDITION_TURN,
-      conditionParam1: 12,
-      conditionParam2: 0,
-      rating: 5,
-      skillId: 1,
-    },
-    name: "ターン条件: 12ターン目",
+    actionFalse: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_TURN,
+        conditionParam1: 5,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 185,
+      },
+      {
+        conditionType: ENEMY_ACTION_CONDITION_TURN,
+        conditionParam1: 0,
+        conditionParam2: 4,
+        rating: 5,
+        skillId: 251,
+      },
+    ],
     arg: {
       partyLevel: 1,
       enemy: {
         hpRate: 1,
         mpRate: 1,
-        turnCount: 12,
+        turnCount: 6,
         affectedStates: [],
         traits: [],
       },
     },
-    expected: true,
     func: [
       expectSwwitchNotCalled,
       ({ enemy }) => {
