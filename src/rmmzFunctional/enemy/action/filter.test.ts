@@ -1,7 +1,10 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Enemy_Action, Trait } from "@RpgTypes/rmmz/rpg";
-import { ENEMY_ACTION_CONDITION_TURN } from "@RpgTypes/rmmz/rpg";
+import {
+  ENEMY_ACTION_CONDITION_PARTY_LEVEL,
+  ENEMY_ACTION_CONDITION_TURN,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Party, Rmmz_Switches } from "@RpgTypes/rmmzRuntime";
 import { enemyActionMeetsCondition } from "./filter";
 import type { Rmmz_EnemyActionConditionType } from "./types";
@@ -65,6 +68,10 @@ const createTestContext = (
 const expectSwwitchNotCalled = ({ switches }: TestContext) => {
   expect(switches.value).not.toHaveBeenCalled();
   expect(switches.setValue).not.toHaveBeenCalled();
+};
+
+const expectPartyNotCalled = ({ party }: TestContext) => {
+  expect(party.highestLevel).not.toHaveBeenCalled();
 };
 
 interface TestCase {
@@ -168,6 +175,7 @@ const testCases: TestCase[] = [
     },
     func: [
       expectSwwitchNotCalled,
+      expectPartyNotCalled,
       ({ party, enemy }) => {
         expect(party.highestLevel).not.toHaveBeenCalled();
         expect(enemy.turnCount).not.toHaveBeenCalled();
@@ -200,6 +208,13 @@ const testCases: TestCase[] = [
         conditionParam2: 2,
         rating: 5,
         skillId: 231,
+      },
+      {
+        conditionType: ENEMY_ACTION_CONDITION_TURN,
+        conditionParam1: 1,
+        conditionParam2: 5,
+        rating: 5,
+        skillId: 233,
       },
     ],
     actionFalse: [
@@ -234,6 +249,63 @@ const testCases: TestCase[] = [
         expect(enemy.turnCount).toHaveBeenCalledOnce();
         expect(enemy.hpRate).not.toHaveBeenCalled();
         expect(enemy.mpRate).not.toHaveBeenCalled();
+      },
+    ],
+  },
+  {
+    name: "party level",
+    arg: {
+      partyLevel: 5,
+      enemy: {
+        hpRate: 1,
+        mpRate: 1,
+        turnCount: 1,
+        affectedStates: [],
+        traits: [],
+      },
+    },
+    actionTrue: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
+        conditionParam1: 3,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 201,
+      },
+      {
+        conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
+        conditionParam1: 4,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 233,
+      },
+      {
+        conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
+        conditionParam1: 5,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 209,
+      },
+    ],
+    actionFalse: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
+        conditionParam1: 6,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 183,
+      },
+      {
+        conditionType: ENEMY_ACTION_CONDITION_PARTY_LEVEL,
+        conditionParam1: 7,
+        conditionParam2: 0,
+        rating: 5,
+        skillId: 351,
+      },
+    ],
+    func: [
+      ({ party }) => {
+        expect(party.highestLevel).toHaveBeenCalledOnce();
       },
     ],
   },
