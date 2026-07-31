@@ -2,6 +2,8 @@ import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
 import type { Enemy_Action, Trait } from "@RpgTypes/rmmz/rpg";
 import {
+  ENEMY_ACTION_CONDITION_HP_RATE,
+  ENEMY_ACTION_CONDITION_MP_RATE,
   ENEMY_ACTION_CONDITION_PARTY_LEVEL,
   ENEMY_ACTION_CONDITION_STATE,
   ENEMY_ACTION_CONDITION_SWITCH,
@@ -376,7 +378,7 @@ const testCases: TestCase[] = [
         conditionParam1: 22,
         conditionParam2: 0,
         rating: 5,
-        skillId: 651,
+        skillId: 400,
       },
     ],
     actionTrue: [
@@ -385,21 +387,21 @@ const testCases: TestCase[] = [
         conditionParam1: 14,
         conditionParam2: 0,
         rating: 5,
-        skillId: 501,
+        skillId: 719,
       },
       {
         conditionType: ENEMY_ACTION_CONDITION_STATE,
         conditionParam1: 20,
         conditionParam2: 0,
         rating: 5,
-        skillId: 531,
+        skillId: 701,
       },
       {
         conditionType: ENEMY_ACTION_CONDITION_STATE,
         conditionParam1: 26,
         conditionParam2: 0,
         rating: 5,
-        skillId: 415,
+        skillId: 723,
       },
     ],
     func: [
@@ -410,6 +412,92 @@ const testCases: TestCase[] = [
         expect(enemy.turnCount).not.toHaveBeenCalled();
         expect(enemy.hpRate).not.toHaveBeenCalled();
         expect(enemy.mpRate).not.toHaveBeenCalled();
+      },
+    ],
+  },
+  {
+    name: "hp rate",
+    arg: {
+      partyLevel: 1,
+      enemy: {
+        hpRate: 0.6,
+        mpRate: 1,
+        turnCount: 1,
+        affectedStates: [],
+        traits: [],
+      },
+    },
+    actionFalse: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_HP_RATE,
+        conditionParam1: 0.2,
+        conditionParam2: 0.5,
+        rating: 5,
+        skillId: 651,
+      },
+      {
+        conditionType: ENEMY_ACTION_CONDITION_HP_RATE,
+        conditionParam1: 0.7,
+        conditionParam2: 0.9,
+        rating: 5,
+        skillId: 653,
+      },
+    ],
+    actionTrue: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_HP_RATE,
+        conditionParam1: 0.4,
+        conditionParam2: 0.6,
+        rating: 5,
+        skillId: 501,
+      },
+      {
+        conditionType: ENEMY_ACTION_CONDITION_HP_RATE,
+        conditionParam1: 0.6,
+        conditionParam2: 0.6,
+        rating: 5,
+        skillId: 531,
+      },
+    ],
+    func: [
+      expectPartyNotCalled,
+      expectSwwitchNotCalled,
+      ({ enemy }) => {
+        expect(enemy.hpRate).toHaveBeenCalledOnce();
+        expect(enemy.turnCount).not.toHaveBeenCalled();
+        expect(enemy.mpRate).not.toHaveBeenCalled();
+      },
+    ],
+  },
+  {
+    name: "mp rate",
+    arg: {
+      partyLevel: 1,
+      enemy: {
+        hpRate: 1,
+        mpRate: 0.4,
+        turnCount: 1,
+        affectedStates: [],
+        traits: [],
+      },
+    },
+    actionFalse: [],
+    actionTrue: [
+      {
+        conditionType: ENEMY_ACTION_CONDITION_MP_RATE,
+        conditionParam1: 0.3,
+        conditionParam2: 0.5,
+        rating: 5,
+        skillId: 501,
+      },
+    ],
+    func: [
+      expectPartyNotCalled,
+      expectSwwitchNotCalled,
+      ({ enemy }) => {
+        expect(enemy.mpRate).toHaveBeenCalledOnce();
+        expect(enemy.turnCount).not.toHaveBeenCalled();
+        expect(enemy.hpRate).not.toHaveBeenCalled();
       },
     ],
   },
