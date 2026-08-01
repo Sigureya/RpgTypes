@@ -21,4 +21,5 @@ export interface Rmmz_Actor extends Rmmz_Battler, Rmmz_Level, Rmmz_ActorTexts {
   hasArmor(armor: Data_Armor | null | undefined): boolean;
   hasWeapon(weapon: Data_Weapon | null | undefined): boolean;
   hasSkill(skillId: number): boolean;
+  armors(): Data_Armor[];
 }

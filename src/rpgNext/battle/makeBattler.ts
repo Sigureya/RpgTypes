@@ -1,46 +1,11 @@
-import type { StatusParamObject, Data_Enemy } from "@RpgTypes/rmmz";
-import { paramArrayToObject } from "@RpgTypes/rmmz";
+import type { Data_Enemy, StatusParamObject } from "@RpgTypes/rmmz";
+import { calcEquipParamsObject, paramArrayToObject } from "@RpgTypes/rmmz";
 import { calculateParamRate } from "@RpgTypes/rmmz/rpg/data/main/traitContainers/battlerParam";
-
-export interface NewBattler {
-  name: string;
-  baseParams: StatusParamObject;
-  paramRates: StatusParamObject;
-  variables: BattlerVariables;
-}
-
-export interface BattlerVariables {
-  hp: number;
-  mp: number;
-  tp: number;
-  states: NewState[];
-  buffPlus: BuffItem[];
-  buffRate: BuffItem[];
-  turnCount: number;
-  custom: {
-    booleans: Record<string, boolean>;
-    numbers: Record<string, number>;
-    objects: Record<string, object>;
-  };
-}
-
-export interface BuffItem {
-  startTurn: number;
-  paramId: number;
-  sourceBattlerId: number;
-  value: number;
-}
-
-export interface NewState {
-  stateId: number;
-  startTurn: number;
-  turnLimit: number;
-  sourceBattlerId: number;
-}
+import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
+import type { NewBattler } from "./types";
 
 export const makeBattlerFromEnemy = (enemy: Data_Enemy): NewBattler => {
   const params = paramArrayToObject(enemy.params);
-
   return {
     name: enemy.name,
     paramRates: calculateParamRate(enemy.traits),
@@ -60,4 +25,9 @@ export const makeBattlerFromEnemy = (enemy: Data_Enemy): NewBattler => {
       buffRate: [],
     },
   };
+};
+
+const baseParamxx = (actor: Rmmz_Actor): StatusParamObject => {
+  const a = actor.armors();
+  return calcEquipParamsObject(a);
 };
