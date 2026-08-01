@@ -1,5 +1,5 @@
-import type { Data_Enemy } from "@RpgTypes/rmmz";
-import { paramArrayToObject } from "@RpgTypes/rmmz";
+import type { Data_Enemy, StatusParamObject } from "@RpgTypes/rmmz";
+import { calcEquipParamsObject, paramArrayToObject } from "@RpgTypes/rmmz";
 import { calculateParamRate } from "@RpgTypes/rmmz/rpg/data/main/traitContainers/battlerParam";
 import type { Rmmz_Actor } from "@RpgTypes/rmmzRuntime";
 import type { NewBattler } from "./types";
@@ -27,6 +27,7 @@ export const makeBattlerFromEnemy = (enemy: Data_Enemy): NewBattler => {
   };
 };
 
-const baseParamxx = (actor: Rmmz_Actor) => {
-  //  const e = actor.eq
+const baseParamxx = (actor: Rmmz_Actor): StatusParamObject => {
+  const a = actor.armors();
+  return calcEquipParamsObject(a);
 };

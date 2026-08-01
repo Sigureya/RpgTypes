@@ -1,4 +1,5 @@
 import type { StatusParamObject } from "@RpgTypes/rmmz";
+import type { NewState } from "./state/types";
 
 export interface NewBattler {
   name: string;
@@ -27,11 +28,4 @@ export interface BuffItem {
   paramId: number;
   sourceBattlerId: number;
   value: number;
-}
-
-export interface NewState {
-  stateId: number;
-  startTurn: number;
-  turnLimit: number;
-  sourceBattlerId: number;
 }
