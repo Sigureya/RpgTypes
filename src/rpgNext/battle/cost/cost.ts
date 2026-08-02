@@ -1,6 +1,6 @@
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import { ACTION_COST_HP, ACTION_COST_MP } from "./constants";
-import type { ActionCost, ActionTotalCost } from "./customValue";
+import type { ActionCost, ActionTotalCost } from "./types";
 
 export const calcTotalCost = (
   battler: Rmmz_BattlerBase,
