@@ -2,6 +2,16 @@ import type { Data_State } from "@RpgTypes/rmmz";
 import { BATTLE_OPERATION_REMOVE_STATUS_BY_DAMAGE } from "./constants";
 import type { BattleOperation_RemoveState, NewState } from "./types";
 
+export const cloneStateInstance = (state: NewState): NewState => {
+  return {
+    stateId: state.stateId,
+    startTurn: state.startTurn,
+    turnLimit: state.turnLimit,
+    sourceBattlerId: state.sourceBattlerId,
+    instanceId: state.instanceId,
+  };
+};
+
 export const xxxx = (
   states: readonly NewState[],
   stateFn: (id: number) => Data_State | undefined,
