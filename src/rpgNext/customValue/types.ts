@@ -1,12 +1,8 @@
 /* eslint-disable @functional/no-return-void */
 import type { Trait } from "@RpgTypes/rmmz";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-import type {
-  ActionContext,
-  BattleXX,
-  ActionCost,
-  ActionTotalCost,
-} from "./customValue";
+import type { ActionCost, ActionTotalCost } from "../battle/cost/types";
+import type { ActionContext, BattleXX } from "./customValue";
 
 export interface ActionBehavierRunner {
   canUse(context: ActionContext): boolean;

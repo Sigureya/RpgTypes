@@ -1,10 +1,6 @@
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-import type {
-  ActionContext,
-  ActionCost,
-  ActionHandlers,
-  BattleXX,
-} from "./customValue";
+import type { ActionCost } from "../battle/cost/types";
+import type { ActionContext, ActionHandlers, BattleXX } from "./customValue";
 import type { ActionBehavierRunner, Context2 } from "./types";
 
 /* eslint-disable @functional/no-return-void */
