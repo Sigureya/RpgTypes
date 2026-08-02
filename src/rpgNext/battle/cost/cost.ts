@@ -1,16 +1,27 @@
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
-import { ACTION_COST_HP, ACTION_COST_MP } from "./constants";
+import { ACTION_COST_HP, ACTION_COST_MP, ACTION_COST_TP } from "./constants";
 import type { ActionCost, ActionTotalCost } from "./types";
 
-export const calcTotalCost = (
-  battler: Rmmz_BattlerBase,
+export const calcTotalActionCost = (
   cost: ReadonlyArray<ActionCost>,
 ): ActionTotalCost => {
-  return {
-    hp: 0,
-    mp: 0,
-    tp: 0,
-  };
+  return cost.reduce<ActionTotalCost>(
+    (total: ActionTotalCost, c): ActionTotalCost => {
+      switch (c.code) {
+        case ACTION_COST_HP:
+          total.hp += c.value;
+          break;
+        case ACTION_COST_MP:
+          total.mp += c.value;
+          break;
+        case ACTION_COST_TP:
+          total.tp += c.value;
+          break;
+      }
+      return total;
+    },
+    { hp: 0, mp: 0, tp: 0, variable: [] },
+  );
 };
 
 interface BattlerVVV {

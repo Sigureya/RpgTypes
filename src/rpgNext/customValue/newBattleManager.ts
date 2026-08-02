@@ -1,14 +1,13 @@
 /* eslint-disable @functional/no-return-void */
 import type { Trait } from "@RpgTypes/rmmz";
 import type { Rmmz_Battler, Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
-import { calcTotalCost, canPayActionCost, canPayActionCost2 } from "./cost";
-import type {
-  ActionContext,
-  ActionCost,
-  ActionTotalCost,
-  BattleField,
-  BattleXX,
-} from "./customValue";
+import {
+  calcTotalActionCost,
+  canPayActionCost,
+  canPayActionCost2,
+} from "../battle/cost/cost";
+import type { ActionCost, ActionTotalCost } from "../battle/cost/types";
+import type { ActionContext, BattleField, BattleXX } from "./customValue";
 import type { ActionBehavierRunner } from "./types";
 
 const canPay = (
@@ -28,6 +27,7 @@ const calcCost = (
     hp: 0,
     mp: 0,
     tp: 0,
+    variable: [],
   };
 };
 
@@ -72,7 +72,7 @@ const totalCostXX = (
   const flat: ActionCost[] = handlers.flatMap((h) => {
     return h.additionalCost(context);
   });
-  return calcTotalCost(context.action.subject(), flat);
+  return calcTotalActionCost(flat);
 };
 
 const battleXX2 = (
