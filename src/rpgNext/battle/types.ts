@@ -6,6 +6,7 @@ export interface NewBattler {
   baseParams: StatusParamObject;
   paramRates: StatusParamObject;
   variables: BattlerVariables;
+  armors: number[];
 }
 
 export interface BattlerVariables {

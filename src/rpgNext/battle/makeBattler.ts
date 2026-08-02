@@ -10,6 +10,7 @@ export const makeBattlerFromEnemy = (enemy: Data_Enemy): NewBattler => {
     name: enemy.name,
     paramRates: calculateParamRate(enemy.traits),
     baseParams: params,
+    armors: [],
     variables: {
       turnCount: 0,
       hp: params.mhp,
