@@ -1,17 +1,6 @@
 /* eslint-disable @functional/no-let */
 /* eslint-disable @functional/no-loop-statements */
-import type {
-  Command_BattleProcessing,
-  EventCommand,
-  ParamObject_ShopGoods,
-} from "@RpgTypes/rmmz/eventCommand";
-import type { Data_Map } from "@RpgTypes/rmmz/events";
-import type {
-  Rmmz_Variables,
-  Rmmz_PlayerCharactor,
-} from "@RpgTypes/rmmzRuntime";
-import { ggTroopId } from "./battle/battle";
-
+import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 export interface InterprterState {
   /**
    * @description 別シーンから結果を受け取る際に使う
