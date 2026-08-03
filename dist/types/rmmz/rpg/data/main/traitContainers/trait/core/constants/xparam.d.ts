@@ -1,0 +1,10 @@
+export declare const XPARAM_HIT_RATE: 0;
+export declare const XPARAM_EVA_RATE: 1;
+export declare const XPARAM_CRI_CRITICAL_RATE: 2;
+export declare const XPARAM_CEV_CRITICAL_EVASION_RATE: 3;
+export declare const XPARAM_MCR_MAGIC_EVASION_RATE: 4;
+export declare const XPARAM_MRF_MAGIC_REFLECTION_RATE: 5;
+export declare const XPARAM_CNT_COUNTER_ATTACK_RATE: 6;
+export declare const XPARAM_HRG_HP_REGEN_RATE: 7;
+export declare const XPARAM_MRG_MP_REGEN_RATE: 8;
+export declare const XPARAM_TRG_TP_REGEN_RATE: 9;

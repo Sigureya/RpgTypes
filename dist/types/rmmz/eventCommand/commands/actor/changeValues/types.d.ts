@@ -12,8 +12,8 @@ export interface Command_ChangeActorTP extends EventCommandLike<typeof CHANGE_TP
 export type ParamArray_ChangeActorValue = [
     targetType: typeof TARGET_DIRECT | typeof TARGET_VARIABLE,
     index: number,
-    operation: number,
-    valueType: number,
+    operation: 0 | 1,
+    valueType: 0 | 1,
     value: number
 ];
 export type ParamArray_ChangeActorMP = ParamArray_ChangeActorValue;
@@ -21,8 +21,8 @@ export type ParamArray_ChangeActorTP = ParamArray_ChangeActorValue;
 export type ParamArray_ChangeActorHP = [
     targetType: typeof TARGET_DIRECT | typeof TARGET_VARIABLE,
     index: number,
-    operation: number,
-    valueType: number,
+    operation: 0 | 1,
+    valueType: 0 | 1,
     value: number,
     allowDeath: boolean
 ];

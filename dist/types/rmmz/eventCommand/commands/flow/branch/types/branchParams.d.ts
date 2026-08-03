@@ -1,16 +1,15 @@
 import { ValueOf } from '../../../../../../libs/templates/valueOf';
 import { Toggle, Operation_PlusMinus } from '../../../../../utils';
+import { BranchParam_Actor } from './actor';
 import { BranchCodeTable } from './branch';
+import { BranchParam_Button } from './button';
+import { BranchParam_Character } from './character';
+import { BranchParam_Enemy } from './enemy';
+import { BranchParam_Variable } from './variable';
 export type BranchParam_Switch = [
     branchCode: BranchCodeTable["SWITCH"],
     switchId: number,
     switchValue: ValueOf<Toggle>
-];
-export type BranchParam_Variable = [
-    branchCode: BranchCodeTable["VARIABLE"],
-    variableId: number,
-    operand: number,
-    value: number
 ];
 export type BranchParam_SelfSwitch = [
     branchCode: BranchCodeTable["SELF_SWITCH"],
@@ -21,20 +20,6 @@ export type BranchParam_Timer = [
     branchCode: BranchCodeTable["TIMER"],
     time: number,
     operation: ValueOf<Operation_PlusMinus>
-];
-export type BranchParam_Actor = [
-    branchCode: BranchCodeTable["ACTOR"],
-    actorId: number,
-    operand: number,
-    value: number
-];
-export type BranchParam_Enemy = [
-    branchCode: BranchCodeTable["ENEMY"],
-    enemyId: number
-];
-export type BranchParam_Character = [
-    branchCode: BranchCodeTable["CHARACTER"],
-    characterId: number
 ];
 export type BranchParam_Gold = [
     branchCode: BranchCodeTable["GOLD"],
@@ -47,15 +32,13 @@ export type BranchParam_Item = [
 ];
 export type BranchParam_Weapon = [
     branchCode: BranchCodeTable["WEAPON"],
-    weaponId: number
+    weaponId: number,
+    includeEquip: boolean
 ];
 export type BranchParam_Armor = [
     branchCode: BranchCodeTable["ARMOR"],
-    armorId: number
-];
-export type BranchParam_Button = [
-    branchCode: BranchCodeTable["BUTTON"],
-    buttonId: number
+    armorId: number,
+    includeEquip: boolean
 ];
 export type BranchParam_Script = [
     branchCode: BranchCodeTable["SCRIPT"],

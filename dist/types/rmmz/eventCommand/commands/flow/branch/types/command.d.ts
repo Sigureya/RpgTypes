@@ -1,6 +1,10 @@
 import { CONDITIONAL_BRANCH, EventCommandLike } from '../../../../../../libs';
-import { BranchByActorName } from './actor';
-import { BranchParam_Switch, BranchParam_Actor, BranchParam_Armor, BranchParam_Button, BranchParam_Character, BranchParam_Enemy, BranchParam_Gold, BranchParam_Item, BranchParam_Script, BranchParam_SelfSwitch, BranchParam_Variable, BranchParam_Vehicle, BranchParam_Timer, BranchParam_Weapon } from './branchParams';
+import { BranchByActorName, BranchParam_Actor } from './actor';
+import { BranchParam_Switch, BranchParam_Armor, BranchParam_Gold, BranchParam_Item, BranchParam_Script, BranchParam_SelfSwitch, BranchParam_Vehicle, BranchParam_Timer, BranchParam_Weapon } from './branchParams';
+import { BranchParam_Button } from './button';
+import { BranchParam_Character } from './character';
+import { BranchParam_Enemy } from './enemy';
+import { BranchParam_Variable } from './variable';
 export type CommnandUnion_Branch = Command_BranchBySwitch | Command_BranchByActor | Command_BranchByArmor | Command_BranchByButton | Command_BranchByCharacter | Command_BranchByEnemy | Command_BranchByGold | Command_BranchByItem | Command_BranchByScript | Command_BranchBySelfSwitch | Command_BranchByVariable | Command_BranchByVehicle | Command_BranchByTimer | Command_BranchByWeapon;
 export interface Command_BranchBySwitch extends EventCommandLike<typeof CONDITIONAL_BRANCH, BranchParam_Switch> {
     parameters: BranchParam_Switch;

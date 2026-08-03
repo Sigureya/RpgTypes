@@ -6,6 +6,7 @@ export * from './gameData';
 export * from './gameDataTypes';
 export * from './main';
 export * from './note';
+export * from './provider';
 export * from './sourceKindConstants';
 export * from './tileset';
 export { resolveTraitLabels } from './resolveTraitLabels';
