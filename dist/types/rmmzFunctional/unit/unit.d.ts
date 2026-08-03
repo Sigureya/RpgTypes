@@ -1,0 +1,15 @@
+import { Data_Actor, Data_Enemy } from '../../rmmz';
+import { Data_Troop } from '../../rmmz/events';
+import { Rmmz_UnitDataProvider, TroopEnemyLabel } from './types';
+export type { Rmmz_UnitDataProvider, TroopEnemyLabel } from './types';
+export { CJK_LOCALE_REGEXP, TROOP_LETTER_TABLE_FULL, TROOP_LETTER_TABLE_HALF, } from './constants';
+export declare const dataTroop: (provider: Rmmz_UnitDataProvider, troopId: number) => Data_Troop | undefined;
+export declare const dataEnemy: (provider: Rmmz_UnitDataProvider, enemyId: number) => Data_Enemy | undefined;
+export declare const initialPartyActorIds: (provider: Rmmz_UnitDataProvider) => number[];
+export declare const initialPartyActors: (provider: Rmmz_UnitDataProvider) => Data_Actor[];
+export declare const battleTestTroop: (provider: Rmmz_UnitDataProvider) => Data_Troop | undefined;
+export declare const troopEnemyIds: (troop: Data_Troop) => number[];
+export declare const troopEnemies: (troop: Data_Troop, provider: Rmmz_UnitDataProvider) => Data_Enemy[];
+export declare const troopEnemyNames: (troop: Data_Troop, provider: Rmmz_UnitDataProvider) => string[];
+export declare const troopLetterTable: (provider: Rmmz_UnitDataProvider) => ReadonlyArray<string>;
+export declare const troopEnemyLabels: (troop: Data_Troop, provider: Rmmz_UnitDataProvider) => TroopEnemyLabel[];
