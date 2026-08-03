@@ -1,0 +1,11 @@
+import { Trait } from './types';
+export declare const traitTargetRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitGuardEffectRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitRecoveryEffectRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitPharmacologyRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitMpCostRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitTpChargeRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitPhysicalDamageRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitMagicDamageRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitFloorDamageRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitExperienceRate: (traits: ReadonlyArray<Trait>) => number;

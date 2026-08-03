@@ -6,7 +6,7 @@ export interface Command_ChangeGold extends EventCommandLike<typeof CHANGE_GOLD>
 }
 export type ParamArray_ChangeGold = [
     operation: ValueOf<Operation_PlusMinus>,
-    operandType: number,
+    operandType: 0 | 1,
     operand: number
 ];
 export interface ParamObject_ChangeGold {

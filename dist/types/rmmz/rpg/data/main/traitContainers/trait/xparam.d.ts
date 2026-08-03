@@ -1,0 +1,12 @@
+import { Trait } from './types';
+export declare const traitXparam: (traits: ReadonlyArray<Trait>, xparamId: number) => number;
+export declare const traitHitRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitEvaRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitCriticalRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitCriticalEvasionRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitMagicEvasionRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitMagicReflectionRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitCounterAttackRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitHpRegenRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitMpRegenRate: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitTpRegenRate: (traits: ReadonlyArray<Trait>) => number;

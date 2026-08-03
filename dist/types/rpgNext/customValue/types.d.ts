@@ -1,0 +1,21 @@
+import { Trait } from '../../rmmz';
+import { Rmmz_Battler } from '../../rmmzRuntime';
+import { ActionCost, ActionTotalCost } from '../battle/cost/types';
+import { ActionContext, BattleXX } from './customValue';
+export interface ActionBehavierRunner {
+    canUse(context: ActionContext): boolean;
+    onActionStart(context: ActionContext, context2: Context2): void;
+    onDamage(context: ActionContext, target: Rmmz_Battler): void;
+    onActionEnd(context: ActionContext): BattleXX | undefined;
+    additionalCost(context: ActionContext): ActionCost[];
+    aditionalTargetTraits(context: ActionContext, target: Rmmz_Battler): Trait[];
+    aditionalSubjectTraits(context: ActionContext, subject: Rmmz_Battler): Trait[];
+    afterDamage(context: ActionContext, target: Rmmz_Battler): BattlerXXQuery[];
+}
+export interface BattlerXXQuery {
+}
+export interface Context2 {
+    totalCost: ActionTotalCost;
+    subject: Rmmz_Battler;
+    targets: Rmmz_Battler[];
+}

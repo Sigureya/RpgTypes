@@ -3,7 +3,10 @@ import { Data_Tileset } from '../../../../rmmz/rpg';
 import { Direction8 } from '../../../../rmmz/utils';
 import { Rmmz_Event } from './event';
 import { Rmmz_Vehicle } from './vehicle';
-export interface Rmmz_Map {
+export interface Rmmz_MapId {
+    mapId(): number;
+}
+export interface Rmmz_Map extends Rmmz_MapId {
     initialize(): void;
     setup(mapId: number): void;
     isEventRunning(): boolean;

@@ -1,0 +1,10 @@
+export declare const SPARAM_TGR_TARGET_RATE: 0;
+export declare const SPARAM_GRD_GUARD_EFFECT_RATE: 1;
+export declare const SPARAM_REC_RECOVERY_EFFECT_RATE: 2;
+export declare const SPARAM_PHA_PHARMACOLOGY_RATE: 3;
+export declare const SPARAM_MCR_MAGIC_COST_RATE: 4;
+export declare const SPARAM_TCR_TP_CHARGE_RATE: 5;
+export declare const SPARAM_PDR_PHYSICAL_DAMAGE_RATE: 6;
+export declare const SPARAM_MDR_MAGIC_DAMAGE_RATE: 7;
+export declare const SPARAM_FDR_FLOOR_DAMAGE_RATE: 8;
+export declare const SPARAM_EXR_EXPERIENCE_RATE: 9;

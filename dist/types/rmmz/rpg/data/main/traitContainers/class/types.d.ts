@@ -30,14 +30,14 @@ export interface ClassLabels {
     expParams: string;
 }
 export type ClassParamGlowTable = [
-    number[],
-    number[],
-    number[],
-    number[],
-    number[],
-    number[],
-    number[],
-    number[]
+    maxhp: number[],
+    maxmp: number[],
+    atk: number[],
+    def: number[],
+    mat: number[],
+    mdf: number[],
+    agi: number[],
+    luk: number[]
 ];
 export interface ClassParamGlowing {
     atk: number;

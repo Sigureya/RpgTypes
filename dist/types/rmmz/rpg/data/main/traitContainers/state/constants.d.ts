@@ -1,0 +1,8 @@
+export declare const STATE_RESTRICTION_NORMAL: 0;
+export declare const STATE_RESTRICTION_CONFUSION_RANDOM_OPPONENT: 1;
+export declare const STATE_RESTRICTION_CONFUSION_RANDOM_ALL: 2;
+export declare const STATE_RESTRICTION_CONFUSION_RANDOM_FRIEND: 3;
+export declare const STATE_RESTRICTION_NOT_MOVE: 4;
+export declare const STATE_REMOVE_TIMING_NONE: 0;
+export declare const STATE_REMOVE_TIMING_END_OF_TURN: 1;
+export declare const STATE_REMOVE_TIMING_END_OF_ACTION: 2;
