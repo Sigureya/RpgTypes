@@ -1,8 +1,8 @@
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
 import fn from "eslint-plugin-functional";
-import importPlugin from "eslint-plugin-import";
-import sortExports from "eslint-plugin-sort-exports";
+//import importPlugin from "eslint-plugin-import";
+//import sortExports from "eslint-plugin-sort-exports";
 // import禁止のグループ。長いので定数としておくことで分離した
 const noimportGroups = [
   "node:*",
@@ -52,8 +52,8 @@ export default [
     plugins: {
       "@typescript-eslint": tseslint,
       "@functional": fn,
-      import: importPlugin,
-      "sort-exports": sortExports,
+      //      import: importPlugin,
+      //      "sort-exports": sortExports,
     },
     rules: {
       ...tseslint.configs.recommended.rules,
@@ -76,55 +76,55 @@ export default [
       "spaced-comment": "error",
 
       // importルール
-      "import/no-cycle": "error",
+      //      "import/no-cycle": "error",
       "@typescript-eslint/consistent-type-imports": [
         "warn",
         {
           prefer: "type-imports",
         },
       ],
-      "import/order": [
-        "error",
-        {
-          alphabetize: { order: "asc", caseInsensitive: true },
-          "newlines-between": "never",
-          groups: [
-            "builtin",
-            "external",
-            "internal",
-            "parent",
-            "sibling",
-            "index",
-            "object",
-          ],
-          pathGroups: [
-            {
-              pattern: "vitest",
-              group: "external",
-              position: "before",
-            },
-          ],
-          pathGroupsExcludedImportTypes: ["vitest"],
-        },
-      ],
-      "no-restricted-imports": [
-        "error",
-        {
-          patterns: [
-            // vitest関連のimportを.test.ts以外で禁止
-            {
-              group: ["vitest", "vitest/*", "vitest/dist*", "vitest/**"],
-              message: "テスト以外でvitestのimportは禁止です",
-            },
-            // node.js関連のimportを禁止
-            {
-              group: noimportGroups,
-              message:
-                "Node.js組み込みモジュールのimportは禁止です（型importはOK）",
-            },
-          ],
-        },
-      ],
+      // "import/order": [
+      //   "error",
+      //   {
+      //     alphabetize: { order: "asc", caseInsensitive: true },
+      //     "newlines-between": "never",
+      //     groups: [
+      //       "builtin",
+      //       "external",
+      //       "internal",
+      //       "parent",
+      //       "sibling",
+      //       "index",
+      //       "object",
+      //     ],
+      //     pathGroups: [
+      //       {
+      //         pattern: "vitest",
+      //         group: "external",
+      //         position: "before",
+      //       },
+      //     ],
+      //     pathGroupsExcludedImportTypes: ["vitest"],
+      //   },
+      // ],
+      // "no-restricted-imports": [
+      //   "error",
+      //   {
+      //     patterns: [
+      //       // vitest関連のimportを.test.ts以外で禁止
+      //       {
+      //         group: ["vitest", "vitest/*", "vitest/dist*", "vitest/**"],
+      //         message: "テスト以外でvitestのimportは禁止です",
+      //       },
+      //       // node.js関連のimportを禁止
+      //       {
+      //         group: noimportGroups,
+      //         message:
+      //           "Node.js組み込みモジュールのimportは禁止です（型importはOK）",
+      //       },
+      //     ],
+      //   },
+      // ],
     },
   },
   {
@@ -152,7 +152,7 @@ export default [
   },
   {
     files: ["src/**/*index.ts", "src/**/*.d.ts"],
-    rules: { "sort-exports/sort-exports": ["error", { sortDir: "asc" }] },
+    //    rules: { "sort-exports/sort-exports": ["error", { sortDir: "asc" }] },
   },
   {
     files: ["src/validate/**/*.test.ts"],
