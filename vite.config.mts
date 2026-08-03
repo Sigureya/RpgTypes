@@ -89,10 +89,10 @@ export default defineConfig(({ mode }) => {
     plugins: [
       validateSchemaPlugin(),
       dts({
-        outDir: "./dist/types",
+        outDirs: "./dist/types",
         include: ["src/**/*.ts"],
         exclude: ["src/**/*.test.ts"],
-        rollupTypes: false,
+        //rollupTypes: false,
       }),
     ],
   };
