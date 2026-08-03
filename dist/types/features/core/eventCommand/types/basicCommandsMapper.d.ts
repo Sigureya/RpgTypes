@@ -1,6 +1,6 @@
 import { EventCommandUnknown } from '../../../../libs/eventCommand';
 import { Command_ShowMessageHeader } from '../../../../rmmz';
-import type * as RpgTypes from "@RpgTypes/rmmz";
+import type * as RpgTypes from '../../../../rmmz';
 export type CallBackFunc<Command extends EventCommandUnknown, Reulst = void> = (command: Readonly<Command>, index: number, list: ReadonlyArray<Readonly<RpgTypes.EventCommand>>) => Reulst;
 export interface FallbackMapper<T> {
     other: CallBackFunc<RpgTypes.EventCommand, T>;

@@ -1,13 +1,14 @@
 import { FileEntry, FileEntryBundle, RawGameData2 } from '../fileio';
 import { Data_Map, Data_MapUnknown, NormalizedEventCommand, RpgDataBundleHasText } from '../rmmz';
-import { RuntimeDictionary, GameDataReplaceOutput } from './core/extract';
+import { RuntimeDictionary, GameDataReplaceOutput, GameDataReplaceOutput2 } from './core/extract';
 import { EventContainerExtractor } from './extractText';
-import { ReplaceRawDataContext } from './types';
+import { ReplaceRawDataContext, ReplaceRawDataContext2 } from './types';
 export { replaceRawDataBundle, replaceRawDataWithAutoNoteFilter, } from './core/replaceBundle';
 export declare const replaceRuntimeMapData: (map: Data_Map, dic: RuntimeDictionary<string>) => Data_MapUnknown<NormalizedEventCommand>;
 export declare const replaceRuntimeData: (data: RpgDataBundleHasText, dic: RuntimeDictionary<string>) => RpgDataBundleHasText;
 export declare const replaceDataDirectToFileEntries: (context: ReplaceRawDataContext, extractor: EventContainerExtractor) => FileEntry[];
 export declare const replaceDataDirect: (context: ReplaceRawDataContext, extractor: EventContainerExtractor) => RawGameData2<NormalizedEventCommand>;
+export declare const replaceGameFilesFtomMulitDictionaries: <T extends string>(context: ReplaceRawDataContext2, extractor: EventContainerExtractor, hashFn: (text: string) => T) => GameDataReplaceOutput2<T>;
 export declare const replaceGameFilesWithHash: <T extends string>(context: ReplaceRawDataContext, extractor: EventContainerExtractor, hashFn: (text: string) => T) => FileEntryBundle;
 export declare const replaceDataWithHashToFileEntries: <T extends string>(context: ReplaceRawDataContext, extractor: EventContainerExtractor, hashFn: (text: string) => T) => FileEntry[];
 export declare const replaceDataWithHash: <T extends string>(context: ReplaceRawDataContext, extractor: EventContainerExtractor, hashFn: (text: string) => T) => GameDataReplaceOutput<T>;
