@@ -4,7 +4,7 @@ import type {
   Rmmz_Variables,
   Rmmz_PlayerCharactor,
 } from "@RpgTypes/rmmzRuntime";
-import { ggTroopId } from "./command/battle/battle";
+import { resolveTroopIdByCommand } from "./command/battle/battle";
 import type { InterprterState } from "./command/types";
 
 interface BattleResult {
@@ -62,7 +62,13 @@ const makeBattleQuery = (
   map: Data_Map,
   random: (maxWeight: number) => number,
 ): BattleQuery => {
-  const troopId = ggTroopId(command, variables, player, map, random);
+  const troopId = resolveTroopIdByCommand(
+    command,
+    variables,
+    player,
+    map,
+    random,
+  );
   return {
     troopId: troopId ?? 0,
     canEscape: command.parameters[2],

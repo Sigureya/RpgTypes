@@ -1,53 +1,12 @@
 import type { Command_BattleProcessing } from "@RpgTypes/rmmz/eventCommand";
-import type { Data_Map, Data_Troop } from "@RpgTypes/rmmz/events";
-import { selectMapEncounters } from "@RpgTypes/rmmz/rpg/data/event/map/map";
+import type { Data_Map } from "@RpgTypes/rmmz/events";
+import { selectMapEncounters } from "@RpgTypes/rmmz/rpg";
 import type {
-  Rmmz_Party,
-  Rmmz_PlayerCharactor,
   Rmmz_Variables,
+  Rmmz_PlayerCharactor,
 } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_BattleManager } from "@RpgTypes/rmmzRuntime/managers/battle";
 
-interface Provide_Encounter {
-  random(maxWeight: number): number;
-  dataTroop(troopId: number): Data_Troop | undefined;
-}
-
-const xxx = (
-  command: Command_BattleProcessing,
-  party: Rmmz_Party,
-  player: Rmmz_PlayerCharactor,
-  variables: Rmmz_Variables,
-  map: Data_Map,
-  provided: Provide_Encounter,
-  battleManager: Rmmz_BattleManager,
-) => {
-  if (party.inBattle()) {
-    return true;
-  }
-  const troopId = ggTroopId(
-    command,
-    variables,
-    player,
-    map,
-    (maxWeight: number) => {
-      return provided.random(maxWeight);
-    },
-  );
-  if (troopId === undefined) {
-    return true;
-  }
-  const troop = provided.dataTroop(troopId);
-  if (!troop) {
-    return true;
-  }
-  battleManager.setup(troopId, command.parameters[2], command.parameters[3]);
-  battleManager.setEventCallback(() => {});
-  player.makeEncounterCount();
-  return true;
-};
-
-export const ggTroopId = (
+export const resolveTroopIdByCommand = (
   { parameters }: Command_BattleProcessing,
   variables: Rmmz_Variables,
   player: Rmmz_PlayerCharactor,
