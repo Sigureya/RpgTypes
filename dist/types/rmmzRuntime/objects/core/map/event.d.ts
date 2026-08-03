@@ -1,7 +1,8 @@
 import { MoveRouteCommandUnknown } from '../../../../libs';
 import { EventCommand } from '../../../../rmmz/eventCommand';
 import { MapEventPage } from '../../../../rmmz/rpg';
-export interface Rmmz_Event {
+import { Rmmz_MapCharacter } from './character';
+export interface Rmmz_Event extends Rmmz_MapCharacter {
     isStarting(): boolean;
     unlock(): void;
     clearStartingFlag(): void;

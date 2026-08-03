@@ -1,5 +1,12 @@
 import { AudioFileParams, ColorRGBA } from '../../../../libs';
-export interface Rmmz_System {
+export interface Rmmz_SystemCounter {
+    battleCount(): number;
+    winCount(): number;
+    escapeCount(): number;
+    saveCount(): number;
+    playtime(): number;
+}
+export interface Rmmz_System extends Rmmz_SystemCounter {
     isJapanese(): boolean;
     isChinese(): boolean;
     isKorean(): boolean;

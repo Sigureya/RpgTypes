@@ -1,5 +1,25 @@
-import { Data_AnyGoodsUnion } from '../../../../../rmmz/rpg';
-export interface Rmmz_UnitPlayer {
+import { Data_AnyGoodsUnion, Data_Armor, Data_Weapon } from '../../../../../rmmz/rpg';
+export interface Rmmz_VariableSourceParty<Battler extends {
+    actorId(): number;
+} = {
+    actorId(): number;
+}> {
+    numItems(item: Data_AnyGoodsUnion, includeEquip?: boolean): number;
+    gold(): number;
+    steps(): number;
+    members(): Battler[];
+    size(): number;
+}
+export interface Rmmz_BranchSourceParty<Battler> {
+    members(): Battler[];
+    hasItem(item: Data_AnyGoodsUnion, includeEquip?: boolean): boolean;
+    gold(): number;
+}
+export interface Rmmz_UnitPlayer<Battler extends {
+    actorId(): number;
+} = {
+    actorId(): number;
+}> extends Rmmz_VariableSourceParty<Battler>, Rmmz_BranchSourceParty<Battler> {
     steps(): number;
     gold(): number;
     gainGold(amount: number): void;
@@ -8,4 +28,7 @@ export interface Rmmz_UnitPlayer {
     numItems(item: Data_AnyGoodsUnion, includeEquip?: boolean): number;
     gainItem(item: Data_AnyGoodsUnion, amount: number, includeEquip?: boolean): void;
     loseItem(item: Data_AnyGoodsUnion, amount: number, includeEquip?: boolean): void;
+    equipItems(): Data_AnyGoodsUnion[];
+    armors(): Data_Armor[];
+    weapons(): Data_Weapon[];
 }

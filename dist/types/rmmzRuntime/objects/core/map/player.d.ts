@@ -1,6 +1,7 @@
+import { Rmmz_MapCharacter } from './character';
 import { Rmmz_Followers } from './followers';
 import { Rmmz_Vehicle } from './vehicle';
-export interface Rmmz_PlayerCharactor {
+export interface Rmmz_PlayerCharactor extends Rmmz_MapCharacter {
     initialize(): void;
     initMembers(): void;
     clearTransferInfo(): void;
