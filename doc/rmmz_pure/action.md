@@ -6,6 +6,22 @@
 
 起点: [src/rmmzMock/core/objects/rmmz_objects.js](src/rmmzMock/core/objects/rmmz_objects.js#L1403)
 
+### 実装済み
+
+- [src/rmmzFunctional/enemy/action/filter.ts](src/rmmzFunctional/enemy/action/filter.ts)
+  - `filterUsableEnemyActions`
+  - `filterEnemyActionByRating`
+  - `enemyActionMeetsCondition`
+- [src/rmmzFunctional/enemy/action/select.ts](src/rmmzFunctional/enemy/action/select.ts)
+  - `enemyActionRatingMax`
+  - `enemyActionRatingZero`
+  - `filterEnemyActionsByRating`
+  - `enemyActionWeightTotal`
+  - `selectEnemyActionByWeight`
+  - `selectEnemyActions`
+
+### まだ候補として残るもの
+
 - pure: checkItemScope, isForOpponent, isForFriend, isForEveryone, isForAliveFriend, isForDeadFriend, isForUser, isForOne, isForRandom, isForAll, needsSelection, numTargets, checkDamageType, isHpEffect, isMpEffect, isDamage, isRecover, isDrain, isHpRecover, isMpRecover, isCertainHit, isPhysical, isMagical, applyCritical
 - quasi: numRepeats, isMagicSkill, itemCnt, itemMrf, itemHit, itemEva, itemCri, testLifeAndDeath, testItemEffect, calcElementRate, elementsMaxRate, applyGuard, lukEffectRate
 - extract: repeatTargets, makeDamageValue の計算パイプライン, applyVariance の乱数注入版, evaluateWithTarget のスコア計算, speed の速度算出式
@@ -15,6 +31,12 @@
 ## Game_ActionResult
 
 起点: [src/rmmzMock/core/objects/rmmz_objects.js](src/rmmzMock/core/objects/rmmz_objects.js#L2275)
+
+### 実装済み
+
+- まだ対応する純関数モジュールはありません
+
+### まだ候補として残るもの
 
 - pure: isStatusAffected, isHit, isStateAdded, isStateRemoved, isBuffAdded, isDebuffAdded, isBuffRemoved
 - quasi: addedStateObjects, removedStateObjects
