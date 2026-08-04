@@ -1,6 +1,7 @@
 import type { Data_UsableItem } from "@RpgTypes/rmmz/rpg";
 import {
   confusionLevel,
+  scopeIsForEveryone,
   scopeIsForFriend,
   scopeIsForOpponent,
 } from "@RpgTypes/rmmz/rpg";
@@ -10,7 +11,7 @@ import {
   actionTargetsForOpponents,
 } from "./targetFor";
 import type { Provider_Battlers } from "./types";
-import { repeatTargets } from "./support";
+import { battlerIsAlive, repeatTargets } from "./support";
 import { battlresRandomTarget } from "./randomSelect";
 
 export const actionMakeTargets = (
@@ -74,6 +75,13 @@ const normalTarget = (
       targetIndex,
       randomFn,
     );
+  }
+  if (scopeIsForEveryone(item)) {
+    const list = [
+      ...provider.friendsUnit().filter(battlerIsAlive),
+      ...provider.opponentsUnit().filter(battlerIsAlive),
+    ];
+    return list;
   }
 
   return [];
