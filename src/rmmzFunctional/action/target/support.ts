@@ -1,19 +1,40 @@
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 
+export const battlerIsAlive = (battler: Rmmz_Battler): boolean => {
+  return battler.isAlive();
+};
+
+export const battlerIsDead = (battler: Rmmz_Battler): boolean => {
+  return battler.isDead();
+};
+
+export const unitTgrSum = (battlers: ReadonlyArray<Rmmz_Battler>): number => {
+  return battlers.reduce((r, b) => r + b.tgr, 0);
+};
+
+export const repeatTargets = <T extends Rmmz_Battler>(
+  battlers: ReadonlyArray<T>,
+  repeat: number,
+): T[] => {
+  return battlers.flatMap((b) => Array(repeat).fill(b));
+};
+
 export const smoothTarget = <T>(
   battlers: ReadonlyArray<T>,
-  index: number,
+  targetIndex: number,
   fn: (battler: T) => boolean,
 ): T | undefined => {
   if (battlers.length === 0) {
     return undefined;
   }
-  const target = battlers[Math.max(0, index)];
+  const finalIndex = Math.max(0, targetIndex);
+  const target = battlers[finalIndex];
   if (target && fn(target)) {
     return target;
   }
   return (
-    battlers.find((b, index): boolean => index !== index && fn(b)) ?? undefined
+    battlers.find((b, index): boolean => index !== targetIndex && fn(b)) ??
+    undefined
   );
 };
 
@@ -21,12 +42,12 @@ export const smoothAliveTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   index: number,
 ): T | undefined => {
-  return smoothTarget(battlers, index, (b) => b.isAlive());
+  return smoothTarget(battlers, index, battlerIsAlive);
 };
 
 export const smoothDeadTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   index: number,
 ): T | undefined => {
-  return smoothTarget(battlers, index, (b) => b.isDead());
+  return smoothTarget(battlers, index, battlerIsDead);
 };

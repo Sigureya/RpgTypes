@@ -16,7 +16,7 @@ export const SCOPE_TARGET_FRIEND = 12 as const;
 export const SCOPE_EACH_FRIEND = 13 as const;
 export const SCOPE_EACH = 14 as const;
 
-export const scopeForUser = (item: Data_UsableItem): boolean => {
+export const scopeIsForUser = (item: Data_UsableItem): boolean => {
   return item.scope === SCOPE_SELF;
 };
 

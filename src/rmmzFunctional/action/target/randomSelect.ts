@@ -4,11 +4,8 @@ import {
   scopeIsForAliveFriend,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-
-export interface Provider_Battlers {
-  opponentsUnit(): ReadonlyArray<Rmmz_Battler>;
-  friendsUnit(): ReadonlyArray<Rmmz_Battler>;
-}
+import { battlerIsAlive, unitTgrSum } from "./support";
+import type { Provider_Battlers } from "./types";
 
 export const battlersDecideRandomTarget = (
   item: Data_UsableItem,
@@ -28,7 +25,7 @@ export const battlresRandomTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
 ): T | undefined => {
-  const tgrSum = battlers.reduce((r, b) => r + b.tgr, 0);
+  const tgrSum: number = unitTgrSum(battlers);
   // eslint-disable-next-line @functional/no-let
   let targetTgr = randomValue * tgrSum;
   // eslint-disable-next-line @functional/no-loop-statements
@@ -53,7 +50,7 @@ export const battlersRandomAliveTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
 ): T | undefined => {
-  const filted = battlers.filter((b) => b.isAlive());
+  const filted = battlers.filter(battlerIsAlive);
   return battlresRandomTarget(filted, randomValue);
 };
 
