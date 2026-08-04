@@ -81,3 +81,12 @@ export const scopeIsForAliveFriend = ({ scope }: Data_UsableItem): boolean => {
 export const scopeIsForEveryone = ({ scope }: Data_UsableItem): boolean => {
   return scope === SCOPE_EACH;
 };
+
+export const scopeIsForRandom = ({ scope }: Data_UsableItem): boolean => {
+  return (
+    scope === SCOPE_RANDOM_OPPONENT_1 ||
+    scope === SCOPE_RANDOM_OPPONENT_2 ||
+    scope === SCOPE_RANDOM_OPPONENT_3 ||
+    scope === SCOPE_RANDOM_OPPONENT_4
+  );
+};
