@@ -19,10 +19,82 @@
   - `enemyActionWeightTotal`
   - `selectEnemyActionByWeight`
   - `selectEnemyActions`
+- [src/rmmzFunctional/action/target/target.ts](src/rmmzFunctional/action/target/target.ts)
+  - `repeatTargets`
+  - `actionTargetForDead`
+  - `actionTargetForDeadAndAlive`
+  - `actionTargetForAlive`
+  - `actionTargetsForOpponents`
+- [src/rmmzFunctional/action/target/randomSelect.ts](src/rmmzFunctional/action/target/randomSelect.ts)
+  - `battlersDecideRandomTarget`
+  - `battlresRandomTarget`
+  - `battlersRandomDeadTarget`
+  - `battlersRandomAliveTarget`
+  - `actionDecideRandomTarget`
+- [src/rmmzFunctional/action/target/support.ts](src/rmmzFunctional/action/target/support.ts)
+  - `smoothTarget`
+  - `smoothAliveTarget`
+  - `smoothDeadTarget`
+- [src/rmmz/rpg/data/main/usableItems/scope.ts](src/rmmz/rpg/data/main/usableItems/scope.ts)
+  - `scopeForUser`
+  - `scopeIsForOne`
+  - `scopeNeedsSelection`
+  - `scopeIsForOpponent`
+  - `scopeIsForFriend`
+  - `scopeIsForDeadFriend`
+  - `scopeIsForAliveFriend`
+  - `scopeIsForEveryone`
+  - `scopeIsForRandom`
+  - `scopeRandomNumTargets`
+- [src/rmmz/rpg/data/main/usableItems/damageType.ts](src/rmmz/rpg/data/main/usableItems/damageType.ts)
+  - `isHpRecoverItem`
+  - `isMpRecoverItem`
+  - `isHpDamage`
+  - `isMpDamage`
+  - `isHpEffect`
+  - `isMpEffect`
+  - `isDamage`
+  - `isRecover`
+  - `isDrain`
+  - `isHpRecovery`
+  - `isMpRecovery`
+- [src/rmmz/rpg/data/main/usableItems/hitType.ts](src/rmmz/rpg/data/main/usableItems/hitType.ts)
+  - `isCertainHit`
+  - `isPhysicalHit`
+  - `isMagicalHit`
+- [src/rmmz/rpg/data/main/traitContainers/trait/rate.ts](src/rmmz/rpg/data/main/traitContainers/trait/rate.ts)
+  - `traitParamRate`
+  - `traitSparam`
+  - `traitElementRate`
+  - `traitDebuffRate`
+  - `traitStateRate`
+- [src/rmmz/rpg/data/main/traitContainers/trait/xparam.ts](src/rmmz/rpg/data/main/traitContainers/trait/xparam.ts)
+  - `traitXparam`
+  - `traitHitRate`
+  - `traitEvaRate`
+  - `traitCriticalRate`
+  - `traitCriticalEvasionRate`
+  - `traitMagicEvasionRate`
+  - `traitMagicReflectionRate`
+  - `traitCounterAttackRate`
+  - `traitHpRegenRate`
+  - `traitMpRegenRate`
+  - `traitTpRegenRate`
+- [src/rmmz/rpg/data/main/traitContainers/trait/sparam.ts](src/rmmz/rpg/data/main/traitContainers/trait/sparam.ts)
+  - `traitTargetRate`
+  - `traitGuardEffectRate`
+  - `traitRecoveryEffectRate`
+  - `traitPharmacologyRate`
+  - `traitMpCostRate`
+  - `traitTpChargeRate`
+  - `traitPhysicalDamageRate`
+  - `traitMagicDamageRate`
+  - `traitFloorDamageRate`
+  - `traitExperienceRate`
 
 ### まだ候補として残るもの
 
-- pure: checkItemScope, isForOpponent, isForFriend, isForEveryone, isForAliveFriend, isForDeadFriend, isForUser, isForOne, isForRandom, isForAll, needsSelection, numTargets, checkDamageType, isHpEffect, isMpEffect, isDamage, isRecover, isDrain, isHpRecover, isMpRecover, isCertainHit, isPhysical, isMagical, applyCritical
+- pure: checkDamageType, applyCritical
 - quasi: numRepeats, isMagicSkill, itemCnt, itemMrf, itemHit, itemEva, itemCri, testLifeAndDeath, testItemEffect, calcElementRate, elementsMaxRate, applyGuard, lukEffectRate
 - extract: repeatTargets, makeDamageValue の計算パイプライン, applyVariance の乱数注入版, evaluateWithTarget のスコア計算, speed の速度算出式
 - 注入候補: item, subjectStats, targetStats, magicSkillIds, randomInt, randomFloat, attackElements, elementRates, guarding, grd
