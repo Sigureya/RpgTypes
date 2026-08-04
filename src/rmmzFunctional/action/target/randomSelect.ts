@@ -4,7 +4,7 @@ import {
   scopeIsForAliveFriend,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-import { battlerIsAlive, unitTgrSum } from "./support";
+import { battlerIsAlive, battlerIsDead, unitTgrSum } from "./support";
 import type { Provider_Battlers } from "./types";
 
 export const battlersDecideRandomTarget = (
@@ -21,10 +21,16 @@ export const battlersDecideRandomTarget = (
   return battlersRandomAliveTarget(units.opponentsUnit(), randomValue);
 };
 
-export const battlresRandomTarget = <T extends Rmmz_Battler>(
+export const battlersRandomTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
 ): T | undefined => {
+  if (battlers.length === 0) {
+    return undefined;
+  }
+  if (battlers.length === 1) {
+    return battlers[0];
+  }
   const tgrSum: number = unitTgrSum(battlers);
   // eslint-disable-next-line @functional/no-let
   let targetTgr = randomValue * tgrSum;
@@ -42,8 +48,8 @@ export const battlersRandomDeadTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
 ): T | undefined => {
-  const filted = battlers.filter((b) => b.isDead());
-  return battlresRandomTarget(filted, randomValue);
+  const filted = battlers.filter(battlerIsDead);
+  return battlersRandomTarget(filted, randomValue);
 };
 
 export const battlersRandomAliveTarget = <T extends Rmmz_Battler>(
@@ -51,7 +57,7 @@ export const battlersRandomAliveTarget = <T extends Rmmz_Battler>(
   randomValue: number,
 ): T | undefined => {
   const filted = battlers.filter(battlerIsAlive);
-  return battlresRandomTarget(filted, randomValue);
+  return battlersRandomTarget(filted, randomValue);
 };
 
 export const actionDecideRandomTarget = <
