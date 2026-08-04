@@ -1,19 +1,25 @@
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 
+export const unitTgrSum = (battlers: ReadonlyArray<Rmmz_Battler>): number => {
+  return battlers.reduce((r, b) => r + b.tgr, 0);
+};
+
 export const smoothTarget = <T>(
   battlers: ReadonlyArray<T>,
-  index: number,
+  targetIndex: number,
   fn: (battler: T) => boolean,
 ): T | undefined => {
   if (battlers.length === 0) {
     return undefined;
   }
-  const target = battlers[Math.max(0, index)];
+  const finalIndex = Math.max(0, targetIndex);
+  const target = battlers[finalIndex];
   if (target && fn(target)) {
     return target;
   }
   return (
-    battlers.find((b, index): boolean => index !== index && fn(b)) ?? undefined
+    battlers.find((b, index): boolean => index !== targetIndex && fn(b)) ??
+    undefined
   );
 };
 
