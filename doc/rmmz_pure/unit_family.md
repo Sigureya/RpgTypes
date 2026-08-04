@@ -6,8 +6,24 @@
 
 起点: [src/rmmzMock/core/objects/rmmz_objects.js](src/rmmzMock/core/objects/rmmz_objects.js#L5222)
 
+### 実装済み
+
+- [src/rmmzFunctional/unit/unit.ts](src/rmmzFunctional/unit/unit.ts)
+  - `dataTroop`
+  - `dataEnemy`
+  - `initialPartyActorIds`
+  - `initialPartyActors`
+  - `battleTestTroop`
+  - `troopEnemyIds`
+  - `troopEnemies`
+  - `troopEnemyNames`
+  - `troopLetterTable`
+  - `troopEnemyLabels`
+
+### まだ候補として残るもの
+
 - pure: inBattle, members, aliveMembers, deadMembers, movableMembers, agility, tgrSum, isAllDead, tpbBaseSpeed
-- quasi: tpbReferenceTime, randomDeadTarget, smoothTarget, smoothDeadTarget, substituteBattler
+- quasi: tpbReferenceTime, substituteBattler
 - extract: selectTargetByTgr, filterByPredicate, calculateAgility
 - 注入候補: members, tgrWeights, battleMode, randomFloat
 - 非候補: initialize, clearActions, randomTarget, clearResults, onBattleStart, onBattleEnd, makeActions, select, updateTpb
