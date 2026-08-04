@@ -8,10 +8,6 @@ export const battlerIsDead = (battler: Rmmz_Battler): boolean => {
   return battler.isDead();
 };
 
-export const unitTgrSum = (battlers: ReadonlyArray<Rmmz_Battler>): number => {
-  return battlers.reduce((r, b) => r + b.tgr, 0);
-};
-
 export const repeatTargets = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   repeat: number,

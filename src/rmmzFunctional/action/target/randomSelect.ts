@@ -4,7 +4,7 @@ import {
   scopeIsForAliveFriend,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-import { battlerIsAlive, battlerIsDead, unitTgrSum } from "./support";
+import { battlerIsAlive, battlerIsDead } from "./support";
 import type { Provider_Battlers } from "./types";
 
 export const battlersDecideRandomTarget = (
@@ -21,6 +21,26 @@ export const battlersDecideRandomTarget = (
   return battlersRandomAliveTarget(units.opponentsUnit(), randomValue);
 };
 
+interface TgrPair<T> {
+  battler: T;
+  tgr: number;
+}
+
+const mapTgrPairs = <T extends Rmmz_Battler>(
+  battlers: ReadonlyArray<T>,
+): TgrPair<T>[] => {
+  return battlers.map(
+    (battler): TgrPair<T> => ({
+      battler,
+      tgr: battler.tgr,
+    }),
+  );
+};
+
+const sumTgrPairs = (pairs: ReadonlyArray<TgrPair<unknown>>): number => {
+  return pairs.reduce((sum, pair) => sum + pair.tgr, 0);
+};
+
 export const battlersRandomTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
@@ -31,14 +51,15 @@ export const battlersRandomTarget = <T extends Rmmz_Battler>(
   if (battlers.length === 1) {
     return battlers[0];
   }
-  const tgrSum: number = unitTgrSum(battlers);
+  const tgrPairs = mapTgrPairs(battlers);
+  const tgrSum: number = sumTgrPairs(tgrPairs);
   // eslint-disable-next-line @functional/no-let
   let targetTgr = randomValue * tgrSum;
   // eslint-disable-next-line @functional/no-loop-statements
-  for (const battler of battlers) {
+  for (const battler of tgrPairs) {
     targetTgr -= battler.tgr;
     if (targetTgr <= 0) {
-      return battler;
+      return battler.battler;
     }
   }
   return undefined;
