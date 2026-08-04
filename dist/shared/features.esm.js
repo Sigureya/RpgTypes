@@ -1,11 +1,11 @@
-import { B as e, G as t, H as n, I as r, J as i, R as a, V as o, W as s, Z as c, l, q as u, r as d, z as f } from "./fileio.esm.js";
-import { n as p } from "./libs.esm.js";
-import { Al as m, Es as h, Mu as g, Nt as _, Pt as ee, Tt as v, at as te, bs as ne, c as re, ds as y, fs as ie, gs as ae, ju as oe, kt as se, s as ce, u as le, vs as ue, ys as de } from "./rmmz.esm.js";
-import { createCommandExtractorMapFromPipeline as fe, createPluginCommandMap as pe, createPluginParamDictionary as me, createTextParamDictionary as he, extractPluginCommandWithExtractor as ge, filterPluginSchemaByFn as _e, filterPluginSchemaStringParams as ve, generatePluginAnnotationText as ye, parseDeepRecord as be, replaceRuntimePluginCommand as xe } from "@sigureya/rmmz-plugin-schema";
-import { JSONPathJS as Se } from "jsonpath-js";
-var Ce = (e, t, n, r, i, a) => {
-	if (e.code === 357) return Te(e, t, n, i, a);
-	let o = p(e.value);
+import { B as e, G as t, H as n, I as r, J as i, R as a, V as o, W as s, Z as c, l, q as ee, r as u, z as d } from "./fileio.esm.js";
+import { n as f } from "./libs.esm.js";
+import { Ml as te, Nt as p, Nu as m, Os as h, Pt as ne, Pu as g, Ss as re, Tt as _, at as v, bs as y, c as ie, kt as ae, ms as oe, ps as b, s as se, u as ce, vs as le, xs as ue } from "./rmmz.esm.js";
+import { createCommandExtractorMapFromPipeline as de, createPluginCommandMap as fe, createPluginParamDictionary as pe, createTextParamDictionary as me, extractPluginCommandWithExtractor as he, filterPluginSchemaByFn as ge, filterPluginSchemaStringParams as _e, generatePluginAnnotationText as ve, parseDeepRecord as ye, replaceRuntimePluginCommand as be } from "@sigureya/rmmz-plugin-schema";
+import { JSONPathJS as xe } from "jsonpath-js";
+var Se = (e, t, n, r, i, a) => {
+	if (e.code === 357) return we(e, t, n, i, a);
+	let o = f(e.value);
 	return {
 		otherData: a,
 		uuid: i(o),
@@ -14,23 +14,23 @@ var Ce = (e, t, n, r, i, a) => {
 		filename: n,
 		id: t,
 		speaker: e.speaker ?? "",
-		dataKey: we(e)
+		dataKey: Ce(e)
 	};
-}, we = (e) => `code:${e.code}`, Te = (e, t, n, r, i) => {
-	let a = p(e.value);
+}, Ce = (e) => `code:${e.code}`, we = (e, t, n, r, i) => {
+	let a = f(e.value);
 	return {
 		otherData: [e.pluginName, ...i],
 		uuid: r(a),
-		kind: `${Ee(e)}`,
+		kind: `${Te(e)}`,
 		baseText: a,
 		filename: n,
 		id: t,
 		dataKey: `code:${e.code}-${e.argName}`
 	};
-}, Ee = (e) => `${e.commandName}.${e.argTitle}`, De = (e, t, n, r) => t.flatMap(((t) => Oe(e, t, n, r))), Oe = (e, t, n, r) => t.commands.filter(b).map(((i) => Ce(i, t.eventId, e, r, n, [t.name]))), ke = (e, t, n, r) => e.filter(((e) => e.commands.length > 0)).flatMap(((e) => {
+}, Te = (e) => `${e.commandName}.${e.argTitle}`, Ee = (e, t, n, r) => t.flatMap(((t) => De(e, t, n, r))), De = (e, t, n, r) => t.commands.filter(ke).map(((i) => Se(i, t.eventId, e, r, n, [t.name]))), Oe = (e, t, n, r) => e.filter(((e) => e.commands.length > 0)).flatMap(((e) => {
 	let i = `page:${e.pageIndex + 1}`;
-	return e.commands.map(((a) => Ce(a, e.eventId, t, n, r, [i])));
-})), b = (e) => e.value.length > 0, Ae = (e) => ((e, t) => ({
+	return e.commands.map(((a) => Se(a, e.eventId, t, n, r, [i])));
+})), ke = (e) => e.value.length > 0, Ae = (e) => ((e, t) => ({
 	code: e.code,
 	paramIndex: t,
 	value: e.parameters[t]
@@ -62,7 +62,7 @@ var Ce = (e, t, n, r, i, a) => {
 	e.name,
 	e.nickname,
 	e.profile
-])), Ie = (e) => y(e, x), Le = (e) => ae(e, x), Re = (e) => de(e, x), x = ({ list: e }) => e.filter(ze).map(((e) => e.parameters[1])), ze = (e) => e.code === 320 || e.code === 325 || e.code === 324, S = (e, t) => ({
+])), Ie = (e) => b(e, x), Le = (e) => le(e, x), Re = (e) => ue(e, x), x = ({ list: e }) => e.filter(ze).map(((e) => e.parameters[1])), ze = (e) => e.code === 320 || e.code === 325 || e.code === 324, S = (e, t) => ({
 	id: e.id,
 	name: e.name,
 	note: Be(e),
@@ -71,7 +71,7 @@ var Ce = (e, t, n, r, i, a) => {
 		value: e[t],
 		id: e.id
 	})))
-}), Be = (e) => ee(e.note, ((t, n) => ({
+}), Be = (e) => ne(e.note, ((t, n) => ({
 	key: t,
 	value: n,
 	id: e.id
@@ -99,7 +99,7 @@ var Ce = (e, t, n, r, i, a) => {
 	note: n.note
 }, r), C = (e, t, n, r) => e.map(((e) => Xe(e, t, n, r))), Xe = (e, t, n, r) => ({
 	main: e.main.filter(((e) => e.value !== "")).map(((e) => {
-		let i = p(e.value);
+		let i = f(e.value);
 		return {
 			kind: n[e.key],
 			baseText: i,
@@ -119,7 +119,7 @@ var Ce = (e, t, n, r, i, a) => {
 	dataKey: "note",
 	otherData: [e.key]
 }))), w = (e, t, n, r, i, a) => {
-	let o = p(t[r]);
+	let o = f(t[r]);
 	return {
 		filename: n,
 		id: 0,
@@ -204,7 +204,7 @@ var Ce = (e, t, n, r, i, a) => {
 	...T(t, e.armorTypes, "armorTypes", n.armorTypes, r),
 	...T(t, e.skillTypes, "skillTypes", n.skillTypes, r)
 ], T = (e, t, n, r, i) => t.filter(((e) => e.length > 0)).map(((t, a) => {
-	let o = p(t);
+	let o = f(t);
 	return {
 		filename: e,
 		id: a,
@@ -214,7 +214,7 @@ var Ce = (e, t, n, r, i, a) => {
 		dataKey: n
 	};
 })), it = (e, t) => {
-	let n = E(e.actors, Ve), r = st(e.armors), i = E(e.classes, Ue), a = E(e.enemies, He), o = E(e.items, Ge), s = E(e.mapInfos, ((e) => e)), c = E(e.skills, We), l = E(e.states, Je), u = E(e.weapons, Ke), d = ct(e.commonEvents, t), f = lt(e.troops, t), p = ut(e.mapFiles, t), m = at([
+	let n = E(e.actors, Ve), r = st(e.armors), i = E(e.classes, Ue), a = E(e.enemies, He), o = E(e.items, Ge), s = E(e.mapInfos, ((e) => e)), c = E(e.skills, We), l = E(e.states, Je), ee = E(e.weapons, Ke), u = ct(e.commonEvents, t), d = lt(e.troops, t), f = ut(e.mapFiles, t), te = at([
 		n,
 		r,
 		i,
@@ -223,17 +223,17 @@ var Ce = (e, t, n, r, i, a) => {
 		s,
 		c,
 		l,
-		u,
-		f,
-		d
+		ee,
+		d,
+		u
 	]).concat(ot(e.mapFiles));
 	return {
 		value: {
 			eventData: {
-				commonEvents: d.data,
-				troops: f.data.flat()
+				commonEvents: u.data,
+				troops: d.data.flat()
 			},
-			mapFiles: p,
+			mapFiles: f,
 			mainData: {
 				actors: n.data,
 				armors: r.data,
@@ -242,10 +242,10 @@ var Ce = (e, t, n, r, i, a) => {
 				items: o.data,
 				skills: c.data,
 				states: l.data,
-				weapons: u.data
+				weapons: ee.data
 			}
 		},
-		errors: m
+		errors: te
 	};
 }, E = (e, t) => ({
 	error: e.error,
@@ -281,14 +281,14 @@ var Ce = (e, t, n, r, i, a) => {
 }, D = (e) => {
 	let t = e.filter(((e) => e.kinds.length === 0)).map(((e) => e.key));
 	return new Set(t);
-}, O = (e, t) => {
-	let n = mt(e);
+}, mt = (e, t) => {
+	let n = ht(e);
 	return Array.from(n.entries()).map((([e, n]) => ({
 		key: e,
-		kinds: gt(_t(n, t)),
-		values: n.map(ht)
+		kinds: _t(vt(n, t)),
+		values: n.map(gt)
 	})));
-}, mt = (e) => {
+}, ht = (e) => {
 	let t = e.flatMap(((e) => e.notes.map(((t) => ({
 		key: t.key,
 		value: t.value,
@@ -297,12 +297,12 @@ var Ce = (e, t, n, r, i, a) => {
 		soruce: e.source
 	})))));
 	return Map.groupBy(t, ((e) => e.key));
-}, ht = (e) => ({
+}, gt = (e) => ({
 	value: e.value,
 	id: e.id,
 	soruce: e.soruce,
 	name: e.name
-}), gt = (e) => [
+}), _t = (e) => [
 	e.isBoolean ? "boolean" : null,
 	e.isNumber ? "number" : null,
 	e.isBgm ? "bgm" : null,
@@ -318,7 +318,7 @@ var Ce = (e, t, n, r, i, a) => {
 	e.isTileset ? "tilesets" : null,
 	e.isMovie ? "movies" : null,
 	e.isScript ? "script" : null
-].filter(((e) => e !== null)), _t = (e, { audioFiles: t, imageFiles: n, otherFiles: r }) => e.reduce(((e, i) => ({
+].filter(((e) => e !== null)), vt = (e, { audioFiles: t, imageFiles: n, otherFiles: r }) => e.reduce(((e, i) => ({
 	isBoolean: e.isBoolean && ft(i.value),
 	isNumber: e.isNumber && pt(i.value),
 	isBgm: e.isBgm && t.bgm.has(i.value),
@@ -333,7 +333,7 @@ var Ce = (e, t, n, r, i, a) => {
 	isEnemy: e.isEnemy && n.enemies.has(i.value),
 	isTileset: e.isTileset && n.tilesets.has(i.value),
 	isMovie: e.isMovie && r.movies.has(i.value),
-	isScript: e.isScript && te(i.value)
+	isScript: e.isScript && v(i.value)
 })), {
 	isBoolean: !0,
 	isNumber: !0,
@@ -350,27 +350,27 @@ var Ce = (e, t, n, r, i, a) => {
 	isTileset: !0,
 	isMovie: !0,
 	isScript: !0
-}), vt = (e) => ({
+}), yt = (e) => ({
 	source: e.filename,
-	notes: [...e.map.noteItems.map(bt), ...e.map.events.map(yt).flat()]
-}), yt = (e) => e.noteItems.map(((t) => ({
+	notes: [...e.map.noteItems.map(xt), ...e.map.events.map(bt).flat()]
+}), bt = (e) => e.noteItems.map(((t) => ({
 	id: e.eventId,
 	key: t.key,
 	value: t.value,
 	name: e.name
-}))), bt = (e) => ({
+}))), xt = (e) => ({
 	id: 0,
 	key: e.key,
 	value: e.value,
 	name: ""
-}), xt = (e, t) => ({
+}), St = (e, t) => ({
 	eventId: e.eventId,
 	name: e.name,
 	pageIndex: e.pageIndex,
 	commands: e.commands,
 	note: e.note,
 	noteItems: e.noteItems.filter(t)
-}), k = (e, t) => e.map(((e) => {
+}), O = (e, t) => e.map(((e) => {
 	let n = e.note.filter(t);
 	return {
 		main: e.main,
@@ -378,8 +378,8 @@ var Ce = (e, t, n, r, i, a) => {
 		id: e.id,
 		name: e.name
 	};
-})).filter(St), St = (e) => e.note.length > 0 || e.main.length > 0, A = (e, t) => {
-	let n = jt(e.value.mainData, t), r = Mt(e.value.mapFiles.validMaps, t);
+})).filter(Ct), Ct = (e) => e.note.length > 0 || e.main.length > 0, wt = (e, t) => {
+	let n = Nt(e.value.mainData, t), r = Pt(e.value.mapFiles.validMaps, t);
 	return {
 		nonTextNoteKeys: n.nonTextNoteKeys,
 		dataNoteSummary: n.noteSummary,
@@ -397,19 +397,19 @@ var Ce = (e, t, n, r, i, a) => {
 			}
 		}
 	};
-}, Ct = (e, t) => {
+}, Tt = (e, t) => {
 	let n = (e) => t.has(e.key);
 	return {
-		actors: k(e.actors, n),
-		enemies: k(e.enemies, n),
-		weapons: k(e.weapons, n),
-		armors: k(e.armors, n),
-		skills: k(e.skills, n),
-		states: k(e.states, n),
-		items: k(e.items, n),
-		classes: k(e.classes, n)
+		actors: O(e.actors, n),
+		enemies: O(e.enemies, n),
+		weapons: O(e.weapons, n),
+		armors: O(e.armors, n),
+		skills: O(e.skills, n),
+		states: O(e.states, n),
+		items: O(e.items, n),
+		classes: O(e.classes, n)
 	};
-}, wt = (e, t) => Dt(e, D(At(e, t))), Tt = (e, t) => D(Ot(e, t)), Et = (e, t) => Ct(e, Tt(e, t)), Dt = (e, t) => e.map(((e) => {
+}, Et = (e, t) => kt(e, D(Mt(e, t))), Dt = (e, t) => D(At(e, t)), Ot = (e, t) => Tt(e, Dt(e, t)), kt = (e, t) => e.map(((e) => {
 	return {
 		filename: e.filename,
 		editingName: e.editingName,
@@ -417,20 +417,20 @@ var Ce = (e, t, n, r, i, a) => {
 			displayedName: n.displayedName,
 			note: n.note,
 			noteItems: n.noteItems.filter(r),
-			events: n.events.map(((e) => xt(e, r)))
+			events: n.events.map(((e) => St(e, r)))
 		})
 	};
 	var n, r;
-})), Ot = (e, t) => O(kt(e), t), kt = (e) => [
-	j(r, e.actors),
-	j(s, e.skills),
-	j(n, e.items),
-	j(i, e.weapons),
-	j(a, e.armors),
-	j(f, e.classes),
-	j(t, e.states),
-	j(o, e.enemies)
-], j = (e, t) => ({
+})), At = (e, t) => mt(jt(e), t), jt = (e) => [
+	k(r, e.actors),
+	k(s, e.skills),
+	k(n, e.items),
+	k(i, e.weapons),
+	k(a, e.armors),
+	k(d, e.classes),
+	k(t, e.states),
+	k(o, e.enemies)
+], k = (e, t) => ({
 	source: e,
 	notes: t.flatMap(((e) => e.note.map(((t) => ({
 		key: t.key,
@@ -438,21 +438,21 @@ var Ce = (e, t, n, r, i, a) => {
 		id: t.id,
 		name: e.name
 	})))))
-}), At = (e, t) => O(e.map(vt), t), jt = (e, t) => {
-	let n = Ot(e, t), r = D(n);
+}), Mt = (e, t) => mt(e.map(yt), t), Nt = (e, t) => {
+	let n = At(e, t), r = D(n);
 	return {
 		noteSummary: n,
 		nonTextNoteKeys: r,
-		mainData: Ct(e, r)
+		mainData: Tt(e, r)
 	};
-}, Mt = (e, t) => {
-	let n = At(e, t);
+}, Pt = (e, t) => {
+	let n = Mt(e, t);
 	return {
 		noteSummary: n,
-		validMaps: Dt(e, D(n))
+		validMaps: kt(e, D(n))
 	};
-}, Nt = (e, t) => e.params.filter(Pt).map(((n) => It(e.pluginName, n, t))).filter(((e) => e !== void 0)), M = (e) => e.length !== 0 && !/^[\d\s-\+\*/,.()=><]+$/.test(e) && !(!/["`']/.test(e) && te(e)), Pt = (e) => typeof e.value == "string" && e.value.length !== 0 && !!Ft(e) && !!M(e.value), Ft = (e) => e.param.attr.kind === "string" || e.param.attr.kind === "string[]" || e.param.attr.kind === "multiline_string" || e.param.attr.kind === "multiline_string[]" || e.param.attr.kind === "combo" || e.param.attr.kind === "any", It = (e, t, n) => {
-	let r = p(t.value);
+}, Ft = (e, t) => e.params.filter(It).map(((n) => Rt(e.pluginName, n, t))).filter(((e) => e !== void 0)), A = (e) => e.length !== 0 && !/^[\d\s-\+\*/,.()=><]+$/.test(e) && !(!/["`']/.test(e) && v(e)), It = (e) => typeof e.value == "string" && e.value.length !== 0 && !!Lt(e) && !!A(e.value), Lt = (e) => e.param.attr.kind === "string" || e.param.attr.kind === "string[]" || e.param.attr.kind === "multiline_string" || e.param.attr.kind === "multiline_string[]" || e.param.attr.kind === "combo" || e.param.attr.kind === "any", Rt = (e, t, n) => {
+	let r = f(t.value);
 	if (r.length !== 0) return {
 		filename: e,
 		id: 0,
@@ -466,7 +466,7 @@ var Ce = (e, t, n, r, i, a) => {
 			t.param.attr.desc || ""
 		]
 	};
-}, Lt = (e, t) => ({
+}, zt = (e, t) => ({
 	code: 357,
 	pluginName: e.pluginName,
 	commandName: e.commandName,
@@ -474,26 +474,26 @@ var Ce = (e, t, n, r, i, a) => {
 	value: typeof t.value == "string" ? t.value : "",
 	argTitle: t.param.attr.text || t.param.name,
 	paramIndex: 3
-}), Rt = (e) => {
-	let t = fe(e);
+}), Bt = (e) => {
+	let t = de(e);
 	return { extractArgs(e, n) {
-		let r = ge(e, t, n);
-		return r.args.map(((e) => Lt(r, e)));
+		let r = he(e, t, n);
+		return r.args.map(((e) => zt(r, e)));
 	} };
-}, zt = (e) => [
+}, Vt = (e) => [
 	...e.eventData.commonEvents.flatMap(((e) => e.commands)),
 	...e.eventData.troops.flatMap(((e) => e.commands)),
 	...e.mapFiles.validMaps.flatMap(((e) => e.map.events.flatMap(((e) => e.commands))))
-], Bt = (e) => {
-	let t = e.filter(Vt).map(((e) => e.speaker.trimEnd()));
+], Ht = (e) => {
+	let t = e.filter(Ut).map(((e) => e.speaker.trimEnd()));
 	return Array.from(new Set(t));
-}, Vt = (e) => e.code === 401 && !!e.speaker && !h(e.speaker), Ht = (e, t, n, r, i, a, o) => {
-	let s = A(it(e.data, o), e);
-	return Gt(e.data.actors.data, e.system, t, s, n, r, i, a);
-}, Ut = Ht, Wt = (e) => [...e.dataNoteSummary, ...e.mapNoteSummary], Gt = (c, l, d, p, m, h, g, _) => {
-	let { eventData: ee, mainData: v, mapFiles: te } = p.data.value;
+}, Ut = (e) => e.code === 401 && !!e.speaker && !h(e.speaker), Wt = (e, t, n, r, i, a, o) => {
+	let s = wt(it(e.data, o), e);
+	return qt(e.data.actors.data, e.system, t, s, n, r, i, a);
+}, Gt = Wt, Kt = (e) => [...e.dataNoteSummary, ...e.mapNoteSummary], qt = (c, l, u, f, te, p, m, h) => {
+	let { eventData: ne, mainData: g, mapFiles: _ } = f.data.value;
 	return {
-		speakers: (re = p.data.value, y = g, Bt(zt(re)).map(((e) => ({
+		speakers: (v = f.data.value, y = m, Ht(Vt(v)).map(((e) => ({
 			filename: "",
 			id: 0,
 			uuid: y(e),
@@ -502,26 +502,26 @@ var Ce = (e, t, n, r, i, a) => {
 			dataKey: "speaker",
 			otherData: []
 		})))),
-		noteSummaries: Wt(p),
-		pluginParams: d.flatMap(((e) => Nt(e, g))),
-		map: Kt(te, g, _),
-		commonEvents: De(e, ee.commonEvents, g, _),
-		troops: ke(ee.troops, u, _, g),
-		armors: C(v.armors, a, h, g),
-		system: Jt(l, g, m),
+		noteSummaries: Kt(f),
+		pluginParams: u.flatMap(((e) => Ft(e, m))),
+		map: Jt(_, m, h),
+		commonEvents: Ee(e, ne.commonEvents, m, h),
+		troops: Oe(ne.troops, ee, h, m),
+		armors: C(g.armors, a, p, m),
+		system: Xt(l, m, te),
 		actors: {
-			texts: C(v.actors, r, h, g),
-			controlChars: ne(c)
+			texts: C(g.actors, r, p, m),
+			controlChars: re(c)
 		},
-		classes: C(v.classes, f, h, g),
-		enemies: C(v.enemies, o, h, g),
-		items: C(v.items, n, h, g),
-		skills: C(v.skills, s, h, g),
-		states: Ye(v.states, t, h, g),
-		weapons: C(v.weapons, i, h, g)
+		classes: C(g.classes, d, p, m),
+		enemies: C(g.enemies, o, p, m),
+		items: C(g.items, n, p, m),
+		skills: C(g.skills, s, p, m),
+		states: Ye(g.states, t, p, m),
+		weapons: C(g.weapons, i, p, m)
 	};
-	var re, y;
-}, Kt = (e, t, n) => e.validMaps.map(((e) => qt(e, t, n))).flat(3), qt = (e, t, n) => e.map.events.map(((r) => ((e, t, n, r) => {
+	var v, y;
+}, Jt = (e, t, n) => e.validMaps.map(((e) => Yt(e, t, n))).flat(3), Yt = (e, t, n) => e.map.events.map(((r) => ((e, t, n, r) => {
 	let i = `page:${e.pageIndex + 1}`, a = dt(e);
 	return [e.noteItems.map(((r) => ({
 		id: e.eventId,
@@ -535,14 +535,14 @@ var Ce = (e, t, n, r, i, a) => {
 			a,
 			r.key
 		]
-	}))), e.commands.filter(b).map(((o) => Ce(o, e.eventId, t.filename, r, n, [
+	}))), e.commands.filter(ke).map(((o) => Se(o, e.eventId, t.filename, r, n, [
 		t.editingName,
 		a,
 		i
 	])))];
-})(r, e, t, n))), Jt = (e, t, n) => {
+})(r, e, t, n))), Xt = (e, t, n) => {
 	if (e.system) {
-		let r = ce(e.system);
+		let r = se(e.system);
 		return {
 			gameTitle: e.system.gameTitle,
 			filename: l,
@@ -554,27 +554,27 @@ var Ce = (e, t, n, r, i, a) => {
 		filename: l,
 		texts: []
 	};
-}, Yt = (e, t, n, r, i, a) => {
+}, Zt = (e, t, n, r, i, a) => {
 	let o = {
 		hashText: a,
 		newText: (e) => i.get(e) ?? e
 	};
 	return {
-		textDictionary: Xt(i, a),
+		textDictionary: Qt(i, a),
 		actorTexts: Me(e, t, n, r, o)
 	};
-}, Xt = (e, t) => Array.from(e.entries()).map((([e, n]) => ({
+}, Qt = (e, t) => Array.from(e.entries()).map((([e, n]) => ({
 	key: t(e),
 	value: n
-}))), Zt = (e) => {
+}))), $t = (e) => {
 	let t = D(e);
 	return Array.from(t);
-}, N = "HonyakuEx", Qt = (e, t) => ({
+}, j = "HonyakuEx", M = (e, t) => ({
 	dir: "js/plugins",
 	subDir: t.outputDirectory,
 	filename: `${t.dictionaryName}.js`,
-	text: en(e)
-}), $t = (e, t, n) => [
+	text: tn(e)
+}), en = (e, t, n) => [
 	"(() => {",
 	"const data = ",
 	`${JSON.stringify(n, null, 2)};`,
@@ -584,34 +584,34 @@ var Ce = (e, t, n, r, i, a) => {
 	"data",
 	");",
 	"})();"
-].join("\n"), en = (e) => {
+].join("\n"), tn = (e) => {
 	let t = {
 		actorTexts: e.actorTexts,
 		textDictionary: e.textDictionary,
 		targetNoteKeys: e.targetNoteKeys
 	};
 	return [
-		rn("辞書データプラグイン。JSONの代わりです。"),
+		an("辞書データプラグイン。JSONの代わりです。"),
 		"(function(){",
 		"\"use strict\";",
-		$t(N, "Setup", t),
-		$t(N, "SetupSystemTexts", e.systemTexts),
+		en(j, "Setup", t),
+		en(j, "SetupSystemTexts", e.systemTexts),
 		"})();"
 	].join("\n");
-}, tn = (e) => [
-	rn("プラグインコマンド書き換えプラグイン"),
+}, nn = (e) => [
+	an("プラグインコマンド書き換えプラグイン"),
 	"(function(){",
 	"\"use strict\";",
 	"const data = ",
 	`${JSON.stringify(e)};`,
 	"PluginManager.callCommand(null,",
-	`"${N}",`,
+	`"${j}",`,
 	"\"ReadPlugins\",",
 	"data",
 	");",
 	"})()"
-].join("\n"), nn = (e) => [{
-	name: `${e.outputDirectory}/${N}`,
+].join("\n"), rn = (e) => [{
+	name: `${e.outputDirectory}/${j}`,
 	description: e.description,
 	status: !0,
 	parameters: {}
@@ -620,13 +620,13 @@ var Ce = (e, t, n, r, i, a) => {
 	description: e.description,
 	status: !0,
 	parameters: {}
-}], rn = (e) => ye({
+}], an = (e) => ve({
 	pluginName: "",
 	locale: "",
 	target: "MZ",
 	dependencies: {
-		base: [N],
-		orderAfter: [N],
+		base: [j],
+		orderAfter: [j],
 		orderBefore: []
 	},
 	schema: {
@@ -640,18 +640,18 @@ var Ce = (e, t, n, r, i, a) => {
 	struct: (e) => JSON.stringify(e),
 	numberArray: (e) => JSON.stringify(e),
 	stringArray: (e) => JSON.stringify(e)
-}), an = (e, t) => {
+}), on = (e, t) => {
 	let n = t.actorTextDictionary.get(e);
 	if (n) return t.textDictionary.get(n);
-}, on = (e) => ({
+}, sn = (e) => ({
 	targetNoteKeys: new Set(e.targetNoteKeys),
 	textDictionary: new Map(e.textDictionary.map((({ key: e, value: t }) => [e, t]))),
 	actorTextDictionary: new Map(e.actorTexts.map((({ key: e, value: t }) => [e, t])))
-}), sn = (e, t = c) => [{
+}), cn = (e, t = c) => [{
 	data: e,
 	filename: t
-}], cn = (e) => un(ln(e)), ln = (e) => e.reduce(((e, t) => {
-	let n = dn(t);
+}], ln = (e) => dn(un(e)), un = (e) => e.reduce(((e, t) => {
+	let n = fn(t);
 	return n.key.length === 0 || n.value.length === 0 || (e.validEntries.push({
 		source: t,
 		normalized: n
@@ -659,27 +659,27 @@ var Ce = (e, t, n, r, i, a) => {
 }), {
 	validEntries: [],
 	rawKeys: /* @__PURE__ */ new Set()
-}), un = (e) => e.validEntries.reduce(((t, n) => (/\s$/.test(n.source.key) && e.rawKeys.has(n.normalized.key) ? t.errorItems.push(n.source) : t.items.push(n.normalized), t)), {
+}), dn = (e) => e.validEntries.reduce(((t, n) => (/\s$/.test(n.source.key) && e.rawKeys.has(n.normalized.key) ? t.errorItems.push(n.source) : t.items.push(n.normalized), t)), {
 	errorItems: [],
 	items: []
-}), dn = (e) => ({
+}), fn = (e) => ({
 	key: e.key.trimEnd(),
 	value: e.value.trimEnd()
-}), fn = (e) => {
+}), pn = (e) => {
 	let t = /* @__PURE__ */ new Map();
 	return e.forEach(((e, n) => {
 		t.has(e.baseText) || t.set(e.baseText, n);
 	})), t;
-}, pn = (e) => {
+}, mn = (e) => {
 	let t = [
-		P(e.actors.texts),
-		P(e.skills),
-		P(e.items),
-		P(e.weapons),
-		P(e.armors),
-		P(e.classes),
-		P(e.states),
-		P(e.enemies)
+		N(e.actors.texts),
+		N(e.skills),
+		N(e.items),
+		N(e.weapons),
+		N(e.armors),
+		N(e.classes),
+		N(e.states),
+		N(e.enemies)
 	];
 	return [
 		...e.system.texts,
@@ -690,11 +690,11 @@ var Ce = (e, t, n, r, i, a) => {
 		...e.troops,
 		...e.pluginParams
 	];
-}, P = (e) => e.map(((e) => [e.main, e.note])), mn = (e, t, n) => e.filter(((e) => e.code === 128 || e.code === 126 || e.code === 127)).map(((e) => gn(e, t, n))), hn = {
+}, N = (e) => e.map(((e) => [e.main, e.note])), hn = (e, t, n) => e.filter(((e) => e.code === 128 || e.code === 126 || e.code === 127)).map(((e) => _n(e, t, n))), gn = {
 	127: "weapon",
 	128: "armor",
 	126: "item"
-}, gn = (e, t, n) => {
+}, _n = (e, t, n) => {
 	let r = g(e) ? {
 		direct: !1,
 		variableId: e.parameters[3]
@@ -703,35 +703,35 @@ var Ce = (e, t, n, r, i, a) => {
 		value: e.parameters[3]
 	}, i = e.parameters[1] === 0 ? t.gain : e.parameters[1] === 1 ? t.lose : t.unknown, a = typeof e.parameters[4] == "boolean" ? { includesEquip: e.parameters[4] } : {};
 	return {
-		itemKind: hn[e.code],
-		dataId: oe(e),
+		itemKind: gn[e.code],
+		dataId: m(e),
 		code: e.code,
 		commandNameMZ: n(e.code),
 		operation: i,
 		...a,
 		...r
 	};
-}, _n = (e, t, n) => y(e.map, ((e, r, i) => ({
-	...vn(e),
-	commands: mn(e.list, t, n),
+}, vn = (e, t, n) => b(e.map, ((e, r, i) => ({
+	...yn(e),
+	commands: hn(e.list, t, n),
 	eventName: i.name,
 	pageIndex: r
-}))), vn = (e) => e.conditions.itemId > 0 && e.conditions.itemValid ? { pageCondition: { itemId: e.conditions.itemId } } : {}, yn = (e, t, n) => ie(e, ((e, r, i) => ({
-	commands: mn(e.list, t, n),
+}))), yn = (e) => e.conditions.itemId > 0 && e.conditions.itemValid ? { pageCondition: { itemId: e.conditions.itemId } } : {}, bn = (e, t, n) => oe(e, ((e, r, i) => ({
+	commands: hn(e.list, t, n),
 	eventName: i.name,
 	troopId: i.id,
 	pageIndex: r
-}))), bn = (e, t) => {
+}))), xn = (e, t) => {
 	let n = e.trimEnd(), r = t.get(n);
 	return r ? r.trimEnd() : n;
-}, F = (e, t) => {
+}, P = (e, t) => {
 	let n = e.trimEnd(), r = t(n);
 	return r ? r.trimEnd() : n;
-}, I = (e, t) => {
+}, F = (e, t) => {
 	let n = e.trimEnd(), r = t.replaceText(n);
 	return r ? r.trimEnd() : n;
-}, L = (e, t) => {
-	let n = (e) => t.replaceText(e), r = v(e.note, t), i = F(e.name, n), a = F(e.nickname, n), o = F(e.profile, n);
+}, I = (e, t) => {
+	let n = (e) => t.replaceText(e), r = _(e.note, t), i = P(e.name, n), a = P(e.nickname, n), o = P(e.profile, n);
 	return {
 		...e,
 		name: i,
@@ -739,22 +739,22 @@ var Ce = (e, t, n, r, i, a) => {
 		profile: o,
 		note: r
 	};
+}, L = (e, t) => {
+	let n = _(e.note, t), r = F(e.name, t);
+	return {
+		...e,
+		name: r,
+		note: n
+	};
 }, R = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t);
+	let n = _(e.note, t), r = F(e.name, t);
 	return {
 		...e,
 		name: r,
 		note: n
 	};
 }, z = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t);
-	return {
-		...e,
-		name: r,
-		note: n
-	};
-}, B = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t), i = I(e.description, t), a = I(e.message1, t), o = I(e.message2, t);
+	let n = _(e.note, t), r = F(e.name, t), i = F(e.description, t), a = F(e.message1, t), o = F(e.message2, t);
 	return {
 		...e,
 		name: r,
@@ -763,16 +763,16 @@ var Ce = (e, t, n, r, i, a) => {
 		message2: o,
 		note: n
 	};
-}, V = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t), i = I(e.description, t);
+}, B = (e, t) => {
+	let n = _(e.note, t), r = F(e.name, t), i = F(e.description, t);
 	return {
 		...e,
 		name: r,
 		description: i,
 		note: n
 	};
-}, H = (e, t) => {
-	let n = v(e.note, t), r = I(e.name, t), i = I(e.message1, t), a = I(e.message2, t), o = I(e.message3, t), s = I(e.message4, t);
+}, V = (e, t) => {
+	let n = _(e.note, t), r = F(e.name, t), i = F(e.message1, t), a = F(e.message2, t), o = F(e.message3, t), s = F(e.message4, t);
 	return {
 		...e,
 		name: r,
@@ -782,44 +782,44 @@ var Ce = (e, t, n, r, i, a) => {
 		message4: s,
 		note: n
 	};
-}, xn = (e, t) => {
+}, Sn = (e, t) => {
 	switch (e.code) {
-		case 101: return Cn(e, t);
-		case 102: return Tn(e, t);
+		case 101: return wn(e, t);
+		case 102: return En(e, t);
 		case 401:
 		case 108:
 		case 408:
-		case 405: return Sn(e, t);
+		case 405: return Cn(e, t);
 		case 320:
 		case 324:
-		case 325: return wn(e, t);
+		case 325: return Tn(e, t);
 		default: return e;
 	}
-}, Sn = (e, t) => {
-	let n = F(e.parameters[0], t);
+}, Cn = (e, t) => {
+	let n = P(e.parameters[0], t);
 	return {
 		code: e.code,
 		indent: e.indent,
 		parameters: [n]
 	};
-}, Cn = (e, t) => {
-	let n = e.parameters[4] ? F(e.parameters[4], t) : "";
-	return m({
+}, wn = (e, t) => {
+	let n = e.parameters[4] ? P(e.parameters[4], t) : "";
+	return te({
 		facename: e.parameters[0],
 		faceIndex: e.parameters[1],
 		background: e.parameters[2],
 		positionType: e.parameters[3],
 		speakerName: n
 	}, e.indent);
-}, wn = (e, t) => {
-	let n = F(e.parameters[1], t);
+}, Tn = (e, t) => {
+	let n = P(e.parameters[1], t);
 	return {
 		code: e.code,
 		indent: e.indent,
 		parameters: [e.parameters[0], n]
 	};
-}, Tn = (e, t) => {
-	let n = e.parameters[0].map(((e) => F(e, t)));
+}, En = (e, t) => {
+	let n = e.parameters[0].map(((e) => P(e, t)));
 	return {
 		code: 102,
 		indent: e.indent,
@@ -831,12 +831,12 @@ var Ce = (e, t, n, r, i, a) => {
 			e.parameters[4]
 		]
 	};
-}, En = (e, t, n = "\n") => Dn(e, ((e) => t.get(e)), n), Dn = (e, t, n = "\n") => se(e.note, ((e) => F(e.value, t)), n), On = (e, t) => kn(e, ((e) => bn(e, t))), kn = (e, t) => ({
-	params: Mn(e.params, ((e) => F(e, t))),
-	messages: re(e.messages, ((e) => F(e, t))),
-	basic: An(e.basic, ((e) => F(e, t))),
-	commands: jn(e.commands, ((e) => F(e, t)))
-}), An = (e, t) => [
+}, Dn = (e, t, n = "\n") => On(e, ((e) => t.get(e)), n), On = (e, t, n = "\n") => ae(e.note, ((e) => P(e.value, t)), n), kn = (e, t) => An(e, ((e) => xn(e, t))), An = (e, t) => ({
+	params: Nn(e.params, ((e) => P(e, t))),
+	messages: ie(e.messages, ((e) => P(e, t))),
+	basic: jn(e.basic, ((e) => P(e, t))),
+	commands: Mn(e.commands, ((e) => P(e, t)))
+}), jn = (e, t) => [
 	t(e[0]),
 	t(e[1]),
 	t(e[2]),
@@ -847,7 +847,7 @@ var Ce = (e, t, n, r, i, a) => {
 	t(e[7]),
 	t(e[8]),
 	t(e[9])
-], jn = (e, t) => [
+], Mn = (e, t) => [
 	t(e[0]),
 	t(e[1]),
 	t(e[2]),
@@ -874,7 +874,7 @@ var Ce = (e, t, n, r, i, a) => {
 	"",
 	t(e[24]),
 	t(e[25])
-], Mn = (e, t) => [
+], Nn = (e, t) => [
 	t(e[0]),
 	t(e[1]),
 	t(e[2]),
@@ -885,24 +885,24 @@ var Ce = (e, t, n, r, i, a) => {
 	t(e[7]),
 	t(e[8]),
 	t(e[9])
-], Nn = (e, t) => ({
+], Pn = (e, t) => ({
 	...e,
-	gameTitle: F(e.gameTitle, t),
-	currencyUnit: F(e.currencyUnit, t),
-	elements: U(e.elements, t),
-	skillTypes: U(e.skillTypes, t),
-	weaponTypes: U(e.weaponTypes, t),
-	armorTypes: U(e.armorTypes, t),
-	equipTypes: U(e.equipTypes, t),
-	terms: kn(e.terms, t)
-}), U = (e, t) => e.map(((e) => F(e, t))), Pn = (e) => e.map(((e) => e.parameters[0].trimEnd())).join("\n").trimEnd(), Fn = class {
+	gameTitle: P(e.gameTitle, t),
+	currencyUnit: P(e.currencyUnit, t),
+	elements: H(e.elements, t),
+	skillTypes: H(e.skillTypes, t),
+	weaponTypes: H(e.weaponTypes, t),
+	armorTypes: H(e.armorTypes, t),
+	equipTypes: H(e.equipTypes, t),
+	terms: An(e.terms, t)
+}), H = (e, t) => e.map(((e) => P(e, t))), Fn = (e) => e.map(((e) => e.parameters[0].trimEnd())).join("\n").trimEnd(), In = class {
 	header;
 	bodies;
 	constructor(e, t) {
 		this.header = e, this.bodies = t;
 	}
 	getBodyText() {
-		return Pn(this.joinCommandBodies());
+		return Fn(this.joinCommandBodies());
 	}
 	mergedBody() {
 		return {
@@ -917,7 +917,7 @@ var Ce = (e, t, n, r, i, a) => {
 	normalizedCommands() {
 		return [this.mergedBody()];
 	}
-}, W = class {
+}, U = class {
 	bodyCode;
 	header;
 	bodies;
@@ -934,7 +934,7 @@ var Ce = (e, t, n, r, i, a) => {
 		return this.bodies.length === 0 ? [e] : [e, this.mergedBody()];
 	}
 	getBodyText() {
-		return Pn(this.bodies);
+		return Fn(this.bodies);
 	}
 	joinCommandBodies() {
 		return this.bodies;
@@ -946,7 +946,7 @@ var Ce = (e, t, n, r, i, a) => {
 			parameters: [this.getBodyText()]
 		};
 	}
-}, G = (e, t, n, r) => {
+}, W = (e, t, n, r) => {
 	let i = e[t];
 	if (!n(i)) throw Error(`Invalid head at index ${t}: ${JSON.stringify(i)}`);
 	let a = [];
@@ -959,28 +959,28 @@ var Ce = (e, t, n, r, i, a) => {
 		header: i,
 		bodies: a
 	};
-}, In = (e, t) => {
-	let { bodies: n, header: r } = ((e, t) => G(e, t, ((e) => e.code === 108), ((e) => e.code === 408)))(e, t);
-	return Ln(r) ? new W(408, r, n) : new Fn(r, n);
-}, Ln = (e) => e.parameters[0] === "選択肢ヘルプ", Rn = (e, t) => {
-	let { bodies: n, header: r } = ((e, t) => G(e, t, ((e) => e.code === 101), ((e) => e.code === 401)))(e, t);
-	return new W(401, r, n);
-}, zn = (e, t) => {
-	let { bodies: n, header: r } = ((e, t) => G(e, t, ((e) => e.code === 355), ((e) => e.code === 655)))(e, t);
-	return new Fn(r, n);
+}, Ln = (e, t) => {
+	let { bodies: n, header: r } = ((e, t) => W(e, t, ((e) => e.code === 108), ((e) => e.code === 408)))(e, t);
+	return Rn(r) ? new U(408, r, n) : new In(r, n);
+}, Rn = (e) => e.parameters[0] === "選択肢ヘルプ", zn = (e, t) => {
+	let { bodies: n, header: r } = ((e, t) => W(e, t, ((e) => e.code === 101), ((e) => e.code === 401)))(e, t);
+	return new U(401, r, n);
 }, Bn = (e, t) => {
-	let { bodies: n, header: r } = ((e, t) => G(e, t, ((e) => e.code === 105), ((e) => e.code === 405)))(e, t);
-	return new W(405, r, n);
-}, Vn = {
-	101: (e, t, n) => n.showMessage(Rn(e, t), t, e),
-	355: (e, t, n) => n.script(zn(e, t), t, e),
-	108: (e, t, n) => n.comment(In(e, t), t, e),
-	105: (e, t, n) => n.showScrollingText(Bn(e, t), t, e)
-}, Hn = (e) => Vn[e], Un = (e, t, n, r) => {
+	let { bodies: n, header: r } = ((e, t) => W(e, t, ((e) => e.code === 355), ((e) => e.code === 655)))(e, t);
+	return new In(r, n);
+}, Vn = (e, t) => {
+	let { bodies: n, header: r } = ((e, t) => W(e, t, ((e) => e.code === 105), ((e) => e.code === 405)))(e, t);
+	return new U(405, r, n);
+}, Hn = {
+	101: (e, t, n) => n.showMessage(zn(e, t), t, e),
+	355: (e, t, n) => n.script(Bn(e, t), t, e),
+	108: (e, t, n) => n.comment(Ln(e, t), t, e),
+	105: (e, t, n) => n.showScrollingText(Vn(e, t), t, e)
+}, Un = (e) => Hn[e], Wn = (e, t, n, r) => {
 	if (e.code === 401 || e.code === 405 || e.code === 408) return;
-	let i = Hn(e.code);
-	return i ? i(n, t, r) : e.code === 102 ? Wn(e) : e.code === 320 || e.code === 324 || e.code === 325 ? Gn(e) : e.code === 655 ? void 0 : e;
-}, Wn = (e) => ({
+	let i = Un(e.code);
+	return i ? i(n, t, r) : e.code === 102 ? Gn(e) : e.code === 320 || e.code === 324 || e.code === 325 ? Kn(e) : e.code === 655 ? void 0 : e;
+}, Gn = (e) => ({
 	code: 102,
 	indent: e.indent,
 	parameters: [
@@ -990,29 +990,29 @@ var Ce = (e, t, n, r, i, a) => {
 		e.parameters[3],
 		e.parameters[4]
 	]
-}), Gn = (e) => ({
+}), Kn = (e) => ({
 	code: e.code,
 	indent: e.indent,
 	parameters: [e.parameters[0], e.parameters[1].trimEnd()]
-}), Kn = (e) => ({
+}), qn = (e) => ({
 	code: 355,
 	indent: e.header.indent,
 	parameters: [e.getBodyText().trimEnd()]
-}), qn = (e) => {
+}), Jn = (e) => {
 	let t = e.getBodyText().trimEnd(), n = {
 		code: 401,
 		indent: e.header.indent,
 		parameters: [t]
 	};
-	return [Yn(e.header), n];
-}, Jn = (e) => {
+	return [Xn(e.header), n];
+}, Yn = (e) => {
 	let t = e.getBodyText().trimEnd(), n = {
 		code: 405,
 		indent: e.header.indent,
 		parameters: [t]
 	};
 	return [e.header, n];
-}, Yn = (e) => {
+}, Xn = (e) => {
 	let t = e.parameters[4] ? e.parameters[4].trimEnd() : "";
 	return {
 		code: e.code,
@@ -1025,59 +1025,59 @@ var Ce = (e, t, n, r, i, a) => {
 			t
 		]
 	};
-}, K = (e, t) => {
+}, G = (e, t) => {
 	let n = (e) => t.replaceText(e);
 	return ((e) => {
 		let t = {
 			comment: (e) => e.normalizedCommands(),
-			script: Kn,
-			showMessage: qn,
-			showScrollingText: Jn
+			script: qn,
+			showMessage: Jn,
+			showScrollingText: Yn
 		};
-		return e.map(((n, r) => n.code === 357 ? n : Un(n, r, e, t))).filter(((e) => e !== void 0)).flat();
-	})(e).map(((e) => e.code === 357 ? t.pluginCommand(e) : e.code === 355 ? t.scriptCommand(e) : xn(e, n)));
-}, Xn = (e, t) => ({
+		return e.map(((n, r) => n.code === 357 ? n : Wn(n, r, e, t))).filter(((e) => e !== void 0)).flat();
+	})(e).map(((e) => e.code === 357 ? t.pluginCommand(e) : e.code === 355 ? t.scriptCommand(e) : Sn(e, n)));
+}, Zn = (e, t) => ({
 	members: e.members,
 	id: e.id,
 	name: e.name,
 	pages: e.pages.map(((e) => ({
 		conditions: e.conditions,
 		span: e.span,
-		list: K(e.list, t)
+		list: G(e.list, t)
 	})))
-}), Zn = (e, t) => ({
-	id: e.id,
-	name: e.name,
-	trigger: e.trigger,
-	switchId: e.switchId,
-	list: K(e.list, t)
 }), Qn = (e, t) => ({
 	id: e.id,
 	name: e.name,
 	trigger: e.trigger,
 	switchId: e.switchId,
-	list: K(e.list, {
+	list: G(e.list, t)
+}), $n = (e, t) => ({
+	id: e.id,
+	name: e.name,
+	trigger: e.trigger,
+	switchId: e.switchId,
+	list: G(e.list, {
 		pluginCommand: (e) => e,
 		scriptCommand: (e) => e,
 		replaceText: t
 	})
-}), $n = (e, t) => tr(e, {
+}), er = (e, t) => nr(e, {
 	pluginCommand: (e) => e,
 	scriptCommand: (e) => e,
 	replaceText: t,
 	isReplaceTargetNote: () => !1
-}), er = (e, t) => tr(e, t), tr = (e, t) => ({
-	note: v(e.note, t),
-	displayName: I(e.displayName, t),
+}), tr = (e, t) => nr(e, t), nr = (e, t) => ({
+	note: _(e.note, t),
+	displayName: F(e.displayName, t),
 	events: e.events.map(((e) => e ? ((e, t) => ({
 		id: e.id,
 		name: e.name,
 		x: e.x,
 		y: e.y,
-		note: v(e.note, t),
+		note: _(e.note, t),
 		pages: e.pages.map(((e) => ({
 			...e,
-			list: K(e.list, t)
+			list: G(e.list, t)
 		})))
 	}))(e, t) : null)),
 	data: e.data,
@@ -1101,28 +1101,28 @@ var Ce = (e, t, n, r, i, a) => {
 	parallaxShow: e.parallaxShow,
 	parallaxSx: e.parallaxSx,
 	parallaxSy: e.parallaxSy
-}), nr = (e, t) => {
+}), rr = (e, t) => {
 	let n = t(e.list);
 	return {
 		...e,
 		list: n
 	};
-}, rr = (e, t) => ({
+}, ir = (e, t) => ({
 	...e,
-	pages: e.pages.map(((e) => nr(e, t)))
-}), ir = (e, t) => ({
+	pages: e.pages.map(((e) => rr(e, t)))
+}), ar = (e, t) => ({
 	...e,
-	events: e.events.map(((e) => e ? rr(e, t) : null))
-}), ar = (e, t) => e.map(((e) => nr(e, t))), or = (e, t) => e.map(((e) => rr(e, t))), sr = (e) => cr(e, (() => [])), q = (e, t) => cr(e, t), cr = (e, t) => e.flatMap(((n, r) => lr(n, r, e, t))).filter(((e) => e !== null)), lr = (e, t, n, r) => {
+	events: e.events.map(((e) => e ? ir(e, t) : null))
+}), or = (e, t) => e.map(((e) => rr(e, t))), sr = (e, t) => e.map(((e) => ir(e, t))), cr = (e) => lr(e, (() => [])), K = (e, t) => lr(e, t), lr = (e, t) => e.flatMap(((n, r) => ur(n, r, e, t))).filter(((e) => e !== null)), ur = (e, t, n, r) => {
 	if (e.code === 357) return r(e);
 	if (e.code === 102) return je(e);
-	let i = Hn(e.code);
+	let i = Un(e.code);
 	if (i) {
-		let e = i(n, t, ur);
+		let e = i(n, t, dr);
 		if (e !== void 0) return [e];
 	}
 	return e.code === 324 || e.code === 320 || e.code === 325 ? Ae(e) : null;
-}, ur = {
+}, dr = {
 	comment: (e) => ({
 		code: 108,
 		paramIndex: 0,
@@ -1150,38 +1150,38 @@ var Ce = (e, t, n, r, i, a) => {
 		}))(e);
 		if (/["`']/.test(t.value)) return t;
 	}
-}, dr = (e) => e.list.filter(pr), fr = (e) => e.pages.flatMap(((e) => e.list.filter(pr))), pr = (e) => e.code === 357, mr = (e, t = () => []) => ({
+}, fr = (e) => e.list.filter(mr), pr = (e) => e.pages.flatMap(((e) => e.list.filter(mr))), mr = (e) => e.code === 357, hr = (e, t = () => []) => ({
 	eventId: e.id,
 	name: e.name,
-	commands: q(e.list, t)
-}), hr = (e, t = () => []) => e.pages.map(((n, r) => ({
+	commands: K(e.list, t)
+}), gr = (e, t = () => []) => e.pages.map(((n, r) => ({
 	eventId: e.id,
 	pageIndex: r,
-	commands: q(n.list, t)
-}))), gr = (e, t = () => []) => ({
+	commands: K(n.list, t)
+}))), _r = (e, t = () => []) => ({
 	note: e.note,
-	noteItems: _(e.note),
+	noteItems: p(e.note),
 	displayedName: e.displayName,
-	events: _r(e, t)
-}), _r = (e, t) => y(e, ((e, n, r) => ({
+	events: vr(e, t)
+}), vr = (e, t) => b(e, ((e, n, r) => ({
 	eventId: r.id,
 	pageIndex: n,
-	commands: q(e.list, t),
+	commands: K(e.list, t),
 	note: r.note,
-	noteItems: _(r.note),
+	noteItems: p(r.note),
 	name: r.name
-}))), J = (e, t) => `${e}:${t}`, vr = (e) => J(e.parameters[0], e.parameters[1]), yr = (e) => [
-	...e.commonEvents.data.flatMap(dr),
-	...e.troops.data.flatMap(fr),
-	...e.mapFiles.validMaps.flatMap(((e) => ((e) => ue(e, ((e) => e.list.filter(pr))))(e.map).flat(2)))
-], br = (e) => {
+}))), q = (e, t) => `${e}:${t}`, yr = (e) => q(e.parameters[0], e.parameters[1]), br = (e) => [
+	...e.commonEvents.data.flatMap(fr),
+	...e.troops.data.flatMap(pr),
+	...e.mapFiles.validMaps.flatMap(((e) => ((e) => y(e, ((e) => e.list.filter(mr))))(e.map).flat(2)))
+], xr = (e) => {
 	let t = /* @__PURE__ */ new Map();
 	for (let n of e) {
-		let e = vr(n), r = t.get(e);
+		let e = yr(n), r = t.get(e);
 		r ? r.push(n) : t.set(e, [n]);
 	}
 	return t;
-}, Y = (e, t) => M(e.default), xr = (e, t, n = Y) => {
+}, J = (e, t) => A(e.default), Sr = (e, t, n = J) => {
 	switch (e.kind) {
 		case "string":
 		case "multiline_string":
@@ -1193,10 +1193,10 @@ var Ce = (e, t, n, r, i, a) => {
 		case "any": return n(e, t);
 		default: return !1;
 	}
-}, Sr = (e, t = Y) => _e(ve(e), ((e, n) => xr(e, n, t))), Cr = (e, t, n = Y) => me(e, Sr(t, n)), wr = (e, t = Y) => e.map(((e) => Cr(e.pluginName, e.schema, t))), Tr = (e, t = Y) => wr(e, t), Er = (e, t, n = Y) => {
-	let r = Tr(t, n), i = Dr(e);
+}, Cr = (e, t = J) => ge(_e(e), ((e, n) => Sr(e, n, t))), wr = (e, t, n = J) => pe(e, Cr(t, n)), Tr = (e, t = J) => e.map(((e) => wr(e.pluginName, e.schema, t))), Er = (e, t = J) => Tr(e, t), Dr = (e, t, n = J) => {
+	let r = Er(t, n), i = Or(e);
 	return r.flatMap(((e) => e.commands.map(((t) => {
-		let n = J(e.pluginName, t.commandName);
+		let n = q(e.pluginName, t.commandName);
 		return {
 			key: n,
 			pluginName: e.pluginName,
@@ -1205,12 +1205,12 @@ var Ce = (e, t, n, r, i, a) => {
 			commands: i.get(n) ?? []
 		};
 	})))).filter(((e) => e.commands.length > 0));
-}, Dr = (e) => br(yr(e)), Or = (e, t, n = Y) => {
-	let r = Tr(t, n), i = Dr(e);
+}, Or = (e) => xr(br(e)), kr = (e, t, n = J) => {
+	let r = Er(t, n), i = Or(e);
 	return {
 		params: r,
 		commandPaths: r.flatMap(((e) => e.commands.map(((t) => {
-			let n = J(e.pluginName, t.commandName);
+			let n = q(e.pluginName, t.commandName);
 			return {
 				key: n,
 				pluginName: e.pluginName,
@@ -1221,35 +1221,35 @@ var Ce = (e, t, n, r, i, a) => {
 		})))).filter(((e) => e.commands.length > 0)),
 		groupedCommands: i
 	};
-}, kr = (e) => e.kind.endsWith("[]"), Ar = (e) => kr(e.attr), jr = (e) => e.kind === "struct", Mr = (e) => e.attr.kind === "struct[]", Nr = (e) => Fr[e.kind.replace("[]", "")].type === "number", Pr = (e) => Fr[e.kind.replace("[]", "")].type === "string", X = {
+}, Ar = (e) => e.kind.endsWith("[]"), jr = (e) => Ar(e.attr), Mr = (e) => e.kind === "struct", Nr = (e) => e.attr.kind === "struct[]", Pr = (e) => Ir[e.kind.replace("[]", "")].type === "number", Fr = (e) => Ir[e.kind.replace("[]", "")].type === "string", Y = {
 	type: "string",
 	hasText: !0
+}, X = {
+	type: "number",
+	hasText: !1
 }, Z = {
 	type: "number",
 	hasText: !1
-}, Q = {
-	type: "number",
-	hasText: !1
-}, Fr = {
-	string: X,
+}, Ir = {
+	string: Y,
 	number: {
 		type: "number",
 		hasText: !1
 	},
 	boolean: { type: "boolean" },
-	armor: Z,
-	actor: Z,
-	class: Z,
-	enemy: Z,
-	skill: Z,
-	state: Z,
-	item: Z,
-	weapon: Z,
-	common_event: Z,
-	switch: Z,
-	variable: Z,
-	troop: Z,
-	multiline_string: X,
+	armor: X,
+	actor: X,
+	class: X,
+	enemy: X,
+	skill: X,
+	state: X,
+	item: X,
+	weapon: X,
+	common_event: X,
+	switch: X,
+	variable: X,
+	troop: X,
+	multiline_string: Y,
 	file: {
 		type: "string",
 		hasText: !1
@@ -1258,38 +1258,38 @@ var Ce = (e, t, n, r, i, a) => {
 		type: "string",
 		hasText: !1
 	},
-	"multiline_string[]": X,
-	"string[]": X,
-	combo: X,
-	select: X,
-	any: X,
+	"multiline_string[]": Y,
+	"string[]": Y,
+	combo: Y,
+	select: Y,
+	any: Y,
 	struct: { type: "struct" },
-	"actor[]": Q,
-	"enemy[]": Q,
-	"class[]": Q,
-	"skill[]": Q,
-	"state[]": Q,
-	"item[]": Q,
-	"weapon[]": Q,
-	"common_event[]": Q,
-	"troop[]": Q,
-	"armor[]": Q,
-	"switch[]": Q,
-	"variable[]": Q,
-	"number[]": Q
+	"actor[]": Z,
+	"enemy[]": Z,
+	"class[]": Z,
+	"skill[]": Z,
+	"state[]": Z,
+	"item[]": Z,
+	"weapon[]": Z,
+	"common_event[]": Z,
+	"troop[]": Z,
+	"armor[]": Z,
+	"switch[]": Z,
+	"variable[]": Z,
+	"number[]": Z
 };
-function Ir(e) {
-	return Lr(e, ((e) => !0), ((e) => !0));
+function Lr(e) {
+	return Rr(e, ((e) => !0), ((e) => !0));
 }
-var Lr = (e, t, n) => {
+var Rr = (e, t, n) => {
 	let r = [], i = [], a = [], o = [];
 	return e.forEach(((e) => {
-		if (jr(e.attr)) r.push({
+		if (Mr(e.attr)) r.push({
 			name: e.name,
 			attr: e.attr
 		});
-		else if (Mr(e)) i.push(e);
-		else if (Ar(e)) {
+		else if (Nr(e)) i.push(e);
+		else if (jr(e)) {
 			if (n(e)) return void o.push(e);
 		} else t(e) && a.push(e);
 	})), {
@@ -1299,20 +1299,20 @@ var Lr = (e, t, n) => {
 		scalarArrays: o
 	};
 };
-function Rr(e) {
+function zr(e) {
 	let t = e.map(((e) => [e.name, e.attr]));
 	return Object.fromEntries(t);
 }
-var zr = (e) => new Map(e.map(((e) => [e.struct, Ir(e.params)]))), Br = (e, t) => {
+var Br = (e) => new Map(e.map(((e) => [e.struct, Lr(e.params)]))), Vr = (e, t) => {
 	if (e.length !== 0) return `${t}[${e.map(((e) => `"${e.name}"`)).join(",")}]`;
-}, Vr = (e, t) => e.map(((e) => ({
+}, Hr = (e, t) => e.map(((e) => ({
 	path: `${t}["${e.name}"][*]`,
 	param: e
-}))), Hr = {
+}))), Ur = {
 	undefinedStruct: "undefined_struct",
 	cyclicStruct: "cyclic_struct"
 };
-function Ur(e, t, n, r) {
+function Wr(e, t, n, r) {
 	let i = {
 		items: [],
 		errs: [],
@@ -1357,10 +1357,10 @@ function Ur(e, t, n, r) {
 			let t = function(e, { path: t, structName: n }) {
 				return {
 					category: "struct",
-					objectSchema: Rr(e.scalars),
+					objectSchema: zr(e.scalars),
 					name: n,
-					scalarArrays: Vr(e.scalarArrays, t),
-					scalarsPath: e.scalars.length > 0 ? Br(e.scalars, t) : void 0
+					scalarArrays: Hr(e.scalarArrays, t),
+					scalarsPath: e.scalars.length > 0 ? Vr(e.scalars, t) : void 0
 				};
 			}(a, {
 				path: r.basePath,
@@ -1383,7 +1383,7 @@ function Ur(e, t, n, r) {
 		errors: o.errs
 	};
 }
-var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"][*]`, n, r), Kr = (e, t, n, r) => ((e) => jr(e.attr))(n) ? Yr(e, n, r) : Mr(n) ? Xr(e, n, r) : Ar(n) ? qr(e, t, n) : Jr(e, t, n), qr = (e, t, n) => ({
+var Gr = (e, t, n, r = Ur) => Wr(e.attr.struct, `${t}["${e.name}"]`, n, r), Kr = (e, t, n, r = Ur) => Wr(e.attr.struct, `${t}["${e.name}"][*]`, n, r), qr = (e, t, n, r) => ((e) => Mr(e.attr))(n) ? Xr(e, n, r) : Nr(n) ? Zr(e, n, r) : jr(n) ? Jr(e, t, n) : Yr(e, t, n), Jr = (e, t, n) => ({
 	rootCategory: e,
 	rootName: t,
 	scalars: {
@@ -1403,7 +1403,7 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		items: [],
 		errors: []
 	}
-}), Jr = (e, t, n) => ({
+}), Yr = (e, t, n) => ({
 	rootCategory: e,
 	rootName: t,
 	scalars: {
@@ -1420,7 +1420,7 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		items: [],
 		errors: []
 	}
-}), Yr = (e, t, n) => ({
+}), Xr = (e, t, n) => ({
 	rootName: t.name,
 	rootCategory: e,
 	scalars: void 0,
@@ -1428,9 +1428,9 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		items: [],
 		errors: []
 	},
-	structs: Wr(t, "$", n)
-}), Xr = (e, t, n) => ({
-	structArrays: Gr(t, "$", n),
+	structs: Gr(t, "$", n)
+}), Zr = (e, t, n) => ({
+	structArrays: Kr(t, "$", n),
 	rootName: t.name,
 	rootCategory: e,
 	scalars: void 0,
@@ -1438,11 +1438,11 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		items: [],
 		errors: []
 	}
-}), Zr = (e, t) => t.map(((t) => Qr(e, t))).flat(3), Qr = (e, t) => [
-	t.top ? $r(t, e, t.top, "") : [],
-	t.structs.map(((n) => $r(t, e, n))),
-	t.structArrays.map(((n) => $r(t, e, n)))
-], $r = (e, t, n, r = n.bundleName) => [n.scalar ? ((e, t, n, r, i) => r.pathSegments(n).map((({ value: n, segments: r }) => ((e, t, n, r, i) => {
+}), Qr = (e, t) => t.map(((t) => $r(e, t))).flat(3), $r = (e, t) => [
+	t.top ? ei(t, e, t.top, "") : [],
+	t.structs.map(((n) => ei(t, e, n))),
+	t.structArrays.map(((n) => ei(t, e, n)))
+], ei = (e, t, n, r = n.bundleName) => [n.scalar ? ((e, t, n, r, i) => r.pathSegments(n).map((({ value: n, segments: r }) => ((e, t, n, r, i) => {
 	if (typeof n == "object" || n === null) return null;
 	let a = r[r.length - 1];
 	if (typeof a == "number") return null;
@@ -1461,28 +1461,28 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 	let i = r.jsonPathJS.find(n);
 	if (!Array.isArray(i)) return [];
 	let a = r.schema.attr;
-	return Pr(a) ? ((e, t, n, r) => t.filter(((e) => typeof e == "string")).map(((t) => ({
+	return Fr(a) ? ((e, t, n, r) => t.filter(((e) => typeof e == "string")).map(((t) => ({
 		rootName: e.rootName,
 		rootType: e.rootCategory,
 		value: t,
 		structName: n,
 		param: r
-	}))))(e, i, t, r.schema) : Nr(a) ? ((e, t, n, r) => t.filter(((e) => typeof e == "number")).map(((t) => ({
+	}))))(e, i, t, r.schema) : Pr(a) ? ((e, t, n, r) => t.filter(((e) => typeof e == "number")).map(((t) => ({
 		rootName: e.rootName,
 		rootType: e.rootCategory,
 		value: t,
 		structName: n,
 		param: r
 	}))))(e, i, t, r.schema) : [];
-})(e, r, t, n)))].flat(2), ei = (e, t) => {
-	let n = ti(e, {
+})(e, r, t, n)))].flat(2), ti = (e, t) => {
+	let n = ni(e, {
 		createReader: (e) => t(e),
 		errorAtPath() {}
 	});
 	if (n.errors.length > 0) throw n.errors[0].error;
 	return n.extractor;
-}, ti = (e, t) => {
-	let n = [], r = e.scalars ? ni(e.scalars, "scalar", t, n) : void 0, i = e.structs.items.map(((e) => ni(e, "struct", t, n))), a = e.structArrays.items.map(((e) => ni(e, "structArray", t, n)));
+}, ni = (e, t) => {
+	let n = [], r = e.scalars ? Q(e.scalars, "scalar", t, n) : void 0, i = e.structs.items.map(((e) => Q(e, "struct", t, n))), a = e.structArrays.items.map(((e) => Q(e, "structArray", t, n)));
 	return {
 		extractor: {
 			rootCategory: e.rootCategory,
@@ -1493,7 +1493,7 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		},
 		errors: n
 	};
-}, ni = (e, t, n, r) => {
+}, Q = (e, t, n, r) => {
 	let i = ri(e.scalarArrays, e.name, t, n, r);
 	return e.scalarsPath ? {
 		bundleName: e.name,
@@ -1539,22 +1539,22 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 	desc: t.desc ?? "",
 	text: t.text ?? "",
 	extractors: oi(t, n, r)
-}), oi = (e, t, n) => e.args.map(((r) => ei(Kr("args", e.command, r, t), n))), si = (e, t) => ({
+}), oi = (e, t, n) => e.args.map(((r) => ti(qr("args", e.command, r, t), n))), si = (e, t) => ({
 	pluginName: t.pluginName,
 	commandName: t.commandName,
-	args: Zr(e, t.extractors)
+	args: Qr(e, t.extractors)
 }), ci = (e, t) => {
-	let n = zr(e.schema.structs);
+	let n = Br(e.schema.structs);
 	return li(e.pluginName, e.schema.commands, n, t);
 }, li = (e, t, n, r) => t.map(((t) => [ui(e, t.command), ai(e, t, n, r)])), ui = (e, t) => `${e}:${t}`, di = (e, t) => {
 	let [n, r] = e.parameters, i = `${n}:${r}`, a = t.get(i);
-	return a ? si(be(e.parameters[3]), a) : {
+	return a ? si(ye(e.parameters[3]), a) : {
 		pluginName: n,
 		commandName: r,
 		args: []
 	};
 }, fi = (e) => new hi(new Map(e)), pi = () => new hi(/* @__PURE__ */ new Map()), mi = (e) => {
-	let t = e.flatMap(((e) => ci(e, ((e) => new Se(e)))));
+	let t = e.flatMap(((e) => ci(e, ((e) => new xe(e)))));
 	return new hi(new Map(t));
 }, hi = class {
 	_commandMap;
@@ -1565,13 +1565,13 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		return Array.from(this._commandMap.keys());
 	}
 	extractMapTexts(e) {
-		return gr(e, ((e) => this.extractArgs(e)));
+		return _r(e, ((e) => this.extractArgs(e)));
 	}
 	extractBattleText(e) {
-		return hr(e, ((e) => this.extractArgs(e)));
+		return gr(e, ((e) => this.extractArgs(e)));
 	}
 	extractCommonEventText(e) {
-		return mr(e, ((e) => this.extractArgs(e)));
+		return hr(e, ((e) => this.extractArgs(e)));
 	}
 	extractArgs(e) {
 		let t = di(e, this._commandMap);
@@ -1586,7 +1586,7 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		})));
 	}
 	extractCommandTexts(e) {
-		return q(e, ((e) => this.extractArgs(e)));
+		return K(e, ((e) => this.extractArgs(e)));
 	}
 }, gi = (e) => typeof e.value == "string", _i = (e) => ({
 	key: "battlerName",
@@ -1604,24 +1604,24 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 ], bi = (e, t) => ({
 	tilesets: e.tilesets,
 	animations: e.animations,
-	actors: $(e.actors, ((e) => L(e, t))),
-	armors: $(e.armors, ((e) => V(e, t))),
-	classes: $(e.classes, ((e) => z(e, t))),
-	commonEvents: $(e.commonEvents, ((e) => Zn(e, t))),
-	enemies: $(e.enemies, ((e) => R(e, t))),
-	items: $(e.items, ((e) => V(e, t))),
+	actors: $(e.actors, ((e) => I(e, t))),
+	armors: $(e.armors, ((e) => B(e, t))),
+	classes: $(e.classes, ((e) => R(e, t))),
+	commonEvents: $(e.commonEvents, ((e) => Qn(e, t))),
+	enemies: $(e.enemies, ((e) => L(e, t))),
+	items: $(e.items, ((e) => B(e, t))),
 	mapInfos: e.mapInfos,
-	skills: $(e.skills, ((e) => B(e, t))),
-	states: $(e.states, ((e) => H(e, t))),
-	troops: $(e.troops, ((e) => Xn(e, t))),
-	weapons: $(e.weapons, ((e) => V(e, t))),
+	skills: $(e.skills, ((e) => z(e, t))),
+	states: $(e.states, ((e) => V(e, t))),
+	troops: $(e.troops, ((e) => Zn(e, t))),
+	weapons: $(e.weapons, ((e) => B(e, t))),
 	mapFiles: {
 		info: e.mapFiles.info,
 		invalidMaps: e.mapFiles.invalidMaps,
 		validMaps: e.mapFiles.validMaps.map(((e) => ({
 			filename: e.filename,
 			editingName: e.editingName,
-			map: er(e.map, t)
+			map: tr(e.map, t)
 		})))
 	}
 }), $ = (e, t) => ({
@@ -1630,7 +1630,7 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 	error: e.error,
 	data: e.success ? e.data.map(t) : []
 }), xi = (e, t, n, r) => {
-	let i = A(it(e, n), {
+	let i = wt(it(e, n), {
 		audioFiles: t.audioFiles,
 		imageFiles: t.imageFiles,
 		otherFiles: t.otherFiles
@@ -1644,7 +1644,7 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 	scriptCommand: (e) => t.scriptCommand(e),
 	replaceText: (e) => t.replaceText(e),
 	isReplaceTargetNote: (n) => !!e.has(n.key) && t.isReplaceTargetNote(n)
-}), Ci = (e, t) => er(e, {
+}), Ci = (e, t) => tr(e, {
 	replaceText: (e) => t.textDictionary.get(e),
 	pluginCommand: (e) => e,
 	scriptCommand: (e) => e,
@@ -1657,23 +1657,23 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		isReplaceTargetNote: (e) => t.targetNoteKeys.has(e.key)
 	};
 	return {
-		actors: e.actors.map(((e) => L(e, n))),
-		armors: e.armors.map(((e) => V(e, n))),
-		classes: e.classes.map(((e) => z(e, n))),
-		enemies: e.enemies.map(((e) => R(e, n))),
-		items: e.items.map(((e) => V(e, n))),
-		skills: e.skills.map(((e) => B(e, n))),
-		states: e.states.map(((e) => H(e, n))),
-		troops: e.troops.map(((e) => Xn(e, n))),
-		weapons: e.weapons.map(((e) => V(e, n))),
-		commonEvents: e.commonEvents.map(((e) => Zn(e, n)))
+		actors: e.actors.map(((e) => I(e, n))),
+		armors: e.armors.map(((e) => B(e, n))),
+		classes: e.classes.map(((e) => R(e, n))),
+		enemies: e.enemies.map(((e) => L(e, n))),
+		items: e.items.map(((e) => B(e, n))),
+		skills: e.skills.map(((e) => z(e, n))),
+		states: e.states.map(((e) => V(e, n))),
+		troops: e.troops.map(((e) => Zn(e, n))),
+		weapons: e.weapons.map(((e) => B(e, n))),
+		commonEvents: e.commonEvents.map(((e) => Qn(e, n)))
 	};
-}, Ti = (e, t) => d(Ei(e, t)), Ei = (e, t) => xi(e.data, e.assetBundle, t, {
+}, Ti = (e, t) => u(Ei(e, t)), Ei = (e, t) => xi(e.data, e.assetBundle, t, {
 	replaceText: (t) => e.dictionary.get(t),
 	pluginCommand: (e) => e,
 	scriptCommand: (e) => e,
 	isReplaceTargetNote: (t) => e.textKeys.has(t.key)
-}).data, Di = (e) => he(e, ((e) => e.default.length === 0 || M(e.default))), Oi = (e, t, n) => {
+}).data, Di = (e) => me(e, ((e) => e.default.length === 0 || A(e.default))), Oi = (e, t, n) => {
 	let r = Mi(e.data, e.assetBundle, e.textKeys, [], t, n), i = e.dictionary.map(((t) => ({
 		locale: t.locale,
 		dictionary: Ni(e.data, e.system, r.note, t.dictionary, n)
@@ -1685,12 +1685,12 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 }, ki = (e, t, n) => {
 	let r = ji(e, t, n);
 	return {
-		dataJSON: d(r.main),
-		scriptJS: [Qt(r.aux, {
+		dataJSON: u(r.main),
+		scriptJS: [M(r.aux, {
 			description: "書き換え用辞書データ",
 			outputDirectory: "translation",
 			dictionaryName: "TranslationDictionary"
-		}), Qt(r.originLike, {
+		}), M(r.originLike, {
 			description: "翻訳前のオリジナル辞書データ",
 			outputDirectory: "translation",
 			dictionaryName: "OriginalDictionary"
@@ -1698,7 +1698,7 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 	};
 }, Ai = (e, t, n) => {
 	let r = ji(e, t, n);
-	return [...d(r.main), ...sn(r.aux)];
+	return [...u(r.main), ...cn(r.aux)];
 }, ji = (e, t, n) => {
 	let { data: r, dictionary: i, system: a } = e, o = Mi(r, e.assetBundle, e.textKeys, [], t, n), s = Array.from(i.keys()).map(((e) => [e, e]));
 	return {
@@ -1707,26 +1707,26 @@ var Wr = (e, t, n, r = Hr) => Ur(e.attr.struct, `${t}["${e.name}"]`, n, r), Gr =
 		originLike: Ni(r, a, o.note, new Map(s), n)
 	};
 }, Mi = (e, t, n, r, i, a) => {
-	let o = ((e) => pe(e.map(Di)))(r);
+	let o = ((e) => fe(e.map(Di)))(r);
 	return xi(e, t, i, {
 		replaceText(e) {
 			let t = e.trimEnd();
 			return t.length === 0 ? "" : a(t);
 		},
 		isReplaceTargetNote: (e) => n.has(e.key),
-		pluginCommand: (e) => xe(e, o, a),
+		pluginCommand: (e) => be(e, o, a),
 		scriptCommand: (e) => e
 	});
 }, Ni = (e, t, n, r, i) => {
-	let a = Yt(e.actors.data, e.commonEvents.data, e.troops.data, e.mapFiles.validMaps.map(((e) => e.map)), r, ((e) => i(e.trimEnd())));
+	let a = Zt(e.actors.data, e.commonEvents.data, e.troops.data, e.mapFiles.validMaps.map(((e) => e.map)), r, ((e) => i(e.trimEnd())));
 	return {
-		systemTexts: le(ce(t), ((e) => {
+		systemTexts: ce(se(t), ((e) => {
 			let t = e.trimEnd();
 			return r.get(t);
 		})),
 		actorTexts: a.actorTexts,
-		targetNoteKeys: Zt([...n.dataNoteSummary, ...n.mapNoteSummary]),
+		targetNoteKeys: $t([...n.dataNoteSummary, ...n.mapNoteSummary]),
 		textDictionary: a.textDictionary
 	};
 };
-export { R as $, je as $t, hr as A, At, Zn as B, Be as Bt, vr as C, Nt as Ct, br as D, Tt as Dt, Sr as E, A as Et, ar as F, it as Ft, Xn as G, He as Gt, K as H, Ve as Ht, nr as I, rt as It, Dn as J, Je as Jt, Nn as K, Ge as Kt, ir as L, Xe as Lt, gr as M, pt as Mt, sr as N, D as Nt, Y as O, Et as Ot, q as P, O as Pt, z as Q, Ae as Qt, rr as R, C as Rt, J as S, Lt as St, Cr as T, M as Tt, er as U, qe as Ut, Qn as V, S as Vt, $n as W, Ue as Wt, xn as X, Me as Xt, En as Y, Ke as Yt, L as Z, Pe as Zt, Er as _, Yt as _t, Oi as a, yn as at, Dr as b, Ut as bt, Ci as c, fn as ct, yi as d, on as dt, ke as en, V as et, _i as f, sn as ft, di as g, Qt as gt, mi as h, tn as ht, Ai as i, _n as it, mr as j, ft as jt, xr as k, wt as kt, bi as l, pn as lt, fi as m, nn as mt, Ti as n, b as nn, H as nt, ki as o, gn as ot, pi as p, an as pt, On as q, We as qt, ji as r, bn as rt, wi as s, mn as st, Ei as t, De as tn, B as tt, xi as u, cn as ut, Tr as v, Zt as vt, wr as w, Pt as wt, yr as x, Rt as xt, Or as y, Ht as yt, or as z, Ye as zt };
+export { L as $, je as $t, gr as A, Mt as At, Qn as B, Be as Bt, yr as C, Ft as Ct, xr as D, Dt, Cr as E, wt as Et, or as F, it as Ft, Zn as G, He as Gt, G as H, Ve as Ht, rr as I, rt as It, On as J, Je as Jt, Pn as K, Ge as Kt, ar as L, Xe as Lt, _r as M, pt as Mt, cr as N, D as Nt, J as O, Ot, K as P, mt as Pt, R as Q, Ae as Qt, ir as R, C as Rt, q as S, zt as St, wr as T, A as Tt, tr as U, qe as Ut, $n as V, S as Vt, er as W, Ue as Wt, Sn as X, Me as Xt, Dn as Y, Ke as Yt, I as Z, Pe as Zt, Dr as _, Zt as _t, Oi as a, bn as at, Or as b, Gt as bt, Ci as c, pn as ct, yi as d, sn as dt, Oe as en, B as et, _i as f, cn as ft, di as g, M as gt, mi as h, nn as ht, Ai as i, vn as it, hr as j, ft as jt, Sr as k, Et as kt, bi as l, mn as lt, fi as m, rn as mt, Ti as n, ke as nn, V as nt, ki as o, _n as ot, pi as p, on as pt, kn as q, We as qt, ji as r, xn as rt, wi as s, hn as st, Ei as t, Ee as tn, z as tt, xi as u, ln as ut, Er as v, $t as vt, Tr as w, It as wt, br as x, Bt as xt, kr as y, Wt as yt, sr as z, Ye as zt };

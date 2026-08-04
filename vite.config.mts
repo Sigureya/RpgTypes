@@ -49,6 +49,7 @@ export default defineConfig(({ mode }) => {
     mock: path.resolve(srcDir, "mock/index.ts"),
     fileio: path.resolve(srcDir, "fileio/index.ts"),
     plugin: path.resolve(srcDir, "plugin/index.ts"),
+    rmmzFunctional: path.resolve(srcDir, "rmmzFunctional/index.ts"),
   };
 
   return {
