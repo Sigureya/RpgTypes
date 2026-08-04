@@ -12,7 +12,7 @@ import {
 } from "./targetFor";
 import type { Provider_Battlers } from "./types";
 import { battlerIsAlive, repeatTargets } from "./support";
-import { battlresRandomTarget } from "./randomSelect";
+import { battlersRandomTarget } from "./randomSelect";
 
 export const actionMakeTargets = (
   item: Data_UsableItem,
@@ -26,7 +26,14 @@ export const actionMakeTargets = (
     confuse > 0
       ? confusionTargets(provider, confuse, randomFn)
       : normalTarget(subject, item, targetIndex, provider, randomFn);
-  return item.repeats > 1 ? repeatTargets(targets, item.repeats) : targets;
+  return applyRepeats(item, targets);
+};
+
+const applyRepeats = <T extends Rmmz_Battler>(
+  item: Data_UsableItem,
+  targets: ReadonlyArray<T>,
+): T[] => {
+  return item.repeats > 1 ? repeatTargets(targets, item.repeats) : [...targets];
 };
 
 const confusionTargets = (
@@ -34,23 +41,23 @@ const confusionTargets = (
   confusedLevel: number,
   randomFn: () => number,
 ): Rmmz_Battler[] => {
-  const target = confSS(provider, confusedLevel, randomFn);
+  const target = selectConfusionTarget(provider, confusedLevel, randomFn);
   return target ? [target] : [];
 };
 
-const confSS = (
+const selectConfusionTarget = (
   provider: Provider_Battlers,
   confusedLevel: number,
   randomFn: () => number,
 ): Rmmz_Battler | undefined => {
   const targetRandomValue: number = randomFn();
   if (confusedLevel <= 1) {
-    return battlresRandomTarget(provider.opponentsUnit(), targetRandomValue);
+    return battlersRandomTarget(provider.opponentsUnit(), targetRandomValue);
   }
   // TODO:confusionLevel 2の処理を追加する
   // 乱数の扱いを決める必要があり、やや複雑
 
-  return battlresRandomTarget(provider.friendsUnit(), targetRandomValue);
+  return battlersRandomTarget(provider.friendsUnit(), targetRandomValue);
 };
 
 const normalTarget = (
@@ -77,12 +84,26 @@ const normalTarget = (
     );
   }
   if (scopeIsForEveryone(item)) {
-    const list = [
-      ...provider.friendsUnit().filter(battlerIsAlive),
-      ...provider.opponentsUnit().filter(battlerIsAlive),
-    ];
-    return list;
+    return actionTargetsEveryone(provider);
   }
 
   return [];
+};
+
+const actionTargetsEveryone = (provider: Provider_Battlers): Rmmz_Battler[] => {
+  // 最適化のためにforループ。
+  const result = [];
+  // eslint-disable-next-line @functional/no-loop-statements
+  for (const battler of provider.friendsUnit()) {
+    if (battlerIsAlive(battler)) {
+      result.push(battler);
+    }
+  }
+  // eslint-disable-next-line @functional/no-loop-statements
+  for (const battler of provider.opponentsUnit()) {
+    if (battlerIsAlive(battler)) {
+      result.push(battler);
+    }
+  }
+  return result;
 };

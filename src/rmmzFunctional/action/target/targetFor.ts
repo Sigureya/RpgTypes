@@ -7,7 +7,7 @@ import {
   scopeRandomNumTargets,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-import { battlresRandomTarget } from "./randomSelect";
+import { battlersRandomTarget } from "./randomSelect";
 import {
   battlerIsAlive,
   battlerIsDead,
@@ -62,7 +62,9 @@ const randomTargets = <T extends Rmmz_Battler>(
   // eslint-disable-next-line @functional/no-loop-statements, @functional/no-let
   for (let i = 0; i < repeat; i++) {
     const rnd = randomFn();
-    const target = battlresRandomTarget(list, rnd);
+    // TODO:ここはtraitsのループがN*Mで増える。
+    // 計算を1回で終えられるようにメモ化したい。
+    const target = battlersRandomTarget(list, rnd);
     if (target) {
       result.push(target);
     }
@@ -87,7 +89,7 @@ export const actionTargetsForAlive = <T extends Rmmz_Battler>(
   unit: ReadonlyArray<T>,
   targetIndex: number,
 ): T[] => {
-  return actionTarget(item, unit, targetIndex, battlerIsAlive);
+  return actionTargets(item, unit, targetIndex, battlerIsAlive);
 };
 
 export const actionTargetsForDead = <T extends Rmmz_Battler>(
@@ -95,10 +97,10 @@ export const actionTargetsForDead = <T extends Rmmz_Battler>(
   unit: ReadonlyArray<T>,
   targetIndex: number,
 ): T[] => {
-  return actionTarget(item, unit, targetIndex, battlerIsDead);
+  return actionTargets(item, unit, targetIndex, battlerIsDead);
 };
 
-const actionTarget = <T extends Rmmz_Battler>(
+const actionTargets = <T extends Rmmz_Battler>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
