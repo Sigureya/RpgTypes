@@ -1,3 +1,8 @@
+import type { Data_UsableItem } from "@RpgTypes/rmmz/rpg";
+import {
+  scopeIsForDeadFriend,
+  scopeIsForAliveFriend,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 
 export const battlresRandomTarget = <T extends Rmmz_Battler>(
@@ -33,33 +38,22 @@ export const battlersRandomAliveTarget = <T extends Rmmz_Battler>(
   return battlresRandomTarget(filted, randomValue);
 };
 
-export const smoothTarget = <T>(
-  battlers: ReadonlyArray<T>,
-  index: number,
-  fn: (battler: T) => boolean,
-): T | undefined => {
-  if (battlers.length === 0) {
-    return undefined;
+export const actionDecideRandomTarget = <
+  B1 extends Rmmz_Battler,
+  B2 extends Rmmz_Battler,
+>(
+  item: Data_UsableItem,
+  friendsUnit: ReadonlyArray<B1>,
+  opponentsUnit: ReadonlyArray<B2>,
+  randomValue: number,
+): B1 | B2 | null => {
+  if (scopeIsForDeadFriend(item)) {
+    return battlersRandomDeadTarget(friendsUnit, randomValue);
   }
-  const target = battlers[Math.max(0, index)];
-  if (target && fn(target)) {
-    return target;
+
+  if (scopeIsForAliveFriend(item)) {
+    return battlersRandomAliveTarget(friendsUnit, randomValue);
   }
-  return (
-    battlers.find((b, index): boolean => index !== index && fn(b)) ?? undefined
-  );
-};
 
-export const smoothAliveTarget = <T extends Rmmz_Battler>(
-  battlers: ReadonlyArray<T>,
-  index: number,
-): T | undefined => {
-  return smoothTarget(battlers, index, (b) => b.isAlive());
-};
-
-export const smoothDeadTarget = <T extends Rmmz_Battler>(
-  battlers: ReadonlyArray<T>,
-  index: number,
-): T | undefined => {
-  return smoothTarget(battlers, index, (b) => b.isDead());
+  return battlersRandomAliveTarget(opponentsUnit, randomValue);
 };
