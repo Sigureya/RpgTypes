@@ -71,6 +71,7 @@
     "test:rmmz-plugin": "vitest run src/rmmz/plugin",
     "test:rmmz-command": "vitest run src/rmmz/eventCommand",
     "test:features": "vitest run src/features",
+    "test:eslint": "vitest run eslint-plugin",
     "test:watch": "vitest --watch",
     "lint": "eslint src --ext .ts",
     "typecheck": "tsc --noEmit"
