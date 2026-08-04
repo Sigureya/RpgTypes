@@ -16,7 +16,7 @@ import {
   SCOPE_TARGET_FRIEND,
   SCOPE_EACH_FRIEND,
   SCOPE_EACH,
-  scopeForUser,
+  scopeIsForUser,
   scopeIsForAliveFriend,
   scopeIsForDeadFriend,
   scopeIsForEveryone,
@@ -99,7 +99,7 @@ const runTestCase = (testCase: TestCase) => {
 
     describe("function", () => {
       test("scopeForUser", () => {
-        expect(scopeForUser(testCase.skill)).toBe(testCase.trait.isForUser);
+        expect(scopeIsForUser(testCase.skill)).toBe(testCase.trait.isForUser);
       });
       test("scopeIsForOne", () => {
         expect(scopeIsForOne(testCase.skill)).toBe(testCase.trait.isForOne);
