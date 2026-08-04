@@ -4,6 +4,13 @@ export const unitTgrSum = (battlers: ReadonlyArray<Rmmz_Battler>): number => {
   return battlers.reduce((r, b) => r + b.tgr, 0);
 };
 
+export const repeatTargets = <T extends Rmmz_Battler>(
+  battlers: ReadonlyArray<T>,
+  repeat: number,
+): T[] => {
+  return battlers.flatMap((b) => Array(repeat).fill(b));
+};
+
 export const smoothTarget = <T>(
   battlers: ReadonlyArray<T>,
   targetIndex: number,
