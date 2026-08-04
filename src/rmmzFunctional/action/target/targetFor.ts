@@ -8,7 +8,12 @@ import {
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 import { battlresRandomTarget } from "./randomSelect";
-import { smoothAliveTarget, smoothTarget } from "./support";
+import {
+  battlerIsAlive,
+  battlerIsDead,
+  smoothAliveTarget,
+  smoothTarget,
+} from "./support";
 
 export const actionTargetsForOpponents = <T extends Rmmz_Battler>(
   item: Data_UsableItem,
@@ -82,7 +87,7 @@ export const actionTargetsForAlive = <T extends Rmmz_Battler>(
   unit: ReadonlyArray<T>,
   targetIndex: number,
 ): T[] => {
-  return actionTarget(item, unit, targetIndex, (b) => b.isAlive());
+  return actionTarget(item, unit, targetIndex, battlerIsAlive);
 };
 
 export const actionTargetsForDead = <T extends Rmmz_Battler>(
@@ -90,7 +95,7 @@ export const actionTargetsForDead = <T extends Rmmz_Battler>(
   unit: ReadonlyArray<T>,
   targetIndex: number,
 ): T[] => {
-  return actionTarget(item, unit, targetIndex, (b) => b.isDead());
+  return actionTarget(item, unit, targetIndex, battlerIsDead);
 };
 
 const actionTarget = <T extends Rmmz_Battler>(

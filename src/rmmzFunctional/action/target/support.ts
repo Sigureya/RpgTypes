@@ -1,5 +1,13 @@
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 
+export const battlerIsAlive = (battler: Rmmz_Battler): boolean => {
+  return battler.isAlive();
+};
+
+export const battlerIsDead = (battler: Rmmz_Battler): boolean => {
+  return battler.isDead();
+};
+
 export const unitTgrSum = (battlers: ReadonlyArray<Rmmz_Battler>): number => {
   return battlers.reduce((r, b) => r + b.tgr, 0);
 };
@@ -34,12 +42,12 @@ export const smoothAliveTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   index: number,
 ): T | undefined => {
-  return smoothTarget(battlers, index, (b) => b.isAlive());
+  return smoothTarget(battlers, index, battlerIsAlive);
 };
 
 export const smoothDeadTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   index: number,
 ): T | undefined => {
-  return smoothTarget(battlers, index, (b) => b.isDead());
+  return smoothTarget(battlers, index, battlerIsDead);
 };

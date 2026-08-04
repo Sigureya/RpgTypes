@@ -4,7 +4,7 @@ import {
   scopeIsForAliveFriend,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-import { unitTgrSum } from "./support";
+import { battlerIsAlive, unitTgrSum } from "./support";
 import type { Provider_Battlers } from "./types";
 
 export const battlersDecideRandomTarget = (
@@ -50,7 +50,7 @@ export const battlersRandomAliveTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
 ): T | undefined => {
-  const filted = battlers.filter((b) => b.isAlive());
+  const filted = battlers.filter(battlerIsAlive);
   return battlresRandomTarget(filted, randomValue);
 };
 
