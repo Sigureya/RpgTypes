@@ -2,7 +2,9 @@ import type { Data_UsableItem } from "@RpgTypes/rmmz/rpg";
 import { scopeIsForOne, scopeRandomNumTargets } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 import { battlresRandomTarget } from "./randomSelect";
-import { smoothAliveTarget, smoothDeadTarget } from "./support";
+import { smoothAliveTarget, smoothTarget } from "./support";
+
+const actionMakeTargets = (subject: Rmmz_Battler) => {};
 
 export const repeatTargets = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
@@ -11,61 +13,45 @@ export const repeatTargets = <T extends Rmmz_Battler>(
   return battlers.flatMap((b) => Array(repeat).fill(b));
 };
 
-export const actionTargetForDead = <T extends Rmmz_Battler>(
-  item: Data_UsableItem,
-  unit: ReadonlyArray<T>,
-  targetIndex: number,
-): T[] => {
-  if (scopeIsForOne(item)) {
-    return singleDeadTarget(unit, targetIndex);
-  }
-  return unit.filter((b) => b.isDead());
-};
-
-export const actionTargetForDeadAndAlive = <T extends Rmmz_Battler>(
+export const actionTargestForDeadAndAlive = <T extends Rmmz_Battler>(
   item: Data_UsableItem,
   unit: Array<T>,
   targetIndex: number,
 ): T[] => {
   if (scopeIsForOne(item)) {
-    return singleTarget(unit, targetIndex);
+    const target = smoothTarget(unit, targetIndex, () => true);
+    return target ? [target] : [];
   }
   return unit;
 };
 
-export const actionTargetForAlive = <T extends Rmmz_Battler>(
+export const actionTargetsForAlive = <T extends Rmmz_Battler>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
 ): T[] => {
+  return actionTarget(item, unit, targetIndex, (b) => b.isAlive());
+};
+
+export const actionTargetsForDead = <T extends Rmmz_Battler>(
+  item: Data_UsableItem,
+  unit: ReadonlyArray<T>,
+  targetIndex: number,
+): T[] => {
+  return actionTarget(item, unit, targetIndex, (b) => b.isDead());
+};
+
+const actionTarget = <T extends Rmmz_Battler>(
+  item: Data_UsableItem,
+  unit: ReadonlyArray<T>,
+  targetIndex: number,
+  fn: (battler: T) => boolean,
+): T[] => {
   if (scopeIsForOne(item)) {
-    return singleTarget(unit, targetIndex);
+    const target = smoothTarget(unit, targetIndex, fn);
+    return target ? [target] : [];
   }
-  return unit.filter((b) => b.isAlive());
-};
-
-const singleDeadTarget = <T extends Rmmz_Battler>(
-  unit: ReadonlyArray<T>,
-  targetIndex: number,
-): T[] => {
-  if (targetIndex < 0) {
-    const t = smoothDeadTarget(unit, 0);
-    return t ? [t] : [];
-  }
-  const target = smoothDeadTarget(unit, targetIndex);
-  return target ? [target] : [];
-};
-
-const singleTarget = <T extends Rmmz_Battler>(
-  unit: ReadonlyArray<T>,
-  targetIndex: number,
-): T[] => {
-  if (targetIndex < 0) {
-    const t = smoothAliveTarget(unit, 0);
-    return t ? [t] : [];
-  }
-  const target = smoothAliveTarget(unit, targetIndex);
-  return target ? [target] : [];
+  return unit.filter(fn);
 };
 
 export const actionTargetsForOpponents = <T extends Rmmz_Battler>(
