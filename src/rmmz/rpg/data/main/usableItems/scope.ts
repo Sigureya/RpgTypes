@@ -90,3 +90,7 @@ export const scopeIsForRandom = ({ scope }: Data_UsableItem): boolean => {
     scope === SCOPE_RANDOM_OPPONENT_4
   );
 };
+
+export const scopeRandomNumTargets = (item: Data_UsableItem): number => {
+  return scopeIsForRandom(item) ? item.scope - 2 : 0;
+};
