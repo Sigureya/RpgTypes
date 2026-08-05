@@ -43,10 +43,6 @@ export const traitAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   return traits.reduce(skillIdAcc, 1);
 };
 
-export const traitsAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
-  return traitAttackSkillId(traits);
-};
-
 const skillIdAcc = (skillId: number, trait: Trait): number => {
   if (trait.code === TRAIT_ATTACK_SKILL) {
     return Math.max(skillId, trait.dataId);
