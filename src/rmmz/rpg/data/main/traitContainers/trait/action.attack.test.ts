@@ -6,7 +6,7 @@ import {
   traitAttackStates,
   traitAttackTimesAdd,
   traitAtttackSpeed,
-} from "./attack";
+} from "./action";
 import {
   TRAIT_ATTACK_ELEMENT,
   TRAIT_ATTACK_SKILL,

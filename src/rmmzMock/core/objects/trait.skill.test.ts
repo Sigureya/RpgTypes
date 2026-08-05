@@ -9,7 +9,7 @@ import {
   TRAIT_SKILL_SEAL,
   TRAIT_SKILL_TYPE_SEAL,
   traitAddedSkills,
-  traitsAttackSkillId,
+  traitAttackSkillId,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import { Game_BattlerBase } from "./rmmz_objects";
@@ -90,7 +90,7 @@ const runTestCase = (testCase: TestCase) => {
         expect(skills).toEqual(testCase.addedSkills);
       });
       test("traitAttackSkillId", () => {
-        const attack = traitsAttackSkillId(testCase.traits);
+        const attack = traitAttackSkillId(testCase.traits);
         expect(attack).toEqual(testCase.attackSkillId);
       });
 
