@@ -3,11 +3,10 @@ import {
   scopeIsForDeadFriend,
   scopeIsForAliveFriend,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Battler_Targetable } from "@RpgTypes/rmmzRuntime";
 import { battlerIsAlive, battlerIsDead } from "./support";
-import type { Provider_Battlers } from "./types";
+import type { Provider_Battlers, Targetable } from "./types";
 
-export const battlersDecideRandomTarget = <T extends Rmmz_Battler_Targetable>(
+export const battlersDecideRandomTarget = <T extends Targetable>(
   item: Data_UsableItem,
   units: Provider_Battlers<T>,
   randomValue: number,
@@ -26,9 +25,7 @@ interface TgrPair<T> {
   tgr: number;
 }
 
-const makeTgrPair = <T extends Rmmz_Battler_Targetable>(
-  battler: T,
-): TgrPair<T> => ({
+const makeTgrPair = <T extends Targetable>(battler: T): TgrPair<T> => ({
   tgr: battler.tgr,
   battler: battler,
 });
@@ -37,7 +34,7 @@ const accumulateTgr = (acc: number, pair: TgrPair<unknown>): number => {
   return acc + pair.tgr;
 };
 
-export const battlersRandomTarget = <T extends Rmmz_Battler_Targetable>(
+export const battlersRandomTarget = <T extends Targetable>(
   battlers: ReadonlyArray<T>,
   randomFn: () => number,
   repeat: number = 1,
@@ -76,7 +73,7 @@ const randomSelect = <T>(
   return last.battler;
 };
 
-export const battlersRandomDeadTarget = <T extends Rmmz_Battler_Targetable>(
+export const battlersRandomDeadTarget = <T extends Targetable>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
 ): T[] => {
@@ -84,7 +81,7 @@ export const battlersRandomDeadTarget = <T extends Rmmz_Battler_Targetable>(
   return battlersRandomTarget(filted, () => randomValue);
 };
 
-export const battlersRandomAliveTarget = <T extends Rmmz_Battler_Targetable>(
+export const battlersRandomAliveTarget = <T extends Targetable>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
 ): T[] => {
@@ -93,8 +90,8 @@ export const battlersRandomAliveTarget = <T extends Rmmz_Battler_Targetable>(
 };
 
 export const actionDecideRandomTarget = <
-  B1 extends Rmmz_Battler_Targetable,
-  B2 extends Rmmz_Battler_Targetable,
+  B1 extends Targetable,
+  B2 extends Targetable,
 >(
   item: Data_UsableItem,
   friendsUnit: ReadonlyArray<B1>,

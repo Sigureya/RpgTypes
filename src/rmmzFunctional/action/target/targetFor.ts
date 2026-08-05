@@ -13,9 +13,9 @@ import {
   smoothTarget,
 } from "./support";
 import { battlersRandomTarget } from "./randomSelect";
-import type { Rmmz_Battler_Targetable } from "@RpgTypes/rmmzRuntime";
+import type { Targetable } from "./types";
 
-export const actionTargetsForOpponents = <T extends Rmmz_Battler_Targetable>(
+export const actionTargetsForOpponents = <T extends Targetable>(
   item: Data_UsableItem,
   opponentsUnit: ReadonlyArray<T>,
   targetIndex: number,
@@ -33,8 +33,8 @@ export const actionTargetsForOpponents = <T extends Rmmz_Battler_Targetable>(
 };
 
 export const actionTargetsForFriends = <
-  T extends Rmmz_Battler_Targetable,
-  S extends Rmmz_Battler_Targetable,
+  T extends Targetable,
+  S extends Targetable,
 >(
   subject: S,
   item: Data_UsableItem,
@@ -53,7 +53,7 @@ export const actionTargetsForFriends = <
   return actionTargetsForDeadAndAlive(item, friendsUnit, targetIndex);
 };
 
-export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler_Targetable>(
+export const actionTargetsForDeadAndAlive = <T extends Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -65,7 +65,7 @@ export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler_Targetable>(
   return Array.from(unit);
 };
 
-export const actionTargetsForAlive = <T extends Rmmz_Battler_Targetable>(
+export const actionTargetsForAlive = <T extends Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -73,7 +73,7 @@ export const actionTargetsForAlive = <T extends Rmmz_Battler_Targetable>(
   return actionTargets(item, unit, targetIndex, battlerIsAlive);
 };
 
-export const actionTargetsForDead = <T extends Rmmz_Battler_Targetable>(
+export const actionTargetsForDead = <T extends Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -81,7 +81,7 @@ export const actionTargetsForDead = <T extends Rmmz_Battler_Targetable>(
   return actionTargets(item, unit, targetIndex, battlerIsDead);
 };
 
-const actionTargets = <T extends Rmmz_Battler_Targetable>(
+const actionTargets = <T extends Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
