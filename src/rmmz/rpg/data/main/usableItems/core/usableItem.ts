@@ -15,4 +15,5 @@ export interface Data_UsableItem {
   tpGain: number;
   description: string;
   note: string;
+  id: number;
 }
