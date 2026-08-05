@@ -1,6 +1,6 @@
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 
-export interface Provider_Battlers {
-  opponentsUnit(): ReadonlyArray<Rmmz_Battler>;
-  friendsUnit(): ReadonlyArray<Rmmz_Battler>;
+export interface Provider_Battlers<T extends Rmmz_Battler = Rmmz_Battler> {
+  opponentsUnit(): ReadonlyArray<T>;
+  friendsUnit(): ReadonlyArray<T>;
 }

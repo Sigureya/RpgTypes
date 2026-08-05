@@ -41,23 +41,10 @@ const confusionTargets = (
   confusedLevel: number,
   randomFn: () => number,
 ): Rmmz_Battler[] => {
-  const target = selectConfusionTarget(provider, confusedLevel, randomFn);
-  return target ? [target] : [];
-};
-
-const selectConfusionTarget = (
-  provider: Provider_Battlers,
-  confusedLevel: number,
-  randomFn: () => number,
-): Rmmz_Battler | undefined => {
-  const targetRandomValue: number = randomFn();
   if (confusedLevel <= 1) {
-    return battlersRandomTarget(provider.opponentsUnit(), targetRandomValue);
+    return battlersRandomTarget(provider.opponentsUnit(), randomFn);
   }
-  // TODO:confusionLevel 2の処理を追加する
-  // 乱数の扱いを決める必要があり、やや複雑
-
-  return battlersRandomTarget(provider.friendsUnit(), targetRandomValue);
+  return battlersRandomTarget(provider.friendsUnit(), randomFn);
 };
 
 const normalTarget = (

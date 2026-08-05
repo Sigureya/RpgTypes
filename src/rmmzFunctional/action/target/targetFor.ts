@@ -7,13 +7,13 @@ import {
   scopeRandomNumTargets,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-import { battlersRandomTarget } from "./randomSelect";
 import {
   battlerIsAlive,
   battlerIsDead,
   smoothAliveTarget,
   smoothTarget,
 } from "./support";
+import { battlersRandomTarget } from "./randomSelect";
 
 export const actionTargetsForOpponents = <T extends Rmmz_Battler>(
   item: Data_UsableItem,
@@ -26,7 +26,7 @@ export const actionTargetsForOpponents = <T extends Rmmz_Battler>(
   }
   const randomRepeat = scopeRandomNumTargets(item);
   if (randomRepeat > 0) {
-    return randomTargets(opponentsUnit, randomRepeat, randomFn);
+    return battlersRandomTarget(opponentsUnit, randomFn, randomRepeat);
   }
   const single = smoothAliveTarget(opponentsUnit, targetIndex);
   return single ? [single] : [];
@@ -48,28 +48,6 @@ export const actionTargetsForFriends = <T extends Rmmz_Battler>(
     return actionTargetsForAlive(item, friendsUnit, targetIndex);
   }
   return actionTargetsForDeadAndAlive(item, friendsUnit, targetIndex);
-};
-
-const randomTargets = <T extends Rmmz_Battler>(
-  list: ReadonlyArray<T>,
-  repeat: number,
-  randomFn: () => number,
-): T[] => {
-  if (list.length === 1) {
-    return Array(repeat).fill(list[0]);
-  }
-  const result: T[] = [];
-  // eslint-disable-next-line @functional/no-loop-statements, @functional/no-let
-  for (let i = 0; i < repeat; i++) {
-    const rnd = randomFn();
-    // TODO:ここはtraitsのループがN*Mで増える。
-    // 計算を1回で終えられるようにメモ化したい。
-    const target = battlersRandomTarget(list, rnd);
-    if (target) {
-      result.push(target);
-    }
-  }
-  return result;
 };
 
 export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler>(

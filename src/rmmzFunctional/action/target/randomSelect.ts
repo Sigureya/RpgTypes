@@ -7,11 +7,11 @@ import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 import { battlerIsAlive, battlerIsDead } from "./support";
 import type { Provider_Battlers } from "./types";
 
-export const battlersDecideRandomTarget = (
+export const battlersDecideRandomTarget = <T extends Rmmz_Battler>(
   item: Data_UsableItem,
-  units: Provider_Battlers,
+  units: Provider_Battlers<T>,
   randomValue: number,
-): Rmmz_Battler | undefined => {
+): T[] => {
   if (scopeIsForDeadFriend(item)) {
     return battlersRandomDeadTarget(units.friendsUnit(), randomValue);
   }
@@ -26,59 +26,68 @@ interface TgrPair<T> {
   tgr: number;
 }
 
-const mapTgrPairs = <T extends Rmmz_Battler>(
-  battlers: ReadonlyArray<T>,
-): TgrPair<T>[] => {
-  return battlers.map(
-    (battler): TgrPair<T> => ({
-      battler,
-      tgr: battler.tgr,
-    }),
-  );
-};
+const makeTgrPair = <T extends Rmmz_Battler>(battler: T): TgrPair<T> => ({
+  tgr: battler.tgr,
+  battler: battler,
+});
 
-const sumTgrPairs = (pairs: ReadonlyArray<TgrPair<unknown>>): number => {
-  return pairs.reduce((sum, pair) => sum + pair.tgr, 0);
+const accumulateTgr = (acc: number, pair: TgrPair<unknown>): number => {
+  return acc + pair.tgr;
 };
 
 export const battlersRandomTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
-  randomValue: number,
-): T | undefined => {
+  randomFn: () => number,
+  repeat: number = 1,
+): T[] => {
   if (battlers.length === 0) {
-    return undefined;
+    return [];
   }
   if (battlers.length === 1) {
-    return battlers[0];
+    return Array(repeat).fill(battlers[0]);
   }
-  const tgrPairs = mapTgrPairs(battlers);
-  const tgrSum: number = sumTgrPairs(tgrPairs);
+  const tgrPairs = battlers.map(makeTgrPair);
+  const tgrSum: number = tgrPairs.reduce(accumulateTgr, 0);
+  const result: T[] = [];
+  // eslint-disable-next-line @functional/no-loop-statements, @functional/no-let
+  for (let i = 0; i < repeat; i++) {
+    const target = randomSelect(tgrPairs, randomFn() * tgrSum);
+    result.push(target);
+  }
+  return result;
+};
+
+const randomSelect = <T>(
+  list: readonly TgrPair<T>[],
+  remainingTgr: number,
+): T => {
   // eslint-disable-next-line @functional/no-let
-  let targetTgr = randomValue * tgrSum;
+  let targetTgr = remainingTgr;
   // eslint-disable-next-line @functional/no-loop-statements
-  for (const battler of tgrPairs) {
-    targetTgr -= battler.tgr;
+  for (const pair of list) {
+    targetTgr -= pair.tgr;
     if (targetTgr <= 0) {
-      return battler.battler;
+      return pair.battler;
     }
   }
-  return undefined;
+  const last = list[list.length - 1];
+  return last.battler;
 };
 
 export const battlersRandomDeadTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
-): T | undefined => {
+): T[] => {
   const filted = battlers.filter(battlerIsDead);
-  return battlersRandomTarget(filted, randomValue);
+  return battlersRandomTarget(filted, () => randomValue);
 };
 
 export const battlersRandomAliveTarget = <T extends Rmmz_Battler>(
   battlers: ReadonlyArray<T>,
   randomValue: number,
-): T | undefined => {
+): T[] => {
   const filted = battlers.filter(battlerIsAlive);
-  return battlersRandomTarget(filted, randomValue);
+  return battlersRandomTarget(filted, () => randomValue);
 };
 
 export const actionDecideRandomTarget = <
@@ -89,7 +98,7 @@ export const actionDecideRandomTarget = <
   friendsUnit: ReadonlyArray<B1>,
   opponentsUnit: ReadonlyArray<B2>,
   randomValue: number,
-): B1 | B2 | undefined => {
+): (B1 | B2)[] => {
   if (scopeIsForDeadFriend(item)) {
     return battlersRandomDeadTarget(friendsUnit, randomValue);
   }
