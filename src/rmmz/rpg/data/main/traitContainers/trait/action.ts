@@ -39,6 +39,27 @@ export const traitAttackTimesAdd = (traits: ReadonlyArray<Trait>): number => {
   return Math.max(0, traitSumAll(traits, TRAIT_ATTACK_TIMES));
 };
 
+export const attackSkillNumRepeats = (
+  sklllId: number,
+  traits: ReadonlyArray<Trait>,
+): number => {
+  const state = traits.reduce<ActionNumRepeatsState>(
+    (acc, trait) => {
+      if (trait.code === TRAIT_ATTACK_SKILL && trait.dataId === sklllId) {
+        acc.isNormalAttack = true;
+      }
+      return acc;
+    },
+    { isNormalAttack: false, repeats: 0 },
+  );
+  return state.isNormalAttack ? state.repeats : 0;
+};
+
+interface ActionNumRepeatsState {
+  isNormalAttack: boolean;
+  repeats: number;
+}
+
 export const traitAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   return traits.reduce(skillIdAcc, 1);
 };
