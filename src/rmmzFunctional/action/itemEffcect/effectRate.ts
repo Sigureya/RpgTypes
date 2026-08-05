@@ -1,4 +1,5 @@
-import { traitAttackElements, type Data_Skill } from "@RpgTypes/rmmz/rpg";
+import type { ItemEffect, Data_Skill } from "@RpgTypes/rmmz/rpg";
+import { traitAttackElements } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 
 export const lukEffectRate = (
@@ -31,4 +32,30 @@ export const actionCalcElementRate = (
     return actionElementMaxRate(target, elements);
   }
   return target.elementRate(skill.damage.elementId);
+};
+
+export const actionCalcAttackStateRate = (
+  stateId: number,
+  subject: Rmmz_BattlerBase,
+  target: Rmmz_BattlerBase,
+  effect: ItemEffect,
+): number => {
+  return (
+    effect.value1 *
+    target.stateRate(stateId) *
+    subject.attackStatesRate(stateId) *
+    lukEffectRate(subject, target)
+  );
+};
+
+export const actionCalcNormalStateRate = (
+  subject: Rmmz_BattlerBase,
+  target: Rmmz_BattlerBase,
+  effect: ItemEffect,
+): number => {
+  return (
+    effect.value1 *
+    target.stateRate(effect.dataId) *
+    lukEffectRate(subject, target)
+  );
 };
