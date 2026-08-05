@@ -11,6 +11,8 @@ import {
 } from "./skill";
 import type { Data_Weapon, Trait } from "./traitContainers";
 import {
+  isSkillIdSealed,
+  isSkillTypeSealed,
   makeWeaponData,
   SPARAM_MCR_MAGIC_COST_RATE,
   TRAIT_SKILL_SEAL,
@@ -60,6 +62,10 @@ const runTestCase = (testCase: TestCase) => {
     test("isSkillSealed", () => {
       const result = isSkillSealed(testCase.traits, testCase.skill);
       expect(result).toBe(testCase.expected.isSkillSealed);
+      expect(
+        isSkillIdSealed(testCase.traits, testCase.skill.id) ||
+          isSkillTypeSealed(testCase.traits, testCase.skill.stypeId),
+      ).toBe(testCase.expected.isSkillSealed);
     });
     test("filterUsableSkills", () => {
       const result: Data_Skill[] = filterUsableSkills(
