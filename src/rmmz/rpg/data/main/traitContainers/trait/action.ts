@@ -43,6 +43,10 @@ export const traitAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   return traits.reduce(skillIdAcc, 1);
 };
 
+export const traitsAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
+  return traitAttackSkillId(traits);
+};
+
 const skillIdAcc = (skillId: number, trait: Trait): number => {
   if (trait.code === TRAIT_ATTACK_SKILL) {
     return Math.max(skillId, trait.dataId);
@@ -68,11 +72,6 @@ export const traitIsGuardTrait = (traits: ReadonlyArray<Trait>): boolean => {
     (trait) =>
       trait.code === TRAIT_SPECIAL_FLAG && trait.value === FLAG_ID_GUARD,
   );
-};
-
-export const traitsAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
-  const set: number[] = traitSet(traits, TRAIT_ATTACK_SKILL);
-  return set.length > 0 ? Math.max(...set) : 1;
 };
 
 export const traitsAddedSkillTypes = (

@@ -1,4 +1,4 @@
-export * from "./attack";
+export * from "./action";
 export * from "./core";
 export * from "./equip";
 export * from "./other";
