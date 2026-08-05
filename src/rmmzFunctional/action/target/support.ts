@@ -1,14 +1,14 @@
-import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Battler_Targetable } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/base";
 
-export const battlerIsAlive = (battler: Rmmz_Battler): boolean => {
+export const battlerIsAlive = (battler: Rmmz_Battler_Targetable): boolean => {
   return battler.isAlive();
 };
 
-export const battlerIsDead = (battler: Rmmz_Battler): boolean => {
+export const battlerIsDead = (battler: Rmmz_Battler_Targetable): boolean => {
   return battler.isDead();
 };
 
-export const repeatTargets = <T extends Rmmz_Battler>(
+export const repeatTargets = <T>(
   battlers: ReadonlyArray<T>,
   repeat: number,
 ): T[] => {
@@ -34,14 +34,14 @@ export const smoothTarget = <T>(
   );
 };
 
-export const smoothAliveTarget = <T extends Rmmz_Battler>(
+export const smoothAliveTarget = <T extends Rmmz_Battler_Targetable>(
   battlers: ReadonlyArray<T>,
   index: number,
 ): T | undefined => {
   return smoothTarget(battlers, index, battlerIsAlive);
 };
 
-export const smoothDeadTarget = <T extends Rmmz_Battler>(
+export const smoothDeadTarget = <T extends Rmmz_Battler_Targetable>(
   battlers: ReadonlyArray<T>,
   index: number,
 ): T | undefined => {

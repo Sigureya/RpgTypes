@@ -6,7 +6,6 @@ import {
   scopeIsForUser,
   scopeRandomNumTargets,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 import {
   battlerIsAlive,
   battlerIsDead,
@@ -14,8 +13,9 @@ import {
   smoothTarget,
 } from "./support";
 import { battlersRandomTarget } from "./randomSelect";
+import type { Rmmz_Battler_Targetable } from "@RpgTypes/rmmzRuntime";
 
-export const actionTargetsForOpponents = <T extends Rmmz_Battler>(
+export const actionTargetsForOpponents = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   opponentsUnit: ReadonlyArray<T>,
   targetIndex: number,
@@ -32,12 +32,15 @@ export const actionTargetsForOpponents = <T extends Rmmz_Battler>(
   return single ? [single] : [];
 };
 
-export const actionTargetsForFriends = <T extends Rmmz_Battler>(
-  subject: T,
+export const actionTargetsForFriends = <
+  T extends Rmmz_Battler_Targetable,
+  S extends Rmmz_Battler_Targetable,
+>(
+  subject: S,
   item: Data_UsableItem,
   friendsUnit: ReadonlyArray<T>,
   targetIndex: number,
-): T[] => {
+): (S | T)[] => {
   if (scopeIsForUser(item)) {
     return [subject];
   }
@@ -50,7 +53,7 @@ export const actionTargetsForFriends = <T extends Rmmz_Battler>(
   return actionTargetsForDeadAndAlive(item, friendsUnit, targetIndex);
 };
 
-export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler>(
+export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -62,7 +65,7 @@ export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler>(
   return Array.from(unit);
 };
 
-export const actionTargetsForAlive = <T extends Rmmz_Battler>(
+export const actionTargetsForAlive = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -70,7 +73,7 @@ export const actionTargetsForAlive = <T extends Rmmz_Battler>(
   return actionTargets(item, unit, targetIndex, battlerIsAlive);
 };
 
-export const actionTargetsForDead = <T extends Rmmz_Battler>(
+export const actionTargetsForDead = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -78,7 +81,7 @@ export const actionTargetsForDead = <T extends Rmmz_Battler>(
   return actionTargets(item, unit, targetIndex, battlerIsDead);
 };
 
-const actionTargets = <T extends Rmmz_Battler>(
+const actionTargets = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
