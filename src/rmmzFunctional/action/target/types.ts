@@ -1,8 +1,11 @@
-import type { Rmmz_Battler_Targetable } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/base";
+import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 
-export interface Provider_Battlers<
-  T extends Rmmz_Battler_Targetable = Rmmz_Battler_Targetable,
-> {
+export interface Provider_Battlers<T extends Targetable = Targetable> {
   opponentsUnit(): ReadonlyArray<T>;
   friendsUnit(): ReadonlyArray<T>;
 }
+
+export type Targetable = Pick<
+  Rmmz_Battler,
+  "states" | "tgr" | "isAlive" | "isDead" | "allTraits"
+>;

@@ -8,16 +8,15 @@ import {
   scopeIsForOpponent,
   scopeIsForUser,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Battler_Targetable } from "@RpgTypes/rmmzRuntime";
 import {
   actionTargetsForFriends,
   actionTargetsForOpponents,
 } from "./targetFor";
-import type { Provider_Battlers } from "./types";
+import type { Provider_Battlers, Targetable } from "./types";
 import { battlerIsAlive, battlerIsDead, repeatTargets } from "./support";
 import { battlersRandomTarget } from "./randomSelect";
 
-export const itemTargetCandidates = <T extends Rmmz_Battler_Targetable>(
+export const itemTargetCandidates = <T extends Targetable>(
   subject: T,
   item: Data_UsableItem,
   provider: Provider_Battlers<T>,
@@ -37,10 +36,7 @@ export const itemTargetCandidates = <T extends Rmmz_Battler_Targetable>(
   return [];
 };
 
-export const actionMakeTargets = <
-  T extends Rmmz_Battler_Targetable,
-  S extends Rmmz_Battler_Targetable,
->(
+export const actionMakeTargets = <T extends Targetable, S extends Targetable>(
   item: Data_UsableItem,
   isItem: boolean,
   subject: S,
@@ -63,12 +59,12 @@ export const actionMakeTargets = <
 
 const calcNomalAttackRepeat = (
   item: Data_UsableItem,
-  subject: Rmmz_Battler_Targetable,
+  subject: Targetable,
 ): number => {
-  return item.repeats + attackSkillNumRepeats(item.id, subject.traits());
+  return item.repeats + attackSkillNumRepeats(item.id, subject.allTraits());
 };
 
-const confusionTargets = <T extends Rmmz_Battler_Targetable>(
+const confusionTargets = <T extends Targetable>(
   provider: Provider_Battlers<T>,
   confusedLevel: number,
   randomFn: () => number,
@@ -79,10 +75,7 @@ const confusionTargets = <T extends Rmmz_Battler_Targetable>(
   return battlersRandomTarget(provider.friendsUnit(), randomFn);
 };
 
-const normalTarget = <
-  T extends Rmmz_Battler_Targetable,
-  S extends Rmmz_Battler_Targetable,
->(
+const normalTarget = <T extends Targetable, S extends Targetable>(
   subject: S,
   item: Data_UsableItem,
   targetIndex: number,
@@ -112,7 +105,7 @@ const normalTarget = <
   return [];
 };
 
-const actionTargetsEveryone = <T extends Rmmz_Battler_Targetable>(
+const actionTargetsEveryone = <T extends Targetable>(
   provider: Provider_Battlers<T>,
 ): T[] => {
   // 最適化のためにforループ。
