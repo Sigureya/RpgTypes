@@ -1,11 +1,19 @@
 import {
+  FLAG_ID_AUTO_BATTLE,
+  FLAG_ID_GUARD,
+  TRAIT_ACTION_PLUS,
   TRAIT_ATTACK_ELEMENT,
   TRAIT_ATTACK_SKILL,
   TRAIT_ATTACK_SPEED,
   TRAIT_ATTACK_STATE,
   TRAIT_ATTACK_TIMES,
+  TRAIT_SKILL_ADD,
+  TRAIT_SKILL_SEAL,
+  TRAIT_SKILL_TYPE_ADD,
+  TRAIT_SKILL_TYPE_SEAL,
+  TRAIT_SPECIAL_FLAG,
 } from "./core";
-import { traitSet, traitSum, traitSumAll } from "./trait";
+import { someTraitMatched, traitSet, traitSum, traitSumAll } from "./trait";
 import type { Trait } from "./types";
 
 export const traitAttackElements = (traits: ReadonlyArray<Trait>): number[] => {
@@ -40,4 +48,53 @@ const skillIdAcc = (skillId: number, trait: Trait): number => {
     return Math.max(skillId, trait.dataId);
   }
   return skillId;
+};
+
+export const traitActionPlusSet = (traits: ReadonlyArray<Trait>): number[] => {
+  return traits
+    .filter((trait) => trait.code === TRAIT_ACTION_PLUS)
+    .map((trait) => trait.value);
+};
+
+export const traitIsAutoBattle = (traits: ReadonlyArray<Trait>): boolean => {
+  return traits.some(
+    (trait) =>
+      trait.code === TRAIT_SPECIAL_FLAG && trait.value === FLAG_ID_AUTO_BATTLE,
+  );
+};
+
+export const traitIsGuardTrait = (traits: ReadonlyArray<Trait>): boolean => {
+  return traits.some(
+    (trait) =>
+      trait.code === TRAIT_SPECIAL_FLAG && trait.value === FLAG_ID_GUARD,
+  );
+};
+
+export const traitsAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
+  const set: number[] = traitSet(traits, TRAIT_ATTACK_SKILL);
+  return set.length > 0 ? Math.max(...set) : 1;
+};
+
+export const traitsAddedSkillTypes = (
+  traits: ReadonlyArray<Trait>,
+): number[] => {
+  return traitSet(traits, TRAIT_SKILL_TYPE_ADD);
+};
+
+export const isSkillTypeSealed = (
+  traits: ReadonlyArray<Trait>,
+  stypeId: number,
+): boolean => {
+  return someTraitMatched(traits, TRAIT_SKILL_TYPE_SEAL, stypeId);
+};
+
+export const traitAddedSkills = (traits: ReadonlyArray<Trait>): number[] => {
+  return traitSet(traits, TRAIT_SKILL_ADD);
+};
+
+export const isSkillIdSealed = (
+  traits: ReadonlyArray<Trait>,
+  skillId: number,
+): boolean => {
+  return someTraitMatched(traits, TRAIT_SKILL_SEAL, skillId);
 };
