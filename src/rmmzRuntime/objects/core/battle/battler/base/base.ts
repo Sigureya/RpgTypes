@@ -6,6 +6,7 @@ import type { Rmmz_StatusParams } from "./param";
 import type { Rmmz_Stateable } from "./state";
 import type { Rmmz_TraitContainer } from "./trait";
 import type { Rmmz_BattlerBase_Values } from "./values";
+import type { Rmmz_Battler_Targetable } from "./target";
 
 export interface Rmmz_BattlerBase
   extends
@@ -15,7 +16,8 @@ export interface Rmmz_BattlerBase
     Rmmz_Stateable,
     Rmmz_StatusParams,
     Rmmz_TraitContainer,
-    Rmmz_BattlerBase_Values {
+    Rmmz_BattlerBase_Values,
+    Rmmz_Battler_Targetable {
   get mhp(): number;
   get mmp(): number;
   get atk(): number;

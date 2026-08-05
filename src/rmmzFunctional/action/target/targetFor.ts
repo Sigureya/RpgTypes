@@ -6,16 +6,16 @@ import {
   scopeIsForUser,
   scopeRandomNumTargets,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
-import { battlersRandomTarget } from "./randomSelect";
 import {
   battlerIsAlive,
   battlerIsDead,
   smoothAliveTarget,
   smoothTarget,
 } from "./support";
+import { battlersRandomTarget } from "./randomSelect";
+import type { Rmmz_Battler_Targetable } from "@RpgTypes/rmmzRuntime";
 
-export const actionTargetsForOpponents = <T extends Rmmz_Battler>(
+export const actionTargetsForOpponents = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   opponentsUnit: ReadonlyArray<T>,
   targetIndex: number,
@@ -26,18 +26,21 @@ export const actionTargetsForOpponents = <T extends Rmmz_Battler>(
   }
   const randomRepeat = scopeRandomNumTargets(item);
   if (randomRepeat > 0) {
-    return randomTargets(opponentsUnit, randomRepeat, randomFn);
+    return battlersRandomTarget(opponentsUnit, randomFn, randomRepeat);
   }
   const single = smoothAliveTarget(opponentsUnit, targetIndex);
   return single ? [single] : [];
 };
 
-export const actionTargetsForFriends = <T extends Rmmz_Battler>(
-  subject: T,
+export const actionTargetsForFriends = <
+  T extends Rmmz_Battler_Targetable,
+  S extends Rmmz_Battler_Targetable,
+>(
+  subject: S,
   item: Data_UsableItem,
   friendsUnit: ReadonlyArray<T>,
   targetIndex: number,
-): T[] => {
+): (S | T)[] => {
   if (scopeIsForUser(item)) {
     return [subject];
   }
@@ -50,29 +53,7 @@ export const actionTargetsForFriends = <T extends Rmmz_Battler>(
   return actionTargetsForDeadAndAlive(item, friendsUnit, targetIndex);
 };
 
-const randomTargets = <T extends Rmmz_Battler>(
-  list: ReadonlyArray<T>,
-  repeat: number,
-  randomFn: () => number,
-): T[] => {
-  if (list.length === 1) {
-    return Array(repeat).fill(list[0]);
-  }
-  const result: T[] = [];
-  // eslint-disable-next-line @functional/no-loop-statements, @functional/no-let
-  for (let i = 0; i < repeat; i++) {
-    const rnd = randomFn();
-    // TODO:ここはtraitsのループがN*Mで増える。
-    // 計算を1回で終えられるようにメモ化したい。
-    const target = battlersRandomTarget(list, rnd);
-    if (target) {
-      result.push(target);
-    }
-  }
-  return result;
-};
-
-export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler>(
+export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -84,7 +65,7 @@ export const actionTargetsForDeadAndAlive = <T extends Rmmz_Battler>(
   return Array.from(unit);
 };
 
-export const actionTargetsForAlive = <T extends Rmmz_Battler>(
+export const actionTargetsForAlive = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -92,7 +73,7 @@ export const actionTargetsForAlive = <T extends Rmmz_Battler>(
   return actionTargets(item, unit, targetIndex, battlerIsAlive);
 };
 
-export const actionTargetsForDead = <T extends Rmmz_Battler>(
+export const actionTargetsForDead = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,
@@ -100,7 +81,7 @@ export const actionTargetsForDead = <T extends Rmmz_Battler>(
   return actionTargets(item, unit, targetIndex, battlerIsDead);
 };
 
-const actionTargets = <T extends Rmmz_Battler>(
+const actionTargets = <T extends Rmmz_Battler_Targetable>(
   item: Data_UsableItem,
   unit: ReadonlyArray<T>,
   targetIndex: number,

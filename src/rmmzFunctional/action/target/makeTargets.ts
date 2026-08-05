@@ -5,7 +5,7 @@ import {
   scopeIsForFriend,
   scopeIsForOpponent,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_Battler_Targetable } from "@RpgTypes/rmmzRuntime";
 import {
   actionTargetsForFriends,
   actionTargetsForOpponents,
@@ -14,59 +14,52 @@ import type { Provider_Battlers } from "./types";
 import { battlerIsAlive, repeatTargets } from "./support";
 import { battlersRandomTarget } from "./randomSelect";
 
-export const actionMakeTargets = (
+export const actionMakeTargets = <
+  T extends Rmmz_Battler_Targetable,
+  S extends Rmmz_Battler_Targetable,
+>(
   item: Data_UsableItem,
-  subject: Rmmz_Battler,
+  subject: S,
   targetIndex: number,
-  provider: Provider_Battlers,
+  provider: Provider_Battlers<T>,
   randomFn: () => number,
-): Rmmz_Battler[] => {
+): (T | S)[] => {
   const confuse: number = confusionLevel(subject.states());
-  const targets: Rmmz_Battler[] =
+  const targets: (T | S)[] =
     confuse > 0
       ? confusionTargets(provider, confuse, randomFn)
       : normalTarget(subject, item, targetIndex, provider, randomFn);
   return applyRepeats(item, targets);
 };
 
-const applyRepeats = <T extends Rmmz_Battler>(
+const applyRepeats = <T>(
   item: Data_UsableItem,
   targets: ReadonlyArray<T>,
 ): T[] => {
   return item.repeats > 1 ? repeatTargets(targets, item.repeats) : [...targets];
 };
 
-const confusionTargets = (
-  provider: Provider_Battlers,
+const confusionTargets = <T extends Rmmz_Battler_Targetable>(
+  provider: Provider_Battlers<T>,
   confusedLevel: number,
   randomFn: () => number,
-): Rmmz_Battler[] => {
-  const target = selectConfusionTarget(provider, confusedLevel, randomFn);
-  return target ? [target] : [];
-};
-
-const selectConfusionTarget = (
-  provider: Provider_Battlers,
-  confusedLevel: number,
-  randomFn: () => number,
-): Rmmz_Battler | undefined => {
-  const targetRandomValue: number = randomFn();
+): T[] => {
   if (confusedLevel <= 1) {
-    return battlersRandomTarget(provider.opponentsUnit(), targetRandomValue);
+    return battlersRandomTarget(provider.opponentsUnit(), randomFn);
   }
-  // TODO:confusionLevel 2の処理を追加する
-  // 乱数の扱いを決める必要があり、やや複雑
-
-  return battlersRandomTarget(provider.friendsUnit(), targetRandomValue);
+  return battlersRandomTarget(provider.friendsUnit(), randomFn);
 };
 
-const normalTarget = (
-  subject: Rmmz_Battler,
+const normalTarget = <
+  T extends Rmmz_Battler_Targetable,
+  S extends Rmmz_Battler_Targetable,
+>(
+  subject: S,
   item: Data_UsableItem,
   targetIndex: number,
-  provider: Provider_Battlers,
+  provider: Provider_Battlers<T>,
   randomFn: () => number,
-): Rmmz_Battler[] => {
+): (S | T)[] => {
   if (scopeIsForFriend(item)) {
     return actionTargetsForFriends(
       subject,
@@ -90,7 +83,9 @@ const normalTarget = (
   return [];
 };
 
-const actionTargetsEveryone = (provider: Provider_Battlers): Rmmz_Battler[] => {
+const actionTargetsEveryone = <T extends Rmmz_Battler_Targetable>(
+  provider: Provider_Battlers<T>,
+): T[] => {
   // 最適化のためにforループ。
   const result = [];
   // eslint-disable-next-line @functional/no-loop-statements

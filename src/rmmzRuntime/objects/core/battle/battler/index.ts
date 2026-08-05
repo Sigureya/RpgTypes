@@ -7,5 +7,5 @@ export type {
   Rmmz_ActorsTemplate,
 } from "./actors";
 export type { Rmmz_Battler } from "./battler";
-export type { Rmmz_BattlerBase } from "./base";
+export type { Rmmz_BattlerBase, Rmmz_Battler_Targetable } from "./base";
 export type { Rmmz_Enemy } from "./enemy";
