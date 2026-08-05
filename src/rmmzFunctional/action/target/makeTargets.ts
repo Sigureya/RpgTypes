@@ -1,5 +1,6 @@
 import type { Data_UsableItem } from "@RpgTypes/rmmz/rpg";
 import {
+  attackSkillNumRepeats,
   confusionLevel,
   scopeIsForEveryone,
   scopeIsForFriend,
@@ -19,6 +20,7 @@ export const actionMakeTargets = <
   S extends Rmmz_Battler_Targetable,
 >(
   item: Data_UsableItem,
+  isItem: boolean,
   subject: S,
   targetIndex: number,
   provider: Provider_Battlers<T>,
@@ -29,14 +31,19 @@ export const actionMakeTargets = <
     confuse > 0
       ? confusionTargets(provider, confuse, randomFn)
       : normalTarget(subject, item, targetIndex, provider, randomFn);
-  return applyRepeats(item, targets);
+
+  const repeat: number = isItem
+    ? item.repeats
+    : calcNomalAttackRepeat(item, subject);
+
+  return repeat > 0 ? repeatTargets(targets, repeat) : targets;
 };
 
-const applyRepeats = <T>(
+const calcNomalAttackRepeat = (
   item: Data_UsableItem,
-  targets: ReadonlyArray<T>,
-): T[] => {
-  return item.repeats > 1 ? repeatTargets(targets, item.repeats) : [...targets];
+  subject: Rmmz_Battler_Targetable,
+): number => {
+  return item.repeats + attackSkillNumRepeats(item.id, subject.traits());
 };
 
 const confusionTargets = <T extends Rmmz_Battler_Targetable>(
