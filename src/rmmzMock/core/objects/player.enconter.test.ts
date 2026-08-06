@@ -28,6 +28,7 @@ const MOCK_ENCOUNTER_LIST: Encounter[] = [
   { regionSet: [], troopId: 1, weight: 1 },
   { regionSet: [189], troopId: 1998, weight: 2 },
   { regionSet: [681, 683], troopId: 2015, weight: 7 },
+  { regionSet: [400], troopId: 2007, weight: 3 },
 ];
 
 interface TestCase {
@@ -106,19 +107,39 @@ const testCases: TestCase[] = [
     validateFn: () => true,
   },
   {
+    list: [{ weight: 4, troopId: 6, regionSet: [] }],
+    expectedId: 0,
+    randomValue: 5,
+    totalWeight: 4,
+    validateFn: () => true,
+  },
+  {
     list: MOCK_ENCOUNTER_LIST,
     expectedId: 0,
     randomValue: 8,
     totalWeight: 0,
     validateFn: () => false,
   },
-
   {
     list: MOCK_ENCOUNTER_LIST,
     expectedId: 2015,
     randomValue: 8,
     totalWeight: 10,
     validateFn: () => true,
+  },
+  {
+    list: MOCK_ENCOUNTER_LIST,
+    expectedId: 2015,
+    randomValue: 3,
+    totalWeight: 0,
+    validateFn: (e) => e.troopId === 2015,
+  },
+  {
+    list: MOCK_ENCOUNTER_LIST,
+    expectedId: 2015,
+    randomValue: 4,
+    totalWeight: 0,
+    validateFn: (e) => e.troopId === 2015,
   },
 ];
 
