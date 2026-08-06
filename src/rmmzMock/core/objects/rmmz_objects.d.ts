@@ -11,11 +11,13 @@ import type {
   Rmmz_Party_Constructor,
   Rmmz_BattlerBase_Constructor,
   Rmmz_Player_Constructor,
+  Rmmz_Battler_Constructor,
 } from "@RpgTypes/rmmzRuntime";
 
 export declare var Game_Action: Rmmz_Action_Constructor;
 export declare var Game_Actors: Rmmz_Actors_Constructor;
 export declare var Game_BattlerBase: Rmmz_BattlerBase_Constructor;
+export declare var Game_Battler: Rmmz_Battler_Constructor;
 export declare var Game_Enemy: Rmmz_Enemy_Constructor;
 export declare var Game_Interpreter: Rmmz_InterpreterConstructor;
 export declare var Game_Message: Rmmz_Message_Constructor;
