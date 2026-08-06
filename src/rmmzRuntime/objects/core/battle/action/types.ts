@@ -23,13 +23,8 @@ export interface Rmmz_ActionBase<Battler, Team>
   setEnemyAction(action: Enemy_Action): void;
   setAttack(): void;
   setGuard(): void;
-  setSkill(skillId: number): void;
-  setItem(itemId: number): void;
   setItemObject(object: Data_UsableItem): void;
   setTarget(targetIndex: number): void;
-  item(): Data_UsableItem | null;
-  isSkill(): boolean;
-  isItem(): boolean;
   numRepeats(): number;
   decideRandomTarget(): void;
   setConfusion(): void;
@@ -37,7 +32,6 @@ export interface Rmmz_ActionBase<Battler, Team>
   isValid(): boolean;
   speed(): number;
   evaluate(): number;
-  itemTargetCandidates(): number;
   evaluateWithTarget(target: Battler): number;
   testApply(target: Battler): boolean;
   testLifeAndDeath(target: Battler): boolean;
