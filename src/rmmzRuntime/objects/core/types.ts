@@ -8,13 +8,23 @@ import type {
 } from "./battle";
 import type { InterpreterMapper, Rmmz_EventCommandRunner } from "./interpreter";
 import type { Rmmz_InterpreterBattler } from "./interpreter/types/actor";
+import type {
+  Data_Item,
+  Data_Skill,
+  Data_UsableItem,
+} from "@RpgTypes/rmmz/rpg";
 
-export interface Rmmz_Action<Subject = Rmmz_Battler> extends Rmmz_ActionBase<
-  Rmmz_Battler,
-  Rmmz_Unit<Rmmz_Battler>
-> {
+export interface Rmmz_Action<
+  Subject = Rmmz_Battler,
+  Item extends Data_UsableItem = Data_UsableItem,
+> extends Rmmz_ActionBase<Rmmz_Battler, Rmmz_Unit<Rmmz_Battler>> {
   setSubject(subject: Subject): void;
   subject(): Subject;
+  item(): Item | null;
+  isSkill(): this is Rmmz_Action<Subject, Data_Skill>;
+  isItem(): this is Rmmz_Action<Subject, Data_Item>;
+  setSkill(skillId: number): asserts this is Rmmz_Action<Subject, Data_Skill>;
+  setItem(itemId: number): asserts this is Rmmz_Action<Subject, Data_Item>;
 }
 
 export interface Rmmz_Interpreter
