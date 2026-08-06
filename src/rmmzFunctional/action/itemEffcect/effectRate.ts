@@ -1,5 +1,13 @@
-import type { ItemEffect, Data_Skill } from "@RpgTypes/rmmz/rpg";
-import { traitAttackElements } from "@RpgTypes/rmmz/rpg";
+import type {
+  ItemEffect,
+  Data_Skill,
+  Data_UsableItem,
+} from "@RpgTypes/rmmz/rpg";
+import {
+  isMagicalHit,
+  isPhysicalHit,
+  traitAttackElements,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 
 export const lukEffectRate = (
@@ -58,4 +66,45 @@ export const actionCalcNormalStateRate = (
     target.stateRate(effect.dataId) *
     lukEffectRate(subject, target)
   );
+};
+
+export const actionItemMrf = (
+  data: Data_UsableItem,
+  target: Rmmz_BattlerBase,
+): number => {
+  return isMagicalHit(data) ? target.mrf : 0;
+};
+
+export const actionItemHit = (
+  data: Data_UsableItem,
+  subject: Rmmz_BattlerBase,
+): number => {
+  if (isPhysicalHit(data)) {
+    return data.successRate * 0.01 * subject.hit;
+  }
+  return data.successRate * 0.01;
+};
+
+export const actionItemEva = (
+  data: Data_UsableItem,
+  target: Rmmz_BattlerBase,
+): number => {
+  if (isPhysicalHit(data)) {
+    return target.eva;
+  }
+  if (isMagicalHit(data)) {
+    return target.mev;
+  }
+  return 0;
+};
+
+export const actionItemCri = (
+  data: Data_UsableItem,
+  subject: Rmmz_BattlerBase,
+  target: Rmmz_BattlerBase,
+): number => {
+  if (data.damage.critical) {
+    return subject.cri * (1 - target.cev);
+  }
+  return 0;
 };
