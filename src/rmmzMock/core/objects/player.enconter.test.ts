@@ -25,7 +25,7 @@ const createMockMap = (list: Encounter[]): MockedObject<FakeMap> => {
 };
 
 const MOCK_ENCOUNTER_LIST: Encounter[] = [
-  { regionSet: [], troopId: 1, weight: 1 },
+  { regionSet: [], troopId: 1980, weight: 1 },
   { regionSet: [189], troopId: 1998, weight: 2 },
   { regionSet: [681, 683], troopId: 2015, weight: 7 },
   { regionSet: [400], troopId: 2007, weight: 3 },
@@ -140,6 +140,13 @@ const testCases: TestCase[] = [
     randomValue: 4,
     totalWeight: 0,
     validateFn: (e) => e.troopId === 2015,
+  },
+  {
+    list: MOCK_ENCOUNTER_LIST,
+    expectedId: 1980,
+    randomValue: 0,
+    totalWeight: 6,
+    validateFn: (e) => e.weight <= 3,
   },
 ];
 
