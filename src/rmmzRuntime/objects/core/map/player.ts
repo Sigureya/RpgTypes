@@ -1,3 +1,4 @@
+import type { Encounter } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_MapCharacter } from "./character";
 import type { Rmmz_Followers } from "./followers";
 import type { Rmmz_Vehicle } from "./vehicle";
@@ -55,7 +56,7 @@ export interface Rmmz_PlayerCharactor extends Rmmz_MapCharacter {
   increaseSteps(): void;
   makeEncounterCount(): void;
   makeEncounterTroopId(): number;
-  meetsEncounterConditions(encounter: unknown): boolean;
+  meetsEncounterConditions(encounter: Encounter): boolean;
   executeEncounter(): boolean;
   startMapEvent(
     x: number,
