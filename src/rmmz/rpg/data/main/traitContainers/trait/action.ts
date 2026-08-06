@@ -39,27 +39,6 @@ export const traitAttackTimesAdd = (traits: ReadonlyArray<Trait>): number => {
   return Math.max(0, traitSumAll(traits, TRAIT_ATTACK_TIMES));
 };
 
-export const attackSkillNumRepeats = (
-  sklllId: number,
-  traits: ReadonlyArray<Trait>,
-): number => {
-  const state = traits.reduce<ActionNumRepeatsState>(
-    (acc, trait) => {
-      if (trait.code === TRAIT_ATTACK_SKILL && trait.dataId === sklllId) {
-        acc.isNormalAttack = true;
-      }
-      return acc;
-    },
-    { isNormalAttack: false, repeats: 0 },
-  );
-  return state.isNormalAttack ? state.repeats : 0;
-};
-
-interface ActionNumRepeatsState {
-  isNormalAttack: boolean;
-  repeats: number;
-}
-
 export const traitAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   return traits.reduce(skillIdAcc, 1);
 };
@@ -113,4 +92,27 @@ export const isSkillIdSealed = (
   skillId: number,
 ): boolean => {
   return someTraitMatched(traits, TRAIT_SKILL_SEAL, skillId);
+};
+
+export const attackSkillNumRepeats = (
+  sklllId: number,
+  traits: ReadonlyArray<Trait>,
+): number => {
+  // eslint-disable-next-line @functional/no-let
+  let repeats = 0;
+  // eslint-disable-next-line @functional/no-let
+  let isNormalAttack = false;
+  // eslint-disable-next-line @functional/no-loop-statements
+  for (const trait of traits) {
+    if (trait.dataId !== sklllId) {
+      continue;
+    }
+    if (trait.code === TRAIT_ATTACK_SKILL) {
+      isNormalAttack = true;
+    }
+    if (trait.code === TRAIT_ATTACK_TIMES) {
+      repeats += trait.value;
+    }
+  }
+  return isNormalAttack ? repeats : 0;
 };
