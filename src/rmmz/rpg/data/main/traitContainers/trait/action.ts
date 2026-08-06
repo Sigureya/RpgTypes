@@ -49,8 +49,13 @@ export const attackSkillNumRepeats = (
   }
   const state = traits.reduce<ActionNumRepeatsState>(
     (acc, trait) => {
-      if (trait.code === TRAIT_ATTACK_SKILL && trait.dataId === sklllId) {
+      if (trait.dataId !== sklllId) {
+        return acc;
+      }
+      if (trait.code === TRAIT_ATTACK_SKILL) {
         acc.isNormalAttack = true;
+      } else if (trait.code === TRAIT_ATTACK_TIMES) {
+        acc.repeats += trait.value;
       }
       return acc;
     },
