@@ -1,9 +1,6 @@
-import type { Trait } from "@RpgTypes/rmmz/rpg";
-import {
-  traitHpRegenRate,
-  traitMpRegenRate,
-  traitTpChargeRate,
-} from "@RpgTypes/rmmz/rpg";
+import { traitTpChargeRate } from "./sparam";
+import type { Trait } from "./types";
+import { traitHpRegenRate, traitMpRegenRate } from "./xparam";
 
 export const calculateHpRegenerate = (
   traits: ReadonlyArray<Trait>,

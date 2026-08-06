@@ -7,4 +7,5 @@ export * from "./sparam";
 export * from "./trait";
 export * from "./types";
 export * from "./xparam";
+export * from "./regenerate";
 export { formatTraitText } from "./format";
