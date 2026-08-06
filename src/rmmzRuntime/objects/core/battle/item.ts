@@ -1,7 +1,9 @@
 import type {
   Data_Armor,
+  Data_Equipment,
   Data_Item,
   Data_Skill,
+  Data_UsableItem,
   Data_Weapon,
 } from "@RpgTypes/rmmz/rpg";
 
@@ -15,13 +17,21 @@ export interface Rmmz_Item<T = unknown> {
   setObject(object: null): asserts this is Rmmz_Item<null>;
   isSkill(): this is Rmmz_Item<Data_Skill>;
   isItem(): this is Rmmz_Item<Data_Item>;
-  isUseableItem(): this is Rmmz_Item<Data_Skill> | Rmmz_Item<Data_Item>;
+  isUseableItem(): this is Rmmz_Item<Data_UsableItem>;
   isWeapon(): this is Rmmz_Item<Data_Weapon>;
   isArmor(): this is Rmmz_Item<Data_Armor>;
-  isEquipItem(): this is Rmmz_Item<Data_Weapon> | Rmmz_Item<Data_Armor>;
+  isEquipItem(): this is Rmmz_Item<Data_Equipment>;
   isNull(): this is Rmmz_Item<null>;
   setEquip(
     isWeapon: boolean,
     itemId: number,
   ): asserts this is Rmmz_Item<Data_Weapon> | Rmmz_Item<Data_Armor>;
+  setEquip(
+    isWeapon: false,
+    itemId: number,
+  ): asserts this is Rmmz_Item<Data_Armor>;
+  setEquip(
+    isWeapon: true,
+    itemId: number,
+  ): asserts this is Rmmz_Item<Data_Weapon>;
 }
