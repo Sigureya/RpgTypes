@@ -7,18 +7,18 @@ export const selectEncounters = (
     index: number,
     list: ReadonlyArray<Encounter>,
   ) => boolean,
-  random: (max: number) => number,
+  randomFn: (max: number) => number,
 ): Encounter | null => {
-  const ee = encounterList.filter(isEncounterValid);
-  if (ee.length === 0) {
+  const list = encounterList.filter(isEncounterValid);
+  if (list.length === 0) {
     return null;
   }
-  const totalWeight: number = ee.reduce(calcWeightTotal, 0);
+  const totalWeight: number = list.reduce(calcWeightTotal, 0);
   if (totalWeight <= 0) {
     return null;
   }
-  const vv = random(totalWeight);
-  return selectByWeight(vv, ee);
+  const randomValue = randomFn(totalWeight);
+  return selectByWeight(randomValue, list);
 };
 
 const calcWeightTotal = (acc: number, e: Encounter): number => {
