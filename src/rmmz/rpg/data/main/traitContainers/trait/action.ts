@@ -39,31 +39,6 @@ export const traitAttackTimesAdd = (traits: ReadonlyArray<Trait>): number => {
   return Math.max(0, traitSumAll(traits, TRAIT_ATTACK_TIMES));
 };
 
-export const attackSkillNumRepeats = (
-  sklllId: number,
-  traits: ReadonlyArray<Trait>,
-): number => {
-  interface ActionNumRepeatsState {
-    isNormalAttack: boolean;
-    repeats: number;
-  }
-  const state = traits.reduce<ActionNumRepeatsState>(
-    (acc, trait) => {
-      if (trait.dataId !== sklllId) {
-        return acc;
-      }
-      if (trait.code === TRAIT_ATTACK_SKILL) {
-        acc.isNormalAttack = true;
-      } else if (trait.code === TRAIT_ATTACK_TIMES) {
-        acc.repeats += trait.value;
-      }
-      return acc;
-    },
-    { isNormalAttack: false, repeats: 0 },
-  );
-  return state.isNormalAttack ? state.repeats : 0;
-};
-
 export const traitAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   return traits.reduce(skillIdAcc, 1);
 };
@@ -117,4 +92,29 @@ export const isSkillIdSealed = (
   skillId: number,
 ): boolean => {
   return someTraitMatched(traits, TRAIT_SKILL_SEAL, skillId);
+};
+
+export const attackSkillNumRepeats = (
+  sklllId: number,
+  traits: ReadonlyArray<Trait>,
+): number => {
+  interface ActionNumRepeatsState {
+    isNormalAttack: boolean;
+    repeats: number;
+  }
+  const state = traits.reduce<ActionNumRepeatsState>(
+    (acc, trait) => {
+      if (trait.dataId !== sklllId) {
+        return acc;
+      }
+      if (trait.code === TRAIT_ATTACK_SKILL) {
+        acc.isNormalAttack = true;
+      } else if (trait.code === TRAIT_ATTACK_TIMES) {
+        acc.repeats += trait.value;
+      }
+      return acc;
+    },
+    { isNormalAttack: false, repeats: 0 },
+  );
+  return state.isNormalAttack ? state.repeats : 0;
 };
