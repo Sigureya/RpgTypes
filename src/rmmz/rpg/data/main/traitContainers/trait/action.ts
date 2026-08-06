@@ -43,6 +43,10 @@ export const attackSkillNumRepeats = (
   sklllId: number,
   traits: ReadonlyArray<Trait>,
 ): number => {
+  interface ActionNumRepeatsState {
+    isNormalAttack: boolean;
+    repeats: number;
+  }
   const state = traits.reduce<ActionNumRepeatsState>(
     (acc, trait) => {
       if (trait.code === TRAIT_ATTACK_SKILL && trait.dataId === sklllId) {
@@ -54,11 +58,6 @@ export const attackSkillNumRepeats = (
   );
   return state.isNormalAttack ? state.repeats : 0;
 };
-
-interface ActionNumRepeatsState {
-  isNormalAttack: boolean;
-  repeats: number;
-}
 
 export const traitAttackSkillId = (traits: ReadonlyArray<Trait>): number => {
   return traits.reduce(skillIdAcc, 1);
