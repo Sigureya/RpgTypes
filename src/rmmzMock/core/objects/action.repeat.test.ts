@@ -87,6 +87,15 @@ const testCases: TestCase[] = [
     item: makeSkillData({ id: 19 }),
     traits: [{ code: TRAIT_ATTACK_TIMES, dataId: 19, value: 2 }],
   },
+  {
+    name: "skill id unmatched",
+    expected: 0,
+    item: makeSkillData({ id: 28 }),
+    traits: [
+      { code: TRAIT_ATTACK_TIMES, dataId: 17, value: 2 },
+      { code: TRAIT_ATTACK_SKILL, dataId: 17, value: 0 },
+    ],
+  },
 ];
 
 describe("Game_Action numRepeats", () => {
