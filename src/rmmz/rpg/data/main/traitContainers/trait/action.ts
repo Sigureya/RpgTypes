@@ -98,23 +98,21 @@ export const attackSkillNumRepeats = (
   sklllId: number,
   traits: ReadonlyArray<Trait>,
 ): number => {
-  interface ActionNumRepeatsState {
-    isNormalAttack: boolean;
-    repeats: number;
+  // eslint-disable-next-line @functional/no-let
+  let repeats = 0;
+  // eslint-disable-next-line @functional/no-let
+  let isNormalAttack = false;
+  // eslint-disable-next-line @functional/no-loop-statements
+  for (const trait of traits) {
+    if (trait.dataId !== sklllId) {
+      continue;
+    }
+    if (trait.code === TRAIT_ATTACK_SKILL) {
+      isNormalAttack = true;
+    }
+    if (trait.code === TRAIT_ATTACK_TIMES) {
+      repeats += trait.value;
+    }
   }
-  const state = traits.reduce<ActionNumRepeatsState>(
-    (acc, trait) => {
-      if (trait.dataId !== sklllId) {
-        return acc;
-      }
-      if (trait.code === TRAIT_ATTACK_SKILL) {
-        acc.isNormalAttack = true;
-      } else if (trait.code === TRAIT_ATTACK_TIMES) {
-        acc.repeats += trait.value;
-      }
-      return acc;
-    },
-    { isNormalAttack: false, repeats: 0 },
-  );
-  return state.isNormalAttack ? state.repeats : 0;
+  return isNormalAttack ? repeats : 0;
 };
