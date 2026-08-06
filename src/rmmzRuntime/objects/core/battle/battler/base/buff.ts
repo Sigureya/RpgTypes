@@ -4,8 +4,8 @@ export interface Rmmz_BattlerBuffs {
   clearBuffs(): void;
   eraseBuff(paramId: ParamID): void;
   buff(paramId: ParamID): number;
-  isBuffAffected(paramId: ParamID): boolean;
-  isDebuffAffected(paramId: ParamID): boolean;
+  isBuffAffected<T extends number = ParamID>(paramId: T): boolean;
+  isDebuffAffected<T extends number = ParamID>(paramId: T): boolean;
   isBuffOrDebuffAffected(paramId: ParamID): boolean;
   isMaxBuffAffected(paramId: ParamID): boolean;
   isMaxDebuffAffected(paramId: ParamID): boolean;
