@@ -24,6 +24,12 @@ const createMockMap = (list: Encounter[]): MockedObject<FakeMap> => {
   };
 };
 
+const totalWeight = (testCase: TestCase): number => {
+  return testCase.list
+    .filter(testCase.validateFn)
+    .reduce((acc, e) => acc + e.weight, 0);
+};
+
 const MOCK_ENCOUNTER_LIST: Encounter[] = [
   { regionSet: [], troopId: 1980, weight: 1 },
   { regionSet: [189], troopId: 1998, weight: 2 },
@@ -35,7 +41,6 @@ interface TestCase {
   list: Encounter[];
   validateFn: (e: Encounter) => boolean;
   randomValue: number;
-  totalWeight: number;
   expectedId: number;
 }
 
@@ -43,10 +48,14 @@ const runTestCase = (testCase: TestCase): void => {
   describe("testCase", () => {
     describe("functions", () => {
       test("call", () => {
+        const total = totalWeight(testCase);
+        const mockRandomFn = vi.fn((max) => {
+          expect(max).toBe(total);
+          return testCase.randomValue;
+        });
         const mockValidFn = vi.fn((e: Encounter) => {
           return testCase.validateFn(e);
         });
-        const mockRandomFn = vi.fn(() => testCase.randomValue);
         selectEncounters(
           testCase.list,
           (e: Encounter, index: number, list) => {
@@ -78,14 +87,33 @@ const runTestCase = (testCase: TestCase): void => {
     });
     describe("Game_Player", () => {
       test("result", () => {
+        // @ts-expect-error
+        Math.randomInt = (): number => {
+          return testCase.randomValue;
+        };
         const map = createMockMap(testCase.list);
         vi.stubGlobal("$gameMap", map);
-        // @ts-expect-error
-        Math.randomInt = vi.fn(() => testCase.randomValue);
         const player = createMockPlayer(testCase.validateFn);
         const result = Game_Player.prototype.makeEncounterTroopId.call(player);
-        expect(map.encounterList).toHaveBeenCalledOnce();
         expect(result).toBe(testCase.expectedId);
+      });
+      test("call", () => {
+        const total = totalWeight(testCase);
+        const randomFn = vi.fn((max: number) => {
+          expect(max).toBe(total);
+          return testCase.randomValue;
+        });
+        // @ts-expect-error
+        Math.randomInt = randomFn;
+        const map = createMockMap(testCase.list);
+        vi.stubGlobal("$gameMap", map);
+        const player = createMockPlayer(testCase.validateFn);
+        Game_Player.prototype.makeEncounterTroopId.call(player);
+        expect(map.encounterList).toHaveBeenCalledOnce();
+        expect(randomFn.mock.calls.length).toBeLessThanOrEqual(1);
+        expect(player.meetsEncounterConditions).toHaveBeenCalledTimes(
+          testCase.list.length,
+        );
       });
     });
   });
@@ -96,56 +124,48 @@ const testCases: TestCase[] = [
     list: [],
     validateFn: () => true,
     randomValue: 0,
-    totalWeight: 0,
     expectedId: 0,
   },
   {
     list: [{ weight: 4, troopId: 6, regionSet: [] }],
     expectedId: 6,
     randomValue: 0,
-    totalWeight: 4,
     validateFn: () => true,
   },
   {
     list: [{ weight: 4, troopId: 6, regionSet: [] }],
     expectedId: 0,
     randomValue: 5,
-    totalWeight: 4,
     validateFn: () => true,
   },
   {
     list: MOCK_ENCOUNTER_LIST,
     expectedId: 0,
     randomValue: 8,
-    totalWeight: 0,
     validateFn: () => false,
   },
   {
     list: MOCK_ENCOUNTER_LIST,
     expectedId: 2015,
     randomValue: 8,
-    totalWeight: 10,
     validateFn: () => true,
   },
   {
     list: MOCK_ENCOUNTER_LIST,
     expectedId: 2015,
     randomValue: 3,
-    totalWeight: 0,
     validateFn: (e) => e.troopId === 2015,
   },
   {
     list: MOCK_ENCOUNTER_LIST,
     expectedId: 2015,
     randomValue: 4,
-    totalWeight: 0,
     validateFn: (e) => e.troopId === 2015,
   },
   {
     list: MOCK_ENCOUNTER_LIST,
     expectedId: 1980,
     randomValue: 0,
-    totalWeight: 6,
     validateFn: (e) => e.weight <= 3,
   },
 ];
