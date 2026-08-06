@@ -19,22 +19,36 @@
   - `enemyActionWeightTotal`
   - `selectEnemyActionByWeight`
   - `selectEnemyActions`
-- [src/rmmzFunctional/action/target/target.ts](src/rmmzFunctional/action/target/target.ts)
-  - `repeatTargets`
-  - `actionTargetForDead`
-  - `actionTargetForDeadAndAlive`
-  - `actionTargetForAlive`
+- [src/rmmzFunctional/action/target/makeTargets.ts](src/rmmzFunctional/action/target/makeTargets.ts)
+  - `itemTargetCandidates`
+  - `actionMakeTargets`
+- [src/rmmzFunctional/action/target/targetFor.ts](src/rmmzFunctional/action/target/targetFor.ts)
   - `actionTargetsForOpponents`
+  - `actionTargetsForFriends`
+  - `actionTargetsForDeadAndAlive`
+  - `actionTargetsForAlive`
+  - `actionTargetsForDead`
 - [src/rmmzFunctional/action/target/randomSelect.ts](src/rmmzFunctional/action/target/randomSelect.ts)
   - `battlersDecideRandomTarget`
-  - `battlresRandomTarget`
+  - `battlersRandomTarget`
   - `battlersRandomDeadTarget`
   - `battlersRandomAliveTarget`
   - `actionDecideRandomTarget`
 - [src/rmmzFunctional/action/target/support.ts](src/rmmzFunctional/action/target/support.ts)
+  - `repeatTargets`
   - `smoothTarget`
   - `smoothAliveTarget`
   - `smoothDeadTarget`
+- [src/rmmzFunctional/action/itemEffcect/itemEffect.ts](src/rmmzFunctional/action/itemEffcect/itemEffect.ts)
+  - `actionTestItemEffect`
+- [src/rmmzFunctional/action/itemEffcect/effectRate.ts](src/rmmzFunctional/action/itemEffcect/effectRate.ts)
+  - `lukEffectRate`
+  - `actionElementMaxRate`
+  - `actionCalcElementRate`
+  - `actionItemMrf`
+  - `actionItemHit`
+  - `actionItemEva`
+  - `actionItemCri`
 - [src/rmmz/rpg/data/main/usableItems/scope.ts](src/rmmz/rpg/data/main/usableItems/scope.ts)
   - `scopeForUser`
   - `scopeIsForOne`
@@ -94,11 +108,11 @@
 
 ### まだ候補として残るもの
 
-- pure: checkDamageType, applyCritical
-- quasi: numRepeats, isMagicSkill, itemCnt, itemMrf, itemHit, itemEva, itemCri, testLifeAndDeath, testItemEffect, calcElementRate, elementsMaxRate, applyGuard, lukEffectRate
+- pure: applyCritical
+- quasi: numRepeats, isMagicSkill, itemCnt, testLifeAndDeath, applyGuard
 - extract: makeDamageValue の計算パイプライン, applyVariance の乱数注入版, evaluateWithTarget のスコア計算, speed の速度算出式
 - 注入候補: item, subjectStats, targetStats, magicSkillIds, randomInt, randomFloat, attackElements, elementRates, guarding, grd
-- 非候補: initialize, clear, setSubject, subject, friendsUnit, opponentsUnit, setEnemyAction, setAttack, setGuard, setSkill, setItem, setItemObject, setTarget, item, isAttack, isGuard, decideRandomTarget, setConfusion, prepare, isValid, speed, makeTargets, confusionTarget, targetsForEveryone, targetsForOpponents, targetsForFriends, randomTargets, targetsForDead, targetsForAlive, targetsForDeadAndAlive, evaluate, itemTargetCandidates, evaluateWithTarget, testApply, hasItemAnyValidEffects, apply, makeDamageValue, evalDamageFormula, applyVariance, executeDamage, executeHpDamage, executeMpDamage, gainDrainedHp, gainDrainedMp, applyItemEffect, itemEffectRecoverHp, itemEffectRecoverMp, itemEffectGainTp, itemEffectAddState, itemEffectAddAttackState, itemEffectAddNormalState, itemEffectRemoveState, itemEffectAddBuff, itemEffectAddDebuff, itemEffectRemoveBuff, itemEffectRemoveDebuff, itemEffectSpecial, itemEffectGrow, itemEffectLearnSkill, itemEffectCommonEvent, makeSuccess, applyItemUserEffect, lukEffectRate, applyGlobal, updateLastUsed, updateLastSubject, updateLastTarget
+- 非候補: initialize, clear, setSubject, subject, friendsUnit, opponentsUnit, setEnemyAction, setAttack, setGuard, setSkill, setItem, setItemObject, setTarget, item, isAttack, isGuard, setConfusion, prepare, isValid, speed, evaluate, evaluateWithTarget, testApply, hasItemAnyValidEffects, apply, makeDamageValue, evalDamageFormula, applyVariance, executeDamage, executeHpDamage, executeMpDamage, gainDrainedHp, gainDrainedMp, applyItemEffect, itemEffectRecoverHp, itemEffectRecoverMp, itemEffectGainTp, itemEffectAddState, itemEffectAddAttackState, itemEffectAddNormalState, itemEffectRemoveState, itemEffectAddBuff, itemEffectAddDebuff, itemEffectRemoveBuff, itemEffectRemoveDebuff, itemEffectSpecial, itemEffectGrow, itemEffectLearnSkill, itemEffectCommonEvent, makeSuccess, applyItemUserEffect, applyGlobal, updateLastUsed, updateLastSubject, updateLastTarget
 
 ## Game_ActionResult
 
