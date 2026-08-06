@@ -12,6 +12,7 @@ export interface Rmmz_TraitContainer {
   debuffRate(paramId: number): number;
   stateRate(stateId: number): number;
   addedSkills(): number[];
+  attackTimesAdd(): number;
   attackSkillId(): number;
   attackElements(): number[];
   attackStates(): number[];
