@@ -1,9 +1,11 @@
-import type { Data_State, Provider_RpgData, Trait } from "@RpgTypes/rmmz";
-import { STATE_REMOVE_TIMING_END_OF_TURN } from "@RpgTypes/rmmz/rpg/data/main/traitContainers/state/constants";
 import {
   calculateHpRegenerate,
   calculateMpRegenerate,
-} from "@RpgTypes/rmmzFunctional";
+  type Data_State,
+  type Provider_RpgData,
+  type Trait,
+} from "@RpgTypes/rmmz";
+import { STATE_REMOVE_TIMING_END_OF_TURN } from "@RpgTypes/rmmz/rpg/data/main/traitContainers/state/constants";
 import { calculateBattlerParam } from "./param";
 import { resolveBattlerTraits } from "./resolve";
 import { xxxx } from "./state/state";
