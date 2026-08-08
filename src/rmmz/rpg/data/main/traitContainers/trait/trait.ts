@@ -1,5 +1,12 @@
 import type { TraitCode } from "./core";
-import type { Trait } from "./types";
+import { TRAIT_ATTACK_STATE } from "./core";
+import type { Trait, Trait_AttackState } from "./types";
+
+export const isTraitAttackState = (
+  trait: Trait,
+): trait is Trait_AttackState => {
+  return trait.code === TRAIT_ATTACK_STATE;
+};
 
 export const traitPi = (
   traits: ReadonlyArray<Trait>,

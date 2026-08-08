@@ -8,4 +8,5 @@ export * from "./trait";
 export * from "./types";
 export * from "./xparam";
 export * from "./regenerate";
+export * from "./state";
 export { formatTraitText } from "./format";
