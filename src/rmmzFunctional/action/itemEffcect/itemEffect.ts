@@ -1,4 +1,4 @@
-import type { ItemEffect } from "@RpgTypes/rmmz/rpg";
+import type { ItemEffect, Trait, Trait_AttackState } from "@RpgTypes/rmmz/rpg";
 import {
   EFFECT_ADD_BUFF,
   EFFECT_ADD_STATE,
@@ -8,6 +8,44 @@ import {
   EFFECT_REMOVE_STATE,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
+import { calcItemEffectRecoverHp } from "./recover";
+
+const filterItemEffects = (
+  luk: number,
+  targetTraits: ReadonlyArray<Trait>,
+  effects: ReadonlyArray<ItemEffect>,
+  attackStates: ReadonlyArray<Trait_AttackState>,
+  randomFn: () => number,
+) => {
+  return effects.flatMap((effect) => {
+    if (effect.code === EFFECT_REMOVE_STATE) {
+      if (itemEffectRemoveState(effect, randomFn())) {
+        return effect;
+      }
+    }
+  });
+};
+
+const itemEffectAddState = (
+  targetTraits: ReadonlyArray<Trait>,
+  effect: ItemEffect,
+  randomFn: () => number,
+) => {};
+
+const itemEffectRemoveState = (
+  effect: ItemEffect,
+  randomValue: number,
+): boolean => {
+  return randomValue < effect.value1;
+};
+
+const actionItemEffectRecoverHp = (
+  target: Rmmz_Battler,
+  effect: ItemEffect,
+): number => {
+  const baseValue = calcItemEffectRecoverHp(target, effect);
+  return Math.floor(baseValue);
+};
 
 export const actionTestItemEffect = (
   target: Rmmz_Battler,
