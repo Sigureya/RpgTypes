@@ -48,21 +48,20 @@ export const variableFromCommand = (
       return variableFromRandom(parameters, (min, max) =>
         provider.random(min, max),
       );
+    case 3:
+      return variableFromGameData(
+        parameters,
+        provider,
+        temp,
+        map,
+        party,
+        system,
+        timer,
+        fallback,
+      );
+    default:
+      return fallback;
   }
-  // 長いのでここはifで分岐する
-  if (parameters[3] === 3) {
-    return variableFromGameData(
-      parameters,
-      provider,
-      temp,
-      map,
-      party,
-      system,
-      timer,
-      fallback,
-    );
-  }
-  return fallback;
 };
 
 export const variableFromGameData = (
@@ -94,7 +93,7 @@ export const variableFromGameData = (
       return variableFromOther(params, map, party, system, timer, fallback);
     case 8:
       return variableFromLastData(params, temp);
+    default:
+      return fallback;
   }
-  // 不正データで到達する恐れがあるので、fallbackを返す
-  return fallback;
 };
