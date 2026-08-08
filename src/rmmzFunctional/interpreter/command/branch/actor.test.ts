@@ -6,33 +6,43 @@ import type {
   Rmmz_BranchSourceActor,
   Rmmz_BranchSourceProvider,
 } from "./types";
-import type { Data_Weapon, Data_Class } from "@RpgTypes/rmmz/rpg";
-import { makeClassData, makeWeaponData } from "@RpgTypes/rmmz/rpg";
+import type { Data_Weapon, Data_Class, Data_Armor } from "@RpgTypes/rmmz/rpg";
+import {
+  makeArmorData,
+  makeClassData,
+  makeWeaponData,
+} from "@RpgTypes/rmmz/rpg";
+import type { Command_BranchByActor } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandBranchByActorArmor,
   makeCommandBranchByActorWeapon,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Members } from "@RpgTypes/rmmzRuntime";
-const MOCKED_ACTOR_ID = 3;
-const MOCKED_CLASS_ID = 8;
+const MOCK_ACTOR_ID = 3;
+const MOCK_CLASS_ID = 8;
 
-const MOCKED_WEAPON_ID = 9;
+const MOCK_WEAPON_ID = 9;
 
 const MOKE_INVALID_ID = 9999;
 
 const MOCKED_WEAPON: Data_Weapon = makeWeaponData({
   name: "MOCKED_WEAPON",
-  id: MOCKED_WEAPON_ID,
+  id: MOCK_WEAPON_ID,
+});
+
+const MOCKED_ARMOR: Data_Armor = makeArmorData({
+  name: "MOCKED_ARMOR",
+  id: MOCK_WEAPON_ID,
 });
 
 const MOCKED_CLASS: Data_Class = makeClassData({
   name: "MOCKED_CLASS",
-  id: MOCKED_CLASS_ID,
+  id: MOCK_CLASS_ID,
 });
 
-const creareMockedParty = <T>(actor: T): MockedObject<Rmmz_Members<T>> => {
+const creareMockedParty = <T>(actor: T[]): MockedObject<Rmmz_Members<T>> => {
   return {
-    members: vi.fn().mockReturnValue([actor]),
+    members: vi.fn(() => actor),
   };
 };
 
@@ -46,9 +56,9 @@ const createMockedProvider = (
       new Error("mapCharacter is not implemented");
     }),
     classData: vi.fn((id) => (id === MOCKED_CLASS.id ? MOCKED_CLASS : null)),
-    armorData: vi.fn().mockThrow(new Error("armorData is not implemented")),
     itemData: vi.fn().mockThrow(new Error("itemData is not implemented")),
     weaponData: vi.fn((id) => (id === MOCKED_WEAPON.id ? MOCKED_WEAPON : null)),
+    armorData: vi.fn((id) => (id === MOCKED_ARMOR.id ? MOCKED_ARMOR : null)),
   };
 };
 
@@ -64,72 +74,142 @@ const createActor = (b: boolean): MockedObject<Rmmz_BranchSourceActor> => {
 };
 
 describe("evaluateActorBranch", () => {
-  describe("weapon", () => {
-    test("valid weapon id", () => {
-      const command = makeCommandBranchByActorWeapon({
-        actorId: MOCKED_ACTOR_ID,
-        weaponId: MOCKED_WEAPON_ID,
-      });
-      const actor = createActor(true);
-      const provider = createMockedProvider(actor);
-      const party = creareMockedParty(actor);
-      const result = evaluateActorBranch(command.parameters, party, provider);
-      expect(result).toBe(true);
-      expect(provider.gameActor).toHaveBeenCalledOnce();
-      expect(provider.gameActor).toHaveBeenCalledWith(MOCKED_ACTOR_ID);
-      expect(provider.weaponData).toHaveBeenCalledOnce();
-      expect(provider.weaponData).toHaveBeenCalledWith(MOCKED_WEAPON_ID);
-      expect(actor.hasArmor).toHaveBeenCalledOnce();
-      expect(actor.hasArmor).toHaveBeenCalledWith(MOCKED_WEAPON);
-    });
-    test("invalid weapon id", () => {
-      const command = makeCommandBranchByActorWeapon({
-        actorId: MOCKED_ACTOR_ID,
-        weaponId: MOKE_INVALID_ID,
-      });
-      const actor = createActor(true);
-      const provider = createMockedProvider(actor);
-      const party = creareMockedParty(actor);
-      const result = evaluateActorBranch(command.parameters, party, provider);
-      expect(result).toBe(false);
-      expect(provider.gameActor).toHaveBeenCalledOnce();
-      expect(provider.gameActor).toHaveBeenCalledWith(MOCKED_ACTOR_ID);
-      expect(provider.weaponData).toHaveBeenCalledOnce();
-      expect(provider.weaponData).toHaveBeenCalledWith(MOKE_INVALID_ID);
-      expect(actor.hasArmor).toHaveBeenCalledOnce();
-      expect(actor.hasArmor).toHaveBeenCalledWith(null);
-    });
-  });
-  describe("armor", () => {
-    test("valid armor id", () => {
-      const command = makeCommandBranchByActorArmor({
-        actorId: MOCKED_ACTOR_ID,
-        armorId: MOCKED_WEAPON_ID,
-      });
-      const actor = createActor(false);
-      const provider = createMockedProvider(actor);
-      const party = creareMockedParty(actor);
-      const result = evaluateActorBranch(command.parameters, party, provider);
-      expect(result).toBe(false);
-      expect(provider.gameActor).toHaveBeenCalledOnce();
-      expect(provider.gameActor).toHaveBeenCalledWith(MOCKED_ACTOR_ID);
-      expect(actor.hasArmor).toHaveBeenCalledOnce();
-      expect(actor.hasArmor).toHaveBeenCalledWith(MOCKED_WEAPON);
-    });
-    test("invalid armor id", () => {
-      const command = makeCommandBranchByActorArmor({
-        actorId: MOCKED_ACTOR_ID,
-        armorId: MOKE_INVALID_ID,
-      });
-      const actor = createActor(false);
-      const provider = createMockedProvider(actor);
-      const party = creareMockedParty(actor);
-      const result = evaluateActorBranch(command.parameters, party, provider);
-      expect(result).toBe(false);
-      expect(provider.gameActor).toHaveBeenCalledOnce();
-      expect(provider.gameActor).toHaveBeenCalledWith(MOCKED_ACTOR_ID);
-      expect(actor.hasArmor).toHaveBeenCalledOnce();
-      expect(actor.hasArmor).toHaveBeenCalledWith(null);
-    });
-  });
+  test("actor name", () => {});
 });
+
+interface TestContext {
+  provider: MockedObject<Rmmz_BranchSourceProvider>;
+  party: MockedObject<Rmmz_Members<Rmmz_BranchSourceActor>>;
+  actor: MockedObject<Rmmz_BranchSourceActor>;
+}
+
+interface TestCase {
+  command: Command_BranchByActor;
+  expected: boolean;
+  calls: ((context: TestContext) => void)[];
+  createActor: () => MockedObject<Rmmz_BranchSourceActor>;
+}
+
+const runTestCase = (testCase: TestCase): void => {
+  describe("", () => {
+    test("actor null", () => {
+      const provider = createMockedProvider(null);
+      const party = creareMockedParty([]);
+      const result = evaluateActorBranch(
+        testCase.command.parameters,
+        party,
+        provider,
+      );
+      expect(result).toBe(false);
+      expect(provider.gameActor).toHaveBeenCalledOnce();
+      expect(party.members).not.toHaveBeenCalled();
+      expect(provider.classData).not.toHaveBeenCalled();
+      expect(provider.weaponData).not.toHaveBeenCalled();
+      expect(provider.armorData).not.toHaveBeenCalled();
+    });
+    test("", () => {
+      const actor = testCase.createActor();
+      const provider = createMockedProvider(actor);
+      const party = creareMockedParty([actor]);
+      const result = evaluateActorBranch(
+        testCase.command.parameters,
+        party,
+        provider,
+      );
+      expect(result).toBe(testCase.expected);
+      const context: TestContext = {
+        provider,
+        party,
+        actor,
+      };
+      testCase.calls.forEach((call) => {
+        call(context);
+      });
+    });
+  });
+};
+
+const testCases: TestCase[] = [
+  {
+    command: makeCommandBranchByActorArmor({
+      actorId: MOCK_ACTOR_ID,
+      armorId: MOCKED_ARMOR.id,
+    }),
+    expected: true,
+    createActor: () => createActor(true),
+    calls: [
+      (ctx) => {
+        expect(ctx.provider.armorData).toHaveBeenCalledOnce();
+        expect(ctx.provider.armorData).toHaveBeenCalledWith(MOCKED_ARMOR.id);
+        expect(ctx.actor.hasArmor).toHaveBeenCalledOnce();
+        expect(ctx.actor.hasArmor).toHaveBeenCalledWith(MOCKED_ARMOR);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorArmor({
+      actorId: MOCK_ACTOR_ID,
+      armorId: MOCKED_ARMOR.id,
+    }),
+    expected: false,
+    createActor: () => createActor(false),
+    calls: [
+      (ctx) => {
+        expect(ctx.provider.armorData).toHaveBeenCalledOnce();
+        expect(ctx.provider.armorData).toHaveBeenCalledWith(MOCKED_ARMOR.id);
+        expect(ctx.actor.hasArmor).toHaveBeenCalledOnce();
+        expect(ctx.actor.hasArmor).toHaveBeenCalledWith(MOCKED_ARMOR);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorArmor({
+      actorId: MOCK_ACTOR_ID,
+      armorId: MOKE_INVALID_ID,
+    }),
+    expected: true,
+    createActor: () => createActor(true),
+    calls: [
+      (ctx) => {
+        expect(ctx.provider.armorData).toHaveBeenCalledOnce();
+        expect(ctx.provider.armorData).toHaveBeenCalledWith(MOKE_INVALID_ID);
+        expect(ctx.actor.hasArmor).toHaveBeenCalledOnce();
+        expect(ctx.actor.hasArmor).toHaveBeenCalledWith(null);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorWeapon({
+      actorId: MOCK_ACTOR_ID,
+      weaponId: MOCKED_WEAPON.id,
+    }),
+    expected: true,
+    createActor: () => createActor(true),
+    calls: [
+      (ctx) => {
+        expect(ctx.provider.weaponData).toHaveBeenCalledOnce();
+        expect(ctx.provider.weaponData).toHaveBeenCalledWith(MOCKED_WEAPON.id);
+        expect(ctx.actor.hasWeapon).toHaveBeenCalledOnce();
+        expect(ctx.actor.hasWeapon).toHaveBeenCalledWith(MOCKED_WEAPON);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorWeapon({
+      actorId: MOCK_ACTOR_ID,
+      weaponId: MOKE_INVALID_ID,
+    }),
+    expected: true,
+    createActor: () => createActor(true),
+    calls: [
+      (ctx) => {
+        expect(ctx.provider.weaponData).toHaveBeenCalledOnce();
+        expect(ctx.provider.weaponData).toHaveBeenCalledWith(MOKE_INVALID_ID);
+        expect(ctx.actor.hasWeapon).toHaveBeenCalledOnce();
+        expect(ctx.actor.hasWeapon).toHaveBeenCalledWith(null);
+      },
+    ],
+  },
+];
+
+testCases.forEach(runTestCase);
