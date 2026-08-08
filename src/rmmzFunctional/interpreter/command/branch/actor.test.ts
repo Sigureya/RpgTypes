@@ -16,6 +16,11 @@ import type { Command_BranchByActor } from "@RpgTypes/rmmz/eventCommand";
 import {
   makeCommandBranchByActorArmor,
   makeCommandBranchByActorWeapon,
+  makeCommandBranchByActorClass,
+  makeCommandBranchByActorName,
+  makeCommandBranchByActorSkill,
+  makeCommandBranchByActorState,
+  makeCommandBranchByActorInParty,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Members } from "@RpgTypes/rmmzRuntime";
 const MOCK_ACTOR_ID = 3;
@@ -74,7 +79,22 @@ const createActor = (b: boolean): MockedObject<Rmmz_BranchSourceActor> => {
 };
 
 describe("evaluateActorBranch", () => {
-  test("actor name", () => {});
+  test("party", () => {
+    // ここだけカバレッジテストに組み込みづらいので、単独で検証する
+    const actor = createActor(true);
+    const otherActor = createActor(false);
+    const command = makeCommandBranchByActorInParty(MOCK_ACTOR_ID);
+    const provider = createMockedProvider(actor);
+    const party = creareMockedParty([otherActor]);
+    const result = evaluateActorBranch(command.parameters, party, provider);
+    expect(result).toBe(false);
+    expect(party.members).toHaveBeenCalledOnce();
+    expect(provider.gameActor).toHaveBeenCalledOnce();
+    expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+    expect(provider.classData).not.toHaveBeenCalled();
+    expect(provider.weaponData).not.toHaveBeenCalled();
+    expect(provider.armorData).not.toHaveBeenCalled();
+  });
 });
 
 interface TestContext {
@@ -207,6 +227,122 @@ const testCases: TestCase[] = [
         expect(ctx.provider.weaponData).toHaveBeenCalledWith(MOKE_INVALID_ID);
         expect(ctx.actor.hasWeapon).toHaveBeenCalledOnce();
         expect(ctx.actor.hasWeapon).toHaveBeenCalledWith(null);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorClass({
+      actorId: MOCK_ACTOR_ID,
+      classId: MOCKED_CLASS.id,
+    }),
+    expected: true,
+    createActor: () => createActor(true),
+    calls: [
+      (ctx) => {
+        expect(ctx.provider.classData).toHaveBeenCalledOnce();
+        expect(ctx.provider.classData).toHaveBeenCalledWith(MOCKED_CLASS.id);
+        expect(ctx.actor.isClass).toHaveBeenCalledOnce();
+        expect(ctx.actor.isClass).toHaveBeenCalledWith(MOCKED_CLASS);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorName({
+      actorId: MOCK_ACTOR_ID,
+      name: "MOCKED_ACTOR",
+    }),
+    expected: true,
+    createActor: () => {
+      const actor = createActor(true);
+      actor.name.mockReturnValue("MOCKED_ACTOR");
+      return actor;
+    },
+    calls: [
+      (ctx) => {
+        expect(ctx.actor.name).toHaveBeenCalledOnce();
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorName({
+      actorId: MOCK_ACTOR_ID,
+      name: "OTHER_NAME",
+    }),
+    expected: false,
+    createActor: () => {
+      const actor = createActor(true);
+      actor.name.mockReturnValue("MOCKED_ACTOR");
+      return actor;
+    },
+    calls: [
+      (ctx) => {
+        expect(ctx.actor.name).toHaveBeenCalledOnce();
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorSkill({
+      actorId: MOCK_ACTOR_ID,
+      skillId: 123,
+    }),
+    expected: true,
+    createActor: () => createActor(true),
+    calls: [
+      (ctx) => {
+        expect(ctx.actor.hasSkill).toHaveBeenCalledOnce();
+        expect(ctx.actor.hasSkill).toHaveBeenCalledWith(123);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorSkill({
+      actorId: MOCK_ACTOR_ID,
+      skillId: 123,
+    }),
+    expected: false,
+    createActor: () => createActor(false),
+    calls: [
+      (ctx) => {
+        expect(ctx.actor.hasSkill).toHaveBeenCalledOnce();
+        expect(ctx.actor.hasSkill).toHaveBeenCalledWith(123);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorState({
+      actorId: MOCK_ACTOR_ID,
+      stateId: 7,
+    }),
+    expected: true,
+    createActor: () => createActor(true),
+    calls: [
+      (ctx) => {
+        expect(ctx.actor.isStateAffected).toHaveBeenCalledOnce();
+        expect(ctx.actor.isStateAffected).toHaveBeenCalledWith(7);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorState({
+      actorId: MOCK_ACTOR_ID,
+      stateId: 7,
+    }),
+    expected: false,
+    createActor: () => createActor(false),
+    calls: [
+      (ctx) => {
+        expect(ctx.actor.isStateAffected).toHaveBeenCalledOnce();
+        expect(ctx.actor.isStateAffected).toHaveBeenCalledWith(7);
+      },
+    ],
+  },
+  {
+    command: makeCommandBranchByActorInParty(MOCK_ACTOR_ID),
+    expected: true,
+    createActor: () => createActor(true),
+    calls: [
+      (ctx) => {
+        expect(ctx.party.members).toHaveBeenCalledOnce();
       },
     ],
   },
