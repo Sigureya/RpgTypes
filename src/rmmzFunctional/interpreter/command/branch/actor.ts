@@ -5,19 +5,19 @@ import type {
   BranchByActorWeapon,
   BranchByActorArmor,
   BranchParam_Actor,
+  Provider_RpgData,
+  Provider_RpgItems,
 } from "@RpgTypes/rmmz";
-import type { Rmmz_Members } from "@RpgTypes/rmmzRuntime";
-import type {
-  Rmmz_BranchSourceActor,
-  Rmmz_BranchSourceProvider,
-} from "./types";
+import type { Rmmz_ActorsReadonly, Rmmz_Members } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_BranchSourceActor } from "./types";
 
-export const evaluateActorBranch = (
+export const evaluateBranchByActor = (
   parameters: BranchParam_Actor,
   party: Rmmz_Members<Rmmz_BranchSourceActor>,
-  provider: Rmmz_BranchSourceProvider,
+  actors: Rmmz_ActorsReadonly<Rmmz_BranchSourceActor>,
+  provider: Provider_RpgData,
 ): boolean => {
-  const actor = provider.gameActor(parameters[1]);
+  const actor = actors.actor(parameters[1]);
   if (!actor) {
     return false;
   }
@@ -53,7 +53,7 @@ const branchByActorName = (
 const branchByActorClass = (
   params: BranchByActorClass,
   actor: Rmmz_BranchSourceActor,
-  provider: Rmmz_BranchSourceProvider,
+  provider: Provider_RpgData,
 ): boolean => {
   // この実装は大変非効率だが、ツクールMZ本体と同じにする必要がある
   const classObj = provider.classData(params[3]);
@@ -70,16 +70,16 @@ const branchByActorSkill = (
 const branchByActorWeapon = (
   params: BranchByActorWeapon,
   actor: Rmmz_BranchSourceActor,
-  provider: Rmmz_BranchSourceProvider,
+  provider: Provider_RpgItems,
 ): boolean => {
-  const weaponObj = provider.weaponData(params[3]);
+  const weaponObj = provider.dataWeapon(params[3]);
   return actor.hasWeapon(weaponObj);
 };
 
 const branchByActorArmor = (
   params: BranchByActorArmor,
   actor: Rmmz_BranchSourceActor,
-  provider: Rmmz_BranchSourceProvider,
+  provider: Provider_RpgItems,
 ): boolean => {
-  return actor.hasArmor(provider.armorData(params[3]));
+  return actor.hasArmor(provider.dataArmor(params[3]));
 };

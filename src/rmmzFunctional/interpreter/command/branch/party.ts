@@ -5,7 +5,7 @@ import type {
   BranchParam_Armor,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_Party } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_BranchSourceProvider } from "./types";
+import type { Provider_RpgData } from "@RpgTypes/rmmz/rpg";
 
 // TSでのテストの関係で簡略化。C#版ではRmmz_Partyをそのまま使うこと
 type Rmmz_PartyHasItem = Pick<Rmmz_Party, "hasItem" | "gold">;
@@ -29,9 +29,9 @@ export const evaluteBranchByGold = (
 export const evaluteBranchByItem = (
   parameters: BranchParam_Item,
   party: Rmmz_PartyHasItem,
-  provider: Rmmz_BranchSourceProvider,
+  provider: Provider_RpgData,
 ): boolean => {
-  const item = provider.itemData(parameters[1]);
+  const item = provider.dataItem(parameters[1]);
   if (!item) {
     return false;
   }
@@ -41,9 +41,9 @@ export const evaluteBranchByItem = (
 export const evaluteBranchByWeapon = (
   parameters: BranchParam_Weapon,
   party: Rmmz_PartyHasItem,
-  provider: Rmmz_BranchSourceProvider,
+  provider: Provider_RpgData,
 ): boolean => {
-  const weapon = provider.weaponData(parameters[1]);
+  const weapon = provider.dataWeapon(parameters[1]);
   if (!weapon) {
     return false;
   }
@@ -53,9 +53,9 @@ export const evaluteBranchByWeapon = (
 export const evaluteBranchByArmor = (
   parameters: BranchParam_Armor,
   party: Rmmz_PartyHasItem,
-  provider: Rmmz_BranchSourceProvider,
+  provider: Provider_RpgData,
 ): boolean => {
-  const armor = provider.armorData(parameters[1]);
+  const armor = provider.dataArmor(parameters[1]);
   if (!armor) {
     return false;
   }

@@ -1,12 +1,14 @@
 import type { MockedObject } from "vitest";
 import { vi, describe, test, expect } from "vitest";
 
-import { evaluateActorBranch } from "./actor";
+import { evaluateBranchByActor } from "./actor";
+import type { Rmmz_BranchSourceActor } from "./types";
 import type {
-  Rmmz_BranchSourceActor,
-  Rmmz_BranchSourceProvider,
-} from "./types";
-import type { Data_Weapon, Data_Class, Data_Armor } from "@RpgTypes/rmmz/rpg";
+  Data_Weapon,
+  Data_Class,
+  Data_Armor,
+  Provider_RpgData,
+} from "@RpgTypes/rmmz/rpg";
 import {
   makeArmorData,
   makeClassData,
@@ -22,7 +24,7 @@ import {
   makeCommandBranchByActorState,
   makeCommandBranchByActorInParty,
 } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Members } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_ActorsReadonly, Rmmz_Members } from "@RpgTypes/rmmzRuntime";
 const MOCK_ACTOR_ID = 3;
 const MOCK_CLASS_ID = 8;
 
@@ -51,19 +53,21 @@ const creareMockedParty = <T>(actor: T[]): MockedObject<Rmmz_Members<T>> => {
   };
 };
 
-const createMockedProvider = (
-  actor: MockedObject<Rmmz_BranchSourceActor> | null | undefined,
-): MockedObject<Rmmz_BranchSourceProvider> => {
+const createMockedProvider = (): MockedObject<Provider_RpgData> => {
   return {
-    gameActor: vi.fn().mockReturnValue(actor),
-    gameEnemy: vi.fn().mockThrow(new Error("gameEnemy is not implemented")),
-    mapCharacter: vi.fn(() => {
-      return null;
-    }),
     classData: vi.fn((id) => (id === MOCKED_CLASS.id ? MOCKED_CLASS : null)),
-    itemData: vi.fn().mockThrow(new Error("itemData is not implemented")),
-    weaponData: vi.fn((id) => (id === MOCKED_WEAPON.id ? MOCKED_WEAPON : null)),
-    armorData: vi.fn((id) => (id === MOCKED_ARMOR.id ? MOCKED_ARMOR : null)),
+    dataItem: vi.fn().mockThrow(new Error("itemData is not implemented")),
+    dataWeapon: vi.fn((id) => (id === MOCKED_WEAPON.id ? MOCKED_WEAPON : null)),
+    dataArmor: vi.fn((id) => (id === MOCKED_ARMOR.id ? MOCKED_ARMOR : null)),
+    dataState: vi.fn().mockThrow(new Error("dataState is not implemented")),
+  };
+};
+
+const createMockedActors = <T>(
+  actor: T | null,
+): MockedObject<Rmmz_ActorsReadonly<T>> => {
+  return {
+    actor: vi.fn().mockReturnValue(actor),
   };
 };
 
@@ -82,23 +86,29 @@ describe("evaluateActorBranch", () => {
   test("party", () => {
     // ここだけカバレッジテストに組み込みづらいので、単独で検証する
     const actor = createActor(true);
+    const actorProvider = createMockedActors(actor);
     const otherActor = createActor(false);
     const command = makeCommandBranchByActorInParty(MOCK_ACTOR_ID);
-    const provider = createMockedProvider(actor);
+    const provider = createMockedProvider();
     const party = creareMockedParty([otherActor]);
-    const result = evaluateActorBranch(command.parameters, party, provider);
+    const result = evaluateBranchByActor(
+      command.parameters,
+      party,
+      actorProvider,
+      provider,
+    );
     expect(result).toBe(false);
     expect(party.members).toHaveBeenCalledOnce();
-    expect(provider.gameActor).toHaveBeenCalledOnce();
-    expect(provider.gameActor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
+    expect(actorProvider.actor).toHaveBeenCalledOnce();
+    expect(actorProvider.actor).toHaveBeenCalledWith(MOCK_ACTOR_ID);
     expect(provider.classData).not.toHaveBeenCalled();
-    expect(provider.weaponData).not.toHaveBeenCalled();
-    expect(provider.armorData).not.toHaveBeenCalled();
+    expect(provider.dataWeapon).not.toHaveBeenCalled();
+    expect(provider.dataArmor).not.toHaveBeenCalled();
   });
 });
 
 interface TestContext {
-  provider: MockedObject<Rmmz_BranchSourceProvider>;
+  provider: MockedObject<Provider_RpgData>;
   party: MockedObject<Rmmz_Members<Rmmz_BranchSourceActor>>;
   actor: MockedObject<Rmmz_BranchSourceActor>;
 }
@@ -113,27 +123,31 @@ interface TestCase {
 const runTestCase = (testCase: TestCase): void => {
   describe("", () => {
     test("actor null", () => {
-      const provider = createMockedProvider(null);
+      const provider = createMockedProvider();
       const party = creareMockedParty([]);
-      const result = evaluateActorBranch(
+      const actorProvider = createMockedActors(null);
+      const result = evaluateBranchByActor(
         testCase.command.parameters,
         party,
+        actorProvider,
         provider,
       );
       expect(result).toBe(false);
-      expect(provider.gameActor).toHaveBeenCalledOnce();
+      expect(actorProvider.actor).toHaveBeenCalledOnce();
       expect(party.members).not.toHaveBeenCalled();
       expect(provider.classData).not.toHaveBeenCalled();
-      expect(provider.weaponData).not.toHaveBeenCalled();
-      expect(provider.armorData).not.toHaveBeenCalled();
+      expect(provider.dataWeapon).not.toHaveBeenCalled();
+      expect(provider.dataArmor).not.toHaveBeenCalled();
     });
     test("", () => {
       const actor = testCase.createActor();
-      const provider = createMockedProvider(actor);
+      const provider = createMockedProvider();
       const party = creareMockedParty([actor]);
-      const result = evaluateActorBranch(
+      const actorProvider = createMockedActors(actor);
+      const result = evaluateBranchByActor(
         testCase.command.parameters,
         party,
+        actorProvider,
         provider,
       );
       expect(result).toBe(testCase.expected);
@@ -159,8 +173,8 @@ const testCases: TestCase[] = [
     createActor: () => createActor(true),
     calls: [
       (ctx) => {
-        expect(ctx.provider.armorData).toHaveBeenCalledOnce();
-        expect(ctx.provider.armorData).toHaveBeenCalledWith(MOCKED_ARMOR.id);
+        expect(ctx.provider.dataArmor).toHaveBeenCalledOnce();
+        expect(ctx.provider.dataArmor).toHaveBeenCalledWith(MOCKED_ARMOR.id);
         expect(ctx.actor.hasArmor).toHaveBeenCalledOnce();
         expect(ctx.actor.hasArmor).toHaveBeenCalledWith(MOCKED_ARMOR);
       },
@@ -175,8 +189,8 @@ const testCases: TestCase[] = [
     createActor: () => createActor(false),
     calls: [
       (ctx) => {
-        expect(ctx.provider.armorData).toHaveBeenCalledOnce();
-        expect(ctx.provider.armorData).toHaveBeenCalledWith(MOCKED_ARMOR.id);
+        expect(ctx.provider.dataArmor).toHaveBeenCalledOnce();
+        expect(ctx.provider.dataArmor).toHaveBeenCalledWith(MOCKED_ARMOR.id);
         expect(ctx.actor.hasArmor).toHaveBeenCalledOnce();
         expect(ctx.actor.hasArmor).toHaveBeenCalledWith(MOCKED_ARMOR);
       },
@@ -191,8 +205,8 @@ const testCases: TestCase[] = [
     createActor: () => createActor(true),
     calls: [
       (ctx) => {
-        expect(ctx.provider.armorData).toHaveBeenCalledOnce();
-        expect(ctx.provider.armorData).toHaveBeenCalledWith(MOKE_INVALID_ID);
+        expect(ctx.provider.dataArmor).toHaveBeenCalledOnce();
+        expect(ctx.provider.dataArmor).toHaveBeenCalledWith(MOKE_INVALID_ID);
         expect(ctx.actor.hasArmor).toHaveBeenCalledOnce();
         expect(ctx.actor.hasArmor).toHaveBeenCalledWith(null);
       },
@@ -207,8 +221,8 @@ const testCases: TestCase[] = [
     createActor: () => createActor(true),
     calls: [
       (ctx) => {
-        expect(ctx.provider.weaponData).toHaveBeenCalledOnce();
-        expect(ctx.provider.weaponData).toHaveBeenCalledWith(MOCKED_WEAPON.id);
+        expect(ctx.provider.dataWeapon).toHaveBeenCalledOnce();
+        expect(ctx.provider.dataWeapon).toHaveBeenCalledWith(MOCKED_WEAPON.id);
         expect(ctx.actor.hasWeapon).toHaveBeenCalledOnce();
         expect(ctx.actor.hasWeapon).toHaveBeenCalledWith(MOCKED_WEAPON);
       },
@@ -223,8 +237,8 @@ const testCases: TestCase[] = [
     createActor: () => createActor(true),
     calls: [
       (ctx) => {
-        expect(ctx.provider.weaponData).toHaveBeenCalledOnce();
-        expect(ctx.provider.weaponData).toHaveBeenCalledWith(MOKE_INVALID_ID);
+        expect(ctx.provider.dataWeapon).toHaveBeenCalledOnce();
+        expect(ctx.provider.dataWeapon).toHaveBeenCalledWith(MOKE_INVALID_ID);
         expect(ctx.actor.hasWeapon).toHaveBeenCalledOnce();
         expect(ctx.actor.hasWeapon).toHaveBeenCalledWith(null);
       },

@@ -5,13 +5,11 @@ import type {
   Command_ConditionalBranch,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
-  Rmmz_BranchSourceParty,
-  Rmmz_SelfSwitches,
-  Rmmz_Switches,
+  Provider_GameObjects,
+  Rmmz_GameObjects,
   Rmmz_Timer,
-  Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
-import { evaluateActorBranch } from "./actor";
+import { evaluateBranchByActor } from "./actor";
 import {
   evaluteBranchByArmor,
   evaluteBranchByGold,
@@ -19,21 +17,15 @@ import {
   evaluteBranchByWeapon,
 } from "./party";
 import { evaluteSelfSwitchBranch, evaluteSwitchBranch } from "./switch";
-import type {
-  Rmmz_BranchSourceActor,
-  Rmmz_BranchSourceProvider,
-} from "./types";
 import { evaluteBranchByVariable } from "./variables";
+import type { Provider_RpgData } from "@RpgTypes/rmmz/rpg";
 
 export const evaluteBranchCommand = (
   mapEventId: number,
   { parameters }: Command_ConditionalBranch,
-  provider: Rmmz_BranchSourceProvider,
-  pary: Rmmz_BranchSourceParty<Rmmz_BranchSourceActor>,
-  switches: Rmmz_Switches,
-  selfFwitches: Rmmz_SelfSwitches,
-  variables: Rmmz_Variables,
-  timer: Rmmz_Timer,
+  dataProvider: Provider_RpgData,
+  objectProvider: Provider_GameObjects,
+  { actors, party, variables, switches, timer, selfSwitches }: Rmmz_GameObjects,
 ): boolean => {
   switch (parameters[0]) {
     case 0:
@@ -41,23 +33,23 @@ export const evaluteBranchCommand = (
     case 1:
       return evaluteBranchByVariable(parameters, variables);
     case 2:
-      return evaluteSelfSwitchBranch(parameters, selfFwitches, mapEventId);
+      return evaluteSelfSwitchBranch(parameters, selfSwitches, mapEventId);
     case 3:
       return evaluteBranchByTimer(parameters, timer);
     case 4:
-      return evaluateActorBranch(parameters, pary, provider);
+      return evaluateBranchByActor(parameters, party, actors, dataProvider);
     case 5:
-      return evaluteBranchByEnemy(parameters, provider);
+      return evaluteBranchByEnemy(parameters, objectProvider);
     case 6:
-      return evaluteBranchByCharacter(parameters, provider);
+      return evaluteBranchByCharacter(parameters, objectProvider);
     case 7:
-      return evaluteBranchByGold(parameters, pary);
+      return evaluteBranchByGold(parameters, party);
     case 8:
-      return evaluteBranchByItem(parameters, pary, provider);
+      return evaluteBranchByItem(parameters, party, dataProvider);
     case 9:
-      return evaluteBranchByWeapon(parameters, pary, provider);
+      return evaluteBranchByWeapon(parameters, party, dataProvider);
     case 10:
-      return evaluteBranchByArmor(parameters, pary, provider);
+      return evaluteBranchByArmor(parameters, party, dataProvider);
   }
   return false;
 };
@@ -78,7 +70,7 @@ export const evaluteBranchByTimer = (
 
 export const evaluteBranchByEnemy = (
   parameters: BranchParam_Enemy,
-  provider: Rmmz_BranchSourceProvider,
+  provider: Provider_GameObjects,
 ): boolean => {
   const enemy = provider.gameEnemy(parameters[1]);
   if (!enemy) {
@@ -97,7 +89,7 @@ export const evaluteBranchByEnemy = (
 
 export const evaluteBranchByCharacter = (
   parameters: BranchParam_Character,
-  provider: Rmmz_BranchSourceProvider,
+  provider: Provider_GameObjects,
 ): boolean => {
   const character = provider.mapCharacter(parameters[1]);
   if (character) {
