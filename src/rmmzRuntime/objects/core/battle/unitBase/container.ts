@@ -9,6 +9,7 @@ export interface Rmmz_BattlerContainer_Readonly<
   aliveMembers(): Battler[];
   deadMembers(): Battler[];
   movableMembers(): Battler[];
+  allMembers(): Battler[];
 }
 
 export interface Rmmz_BattlerContainer<
@@ -17,6 +18,7 @@ export interface Rmmz_BattlerContainer<
   inBattle(): boolean;
   members(): Battler[];
   aliveMembers(): Battler[];
+  allMembers(): Battler[];
   deadMembers(): Battler[];
   movableMembers(): Battler[];
   clearActions(): void;
