@@ -6,12 +6,8 @@ import type {
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
   Provider_GameObjects,
-  Rmmz_ActorsReadonly,
-  Rmmz_BranchSourceParty,
-  Rmmz_SelfSwitches,
-  Rmmz_Switches,
+  Rmmz_GameObjects,
   Rmmz_Timer,
-  Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
 import { evaluateBranchByActor } from "./actor";
 import {
@@ -21,7 +17,6 @@ import {
   evaluteBranchByWeapon,
 } from "./party";
 import { evaluteSelfSwitchBranch, evaluteSwitchBranch } from "./switch";
-import type { Rmmz_BranchSourceActor } from "./types";
 import { evaluteBranchByVariable } from "./variables";
 import type { Provider_RpgData } from "@RpgTypes/rmmz/rpg";
 
@@ -30,12 +25,7 @@ export const evaluteBranchCommand = (
   { parameters }: Command_ConditionalBranch,
   dataProvider: Provider_RpgData,
   objectProvider: Provider_GameObjects,
-  actors: Rmmz_ActorsReadonly<Rmmz_BranchSourceActor>,
-  pary: Rmmz_BranchSourceParty<Rmmz_BranchSourceActor>,
-  switches: Rmmz_Switches,
-  selfFwitches: Rmmz_SelfSwitches,
-  variables: Rmmz_Variables,
-  timer: Rmmz_Timer,
+  { actors, party, variables, switches, timer, selfSwitches }: Rmmz_GameObjects,
 ): boolean => {
   switch (parameters[0]) {
     case 0:
@@ -43,23 +33,23 @@ export const evaluteBranchCommand = (
     case 1:
       return evaluteBranchByVariable(parameters, variables);
     case 2:
-      return evaluteSelfSwitchBranch(parameters, selfFwitches, mapEventId);
+      return evaluteSelfSwitchBranch(parameters, selfSwitches, mapEventId);
     case 3:
       return evaluteBranchByTimer(parameters, timer);
     case 4:
-      return evaluateBranchByActor(parameters, pary, actors, dataProvider);
+      return evaluateBranchByActor(parameters, party, actors, dataProvider);
     case 5:
       return evaluteBranchByEnemy(parameters, objectProvider);
     case 6:
       return evaluteBranchByCharacter(parameters, objectProvider);
     case 7:
-      return evaluteBranchByGold(parameters, pary);
+      return evaluteBranchByGold(parameters, party);
     case 8:
-      return evaluteBranchByItem(parameters, pary, dataProvider);
+      return evaluteBranchByItem(parameters, party, dataProvider);
     case 9:
-      return evaluteBranchByWeapon(parameters, pary, dataProvider);
+      return evaluteBranchByWeapon(parameters, party, dataProvider);
     case 10:
-      return evaluteBranchByArmor(parameters, pary, dataProvider);
+      return evaluteBranchByArmor(parameters, party, dataProvider);
   }
   return false;
 };
