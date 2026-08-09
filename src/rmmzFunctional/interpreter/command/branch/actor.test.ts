@@ -58,7 +58,7 @@ const createMockedProvider = (
     gameActor: vi.fn().mockReturnValue(actor),
     gameEnemy: vi.fn().mockThrow(new Error("gameEnemy is not implemented")),
     mapCharacter: vi.fn(() => {
-      new Error("mapCharacter is not implemented");
+      return null;
     }),
     classData: vi.fn((id) => (id === MOCKED_CLASS.id ? MOCKED_CLASS : null)),
     itemData: vi.fn().mockThrow(new Error("itemData is not implemented")),
