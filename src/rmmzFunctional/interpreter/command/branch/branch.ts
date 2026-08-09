@@ -53,17 +53,11 @@ export const evaluteBranchCommand = (
     case 7:
       return evaluteBranchByGold(parameters, pary);
     case 8:
-      return evaluteBranchByItem(parameters, pary, (itemId: number) =>
-        provider.itemData(itemId),
-      );
+      return evaluteBranchByItem(parameters, pary, provider);
     case 9:
-      return evaluteBranchByWeapon(parameters, pary, (weaponId: number) =>
-        provider.weaponData(weaponId),
-      );
+      return evaluteBranchByWeapon(parameters, pary, provider);
     case 10:
-      return evaluteBranchByArmor(parameters, pary, (armorId: number) =>
-        provider.armorData(armorId),
-      );
+      return evaluteBranchByArmor(parameters, pary, provider);
   }
   return false;
 };
