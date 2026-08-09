@@ -1,3 +1,5 @@
+import type { EventCommandUnknown } from "@RpgTypes/libs";
+import type { Data_CommonEventUnknown } from "./event";
 import type {
   Data_Armor,
   Data_Class,
@@ -12,6 +14,14 @@ export interface Provider_RpgItems {
   dataArmor(armorId: number): Data_Armor | undefined | null;
 }
 
+export interface Provider_CommonEvents<
+  Comand extends EventCommandUnknown = EventCommandUnknown,
+> {
+  isValidCommonEvent(commonEventId: number): boolean;
+  commonEvent(
+    commonEventId: number,
+  ): Data_CommonEventUnknown<Comand> | undefined | null;
+}
 export interface Provider_RpgState {
   dataState(stateId: number): Data_State | undefined | null;
 }
