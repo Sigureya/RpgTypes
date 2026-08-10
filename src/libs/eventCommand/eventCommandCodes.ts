@@ -3,6 +3,7 @@ export const SHOW_MESSAGE = 101 as const;
 export const SHOW_MESSAGE_BODY = 401 as const;
 export const SHOW_CHOICES = 102 as const;
 export const SHOW_CHOICES_ITEM = 402 as const;
+export const SHOW_CHOICES_CANCEL = 403 as const;
 export const INPUT_NUMBER = 103 as const;
 export const SELECT_ITEM = 104 as const;
 export const SHOW_SCROLLING_TEXT = 105 as const;
