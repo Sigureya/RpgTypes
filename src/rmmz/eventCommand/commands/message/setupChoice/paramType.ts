@@ -6,7 +6,7 @@ export const choiceCancelType = (command: Command_ShowChoices): number => {
   return cancelType < choicse.length ? cancelType : -2;
 };
 
-export const choideDefaultType = (command: Command_ShowChoices): number => {
+export const choiceDefaultType = (command: Command_ShowChoices): number => {
   return command.parameters.length > 2 ? command.parameters[2] : 0;
 };
 
