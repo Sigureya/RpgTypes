@@ -4,6 +4,7 @@ import {
   choiceCancelType,
   choiceDefaultType,
   choicePositionType,
+  INPUT_NUMBER,
   SHOW_CHOICES,
   type Command_ShowChoices,
 } from "@RpgTypes/rmmz";
@@ -15,9 +16,9 @@ export const setupChoiceNN = (
   state: InterpreterState2,
   command: Command_ShowChoices,
   message: Rmmz_Message,
-): InterpreterState2 => {
+): InterpreterState2 | undefined => {
   if (message.isBusy()) {
-    return state;
+    return;
   }
   message.setChoices(
     Array.from<string>(command.parameters[0]),
@@ -34,10 +35,10 @@ export const setupNumberInputNN = (
   state: InterpreterState2,
   command: Command_InputNumber,
   message: Rmmz_Message,
-): InterpreterState2 => {
+): InterpreterState2 | undefined => {
   if (message.isBusy()) {
-    return state;
+    return;
   }
   message.setNumberInput(command.parameters[0], command.parameters[1]);
-  return waitXXX(state, command.code);
+  return waitXXX(state, INPUT_NUMBER);
 };
