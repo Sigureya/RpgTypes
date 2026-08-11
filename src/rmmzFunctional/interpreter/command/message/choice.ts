@@ -1,4 +1,7 @@
-import type { Command_ShowChoices } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ShowChoices,
+  Command_ShowChoiceWhen,
+} from "@RpgTypes/rmmz/eventCommand";
 import {
   choiceBackground,
   choiceCancelType,
@@ -19,4 +22,15 @@ export const setupChoice = (
   message.setBackground(choiceBackground(command));
   message.setChoicePositionType(choicePositionType(command));
   return message;
+};
+
+export const needsSkipByChoiceWhen = (
+  command: Command_ShowChoiceWhen,
+  indent: number,
+): boolean => {
+  return indent !== command.parameters[0];
+};
+
+export const needsSkipByWhenCancel = (value: number): boolean => {
+  return value >= 0;
 };
