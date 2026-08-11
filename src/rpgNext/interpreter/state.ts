@@ -47,7 +47,7 @@ const skipBranchCommand = (
         source: state.source,
         index: i,
         indent: command.indent,
-        ppCode: state.ppCode,
+        waitCode: state.waitCode,
         ppResult: state.ppResult,
       };
     }
@@ -56,7 +56,7 @@ const skipBranchCommand = (
     indent: 0,
     source: state.source,
     index: commandList.length,
-    ppCode: 0,
+    waitCode: 0,
     ppResult: 0,
   };
 };
