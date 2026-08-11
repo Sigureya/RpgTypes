@@ -18,10 +18,10 @@ const eeeCommand = (
   data: Provider_RpgData,
   p: Provider_GameObjects,
 ) => {
-  const command = commandList[state.index];
-  if (!command) {
-    return {};
+  if (state.index >= commandList.length) {
+    return exitXXX();
   }
+  const command = commandList[state.index];
   if (command.code === CONDITIONAL_BRANCH) {
     if (evaluteBranchCommand(mapId, command, data, p, objects)) {
       return {
