@@ -1,6 +1,7 @@
 import type {
   Rmmz_Actors,
   Rmmz_Map,
+  Rmmz_Message,
   Rmmz_Party,
   Rmmz_PlayerCharactor,
   Rmmz_SelfSwitches,
@@ -20,4 +21,5 @@ export interface Rmmz_GameObjects {
   player: Rmmz_PlayerCharactor;
   timer: Rmmz_Timer;
   selfSwitches: Rmmz_SelfSwitches;
+  message: Rmmz_Message;
 }
