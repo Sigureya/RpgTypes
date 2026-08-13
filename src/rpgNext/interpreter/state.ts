@@ -1,6 +1,6 @@
 import type { EventCommand, Provider_RpgData } from "@RpgTypes/rmmz";
 import { CONDITIONAL_BRANCH, INPUT_NUMBER, SHOW_CHOICES } from "@RpgTypes/rmmz";
-import type { InterpreterState2 } from "./types";
+import type { InterpreterGGG, InterpreterState2 } from "./types";
 import { executeSideEffectCommand } from "@RpgTypes/rmmzFunctional/interpreter/command/command";
 import type {
   Provider_GameObjects,
@@ -10,6 +10,33 @@ import { evaluteBranchCommand } from "@RpgTypes/rmmzFunctional";
 import { setupChoiceNN, setupNumberInputNN } from "./message";
 import { exitXXX, indexNext } from "./wait";
 
+const runXXX = (
+  xx: InterpreterGGG,
+  limit: number,
+  objects: Rmmz_GameObjects,
+  data: Provider_RpgData,
+  p: Provider_GameObjects,
+): InterpreterGGG | undefined => {
+  // eslint-disable-next-line @functional/no-let
+  let state: InterpreterState2 = xx.state;
+  // eslint-disable-next-line @functional/no-loop-statements, @functional/no-let
+  for (let i = 0; i < limit; ++i) {
+    const newState = eeeCommand(xx.mapId, state, xx.commands, objects, data, p);
+    if (newState === undefined) {
+      // メッセージ待機などの理由によりイベント実行が延期された
+      return {
+        commands: xx.commands,
+        mapId: xx.mapId,
+        sourceInfo: xx.sourceInfo,
+        state: state,
+      };
+    }
+    state = newState;
+  }
+
+  return;
+};
+
 const eeeCommand = (
   mapId: number,
   state: InterpreterState2,
@@ -17,17 +44,14 @@ const eeeCommand = (
   objects: Rmmz_GameObjects,
   data: Provider_RpgData,
   p: Provider_GameObjects,
-) => {
+): InterpreterState2 | undefined => {
   if (state.index >= commandList.length) {
     return exitXXX();
   }
   const command = commandList[state.index];
   if (command.code === CONDITIONAL_BRANCH) {
     if (evaluteBranchCommand(mapId, command, data, p, objects)) {
-      return {
-        index: state.index + 1,
-        indent: command.indent + 1,
-      };
+      return undefined;
     }
     return skipBranchCommand(state, commandList, command.indent);
   }
