@@ -1,8 +1,19 @@
 import type {
   MapEvent_PageCondition,
+  MapEventPage,
   Provider_RpgItems,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_GameObjects } from "@RpgTypes/rmmzRuntime";
+
+export const mapEventFindProperPageIndex = (
+  pages: ReadonlyArray<MapEventPage>,
+  gameObjects: Rmmz_GameObjects,
+  itemProvider: Provider_RpgItems,
+): number => {
+  return pages.findLastIndex((page): boolean => {
+    return mapEventMeetsCondition(page.conditions, gameObjects, itemProvider);
+  });
+};
 
 export const mapEventMeetsCondition = (
   condition: MapEvent_PageCondition,
