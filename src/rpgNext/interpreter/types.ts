@@ -1,3 +1,5 @@
+import type { EventCommand } from "@RpgTypes/rmmz";
+
 export interface InterpreterState2 {
   index: number;
   indent: number;
@@ -8,3 +10,17 @@ export interface InterpreterState2 {
 export interface InterpreterXXX {
   source: number;
 }
+
+export interface InterpreterGGG {
+  state: InterpreterState2;
+  sourceInfo: EventSourceInfo;
+  commands: EventCommand[];
+  mapId: number;
+}
+
+export interface EventSourceInfo {
+  eventId: number;
+  kind: EventSourceType;
+}
+
+export type EventSourceType = "common" | "map" | "battle";
