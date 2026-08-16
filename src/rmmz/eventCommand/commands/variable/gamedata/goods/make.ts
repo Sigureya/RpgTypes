@@ -1,5 +1,6 @@
 import { CONTROL_VARIABLES } from "@RpgTypes/libs";
 import type {
+  Command_ControlVariables_FromAnyGoods,
   Command_ControlVariables_FromArmor,
   Command_ControlVariables_FromItem,
   Command_ControlVariables_FromWeapon,
@@ -10,6 +11,12 @@ import type {
   ParamObject_VariableFromItem,
   ParamObject_VariableFromWeapon,
 } from "./types";
+
+export const resolveItemId = (
+  command: Command_ControlVariables_FromAnyGoods,
+): number => {
+  return command.parameters[5];
+};
 
 export const makeCommandVariableFromItemData = (
   params: ParamObject_VariableFromItem,
