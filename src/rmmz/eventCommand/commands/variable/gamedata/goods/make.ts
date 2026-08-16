@@ -11,6 +11,15 @@ import type {
   ParamObject_VariableFromWeapon,
 } from "./types";
 
+export const resolveItemId = (
+  command:
+    | Command_ControlVariables_FromItem
+    | Command_ControlVariables_FromWeapon
+    | Command_ControlVariables_FromArmor,
+): number => {
+  return command.parameters[5];
+};
+
 export const makeCommandVariableFromItemData = (
   params: ParamObject_VariableFromItem,
   indent: number = 0,
