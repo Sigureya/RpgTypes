@@ -4,5 +4,6 @@ export * from "./script";
 export * from "./system";
 export type * from "./types";
 export * from "./utils";
+export * from "./utils2";
 export type { Data_CommonEvent, Data_Map, Data_Troop } from "./events";
 export { extractFileName } from "./utils/pluginName";
