@@ -2,25 +2,45 @@
 import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/libs";
 import type { EventCommand } from "./union";
 import type {
+  Command_ScrollTextBody,
   Command_ShowMessageBody,
   Command_ShowMessageHeader,
 } from "./message";
+import { makeCommandShowMessageBody } from "./message";
+
+export type MessageCommandGroupV2 = EventCommandGroupV2<
+  Command_ShowMessageHeader,
+  Command_ShowMessageBody
+>;
 
 export interface EventCommandGroupV2<
   Head extends EventCommand,
   Body extends EventCommand,
 > {
-  head: Head;
+  header: Head;
   bodies: Body[];
 }
+
+export const joinMsgXX = (
+  group: MessageCommandGroupV2,
+): [head: Command_ShowMessageHeader, body: Command_ShowMessageBody] => {
+  const text = joinEEX(group.bodies);
+  const body = makeCommandShowMessageBody(text, group.header.indent);
+  return [group.header, body];
+};
+
+const joinEEX = (
+  list:
+    | ReadonlyArray<Command_ShowMessageBody>
+    | ReadonlyArray<Command_ScrollTextBody>,
+): string => {
+  return list.map((command) => command.parameters[0].trimEnd()).join("\n");
+};
 
 export const groupByMessageCommands = (
   list: ReadonlyArray<EventCommand>,
   index: number,
-): null | EventCommandGroupV2<
-  Command_ShowMessageHeader,
-  Command_ShowMessageBody
-> => {
+): null | MessageCommandGroupV2 => {
   return groopXXX2(
     list,
     index,
@@ -47,8 +67,8 @@ const groopXXX2 = <TC1 extends EventCommand, TC2 extends EventCommand>(
     if (fn2(command)) {
       temp.push(command);
     } else {
-      return { head: head, bodies: temp };
+      return { header: head, bodies: temp };
     }
   }
-  return { head: head, bodies: temp };
+  return { header: head, bodies: temp };
 };
