@@ -11,7 +11,6 @@ import {
 import type { EventCommand } from "@RpgTypes/rmmz";
 import { groupByMessageCommands, joinMsgXX } from "@RpgTypes/rmmz";
 import { createCommentGroup } from "./comment";
-import { createMessageGroup } from "./message";
 import { createScriptGroup } from "./script";
 import { createScrollTextGroup } from "./scrollText";
 
@@ -104,6 +103,9 @@ const messaege = (
   index: number,
   input: ReadonlyArray<EventCommand>,
 ) => {
-  const group = createMessageGroup(input, index);
-  return [...acc, ...group.normalizedCommands()];
+  const group = groupByMessageCommands(input, index);
+  if (group) {
+    return [...acc, ...joinMsgXX(group)];
+  }
+  return [...acc];
 };
