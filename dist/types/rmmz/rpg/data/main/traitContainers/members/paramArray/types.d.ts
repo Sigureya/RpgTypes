@@ -19,3 +19,17 @@ export interface StatusParamObject {
     agi: number;
     luk: number;
 }
+export interface ExtraParamObject {
+    hit: number;
+    eva: number;
+    cri: number;
+    cev: number;
+    mev: number;
+    mrf: number;
+    cnt: number;
+    hrg: number;
+    mrg: number;
+    trg: number;
+    tgr: number;
+    grd: number;
+}

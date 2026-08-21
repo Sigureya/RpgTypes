@@ -4,4 +4,7 @@ export declare const extractMessageGroup: (list: ReadonlyArray<EventCommand>, in
     header: Command_ShowMessageHeader;
     bodies: Command_ShowMessageBody[];
 };
+/**
+ * @deprecated
+ */
 export declare const createMessageGroup: (list: ReadonlyArray<EventCommand>, index: number) => SimpleEventCommandGroup<Command_ShowMessageHeader, Command_ShowMessageBody>;

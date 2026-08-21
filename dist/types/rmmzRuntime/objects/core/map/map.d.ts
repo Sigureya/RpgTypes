@@ -1,5 +1,5 @@
 import { Data_CommonEvent } from '../../../../rmmz/events';
-import { Data_Tileset } from '../../../../rmmz/rpg';
+import { Data_Tileset, Encounter } from '../../../../rmmz/rpg';
 import { Direction8 } from '../../../../rmmz/utils';
 import { Rmmz_Event } from './event';
 import { Rmmz_Vehicle } from './vehicle';
@@ -52,7 +52,7 @@ export interface Rmmz_Map extends Rmmz_MapId {
     isLoopHorizontal(): boolean;
     isLoopVertical(): boolean;
     isDashDisabled(): boolean;
-    encounterList(): [];
+    encounterList(): Encounter[];
     encounterStep(): number;
     isOverworld(): boolean;
     screenTileX(): number;

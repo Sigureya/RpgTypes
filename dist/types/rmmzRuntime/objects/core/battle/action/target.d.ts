@@ -9,4 +9,5 @@ export interface Rmmz_Action_Target<Battler, Team> {
     targetsForDead(unit: Team): Battler[];
     targetsForAlive(unit: Team): Battler[];
     targetsForDeadAndAlive(unit: Team): Battler[];
+    itemTargetCandidates(): Battler[];
 }

@@ -7,6 +7,7 @@ export interface Rmmz_Actor_Constructor {
 }
 export interface Rmmz_Battler_Constructor {
     new (): Rmmz_Battler;
+    prototype: Rmmz_Battler;
 }
 export interface Rmmz_BattlerBase_Constructor {
     new (): Rmmz_BattlerBase;

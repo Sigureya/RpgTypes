@@ -1,4 +1,15 @@
 import { Trait } from './types';
+export declare const traitAttackElements: (traits: ReadonlyArray<Trait>) => number[];
+export declare const traitAttackStates: (traits: ReadonlyArray<Trait>) => number[];
+export declare const traitAttackStateRate: (traits: ReadonlyArray<Trait>, stateId: number) => number;
+export declare const traitAtttackSpeed: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitAttackTimesAdd: (traits: ReadonlyArray<Trait>) => number;
+export declare const traitAttackSkillId: (traits: ReadonlyArray<Trait>) => number;
 export declare const traitActionPlusSet: (traits: ReadonlyArray<Trait>) => number[];
 export declare const traitIsAutoBattle: (traits: ReadonlyArray<Trait>) => boolean;
 export declare const traitIsGuardTrait: (traits: ReadonlyArray<Trait>) => boolean;
+export declare const traitsAddedSkillTypes: (traits: ReadonlyArray<Trait>) => number[];
+export declare const isSkillTypeSealed: (traits: ReadonlyArray<Trait>, stypeId: number) => boolean;
+export declare const traitAddedSkills: (traits: ReadonlyArray<Trait>) => number[];
+export declare const isSkillIdSealed: (traits: ReadonlyArray<Trait>, skillId: number) => boolean;
+export declare const attackSkillNumRepeats: (sklllId: number, traits: ReadonlyArray<Trait>) => number;

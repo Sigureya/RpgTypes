@@ -6,11 +6,13 @@ export interface Rmmz_BattlerContainer_Readonly<Battler> extends Rmmz_Members<Ba
     aliveMembers(): Battler[];
     deadMembers(): Battler[];
     movableMembers(): Battler[];
+    allMembers(): Battler[];
 }
 export interface Rmmz_BattlerContainer<Battler> extends Rmmz_BattlerContainer_Readonly<Battler> {
     inBattle(): boolean;
     members(): Battler[];
     aliveMembers(): Battler[];
+    allMembers(): Battler[];
     deadMembers(): Battler[];
     movableMembers(): Battler[];
     clearActions(): void;
