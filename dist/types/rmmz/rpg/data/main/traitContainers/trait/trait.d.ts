@@ -1,5 +1,6 @@
 import { TraitCode } from './core';
-import { Trait } from './types';
+import { Trait, Trait_AttackState } from './types';
+export declare const isTraitAttackState: (trait: Trait) => trait is Trait_AttackState;
 export declare const traitPi: (traits: ReadonlyArray<Trait>, code: number, id: number) => number;
 export declare const traitSum: (traits: ReadonlyArray<Trait>, code: number, id: number) => number;
 export declare const traitSumAll: (traits: ReadonlyArray<Trait>, code: number) => number;

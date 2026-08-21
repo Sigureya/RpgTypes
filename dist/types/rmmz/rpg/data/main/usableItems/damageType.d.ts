@@ -1,0 +1,16 @@
+import { Data_UsableItem } from './core/usableItem';
+export declare const DAMAGE_TYPE_HP_DAMAGE: 1;
+export declare const DAMAGE_TYPE_MP_DAMAGE: 2;
+export declare const DAMAGE_TYPE_HP_RECOVER: 3;
+export declare const DAMAGE_TYPE_MP_RECOVER: 4;
+export declare const DAMAGE_TYPE_HP_DRAIN: 5;
+export declare const DAMAGE_TYPE_MP_DRAIN: 6;
+export declare const isHpEffect: (item: Data_UsableItem) => boolean;
+export declare const isMpEffect: (item: Data_UsableItem) => boolean;
+export declare const isDamage: (item: Data_UsableItem) => boolean;
+export declare const isRecover: (item: Data_UsableItem) => boolean;
+export declare const isDrain: (item: Data_UsableItem) => boolean;
+export declare const isHpRecoverItem: (item: Data_UsableItem) => boolean;
+export declare const isMpRecoverItem: (item: Data_UsableItem) => boolean;
+export declare const isHpRecovery: (item: Data_UsableItem) => boolean;
+export declare const isMpRecovery: (item: Data_UsableItem) => boolean;
