@@ -9,16 +9,18 @@ import {
   SCRIPT_EVAL,
 } from "@RpgTypes/libs/eventCommand";
 import type { EventCommand } from "@RpgTypes/rmmz";
+import { groupByMessageCommands, joinMsgXX } from "@RpgTypes/rmmz";
 import { createCommentGroup } from "./comment";
-import { createMessageGroup } from "./message";
 import { createScriptGroup } from "./script";
 import { createScrollTextGroup } from "./scrollText";
-import { insertSpeakerCommand } from "./speakerNameMV";
 
 export const normalizeCommandsForMV = (list: ReadonlyArray<EventCommand>) => {
   return xxxDetail(list, (acc, command, index, input) => {
-    const group = createMessageGroup(input, index);
-    return [...acc, ...insertSpeakerCommand(group, () => undefined)];
+    const g2 = groupByMessageCommands(input, index);
+    if (g2) {
+      return [...acc, ...joinMsgXX(g2)];
+    }
+    return [...acc];
   });
 };
 
@@ -101,6 +103,9 @@ const messaege = (
   index: number,
   input: ReadonlyArray<EventCommand>,
 ) => {
-  const group = createMessageGroup(input, index);
-  return [...acc, ...group.normalizedCommands()];
+  const group = groupByMessageCommands(input, index);
+  if (group) {
+    return [...acc, ...joinMsgXX(group)];
+  }
+  return [...acc];
 };

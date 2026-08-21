@@ -18,6 +18,9 @@ export const extractMessageGroup = (
   );
 };
 
+/**
+ * @deprecated
+ */
 export const createMessageGroup = (
   list: ReadonlyArray<EventCommand>,
   index: number,
