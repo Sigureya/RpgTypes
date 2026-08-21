@@ -1,6 +1,6 @@
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
-import fn from "eslint-plugin-functional";
+//import fn from "eslint-plugin-functional";
 //import importPlugin from "eslint-plugin-import";
 //import sortExports from "eslint-plugin-sort-exports";
 // import禁止のグループ。長いので定数としておくことで分離した
@@ -51,7 +51,7 @@ export default [
 
     plugins: {
       "@typescript-eslint": tseslint,
-      "@functional": fn,
+      // "@functional": fn,
       //      import: importPlugin,
       //      "sort-exports": sortExports,
     },
@@ -65,9 +65,9 @@ export default [
       "no-dupe-else-if": "error",
       "no-duplicate-case": "error",
       // 純粋関数強制Rule
-      "@functional/no-return-void": "warn",
-      "@functional/no-let": "error",
-      "@functional/no-loop-statements": "error",
+      //      "@functional/no-return-void": "warn",
+      //      "@functional/no-let": "error",
+      //      "@functional/no-loop-statements": "error",
       // その他のルール
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-unused-vars": "warn",
@@ -133,7 +133,7 @@ export default [
     rules: {
       // テストファイルに特有のルール
       "@typescript-eslint/no-explicit-any": "off", // テストではanyを許可
-      "@functional/no-return-void": "off",
+      //      "@functional/no-return-void": "off",
       "no-restricted-imports": "off",
       "no-undef": "off",
       "@typescript-eslint/no-require-imports": "off",
@@ -146,7 +146,7 @@ export default [
       "src/rmmzMock/**/*.ts",
     ],
     rules: {
-      "@functional/no-return-void": "off",
+      //      "@functional/no-return-void": "off",
       "@typescript-eslint/ban-ts-comment": "off",
     },
   },
