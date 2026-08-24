@@ -4,4 +4,5 @@ export interface Rmmz_MapCharacter {
   direction(): number;
   screenX(): number;
   screenY(): number;
+  pos(x: number, y: number): boolean;
 }

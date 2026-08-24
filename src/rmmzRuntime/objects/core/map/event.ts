@@ -4,6 +4,7 @@ import type { MapEventPage } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_MapCharacter } from "./character";
 
 export interface Rmmz_Event extends Rmmz_MapCharacter {
+  start(): unknown;
   isStarting(): boolean;
   unlock(): void;
   clearStartingFlag(): void;
@@ -12,4 +13,6 @@ export interface Rmmz_Event extends Rmmz_MapCharacter {
   forceMoveRoute(route: ReadonlyArray<MoveRouteCommandUnknown>): void;
   page(): MapEventPage<EventCommand, MoveRouteCommandUnknown> | null;
   lock(): void;
+  isTriggerIn(triggers: ReadonlyArray<number>): boolean;
+  isNormalPriority(): boolean;
 }
