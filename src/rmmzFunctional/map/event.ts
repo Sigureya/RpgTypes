@@ -4,9 +4,13 @@ import type {
   Provider_RpgItems,
 } from "@RpgTypes/rmmz/rpg";
 import type {
+  Rmmz_ActorsReadonly,
+  Rmmz_BranchSourceParty,
   Rmmz_Event,
   Rmmz_GameObjects,
   Rmmz_MapEventContainer,
+  Rmmz_Switches,
+  Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
 
 type MapEvent = Pick<
@@ -26,13 +30,13 @@ export const startMapEvent = <T extends MapEvent>(
     return;
   }
   for (const event of map.events()) {
-    if (eventStartXX(event, x, y, triggers, normalPriority)) {
+    if (isEventStartable(event, x, y, triggers, normalPriority)) {
       event.start();
     }
   }
 };
 
-const eventStartXX = (
+const isEventStartable = (
   event: MapEvent,
   x: number,
   y: number,
@@ -50,18 +54,32 @@ const eventStartXX = (
 
 export const mapEventFindProperPageIndex = (
   pages: ReadonlyArray<MapEventPage>,
-  gameObjects: Rmmz_GameObjects,
+  gameObjects: Pick<
+    Rmmz_GameObjects,
+    "actors" | "party" | "variables" | "switches"
+  >,
   itemProvider: Provider_RpgItems,
 ): number => {
+  const { actors, party, variables, switches } = gameObjects;
   return pages.findLastIndex((page): boolean => {
-    return mapEventMeetsCondition(page.conditions, gameObjects, itemProvider);
+    return mapEventMeetsCondition(
+      page.conditions,
+      itemProvider,
+      actors,
+      party,
+      variables,
+      switches,
+    );
   });
 };
 
-export const mapEventMeetsCondition = (
+export const mapEventMeetsCondition = <T>(
   condition: MapEvent_PageCondition,
-  { actors, party, variables, switches }: Rmmz_GameObjects,
   itemProvider: Provider_RpgItems,
+  actors: Rmmz_ActorsReadonly<T>,
+  party: Rmmz_BranchSourceParty<T>,
+  variables: Rmmz_Variables,
+  switches: Rmmz_Switches,
 ): boolean => {
   if (condition.switch1Valid && !switches.value(condition.switch1Id)) {
     return false;
@@ -69,7 +87,6 @@ export const mapEventMeetsCondition = (
   if (condition.switch2Valid && !switches.value(condition.switch2Id)) {
     return false;
   }
-
   if (condition.variableValid) {
     const variableValue = variables.value(condition.variableId);
     if (variableValue < condition.variableValue) {
