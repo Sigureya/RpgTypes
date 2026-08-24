@@ -1,5 +1,3 @@
-/* eslint-disable @functional/no-let */
-/* eslint-disable @functional/no-loop-statements */
 import type { EventCommand } from "@RpgTypes/rmmz/eventCommand";
 export interface InterprterState {
   /**

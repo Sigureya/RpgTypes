@@ -17,9 +17,7 @@ const runXXX = (
   data: Provider_RpgData,
   p: Provider_GameObjects,
 ): InterpreterGGG | undefined => {
-  // eslint-disable-next-line @functional/no-let
   let state: InterpreterState2 = xx.state;
-  // eslint-disable-next-line @functional/no-loop-statements, @functional/no-let
   for (let i = 0; i < limit; ++i) {
     const newState = eeeCommand(xx.mapId, state, xx.commands, objects, data, p);
     if (newState === undefined) {
@@ -70,7 +68,6 @@ const skipBranchCommand = (
   commandList: ReadonlyArray<EventCommand>,
   targetIndent: number,
 ): InterpreterState2 => {
-  // eslint-disable-next-line @functional/no-loop-statements, @functional/no-let
   for (let i = state.index + 1; i < commandList.length; i++) {
     const command = commandList[i];
     if (command.indent === targetIndent) {

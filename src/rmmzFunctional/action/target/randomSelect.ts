@@ -48,7 +48,6 @@ export const battlersRandomTarget = <T extends Targetable>(
   const tgrPairs = battlers.map(makeTgrPair);
   const tgrSum: number = tgrPairs.reduce(accumulateTgr, 0);
   const result: T[] = [];
-  // eslint-disable-next-line @functional/no-loop-statements, @functional/no-let
   for (let i = 0; i < repeat; i++) {
     const target = randomSelect(tgrPairs, randomFn() * tgrSum);
     result.push(target);
@@ -60,9 +59,7 @@ const randomSelect = <T>(
   list: readonly TgrPair<T>[],
   remainingTgr: number,
 ): T => {
-  // eslint-disable-next-line @functional/no-let
   let targetTgr = remainingTgr;
-  // eslint-disable-next-line @functional/no-loop-statements
   for (const pair of list) {
     targetTgr -= pair.tgr;
     if (targetTgr <= 0) {

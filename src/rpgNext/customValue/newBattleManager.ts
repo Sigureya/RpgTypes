@@ -1,4 +1,3 @@
-/* eslint-disable @functional/no-return-void */
 import type { Trait } from "@RpgTypes/rmmz";
 import type { Rmmz_Battler, Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import {

@@ -1,4 +1,3 @@
-/* eslint-disable @functional/no-loop-statements */
 import { SHOW_MESSAGE, SHOW_MESSAGE_BODY } from "@RpgTypes/libs";
 import type { EventCommand } from "./union";
 import type {
@@ -61,7 +60,6 @@ const groopXXX2 = <TC1 extends EventCommand, TC2 extends EventCommand>(
   }
 
   const temp: TC2[] = [];
-  // eslint-disable-next-line @functional/no-let
   for (let i = index + 1; i < list.length; i++) {
     const command = list[i];
     if (fn2(command)) {

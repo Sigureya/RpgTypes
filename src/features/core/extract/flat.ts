@@ -6,7 +6,6 @@ export const createDuplicateMap = (
   list: readonly ExtractedTextItem<unknown>[],
 ): Map<string, number> => {
   const map = new Map<string, number>();
-  // eslint-disable-next-line @functional/no-return-void
   list.forEach((item, index) => {
     if (!map.has(item.baseText)) {
       map.set(item.baseText, index);

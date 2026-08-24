@@ -29,9 +29,7 @@ const selectByWeight = (
   w: number,
   encounterList: readonly Encounter[],
 ): Encounter | null => {
-  // eslint-disable-next-line @functional/no-let
   let weight = w;
-  // eslint-disable-next-line @functional/no-loop-statements
   for (const encounter of encounterList) {
     weight -= encounter.weight;
     if (weight < 0) {

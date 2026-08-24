@@ -1,4 +1,3 @@
-/* eslint-disable @functional/no-return-void */
 import type {
   Command_ChangeActorHP,
   Command_ChangeActorLevel,
