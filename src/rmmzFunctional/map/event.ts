@@ -42,10 +42,10 @@ const eventStartXX = (
   if (event.isNormalPriority() !== normalPriority) {
     return false;
   }
-  if (!event.isTriggerIn(triggers)) {
+  if (!event.pos(x, y)) {
     return false;
   }
-  return event.pos(x, y);
+  return event.isTriggerIn(triggers);
 };
 
 export const mapEventFindProperPageIndex = (

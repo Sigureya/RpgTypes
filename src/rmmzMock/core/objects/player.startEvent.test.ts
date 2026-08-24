@@ -4,9 +4,9 @@ import { Game_Player, Game_Map } from "./rmmz_objects";
 import type { Rmmz_Event, Rmmz_MapEventContainer } from "@RpgTypes/rmmzRuntime";
 import { startMapEvent } from "@RpgTypes/rmmzFunctional/map/event";
 
-describe("player.startEvent - isEventRunting => true", () => {
+describe("player.startEvent - isEventRunning => true", () => {
   test("Game_Player", () => {
-    const fakeMap: MockedMap = {
+    const fakeMap: MockedGameMap = {
       events: vi.fn().mockThrow(new Error("not implemented")),
       eventsXy: vi.fn().mockThrow(new Error("not implemented")),
       isEventRunning: vi.fn().mockReturnValue(true),
@@ -17,8 +17,9 @@ describe("player.startEvent - isEventRunting => true", () => {
     expect(fakeMap.events).not.toHaveBeenCalled();
     expect(fakeMap.eventsXy).not.toHaveBeenCalled();
   });
+
   test("function", () => {
-    const fakeMap: MockedMap = {
+    const fakeMap: MockedGameMap = {
       events: vi.fn().mockThrow(new Error("not implemented")),
       eventsXy: vi.fn().mockThrow(new Error("not implemented")),
       isEventRunning: vi.fn().mockReturnValue(true),
@@ -30,33 +31,36 @@ describe("player.startEvent - isEventRunting => true", () => {
   });
 });
 
-type FakeEvent = Pick<
+type MockedEventLike = Pick<
   Rmmz_Event,
   "start" | "pos" | "isTriggerIn" | "isNormalPriority"
 >;
-type FakeMap = Pick<
-  Rmmz_MapEventContainer<FakeEvent>,
+type GameMapLike = Pick<
+  Rmmz_MapEventContainer<MockedEventLike>,
   "isEventRunning" | "events" | "eventsXy"
 >;
-type MockedMap = MockedObject<FakeMap>;
-type MockedEvent = MockedObject<FakeEvent>;
+type MockedGameMap = MockedObject<GameMapLike>;
+type MockedEvent = MockedObject<MockedEventLike>;
 
-const createMockedMap = (events: MockedObject<FakeEvent>[] = []): MockedMap => {
-  const bb = {
+const createMockMap = (
+  events: MockedObject<MockedEventLike>[] = [],
+): MockedGameMap => {
+  const baseMap = {
     isEventRunning: vi.fn().mockReturnValue(false),
     events: vi.fn().mockReturnValue(events),
   };
   return {
-    isEventRunning: bb.isEventRunning,
-    events: bb.events,
+    isEventRunning: baseMap.isEventRunning,
+    events: baseMap.events,
     eventsXy: vi.fn((x, y) => {
-      return Game_Map.prototype.eventsXy.call(bb, x, y);
+      return Game_Map.prototype.eventsXy.call(baseMap, x, y);
     }),
   };
 };
 
-type EventArg = Record<Exclude<keyof FakeEvent, "start">, boolean>;
-const createMockedEvent = (arg: EventArg): MockedEvent => {
+type EventCondition = Record<Exclude<keyof MockedEventLike, "start">, boolean>;
+
+const createMockEvent = (arg: EventCondition): MockedEvent => {
   return {
     isNormalPriority: vi.fn().mockReturnValue(arg.isNormalPriority),
     isTriggerIn: vi.fn().mockReturnValue(arg.isTriggerIn),
@@ -65,56 +69,62 @@ const createMockedEvent = (arg: EventArg): MockedEvent => {
   };
 };
 
-interface GGG {
-  event1: MockedObject<FakeEvent>;
-  event2: MockedObject<FakeEvent>;
+interface EventPair {
+  event1: MockedObject<MockedEventLike>;
+  event2: MockedObject<MockedEventLike>;
 }
 
-interface TestCase {
+interface StartEventTestCase {
+  caseName: string;
   params: {
     triggers: ReadonlyArray<number>;
     normalPriority: boolean;
   };
   eventSrc: {
-    event1: EventArg;
-    event2: EventArg;
+    event1: EventCondition;
+    event2: EventCondition;
   };
-  contextTest(events: GGG, map: MockedMap): void;
+  contextTest(events: EventPair): void;
 }
 
-const xyxy = (x: number, y: number, events: ReadonlyArray<MockedEvent>) => {
+const expectEventPositionCalls = (
+  x: number,
+  y: number,
+  events: ReadonlyArray<MockedEvent>,
+) => {
   events.forEach((event) => {
     expect(event.pos).toHaveBeenCalledWith(x, y);
     expect(event.pos).toHaveBeenCalledOnce();
   });
 };
 
-const runTestCase = (testCase: TestCase) => {
-  describe("", () => {
+const MOCK_X = 315;
+const MOCK_Y = 231;
+
+const runTestCase = (testCase: StartEventTestCase) => {
+  describe(testCase.caseName, () => {
     test("call", () => {
-      const x = 315;
-      const y = 231;
-      const event1 = createMockedEvent(testCase.eventSrc.event1);
-      const event2 = createMockedEvent(testCase.eventSrc.event2);
+      const event1 = createMockEvent(testCase.eventSrc.event1);
+      const event2 = createMockEvent(testCase.eventSrc.event2);
       const eventList = [event1, event2];
       const { normalPriority, triggers } = testCase.params;
 
-      const fakeMap = createMockedMap(eventList);
-      startMapEvent(fakeMap, x, y, triggers, normalPriority);
+      const fakeMap = createMockMap(eventList);
+      startMapEvent(fakeMap, MOCK_X, MOCK_Y, triggers, normalPriority);
       expect(fakeMap.isEventRunning).toHaveBeenCalledOnce();
       expect(fakeMap.events).toHaveBeenCalledOnce();
       expect(fakeMap.eventsXy).not.toHaveBeenCalled();
-      xyxy(x, y, eventList);
-      testCase.contextTest({ event1, event2 }, fakeMap);
+      testCase.contextTest({ event1, event2 });
     });
+
     test("game_player", () => {
-      const x = 217;
-      const y = 235;
-      const event1 = createMockedEvent(testCase.eventSrc.event1);
-      const event2 = createMockedEvent(testCase.eventSrc.event2);
+      const x = MOCK_X;
+      const y = MOCK_Y;
+      const event1 = createMockEvent(testCase.eventSrc.event1);
+      const event2 = createMockEvent(testCase.eventSrc.event2);
       const eventList = [event1, event2];
       const { normalPriority, triggers } = testCase.params;
-      const mockedMap = createMockedMap(eventList);
+      const mockedMap = createMockMap(eventList);
       vi.stubGlobal("$gameMap", mockedMap);
       Game_Player.prototype.startMapEvent.call(
         null,
@@ -126,26 +136,118 @@ const runTestCase = (testCase: TestCase) => {
       expect(mockedMap.isEventRunning).toHaveBeenCalledOnce();
       expect(mockedMap.events).toHaveBeenCalledOnce();
       expect(mockedMap.eventsXy).toHaveBeenCalledOnce();
-      xyxy(x, y, eventList);
-      testCase.contextTest({ event1, event2 }, mockedMap);
+      expectEventPositionCalls(x, y, eventList);
+      testCase.contextTest({ event1, event2 });
     });
   });
 };
 
-const testCases: TestCase[] = [
+const startEventTestCases: StartEventTestCase[] = [
   {
+    caseName: "all true",
     eventSrc: {
       event1: { isNormalPriority: true, isTriggerIn: true, pos: true },
-      event2: { isNormalPriority: true, isTriggerIn: true, pos: false },
+      event2: { isNormalPriority: true, isTriggerIn: true, pos: true },
     },
     params: { triggers: [], normalPriority: true },
     contextTest: (events) => {
       expect(events.event1.start).toHaveBeenCalledOnce();
+      expect(events.event2.start).toHaveBeenCalledOnce();
+      expect(events.event1.pos).toHaveBeenCalledWith(MOCK_X, MOCK_Y);
+      expect(events.event2.pos).toHaveBeenCalledWith(MOCK_X, MOCK_Y);
+    },
+  },
+  {
+    caseName: "all false",
+    eventSrc: {
+      event1: { isNormalPriority: false, isTriggerIn: false, pos: false },
+      event2: { isNormalPriority: false, isTriggerIn: false, pos: false },
+    },
+    params: { triggers: [], normalPriority: true },
+    contextTest: (events) => {
+      expect(events.event1.start).not.toHaveBeenCalled();
+      expect(events.event2.start).not.toHaveBeenCalled();
+    },
+  },
+  {
+    caseName: "event1 true, event2 false",
+    eventSrc: {
+      event1: { isNormalPriority: true, isTriggerIn: true, pos: true },
+      event2: { isNormalPriority: false, isTriggerIn: false, pos: false },
+    },
+    params: { triggers: [], normalPriority: true },
+    contextTest: (events) => {
+      expect(events.event1.start).toHaveBeenCalledOnce();
+      expect(events.event1.pos).toHaveBeenCalledWith(MOCK_X, MOCK_Y);
+      expect(events.event2.start).not.toHaveBeenCalled();
+    },
+  },
+  {
+    caseName: "event1 false, event2 true",
+    eventSrc: {
+      event1: { isNormalPriority: false, isTriggerIn: false, pos: false },
+      event2: { isNormalPriority: true, isTriggerIn: true, pos: true },
+    },
+    params: { triggers: [], normalPriority: true },
+    contextTest: (events) => {
+      expect(events.event1.start).not.toHaveBeenCalled();
+      expect(events.event2.start).toHaveBeenCalledOnce();
+      expect(events.event2.pos).toHaveBeenCalledWith(MOCK_X, MOCK_Y);
+    },
+  },
+  {
+    caseName: "normalPriority false ,arg normalPriority false",
+    eventSrc: {
+      event1: { isNormalPriority: true, isTriggerIn: true, pos: true },
+      event2: { isNormalPriority: true, isTriggerIn: true, pos: true },
+    },
+    params: { triggers: [], normalPriority: false },
+    contextTest: (events) => {
+      expect(events.event1.start).not.toHaveBeenCalled();
+      expect(events.event2.start).not.toHaveBeenCalled();
+    },
+  },
+
+  {
+    caseName: "normalPriority false ,arg normalPriority true",
+    eventSrc: {
+      event1: { isNormalPriority: false, isTriggerIn: true, pos: true },
+      event2: { isNormalPriority: false, isTriggerIn: true, pos: true },
+    },
+    params: { triggers: [], normalPriority: true },
+    contextTest: (events) => {
+      expect(events.event1.start).not.toHaveBeenCalled();
+      expect(events.event2.start).not.toHaveBeenCalled();
+    },
+  },
+  {
+    caseName: "triggers false",
+    eventSrc: {
+      event1: { isNormalPriority: true, isTriggerIn: false, pos: true },
+      event2: { isNormalPriority: true, isTriggerIn: false, pos: true },
+    },
+    params: { triggers: [], normalPriority: true },
+    contextTest: (events) => {
+      expect(events.event1.start).not.toHaveBeenCalled();
+      expect(events.event2.start).not.toHaveBeenCalled();
+    },
+  },
+  {
+    caseName: "pos false",
+    eventSrc: {
+      event1: { isNormalPriority: true, isTriggerIn: true, pos: false },
+      event2: { isNormalPriority: true, isTriggerIn: true, pos: false },
+    },
+    params: { triggers: [], normalPriority: true },
+    contextTest: (events) => {
+      expect(events.event1.start).not.toHaveBeenCalled();
       expect(events.event2.start).not.toHaveBeenCalled();
     },
   },
 ];
 
-testCases.forEach((testCase) => {
-  runTestCase(testCase);
+describe("player.startEvent - isEventRunning => false", () => {
+  startEventTestCases.forEach((testCase) => {
+    runTestCase(testCase);
+  });
 });
