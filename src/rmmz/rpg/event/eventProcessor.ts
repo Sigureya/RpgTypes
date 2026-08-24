@@ -1,10 +1,7 @@
-import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type {
-  BattleEventPage,
-  Data_CommonEventUnknown,
-  Data_TroopUnknonw,
-  MapEventContainer,
-} from "@RpgTypes/rmmz";
+import type { EventCommandUnknown } from "@RpgTypes/libs";
+import type { Data_CommonEventUnknown } from "./common";
+import type { MapEventContainer } from "./map";
+import type { Data_TroopUnknonw, BattleEventPage } from "./troop";
 import type { MapEventContext } from "./types";
 
 interface EventContainer<Command> {

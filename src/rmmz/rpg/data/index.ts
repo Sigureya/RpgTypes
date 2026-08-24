@@ -1,8 +1,7 @@
 export * from "./animation";
 export * from "./controlChars";
 export * from "./dataToCtrlChar";
-export * from "./gameData";
-export * from "./gameDataTypes";
+
 export * from "./main";
 export * from "./note";
 export * from "../provider";

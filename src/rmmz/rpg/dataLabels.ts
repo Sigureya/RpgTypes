@@ -1,5 +1,6 @@
 import type { DomainLabel } from "@RpgTypes/libs";
-import type { Data_CommonEventUnknown } from "../event";
+
+import type { Data_CommonEventUnknown } from "./event";
 import type {
   WeaponLabels,
   ArmorLabels,
@@ -7,8 +8,10 @@ import type {
   ActorLabels,
   ClassLabels,
   StateLabels,
-} from "./traitContainers";
-import type { ItemLabels, SkillLabels, UsableItemLabels } from "./usableItems";
+  ItemLabels,
+  SkillLabels,
+  UsableItemLabels,
+} from "./data/main";
 
 export interface DataLabels {
   weapon: DomainLabel<WeaponLabels>;

@@ -3,8 +3,7 @@ import type {
   MoveRouteCommandUnknown,
 } from "@RpgTypes/libs";
 import type { Data_Map } from "@RpgTypes/rmmz/events";
-import type { MapEventPage } from "../../rmmz/rpg/data/event/map/event/page";
-import type { MapEvent } from "../../rmmz/rpg/data/event/map/event/page/mapEvent";
+import type { MapEvent, MapEventPage } from "@RpgTypes/rmmz/rpg";
 
 export interface Provider_MapTilesetFlags {
   tilesetFlags(map: Pick<Data_Map, "tilesetId">): ReadonlyArray<number>;

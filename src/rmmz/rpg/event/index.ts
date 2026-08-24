@@ -1,4 +1,4 @@
-export * from "./commonEvent";
+export * from "./common";
 export * from "./eventProcessor";
 export * from "./makeEvent";
 export * from "./map";

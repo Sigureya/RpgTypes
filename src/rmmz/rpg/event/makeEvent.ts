@@ -1,5 +1,5 @@
 import type { EventCommandUnknown } from "@RpgTypes/libs/eventCommand";
-import type { Data_CommonEventUnknown } from "./commonEvent";
+
 import type {
   BattleEventPage,
   Data_TroopUnknonw,
@@ -7,6 +7,7 @@ import type {
   Troop_EventConditions,
   Troop_Member,
 } from "./troop";
+import type { Data_CommonEventUnknown } from "./common";
 
 export const makeCommonEventData = <Command extends EventCommandUnknown>(
   data: Partial<Data_CommonEventUnknown<Command>> = {},

@@ -2,7 +2,7 @@ import { describe, test, expect } from "vitest";
 import type { DomainName, NamedItemSource } from "@RpgTypes/libs";
 import { defineGameDataSources } from "./gameData";
 import type { GameData } from "./gameDataTypes";
-import type { DataLabels, SourceId_Data } from "./main";
+import type { DataLabels, SourceId_Data } from "./data/main";
 import {
   LABEL_SET_DATA,
   makeActorData,
@@ -13,7 +13,7 @@ import {
   makeSkillData,
   makeStateData,
   makeWeaponData,
-} from "./main";
+} from "./data/main";
 import {
   MODULE_DATA,
   SRC_DATA_ACTOR,
@@ -24,7 +24,7 @@ import {
   SRC_DATA_SKILL,
   SRC_DATA_STATE,
   SRC_DATA_WEAPON,
-} from "./sourceKindConstants";
+} from "./data/sourceKindConstants";
 
 const kindOf = (list: NamedItemSource[], target: string) => {
   const key = {

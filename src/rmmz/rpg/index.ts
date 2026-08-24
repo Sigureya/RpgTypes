@@ -5,3 +5,6 @@ export * from "./rpgLabels";
 export * from "./event";
 export * from "./provider";
 export { labelsRegistry } from "./labelRegistryDefault";
+export * from "./dataLabels";
+export * from "./gameData";
+export * from "./gameDataTypes";

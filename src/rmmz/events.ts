@@ -1,7 +1,9 @@
 import type { EventCommand } from "./eventCommand";
-import type { Data_MapUnknown } from "./rpg";
-import type { Data_CommonEventUnknown } from "./rpg/data/event/commonEvent";
-import type { Data_TroopUnknonw } from "./rpg/data/event/troop";
+import type {
+  Data_CommonEventUnknown,
+  Data_MapUnknown,
+  Data_TroopUnknonw,
+} from "./rpg";
 
 export type Data_CommonEvent = Data_CommonEventUnknown<EventCommand>;
 export type Data_Troop = Data_TroopUnknonw<EventCommand>;

@@ -7,8 +7,12 @@ import type {
   EnemyLabels,
   StateLabels,
   WeaponLabels,
-} from "./traitContainers";
-import type { ItemLabels, SkillLabels, UsableItemLabels } from "./usableItems";
+} from "./data/main/traitContainers";
+import type {
+  ItemLabels,
+  SkillLabels,
+  UsableItemLabels,
+} from "./data/main/usableItems";
 
 export const LABEL_SET_DATA = {
   actor: {
