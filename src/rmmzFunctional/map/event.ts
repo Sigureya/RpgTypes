@@ -3,7 +3,45 @@ import type {
   MapEventPage,
   Provider_RpgItems,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_GameObjects } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_Event,
+  Rmmz_GameObjects,
+  Rmmz_Map,
+} from "@RpgTypes/rmmzRuntime";
+
+// Game_Player.prototype.startMapEvent に相当する
+export const startMapEvent = (
+  map: Rmmz_Map,
+  x: number,
+  y: number,
+  triggers: ReadonlyArray<number>,
+  normalPriority: boolean,
+): void => {
+  if (map.isEventRunning()) {
+    return;
+  }
+  for (const event of map.events()) {
+    if (eventStartXX(event, x, y, triggers, normalPriority)) {
+      event.start();
+    }
+  }
+};
+
+const eventStartXX = (
+  event: Rmmz_Event,
+  x: number,
+  y: number,
+  triggers: ReadonlyArray<number>,
+  normalPriority: boolean,
+): boolean => {
+  if (event.isNormalPriority() !== normalPriority) {
+    return false;
+  }
+  if (!event.isTriggerIn(triggers)) {
+    return false;
+  }
+  return event.pos(x, y);
+};
 
 export const mapEventFindProperPageIndex = (
   pages: ReadonlyArray<MapEventPage>,
