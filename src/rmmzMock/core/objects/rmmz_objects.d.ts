@@ -12,6 +12,7 @@ import type {
   Rmmz_BattlerBase_Constructor,
   Rmmz_Player_Constructor,
   Rmmz_Battler_Constructor,
+  Rmmz_Map_Constructor,
 } from "@RpgTypes/rmmzRuntime";
 
 export declare var Game_Action: Rmmz_Action_Constructor;
@@ -28,3 +29,4 @@ export declare var Game_Troop: Rmmz_Troop_Constructor;
 
 export declare var Game_Variables: Rmmz_Variables_Constructor;
 export declare var Game_Player: Rmmz_Player_Constructor;
+export declare var Game_Map: Rmmz_Map_Constructor;

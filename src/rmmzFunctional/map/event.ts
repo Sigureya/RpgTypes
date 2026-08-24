@@ -6,12 +6,17 @@ import type {
 import type {
   Rmmz_Event,
   Rmmz_GameObjects,
-  Rmmz_Map,
+  Rmmz_MapEventContainer,
 } from "@RpgTypes/rmmzRuntime";
 
+type MapEvent = Pick<
+  Rmmz_Event,
+  "start" | "pos" | "isTriggerIn" | "isNormalPriority"
+>;
+
 // Game_Player.prototype.startMapEvent に相当する
-export const startMapEvent = (
-  map: Rmmz_Map,
+export const startMapEvent = <T extends MapEvent>(
+  map: Pick<Rmmz_MapEventContainer<T>, "isEventRunning" | "events">,
   x: number,
   y: number,
   triggers: ReadonlyArray<number>,
@@ -28,7 +33,7 @@ export const startMapEvent = (
 };
 
 const eventStartXX = (
-  event: Rmmz_Event,
+  event: MapEvent,
   x: number,
   y: number,
   triggers: ReadonlyArray<number>,
