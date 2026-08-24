@@ -6,7 +6,7 @@ import type {
   Data_Item,
   Data_State,
   Data_Weapon,
-} from "./main";
+} from "./data/main";
 
 export interface Provider_RpgItems {
   dataItem(itemId: number): Data_Item | undefined | null;
