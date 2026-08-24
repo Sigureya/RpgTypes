@@ -1,12 +1,11 @@
 import type { PluginManagerTemplate } from "@sigureya/rmmz-plugin-schema";
 
-/* eslint-disable @functional/no-return-void */
 export interface Rmmz_PluginManager extends PluginManagerTemplate<
   string,
   string,
   object
 > {
-  parameters(name: string): unknown;
+  parameters(name: string): Record<string, string>;
   registerCommand(
     pluginName: string,
     commandName: string,
