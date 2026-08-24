@@ -59,7 +59,7 @@ export const groupPluginCommandsByKey = (
   commands: ReadonlyArray<Command_PluginCommandMZ>,
 ): Map<PluginCommandMapKey, Command_PluginCommandMZ[]> => {
   const map = new Map<PluginCommandMapKey, Command_PluginCommandMZ[]>();
-  // eslint-disable-next-line @functional/no-loop-statements
+
   for (const command of commands) {
     const key = createPluginCommandKeyFromCommand(command);
     const list = map.get(key);

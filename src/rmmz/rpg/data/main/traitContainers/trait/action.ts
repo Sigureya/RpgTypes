@@ -98,11 +98,8 @@ export const attackSkillNumRepeats = (
   sklllId: number,
   traits: ReadonlyArray<Trait>,
 ): number => {
-  // eslint-disable-next-line @functional/no-let
   let repeats = 0;
-  // eslint-disable-next-line @functional/no-let
   let isNormalAttack = false;
-  // eslint-disable-next-line @functional/no-loop-statements
   for (const trait of traits) {
     if (trait.dataId !== sklllId) {
       continue;

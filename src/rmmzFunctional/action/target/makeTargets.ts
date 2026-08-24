@@ -110,13 +110,11 @@ const actionTargetsEveryone = <T extends Targetable>(
 ): T[] => {
   // 最適化のためにforループ。
   const result = [];
-  // eslint-disable-next-line @functional/no-loop-statements
   for (const battler of provider.friendsUnit()) {
     if (battlerIsAlive(battler)) {
       result.push(battler);
     }
   }
-  // eslint-disable-next-line @functional/no-loop-statements
   for (const battler of provider.opponentsUnit()) {
     if (battlerIsAlive(battler)) {
       result.push(battler);

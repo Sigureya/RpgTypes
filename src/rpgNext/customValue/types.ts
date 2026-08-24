@@ -1,4 +1,3 @@
-/* eslint-disable @functional/no-return-void */
 import type { Trait } from "@RpgTypes/rmmz";
 import type { Rmmz_Battler } from "@RpgTypes/rmmzRuntime";
 import type { ActionCost, ActionTotalCost } from "../battle/cost/types";

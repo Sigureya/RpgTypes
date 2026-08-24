@@ -1,9 +1,8 @@
 import type { RpnCommand } from "./types";
-/* eslint-disable @functional/no-loop-statements */
 
 export const calculateRPN = <T extends Record<string, number>>(
   commands: ReadonlyArray<RpnCommand>,
-  variables: T
+  variables: T,
 ): number => {
   const stack: number[] = [];
   for (const cmd of commands) {

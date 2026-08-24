@@ -5,12 +5,12 @@ import type {
 
 export const pickCommands = <
   Head extends EventCommand,
-  Body extends ExtractCommandByParam<[string], EventCommand>
+  Body extends ExtractCommandByParam<[string], EventCommand>,
 >(
   array: ReadonlyArray<EventCommand>,
   index: number,
   headFn: (data: EventCommand) => data is Head,
-  bodyFn: (data: EventCommand) => data is Body
+  bodyFn: (data: EventCommand) => data is Body,
 ): {
   header: Head;
   bodies: Body[];
@@ -20,9 +20,6 @@ export const pickCommands = <
     throw new Error(`Invalid head at index ${index}: ${JSON.stringify(head)}`);
   }
 
-  // どうしようもないので、ここだけeslintのルールを無効化する
-  /* eslint-disable @functional/no-loop-statements */
-  /* eslint-disable @functional/no-let */
   const bodys: Body[] = [];
   for (let i = index + 1; i < array.length; i++) {
     const body = array[i];

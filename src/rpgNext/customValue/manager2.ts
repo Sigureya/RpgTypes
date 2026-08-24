@@ -3,7 +3,6 @@ import type { ActionCost } from "../battle/cost/types";
 import type { ActionContext, ActionHandlers, BattleXX } from "./customValue";
 import type { ActionBehavierRunner, Context2 } from "./types";
 
-/* eslint-disable @functional/no-return-void */
 interface Manager2 {
   add(key: Keys, dataId: number): void;
 }
