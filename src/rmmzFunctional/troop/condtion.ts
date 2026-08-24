@@ -1,7 +1,9 @@
 import type { Troop_EventConditions } from "@RpgTypes/rmmz";
-import type { Rmmz_ActorsReadonly } from "@RpgTypes/rmmzRuntime";
-import type { Rmmz_BattleManager_State } from "@RpgTypes/rmmzRuntime/managers/battle/interface";
-import type { Rmmz_Switches } from "@RpgTypes/rmmzRuntime/objects/core/variables";
+import type {
+  Rmmz_ActorsReadonly,
+  Rmmz_BattleManager_State,
+  Rmmz_Switches,
+} from "@RpgTypes/rmmzRuntime";
 
 export interface TroopMM {
   members(): ReadonlyArray<{ hpRate(): number }>;
