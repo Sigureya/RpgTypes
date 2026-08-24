@@ -6,6 +6,7 @@ import type {
   Rmmz_BattleManager_State,
 } from "./interface";
 import type { Battle_Reward } from "./interface/reward";
+export * from "./interface";
 
 export interface Rmmz_BattleManager
   extends

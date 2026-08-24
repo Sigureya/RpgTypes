@@ -1,3 +1,4 @@
+export * from "./battle";
 export * from "./dataManager";
 export type { Rmmz_AudioManager } from "./audioManager";
 export type { Rmmz_ColorManager } from "./colorManager";
