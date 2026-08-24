@@ -11,7 +11,7 @@ import type {
   Data_Enemy,
   Data_Item,
   Data_Weapon,
-} from "./main";
+} from "./data/main";
 import type {
   SourceId_DataSkill,
   SourceId_DataState,
@@ -22,11 +22,11 @@ import type {
   SourceId_DataItem,
   SourceId_DataWeapon,
   SourceId_DataCommonEvent,
-} from "./main/sourceIdTypes";
+} from "./data/main/sourceIdTypes";
 
 export const defineGameDataSources = (
   data: GameData,
-  dataLabels: DataLabels
+  dataLabels: DataLabels,
 ): NamedItemSource[] => {
   return [
     defineSkill(data.skills, dataLabels),
@@ -43,7 +43,7 @@ export const defineGameDataSources = (
 
 const defineSkill = (
   skills: Data_Skill[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => {
   return {
     label: labels.skill.title,
@@ -58,7 +58,7 @@ const defineSkill = (
 
 const defineActor = (
   actors: Data_Actor[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => {
   return {
     items: actors,
@@ -73,7 +73,7 @@ const defineActor = (
 
 const defineState = (
   states: Data_State[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => {
   return {
     items: states,
@@ -88,7 +88,7 @@ const defineState = (
 
 const defineArmor = (
   armors: Data_Armor[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => {
   return {
     items: armors,
@@ -103,7 +103,7 @@ const defineArmor = (
 
 const defineClass = (
   classes: Data_Class[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => {
   return {
     items: classes,
@@ -118,7 +118,7 @@ const defineClass = (
 
 const defineEnemy = (
   enemies: Data_Enemy[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => {
   return {
     items: enemies,
@@ -133,7 +133,7 @@ const defineEnemy = (
 
 const defineItem = (
   items: Data_Item[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => ({
   items: items,
   label: labels.item.title,
@@ -145,7 +145,7 @@ const defineItem = (
 });
 const defineWeapon = (
   weapons: Data_Weapon[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => ({
   items: weapons,
   label: labels.weapon.title,
@@ -158,7 +158,7 @@ const defineWeapon = (
 
 const defineCommonEvent = (
   commonEvents: Data_CommonEventLike[],
-  labels: DataLabels
+  labels: DataLabels,
 ): NamedItemSource => ({
   items: commonEvents,
   label: labels.commonEvent.title,

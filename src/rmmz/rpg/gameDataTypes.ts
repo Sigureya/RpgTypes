@@ -8,7 +8,7 @@ import type {
   Data_Class,
   Data_Skill,
   Data_State,
-} from "./main";
+} from "./data/main";
 
 export interface GameData {
   items: Data_Item[];

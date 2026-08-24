@@ -9,8 +9,8 @@ import type {
 import { makeTestAudioCommands } from "./eventCommand";
 import { makeTestCommands } from "./eventCommand/makeTestCommands";
 import type { Data_CommonEvent, Data_Troop } from "./events";
-import type { Data_MapUnknown, MapEventPage } from "./rpg/data/event";
-import { makeMapData, makeMapEventPage } from "./rpg/data/event";
+import type { Data_MapUnknown, MapEventPage } from "./rpg";
+import { makeMapData, makeMapEventPage } from "./rpg";
 
 export const makeTestTroopData = (source: TestEventDataSource): Data_Troop => {
   return {
