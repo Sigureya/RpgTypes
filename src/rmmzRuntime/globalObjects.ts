@@ -22,6 +22,7 @@ import type {
   Rmmz_System,
 } from "./objects";
 import type { Rmmz_SceneManager } from "./sceneManager";
+import type { Rmmz_Input } from "./core";
 
 declare global {
   var $dataActors: IdentifiedItems<Data_Actor>;
@@ -48,5 +49,7 @@ declare global {
 declare global {
   var SceneManager: Rmmz_SceneManager;
   var PluginManager: Rmmz_PluginManager;
+  var Input: Rmmz_Input;
 }
+
 export {};
