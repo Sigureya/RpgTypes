@@ -61,7 +61,7 @@ export interface Rmmz_PlayerCharactor extends Rmmz_MapCharacter {
   startMapEvent(
     x: number,
     y: number,
-    triggers: number[],
+    triggers: ReadonlyArray<number>,
     normal: boolean,
   ): void;
   moveByInput(): void;

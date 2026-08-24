@@ -8,7 +8,19 @@ export interface Rmmz_MapId {
   mapId(): number;
 }
 
-export interface Rmmz_Map extends Rmmz_MapId {
+export interface Rmmz_MapEventContainer<Event = Rmmz_Event> {
+  events(): Event[];
+  event(eventId: number): Event | undefined;
+  setupEvents(): void;
+  eraseEvent(eventId: number): void;
+  eventsXy(x: number, y: number): Event[];
+  eventsXyNt(x: number, y: number): Event[];
+  tileEventsXy(x: number, y: number): Event[];
+  isEventRunning(): boolean;
+}
+
+export interface Rmmz_Map
+  extends Rmmz_MapId, Rmmz_MapEventContainer<Rmmz_Event> {
   initialize(): void;
   setup(mapId: number): void;
   isEventRunning(): boolean;
@@ -33,10 +45,6 @@ export interface Rmmz_Map extends Rmmz_MapId {
   boat(): Rmmz_Vehicle;
   ship(): Rmmz_Vehicle;
   airship(): Rmmz_Vehicle;
-  setupEvents(): void;
-  events(): Rmmz_Event[];
-  event(eventId: number): Rmmz_Event | undefined;
-  eraseEvent(eventId: number): void;
   autorunCommonEvents(): Data_CommonEvent[];
   parallelCommonEvents(): Data_CommonEvent[];
   setupScroll(): void;
@@ -76,9 +84,6 @@ export interface Rmmz_Map extends Rmmz_MapId {
   refreshIfNeeded(): void;
   refresh(): void;
   refreshTileEvents(): void;
-  eventsXy(x: number, y: number): Rmmz_Event[];
-  eventsXyNt(x: number, y: number): Rmmz_Event[];
-  tileEventsXy(x: number, y: number): Rmmz_Event[];
   eventIdXy(x: number, y: number): number;
   scrollDown(distance: number): void;
   scrollLeft(distance: number): void;
