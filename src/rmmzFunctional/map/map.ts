@@ -3,13 +3,12 @@ import type {
   MoveRouteCommandUnknown,
 } from "@RpgTypes/libs";
 import type { Data_Map } from "@RpgTypes/rmmz/events";
-import { mapEventsXy } from "@RpgTypes/rmmz/rpg/data/event/map/event/event";
-import type { MapEvent } from "@RpgTypes/rmmz/rpg/data/event/map/event/page";
+import type { Data_MapUnknown, MapEvent } from "@RpgTypes/rmmz/rpg";
+import { mapEventsXy } from "@RpgTypes/rmmz/rpg";
 import {
-  isValidMapPosition,
   mapLayeredTiles,
-} from "@RpgTypes/rmmz/rpg/data/event/map/tiles";
-import type { Data_MapUnknown } from "@RpgTypes/rmmz/rpg/data/event/map/types";
+  isValidMapPosition,
+} from "@RpgTypes/rmmz/rpg/event/map/tiles";
 import type { Direction8 } from "@RpgTypes/rmmz/utils";
 import type {
   Provider_MapEventPageResolver,
