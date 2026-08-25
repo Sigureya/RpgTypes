@@ -1,3 +1,4 @@
+import type { Command_ChangeActorHP } from "../../actor";
 import { OPERATION_MINUS } from "./constants";
 import { OPERATION_PLUS } from "./constants";
 import type {
@@ -26,6 +27,15 @@ const OPERAND = {
 } as const;
 
 const ENEMY_EACH = -1 as const;
+
+export const allowDeathByEnemy = (command: Command_ChangeEnemyHP): boolean => {
+  return command.parameters[4];
+};
+
+export const allowDeathByActor = (command: Command_ChangeActorHP): boolean => {
+  return command.parameters[5];
+};
+
 export const makeCommandGainHP = (
   params: ParamObject_ChangeEnemyHp,
   indent: number = 0,
