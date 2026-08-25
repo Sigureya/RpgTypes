@@ -12,6 +12,17 @@ import {
   makeCommandVariableFromPartyAt,
   makeCommandVariableFromSystemPlayTime,
   makeCommandVariableFromWeapon,
+  makeCommandVariableFromLastEnemyIndex,
+  makeCommandVariableFromLastTargetActorId,
+  makeCommandVariableFromLastTargetEnemyIndex,
+  makeCommandVariableFromLastUsedSkillId,
+  makeCommandVariableDataLastActorId,
+  LAST_DATA_TARGET_ENEMY_INDEX,
+  LAST_DATA_LAST_ACTOR_ID,
+  LAST_DATA_LAST_ENEMY_INDEX,
+  LAST_DATA_LAST_TARGET_ACTOR_ID,
+  LAST_DATA_LAST_USED_ITEM_ID,
+  LAST_DATA_LAST_USED_SKILL_ID,
 } from "@RpgTypes/rmmz/eventCommand";
 import { variableFromCommand } from "@RpgTypes/rmmzFunctional";
 import type {
@@ -312,7 +323,7 @@ const testCases: TestCase[] = [
     },
   },
   {
-    name: "PartySize",
+    name: "ItemCount",
     command: makeCommandVariableFromItemData({
       variableId: MOCK_START_ID,
       itemId: MOCK_ITEM_ID,
@@ -424,7 +435,74 @@ const testCases: TestCase[] = [
     expected: MOCK_TEMP_LAST_ACTION_DATA,
     contextTest: (context) => {
       expect(context.temp.lastActionData).toHaveBeenCalledOnce();
-      expect(context.temp.lastActionData).toHaveBeenCalledWith(1);
+      expect(context.temp.lastActionData).toHaveBeenCalledWith(
+        LAST_DATA_LAST_USED_ITEM_ID,
+      );
+    },
+  },
+  {
+    name: "LastTargetActorId",
+    command: makeCommandVariableFromLastTargetActorId({
+      startId: MOCK_START_ID,
+    }),
+    expected: MOCK_TEMP_LAST_ACTION_DATA,
+    contextTest: (context) => {
+      expect(context.temp.lastActionData).toHaveBeenCalledOnce();
+      expect(context.temp.lastActionData).toHaveBeenCalledWith(
+        LAST_DATA_LAST_TARGET_ACTOR_ID,
+      );
+    },
+  },
+  {
+    name: "LastTargetEnemyIndex",
+    command: makeCommandVariableFromLastTargetEnemyIndex({
+      startId: MOCK_START_ID,
+    }),
+    expected: MOCK_TEMP_LAST_ACTION_DATA,
+    contextTest: (context) => {
+      expect(context.temp.lastActionData).toHaveBeenCalledOnce();
+      expect(context.temp.lastActionData).toHaveBeenCalledWith(
+        LAST_DATA_TARGET_ENEMY_INDEX,
+      );
+    },
+  },
+  {
+    name: "LastUsedSkillId",
+    command: makeCommandVariableFromLastUsedSkillId({
+      startId: MOCK_START_ID,
+    }),
+    expected: MOCK_TEMP_LAST_ACTION_DATA,
+    contextTest: (context) => {
+      expect(context.temp.lastActionData).toHaveBeenCalledOnce();
+      expect(context.temp.lastActionData).toHaveBeenCalledWith(
+        LAST_DATA_LAST_USED_SKILL_ID,
+      );
+    },
+  },
+  {
+    name: "LastEnemyIndex",
+    command: makeCommandVariableFromLastEnemyIndex({
+      startId: MOCK_START_ID,
+    }),
+    expected: MOCK_TEMP_LAST_ACTION_DATA,
+    contextTest: (context) => {
+      expect(context.temp.lastActionData).toHaveBeenCalledOnce();
+      expect(context.temp.lastActionData).toHaveBeenCalledWith(
+        LAST_DATA_LAST_ENEMY_INDEX,
+      );
+    },
+  },
+  {
+    name: "LastActorId",
+    command: makeCommandVariableDataLastActorId({
+      startId: MOCK_START_ID,
+    }),
+    expected: MOCK_TEMP_LAST_ACTION_DATA,
+    contextTest: (context) => {
+      expect(context.temp.lastActionData).toHaveBeenCalledOnce();
+      expect(context.temp.lastActionData).toHaveBeenCalledWith(
+        LAST_DATA_LAST_ACTOR_ID,
+      );
     },
   },
 ];
