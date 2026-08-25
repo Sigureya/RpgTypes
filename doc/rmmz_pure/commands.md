@@ -7,6 +7,10 @@
 - `〇`: 存在する
 - `－`: 存在しない、または未確認
 
+- rmmzTestはrmmz_objectsのテストを指す
+- fnは純粋関数実装の有無を指す
+- fnTestは純粋関数実装のテストの有無を指す
+
 ## event command 番号
 
 | コマンド番号 | 処理名                   | rmmzTest | fn  | fnTest |
