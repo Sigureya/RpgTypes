@@ -19,8 +19,18 @@ export interface Rmmz_MapEventContainer<Event = Rmmz_Event> {
   isEventRunning(): boolean;
 }
 
+export interface Rmmz_MapVehicleContainer<T = Rmmz_Vehicle> {
+  vehicle(type: string | number): T | null;
+  ship(): T;
+  boat(): T;
+  airship(): T;
+}
+
 export interface Rmmz_Map
-  extends Rmmz_MapId, Rmmz_MapEventContainer<Rmmz_Event> {
+  extends
+    Rmmz_MapId,
+    Rmmz_MapEventContainer<Rmmz_Event>,
+    Rmmz_MapVehicleContainer<Rmmz_Vehicle> {
   initialize(): void;
   setup(mapId: number): void;
   isEventRunning(): boolean;
