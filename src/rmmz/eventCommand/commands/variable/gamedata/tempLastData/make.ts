@@ -6,6 +6,14 @@ import type {
   Command_ControlVariables_FromLastData,
   ParamArray_VariableFromLastData,
 } from "./types";
+import {
+  LAST_DATA_TARGET_ENEMY_INDEX,
+  LAST_DATA_LAST_ACTOR_ID,
+  LAST_DATA_LAST_ENEMY_INDEX,
+  LAST_DATA_LAST_TARGET_ACTOR_ID,
+  LAST_DATA_LAST_USED_ITEM_ID,
+  LAST_DATA_LAST_USED_SKILL_ID,
+} from "./constants";
 
 export const makeCommandVariableFromLastUsedSkillId = (
   params: ParamObject_VariableFromLastData,
@@ -14,7 +22,7 @@ export const makeCommandVariableFromLastUsedSkillId = (
   return {
     code: CONTROL_VARIABLES,
     indent,
-    parameters: paramToArray(params, 0),
+    parameters: paramToArray(params, LAST_DATA_LAST_USED_SKILL_ID),
   };
 };
 
@@ -25,7 +33,7 @@ export const makeCommandVariableFromLastUsedItemId = (
   return {
     code: CONTROL_VARIABLES,
     indent,
-    parameters: paramToArray(params, 1),
+    parameters: paramToArray(params, LAST_DATA_LAST_USED_ITEM_ID),
   };
 };
 
@@ -36,7 +44,7 @@ export const makeCommandVariableDataLastActorId = (
   return {
     code: CONTROL_VARIABLES,
     indent,
-    parameters: paramToArray(params, 2),
+    parameters: paramToArray(params, LAST_DATA_LAST_ACTOR_ID),
   };
 };
 
@@ -47,7 +55,7 @@ export const makeCommandVariableFromLastEnemyIndex = (
   return {
     code: CONTROL_VARIABLES,
     indent,
-    parameters: paramToArray(params, 3),
+    parameters: paramToArray(params, LAST_DATA_LAST_ENEMY_INDEX),
   };
 };
 
@@ -58,7 +66,7 @@ export const makeCommandVariableFromLastTargetActorId = (
   return {
     code: CONTROL_VARIABLES,
     indent,
-    parameters: paramToArray(params, 4),
+    parameters: paramToArray(params, LAST_DATA_LAST_TARGET_ACTOR_ID),
   };
 };
 
@@ -69,7 +77,7 @@ export const makeCommandVariableFromLastTargetEnemyIndex = (
   return {
     code: CONTROL_VARIABLES,
     indent,
-    parameters: paramToArray(params, 5),
+    parameters: paramToArray(params, LAST_DATA_TARGET_ENEMY_INDEX),
   };
 };
 

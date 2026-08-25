@@ -7,6 +7,7 @@ import type {
   Rmmz_SelfSwitches,
   Rmmz_Switches,
   Rmmz_System,
+  Rmmz_Temp,
   Rmmz_Timer,
   Rmmz_Variables,
 } from "./core";
@@ -22,4 +23,5 @@ export interface Rmmz_GameObjects {
   timer: Rmmz_Timer;
   selfSwitches: Rmmz_SelfSwitches;
   message: Rmmz_Message;
+  temp: Rmmz_Temp;
 }

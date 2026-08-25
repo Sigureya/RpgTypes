@@ -7,6 +7,7 @@ import {
   variableFromRandom,
 } from "@RpgTypes/rmmz/eventCommand";
 import type {
+  Rmmz_GameObjects,
   Rmmz_MapId,
   Rmmz_SystemCounter,
   Rmmz_Temp,
@@ -27,6 +28,25 @@ import {
   variableFromPartyAt,
 } from "./party";
 import type { Rmmz_VariableSourceProvider } from "./types";
+
+export const variableFromCommandEx = (
+  command: Command_ControlVariables,
+  provider: Rmmz_VariableSourceProvider,
+  objects: Rmmz_GameObjects,
+  fallback: number = 0,
+): number => {
+  return variableFromCommand(
+    command,
+    provider,
+    objects.variables,
+    objects.temp,
+    objects.map,
+    objects.party,
+    objects.system,
+    objects.timer,
+    fallback,
+  );
+};
 
 export const variableFromCommand = (
   { parameters }: Command_ControlVariables,
