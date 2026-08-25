@@ -58,7 +58,6 @@ const MOCK_ITEM_COUNT = 9;
 const MOCK_ITEM_ID = 151;
 const MOCK_WEAPON_ID = 251;
 const MOCK_ARMOR_ID = 386;
-const MOCK_LAST_USED_ITEM_ID = 33;
 
 const MOCK_SYSTEM_BATTLE_COUNT = 1024;
 const MOCK_SYSTEM_WIN_COUNT = 512;
@@ -241,14 +240,19 @@ interface TestCase {
   expected: number;
   command: Command_ControlVariables_FromGameData;
   contextTest: (objects: TestContext) => void;
+  interpreterContextTest?: (objects: TestContext) => void;
 }
 
 const stubGameDataGlobals = (context: TestContext) => {
   vi.stubGlobal("$gameActors", {
     actor: vi.fn((id: number) => context.provider.gameActor(id)),
   });
+  const troopMembers = Array.from(
+    { length: MOCK_ENEMY_INDEX + 1 },
+    (_, index) => (index === MOCK_ENEMY_INDEX ? context.enemy : null),
+  );
   vi.stubGlobal("$gameTroop", {
-    members: vi.fn(() => [context.enemy]),
+    members: vi.fn(() => troopMembers),
   });
   vi.stubGlobal("$gameTemp", context.temp);
   vi.stubGlobal("$gameMap", context.map);
@@ -293,7 +297,7 @@ const runTestCase = (testCase: TestCase): void => {
         testCase.command.parameters[6] as number,
       );
       expect(result).toBe(testCase.expected);
-      testCase.contextTest(context);
+      testCase.interpreterContextTest?.(context);
     });
   });
 };
@@ -370,6 +374,10 @@ const testCases: TestCase[] = [
     contextTest: (context) => {
       expect(context.provider.gameEnemy).toHaveBeenCalledOnce();
       expect(context.provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
+    },
+    interpreterContextTest: () => {
+      // Game_Interpreter.prototype.gameDataOperand reads $gameTroop.members(),
+      // not the provider-based variable source.
     },
   },
   {
