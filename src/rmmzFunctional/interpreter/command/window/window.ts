@@ -4,7 +4,6 @@ import type { Rmmz_System } from "@RpgTypes/rmmzRuntime";
 export const commandChangeWindowColor = (
   command: Command_ChangeWindowColor,
   system: Rmmz_System,
-): boolean => {
+): void => {
   system.setWindowTone(command.parameters[0]);
-  return true;
 };

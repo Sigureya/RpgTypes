@@ -50,21 +50,19 @@ export const resolveVehicleLocation = (
 export const commandChangeVehicleBgm = (
   command: Command_ChangeVehicleBGM,
   map: Rmmz_MapVehicleContainer<Rmmz_Vehicle>,
-): boolean => {
+): void => {
   const vehicle = map.vehicle(command.parameters[0]);
   if (vehicle) {
     vehicle.setBgm(command.parameters[1]);
   }
-  return true;
 };
 
 export const commandChangeVehicleImage = (
   command: Command_ChangeVehicleImage,
   map: Rmmz_MapVehicleContainer<Rmmz_Vehicle>,
-): boolean => {
+): void => {
   const vehicle = map.vehicle(command.parameters[0]);
   if (vehicle) {
     vehicle.setImage(command.parameters[1], command.parameters[2]);
   }
-  return true;
 };

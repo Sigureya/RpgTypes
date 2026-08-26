@@ -11,21 +11,20 @@ import type {
 export const commandChangeActorClass = (
   command: Command_ChangeClaass,
   provider: Rmmz_ActorsReadonly<Rmmz_Actor>,
-): boolean => {
+): void => {
   const actor = provider.actor(command.parameters[0]);
   if (actor) {
     const classId = command.parameters[1];
     const keepExp = command.parameters[2];
     actor.changeClass(classId, keepExp);
   }
-  return true;
 };
 
 export const commandChangeActorImages = (
   { parameters }: Command_ChangeActorImages,
   provider: Rmmz_ActorsReadonly<Rmmz_Actor>,
   gamePlayer: Rmmz_PlayerCharactor,
-): boolean => {
+): void => {
   const actor = provider.actor(parameters[0]);
   if (actor) {
     actor.setCharacterImage(parameters[1], parameters[2]);
@@ -33,5 +32,4 @@ export const commandChangeActorImages = (
     actor.setBattlerImage(parameters[5]);
   }
   gamePlayer.refresh();
-  return true;
 };
