@@ -2,10 +2,12 @@ import type {
   Command_ChangeEnemyHP,
   Command_ChangeEnemyMP,
   Command_ChangeEnemyTP,
+  Command_EnemyRecoverAll,
 } from "@RpgTypes/rmmz/eventCommand";
 import { allowDeathByEnemy } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change";
 import type {
   Rmmz_Battler,
+  Rmmz_Battler_Poitns,
   Rmmz_Members,
   Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
@@ -27,9 +29,18 @@ export const iterateEnemyIndex = <T>(
   }
 };
 
+export const commandEnemyRecoverAll = (
+  command: Command_EnemyRecoverAll,
+  troop: Rmmz_Members<Pick<Rmmz_Battler, "recoverAll">>,
+): void => {
+  iterateEnemyIndex(troop, command.parameters[0], (enemy) => {
+    enemy.recoverAll();
+  });
+};
+
 export const commandChangeEnemyMp = (
   command: Command_ChangeEnemyMP,
-  troop: Rmmz_Members<Rmmz_Battler>,
+  troop: Rmmz_Members<Rmmz_Battler_Poitns>,
   variables: Rmmz_Variables,
 ): void => {
   const value = resolveCommandValueByEnemy(command, variables);
@@ -40,7 +51,7 @@ export const commandChangeEnemyMp = (
 
 export const commandChangeEnemyTp = (
   command: Command_ChangeEnemyTP,
-  troop: Rmmz_Members<Rmmz_Battler>,
+  troop: Rmmz_Members<Rmmz_Battler_Poitns>,
   variables: Rmmz_Variables,
 ): void => {
   const value = resolveCommandValueByEnemy(command, variables);
@@ -51,25 +62,25 @@ export const commandChangeEnemyTp = (
 
 export const commandChangeEnemyHp = (
   command: Command_ChangeEnemyHP,
-  troop: Rmmz_Members<Rmmz_Battler>,
+  troop: Rmmz_Members<Rmmz_Battler_Poitns>,
   variables: Rmmz_Variables,
 ): void => {
   const value = resolveCommandValueByEnemy(command, variables);
-  const death = allowDeathByEnemy(command);
+  const death: boolean = allowDeathByEnemy(command);
   const targetIndex: number = command.parameters[0];
   if (death) {
     iterateEnemyIndex(troop, targetIndex, (enemy) => {
-      enemy.gainHp(value, true);
+      enemy.gainHp(value);
     });
     return;
   }
   iterateEnemyIndex(troop, targetIndex, (enemy) => {
     const hpValue = hpValueEx(value, enemy);
-    enemy.gainHp(hpValue, false);
+    enemy.gainHp(hpValue);
   });
 };
 
-const hpValueEx = (value: number, battler: Rmmz_Battler): number => {
+const hpValueEx = (value: number, battler: Rmmz_Battler_Poitns): number => {
   const hp = battler.hp;
   if (hp <= -value) {
     return 1 - hp;

@@ -12,7 +12,7 @@ export interface Command_EnemyRecoverAll extends EventCommandLike<
 export interface Command_EnemyRecoverAllEach extends EventCommandLike<
   typeof ENEMY_RECOVER_ALL
 > {
-  parameters: [0];
+  parameters: [-1];
 }
 
 export type ParamArray_EnemyRecoverAll = [enemyIndex: number];

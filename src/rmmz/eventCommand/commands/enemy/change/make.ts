@@ -107,7 +107,7 @@ export const makeCommandGainEnemyHPVV = (
   code: 331,
   indent,
   parameters: [
-    param.enemyIndexVariableId,
+    param.enemyIndex,
     OPERATION_PLUS,
     OPERAND.variable,
     param.operandVariableId,
@@ -123,7 +123,7 @@ export const makeCommandLoseEnemyHPVV = (
   code: 331,
   indent,
   parameters: [
-    param.enemyIndexVariableId,
+    param.enemyIndex,
     OPERATION_MINUS,
     OPERAND.variable,
     param.operandVariableId,
@@ -138,7 +138,7 @@ export const makeCommandGainEnemyMP2 = (
   code: 332,
   indent,
   parameters: [
-    param.enemyIndexVariableId,
+    param.enemyIndex,
     OPERATION_PLUS,
     OPERAND.variable,
     param.operandVariableId,
@@ -180,7 +180,7 @@ export const makeCommandGainEnemyMPVV = (
   code: 332,
   indent,
   parameters: [
-    param.enemyIndexVariableId,
+    param.enemyIndex,
     OPERATION_PLUS,
     OPERAND.variable,
     param.operandVariableId,
@@ -194,7 +194,7 @@ export const makeCommandLoseEnemyMPVV = (
   code: 332,
   indent,
   parameters: [
-    param.enemyIndexVariableId,
+    param.enemyIndex,
     OPERATION_MINUS,
     OPERAND.variable,
     param.operandVariableId,
@@ -272,7 +272,7 @@ export const makeCommandGainEnemyTPVV = (
   code: 342,
   indent,
   parameters: [
-    param.enemyIndexVariableId,
+    param.enemyIndex,
     OPERATION_PLUS,
     OPERAND.variable,
     param.operandVariableId,
@@ -286,7 +286,7 @@ export const makeCommandLoseEnemyTPVV = (
   code: 342,
   indent,
   parameters: [
-    param.enemyIndexVariableId,
+    param.enemyIndex,
     OPERATION_MINUS,
     OPERAND.variable,
     param.operandVariableId,

@@ -30,7 +30,7 @@ const runTestCase = (testCase: TestCase) => {
 };
 
 const vvParam: ParamObject_ChangeEnemyMp2 = {
-  enemyIndexVariableId: 9,
+  enemyIndex: 9,
   operandVariableId: 12,
 };
 
