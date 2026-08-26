@@ -18,7 +18,7 @@ export type ParamArray_ChangeEnemyValueBase = [
 export type ParamArray_ChangeEnemyValue = ParamArray_ChangeEnemyValueBase;
 
 export interface ParamObject_ChangeEnemyValueVV {
-  enemyIndexVariableId: number;
+  enemyIndex: number;
   operandVariableId: number;
 }
 
