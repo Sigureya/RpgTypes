@@ -70,13 +70,13 @@ export const commandChangeEnemyHp = (
   const targetIndex: number = command.parameters[0];
   if (death) {
     iterateEnemyIndex(troop, targetIndex, (enemy) => {
-      enemy.gainHp(value, true);
+      enemy.gainHp(value);
     });
     return;
   }
   iterateEnemyIndex(troop, targetIndex, (enemy) => {
     const hpValue = hpValueEx(value, enemy);
-    enemy.gainHp(hpValue, false);
+    enemy.gainHp(hpValue);
   });
 };
 
