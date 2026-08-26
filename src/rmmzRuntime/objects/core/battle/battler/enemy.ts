@@ -1,4 +1,8 @@
-import type { Data_AnyGoodsUnion, Data_Enemy } from "@RpgTypes/rmmz/rpg";
+import type {
+  Data_AnyGoodsUnion,
+  Data_Enemy,
+  Enemy_Action,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_Battler } from "./battler";
 import type { Rmmz_EnemyBase } from "./enemyBase/enemy";
 
@@ -11,4 +15,5 @@ export interface Rmmz_Enemy extends Rmmz_Battler, Rmmz_EnemyBase {
   enemy(): Data_Enemy;
   appear(): void;
   transform(enemyId: number): void;
+  meetsCondition(action: Enemy_Action): boolean;
 }

@@ -5,3 +5,15 @@ export interface Enemy_Action {
   skillId: number;
   rating: number;
 }
+
+export interface Enemy_Action_Base {
+  skillId: number;
+  rating: number;
+}
+
+export interface Enemy_Action_Turn extends Enemy_Action_Base {
+  skillId: number;
+  rating: number;
+  turnA: number;
+  turnB: number;
+}

@@ -7,6 +7,7 @@ import type {
 
 export interface Rmmz_Enemy_Constructor {
   new (enemyId: number, x: number, y: number): Rmmz_Enemy;
+  prototype: Rmmz_Enemy;
 }
 
 export interface Rmmz_Actor_Constructor {
