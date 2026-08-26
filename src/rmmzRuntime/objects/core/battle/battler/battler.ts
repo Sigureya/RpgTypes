@@ -8,6 +8,7 @@ export interface Rmmz_Battler_Poitns {
   loseHp(value: number): void;
   loseMp(value: number): void;
   loseTp(value: number): void;
+  get hp(): number;
 }
 
 export interface Rmmz_Battler extends Rmmz_BattlerBase, Rmmz_Battler_Poitns {
