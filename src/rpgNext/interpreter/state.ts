@@ -9,6 +9,7 @@ import type {
 import { evaluteBranchCommand } from "@RpgTypes/rmmzFunctional";
 import { setupChoiceNN, setupNumberInputNN } from "./message";
 import { exitXXX, indexNext } from "./wait";
+import type { Rmmz_Managers } from "@RpgTypes/rmmzRuntime/managers/manager";
 
 const runXXX = (
   xx: InterpreterGGG,
@@ -16,10 +17,19 @@ const runXXX = (
   objects: Rmmz_GameObjects,
   data: Provider_RpgData,
   p: Provider_GameObjects,
+  managers: Rmmz_Managers,
 ): InterpreterGGG | undefined => {
   let state: InterpreterState2 = xx.state;
   for (let i = 0; i < limit; ++i) {
-    const newState = eeeCommand(xx.mapId, state, xx.commands, objects, data, p);
+    const newState = eeeCommand(
+      xx.mapId,
+      state,
+      xx.commands,
+      objects,
+      data,
+      p,
+      managers,
+    );
     if (newState === undefined) {
       // メッセージ待機などの理由によりイベント実行が延期された
       return {
@@ -42,6 +52,7 @@ const eeeCommand = (
   objects: Rmmz_GameObjects,
   data: Provider_RpgData,
   p: Provider_GameObjects,
+  managers: Rmmz_Managers,
 ): InterpreterState2 | undefined => {
   if (state.index >= commandList.length) {
     return exitXXX();
@@ -59,7 +70,7 @@ const eeeCommand = (
   if (command.code === INPUT_NUMBER) {
     return setupNumberInputNN(state, command, objects.message);
   }
-  executeSideEffectCommand(command, objects, data);
+  executeSideEffectCommand(command, objects, data, managers);
   return indexNext(state);
 };
 
