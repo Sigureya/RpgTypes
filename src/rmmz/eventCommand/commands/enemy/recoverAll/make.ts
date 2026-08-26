@@ -5,18 +5,18 @@ import type {
 } from "./types";
 
 export const makeCommandEnemyRecoverAllEach = (
-  indent: number = 0
+  indent: number = 0,
 ): Command_EnemyRecoverAllEach => {
   return {
     code: 334,
     indent,
-    parameters: [0],
+    parameters: [-1],
   };
 };
 
 export const makeCommandEnemyRecoverAll = (
   param: { enemyIndex: number },
-  indent: number = 0
+  indent: number = 0,
 ): Command_EnemyRecoverAll => {
   return {
     code: 334,
