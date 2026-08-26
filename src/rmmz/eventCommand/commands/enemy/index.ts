@@ -1,11 +1,4 @@
-export type {
-  Command_ChangeEnemyHP,
-  Command_ChangeEnemyMP,
-  Command_ChangeEnemyTP,
-  ParamArray_ChangeEnemyHP,
-  ParamArray_ChangeEnemyValue,
-  ParamArray_GainEnemyMP,
-} from "./change/types";
+export * from "./change";
 
 export type {
   Command_ChangeEnemyState,
