@@ -29,8 +29,6 @@ const MOCK_HP = 100;
 const MOCK_VARIABLE_VALUE = 64;
 
 const MOCK_VARIABLE_ID_VALUE = 22;
-const MOCK_VARIABLE_ID_ENEMY_INDEX = 123;
-const MOCK_TARGET_ENEMY_INDEX_V = 1;
 
 type MockedEnemy = MockedObject<
   Rmmz_Battler_Poitns & {
@@ -72,9 +70,6 @@ const createMockedVariables = (): MockedObject<Rmmz_Variables> => {
     value: vi.fn((id) => {
       if (id === MOCK_VARIABLE_ID_VALUE) {
         return MOCK_VARIABLE_VALUE;
-      }
-      if (id === MOCK_VARIABLE_ID_ENEMY_INDEX) {
-        return MOCK_TARGET_ENEMY_INDEX_V;
       }
       return 0;
     }),
@@ -272,7 +267,8 @@ describe("commandChangeEnemyTp", () => {
           targetIndex: 2,
           operand: { mode: "direct", value: 7 },
         }),
-        contextTest: ({ battlers }) => {
+        contextTest: ({ battlers, variables }) => {
+          expect(variables.value).not.toHaveBeenCalled();
           expect(battlers[2].gainTp).toHaveBeenCalledOnce();
           expect(battlers[2].gainTp).toHaveBeenCalledWith(7);
         },
@@ -335,6 +331,23 @@ describe("commandChangeEnemyHp", () => {
           battlers.forEach((enemy) => {
             expect(enemy.gainHp).toHaveBeenCalledOnce();
             expect(enemy.gainHp).toHaveBeenCalledWith(40);
+          });
+        },
+      },
+      {
+        command: makeCommandGainEnemyHPVV(
+          {
+            enemyIndex: -1,
+            operandVariableId: MOCK_VARIABLE_ID_VALUE,
+          },
+          false,
+        ),
+        contextTest: ({ battlers, variables }) => {
+          expect(variables.value).toHaveBeenCalledWith(MOCK_VARIABLE_ID_VALUE);
+          expect(variables.value).toHaveBeenCalledTimes(1);
+          battlers.forEach((enemy) => {
+            expect(enemy.gainHp).toHaveBeenCalledOnce();
+            expect(enemy.gainHp).toHaveBeenCalledWith(MOCK_VARIABLE_VALUE);
           });
         },
       },
