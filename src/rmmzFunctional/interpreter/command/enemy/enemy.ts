@@ -2,13 +2,17 @@ import type {
   Command_ChangeEnemyHP,
   Command_ChangeEnemyMP,
   Command_ChangeEnemyTP,
+  Command_EnemyAppear,
   Command_EnemyRecoverAll,
+  Command_EnemyTransform,
 } from "@RpgTypes/rmmz/eventCommand";
 import { allowDeathByEnemy } from "@RpgTypes/rmmz/eventCommand/commands/enemy/change";
 import type {
   Rmmz_Battler,
   Rmmz_Battler_Poitns,
+  Rmmz_Enemy,
   Rmmz_Members,
+  Rmmz_Troop,
   Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
 import { operateValue } from "@RpgTypes/rmmzRuntime";
@@ -27,6 +31,26 @@ export const iterateEnemyIndex = <T>(
   if (enemy) {
     fn(enemy);
   }
+};
+
+export const commandEnemyAppear = <T extends Pick<Rmmz_Enemy, "appear">>(
+  command: Command_EnemyAppear,
+  troop: Pick<Rmmz_Troop<T>, "members" | "makeUniqueNames">,
+): void => {
+  iterateEnemyIndex(troop, command.parameters[0], (enemy) => {
+    enemy.appear();
+  });
+  troop.makeUniqueNames();
+};
+
+export const commandEnemyTransform = <T extends Pick<Rmmz_Enemy, "transform">>(
+  command: Command_EnemyTransform,
+  troop: Pick<Rmmz_Troop<T>, "members" | "makeUniqueNames">,
+): void => {
+  iterateEnemyIndex(troop, command.parameters[0], (enemy) => {
+    enemy.transform(command.parameters[1]);
+  });
+  troop.makeUniqueNames();
 };
 
 export const commandEnemyRecoverAll = (
