@@ -1,4 +1,8 @@
-import type { Command_SetVehicleLocation } from "@RpgTypes/rmmz/eventCommand";
+import type {
+  Command_ChangeVehicleBGM,
+  Command_ChangeVehicleImage,
+  Command_SetVehicleLocation,
+} from "@RpgTypes/rmmz/eventCommand";
 import type {
   Rmmz_MapVehicleContainer,
   Rmmz_Vehicle,
@@ -41,4 +45,26 @@ export const resolveVehicleLocation = (
     x: variables.value(command.parameters[3]),
     y: variables.value(command.parameters[4]),
   };
+};
+
+export const commandChangeVehicleBgm = (
+  command: Command_ChangeVehicleBGM,
+  map: Rmmz_MapVehicleContainer<Rmmz_Vehicle>,
+): boolean => {
+  const vehicle = map.vehicle(command.parameters[0]);
+  if (vehicle) {
+    vehicle.setBgm(command.parameters[1]);
+  }
+  return true;
+};
+
+export const commandChangeVehicleImage = (
+  command: Command_ChangeVehicleImage,
+  map: Rmmz_MapVehicleContainer<Rmmz_Vehicle>,
+): boolean => {
+  const vehicle = map.vehicle(command.parameters[0]);
+  if (vehicle) {
+    vehicle.setImage(command.parameters[1], command.parameters[2]);
+  }
+  return true;
 };
