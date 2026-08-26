@@ -10,7 +10,7 @@ export interface Rmmz_MapId {
 
 export interface Rmmz_MapEventContainer<Event = Rmmz_Event> {
   events(): Event[];
-  event(eventId: number): Event | undefined;
+  event(eventId: number): Event | undefined | null;
   setupEvents(): void;
   eraseEvent(eventId: number): void;
   eventsXy(x: number, y: number): Event[];
@@ -26,9 +26,18 @@ export interface Rmmz_MapVehicleContainer<T = Rmmz_Vehicle> {
   airship(): T;
 }
 
+export interface Rmmz_MapLocationSource<T> {
+  terrainTag(x: number, y: number): number;
+  eventIdXy(x: number, y: number): number;
+  tileId(x: number, y: number, z: number): number;
+  regionId(x: number, y: number): number;
+  event(eventId: number): T | null | undefined;
+}
+
 export interface Rmmz_Map
   extends
     Rmmz_MapId,
+    Rmmz_MapLocationSource<Rmmz_Event>,
     Rmmz_MapEventContainer<Rmmz_Event>,
     Rmmz_MapVehicleContainer<Rmmz_Vehicle> {
   initialize(): void;
