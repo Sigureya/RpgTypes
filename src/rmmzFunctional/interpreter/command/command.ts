@@ -65,104 +65,105 @@ export const executeSideEffectCommand = (
   objects: Rmmz_GameObjects,
   data: Provider_RpgData,
   manaegers: Rmmz_Managers,
-): boolean => {
+): void => {
   switch (command.code) {
     case CHANGE_GOLD:
-      return executeChangeGold(command, objects.party, objects.variables);
+      executeChangeGold(command, objects.party, objects.variables);
+      return;
     case CHANGE_ITEMS:
-      return executeChangeItems(
-        command,
-        data,
-        objects.party,
-        objects.variables,
-      );
+      executeChangeItems(command, data, objects.party, objects.variables);
+      return;
     case CHANGE_WEAPONS:
-      return executeChangeWeapons(
-        command,
-        data,
-        objects.party,
-        objects.variables,
-      );
+      executeChangeWeapons(command, data, objects.party, objects.variables);
+      return;
     case CHANGE_ARMORS:
-      return executeChangeArmors(
-        command,
-        data,
-        objects.party,
-        objects.variables,
-      );
+      executeChangeArmors(command, data, objects.party, objects.variables);
+      return;
     case CHANGE_DEFEAT_ME:
-      return commandChangeDefeatMe(command, objects.system);
+      commandChangeDefeatMe(command, objects.system);
+      return;
     case CHANGE_VICTORY_ME:
-      return commandChangeVictoryMe(command, objects.system);
+      commandChangeVictoryMe(command, objects.system);
+      return;
     case CHANGE_BATTLE_BGM:
-      return commandChangeBattleBgm(command, objects.system);
+      commandChangeBattleBgm(command, objects.system);
+      return;
     case SAVE_BGM:
-      return commmandSaveBgm(objects.system);
+      commmandSaveBgm(objects.system);
+      return;
     case CHANGE_HP:
-      return commandChangeActorHp(
+      commandChangeActorHp(
         command,
         objects.actors,
         objects.party,
         objects.variables,
       );
+      return;
     case CHANGE_MP:
-      return commandChangeActorMp(
+      commandChangeActorMp(
         command,
         objects.actors,
         objects.party,
         objects.variables,
       );
+      return;
     case CHANGE_TP:
-      return commandChangeActorTp(
+      commandChangeActorTp(
         command,
         objects.actors,
         objects.party,
         objects.variables,
       );
+      return;
     case CHANGE_NAME:
-      return commandChangeActorName(command, objects.actors);
+      commandChangeActorName(command, objects.actors);
+      return;
     case CHANGE_PROFILE:
-      return commandChangeActorProfile(command, objects.actors);
+      commandChangeActorProfile(command, objects.actors);
+      return;
     case CHANGE_NICKNAME:
-      return commandChangeActorNickName(command, objects.actors);
+      commandChangeActorNickName(command, objects.actors);
+      return;
     case CHANGE_LEVEL:
-      return commandChangeActorLevel(
+      commandChangeActorLevel(
         command,
         objects.actors,
         objects.party,
         objects.variables,
       );
+      return;
     case CHANGE_EXP:
-      return commandChangeActorExp(
+      commandChangeActorExp(
         command,
         objects.actors,
         objects.party,
         objects.variables,
       );
+      return;
     case CHANGE_CLASS:
-      return commandChangeActorClass(command, objects.actors);
+      commandChangeActorClass(command, objects.actors);
+      return;
     case CHANGE_ACTOR_IMAGES:
-      return commandChangeActorImages(command, objects.actors, objects.player);
+      commandChangeActorImages(command, objects.actors, objects.player);
+      return;
     case PLAY_BGM:
       commandPlayBgm(command, manaegers.audio);
-      return true;
+      return;
     case PLAY_BGS:
       commandPlayBgs(command, manaegers.audio);
-      return true;
+      return;
     case PLAY_ME:
       commandPlayMe(command, manaegers.audio);
-      return true;
+      return;
     case PLAY_SE:
       commandPlaySe(command, manaegers.audio);
-      return true;
+      return;
     case FADEOUT_BGM:
       commandFadeOutBgm(command, manaegers.audio);
-      return true;
+      return;
     case FADEOUT_BGS:
       commandFadeOutBgs(command, manaegers.audio);
-      return true;
+      return;
     default:
-      return true;
   }
-  return true;
 };

@@ -19,11 +19,10 @@ export const commandChangeActorHp = (
   provider: Rmmz_ActorsReadonly<Rmmz_Actor>,
   party: Rmmz_BattlerContainer_Readonly<Rmmz_Actor>,
   variables: Rmmz_Variables,
-) => {
+): void => {
   cmdx(command, party, provider, variables, (actor, value) => {
     actor.gainHp(value, command.parameters[5]);
   });
-  return true;
 };
 
 export const commandChangeActorMp = (
@@ -31,11 +30,10 @@ export const commandChangeActorMp = (
   provider: Rmmz_Actors,
   party: Rmmz_BattlerContainer_Readonly<Rmmz_Actor>,
   variables: Rmmz_Variables,
-) => {
+): void => {
   cmdx(command, party, provider, variables, (actor, value) => {
     actor.gainMp(value);
   });
-  return true;
 };
 
 export const commandChangeActorTp = (
@@ -43,11 +41,10 @@ export const commandChangeActorTp = (
   provider: Rmmz_Actors,
   party: Rmmz_BattlerContainer_Readonly<Rmmz_Actor>,
   variables: Rmmz_Variables,
-) => {
+): void => {
   cmdx(command, party, provider, variables, (actor, value) => {
     actor.gainTp(value);
   });
-  return true;
 };
 
 export const commandChangeActorExp = (
@@ -55,12 +52,11 @@ export const commandChangeActorExp = (
   provider: Rmmz_ActorsReadonly<Rmmz_Actor>,
   party: Rmmz_BattlerContainer_Readonly<Rmmz_Actor>,
   variables: Rmmz_Variables,
-) => {
+): void => {
   cmdx(command, party, provider, variables, (actor, value) => {
     const current = actor.currentExp();
     actor.changeExp(current + value, command.parameters[5]);
   });
-  return true;
 };
 
 export const commandChangeActorLevel = (
@@ -68,12 +64,11 @@ export const commandChangeActorLevel = (
   provider: Rmmz_ActorsReadonly<Rmmz_Actor>,
   party: Rmmz_BattlerContainer_Readonly<Rmmz_Actor>,
   variables: Rmmz_Variables,
-) => {
+): void => {
   cmdx(command, party, provider, variables, (actor, value) => {
     const current = actor.level;
     actor.changeLevel(current + value, command.parameters[5]);
   });
-  return true;
 };
 
 const cmdx = (

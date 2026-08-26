@@ -8,28 +8,24 @@ import type { Rmmz_System } from "@RpgTypes/rmmzRuntime";
 export const commandChangeDefeatMe = (
   command: Command_ChangeDefeatME,
   system: Rmmz_System,
-): boolean => {
+): void => {
   system.setDefeatMe(command.parameters[0]);
-  return true;
 };
 
 export const commandChangeVictoryMe = (
   command: Command_ChangeVictoryME,
   system: Rmmz_System,
-): boolean => {
+): void => {
   system.setVictoryMe(command.parameters[0]);
-  return true;
 };
 
 export const commandChangeBattleBgm = (
   command: Command_ChangeBattleBGM,
   system: Rmmz_System,
-): boolean => {
+): void => {
   system.setBattleBgm(command.parameters[0]);
-  return true;
 };
 
-export const commmandSaveBgm = (system: Rmmz_System) => {
+export const commmandSaveBgm = (system: Rmmz_System): void => {
   system.saveBgm();
-  return true;
 };

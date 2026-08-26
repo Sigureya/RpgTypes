@@ -10,10 +10,9 @@ export const commandGetLocationInfo = (
   sourceEventId: number,
   variables: Rmmz_Variables,
   map: Rmmz_MapLocationSource<Point>,
-): boolean => {
+): void => {
   const value = resolveLocationInfo(command, sourceEventId, variables, map);
   variables.setValue(command.parameters[0], value);
-  return true;
 };
 
 export const resolveLocationInfo = (

@@ -5,12 +5,11 @@ export const commandChangeEncounter = (
   command: Command_ChangeEncounter,
   system: Rmmz_System,
   player: Rmmz_PlayerCharactor,
-): boolean => {
+): void => {
   if (command.parameters[0] === 0) {
     system.disableEncounter();
   } else {
     system.enableEncounter();
   }
   player.makeEncounterCount();
-  return true;
 };
