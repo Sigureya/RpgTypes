@@ -251,7 +251,6 @@ interface TestCase {
   expected: number;
   command: Command_ControlVariables_FromGameData;
   contextTest: (objects: TestContext) => void;
-  interpreterContextTest?: (objects: TestContext) => void;
 }
 
 const stubGameDataGlobals = (context: TestContext) => {
@@ -308,7 +307,6 @@ const runTestCase = (testCase: TestCase): void => {
         testCase.command.parameters[6] as number,
       );
       expect(result).toBe(testCase.expected);
-      testCase.interpreterContextTest?.(context);
     });
   });
 };
@@ -385,10 +383,6 @@ const testCases: TestCase[] = [
     contextTest: (context) => {
       expect(context.provider.gameEnemy).toHaveBeenCalledOnce();
       expect(context.provider.gameEnemy).toHaveBeenCalledWith(MOCK_ENEMY_INDEX);
-    },
-    interpreterContextTest: () => {
-      // Game_Interpreter.prototype.gameDataOperand reads $gameTroop.members(),
-      // not the provider-based variable source.
     },
   },
   {
