@@ -1,5 +1,11 @@
 import { makeParamArray } from "../members";
-import type { Data_Enemy, DropItem, Enemy_Action } from "./types";
+import { ENEMY_ACTION_CONDITION_TURN } from "./constants";
+import type {
+  Data_Enemy,
+  DropItem,
+  Enemy_Action,
+  Enemy_Action_Turn,
+} from "./types";
 
 export const makeDropItem = (dropItem: Partial<DropItem> = {}): DropItem => ({
   dataId: dropItem.dataId ?? 0,
@@ -8,7 +14,7 @@ export const makeDropItem = (dropItem: Partial<DropItem> = {}): DropItem => ({
 });
 
 export const makeEnemyAction = (
-  action: Partial<Enemy_Action> = {}
+  action: Partial<Enemy_Action> = {},
 ): Enemy_Action => ({
   conditionParam1: action.conditionParam1 ?? 0,
   conditionParam2: action.conditionParam2 ?? 0,
@@ -17,6 +23,16 @@ export const makeEnemyAction = (
 
   skillId: action.skillId ?? 0,
 });
+
+export const makeEnemyActionTurn = (e: Enemy_Action_Turn): Enemy_Action => {
+  return {
+    conditionParam1: e.turnA,
+    conditionParam2: e.turnB,
+    conditionType: ENEMY_ACTION_CONDITION_TURN,
+    rating: e.rating,
+    skillId: e.skillId,
+  };
+};
 
 export const makeEnemyData = (data: Partial<Data_Enemy> = {}): Data_Enemy => ({
   name: data.name ?? "",
