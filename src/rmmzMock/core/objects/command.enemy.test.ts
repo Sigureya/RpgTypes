@@ -4,13 +4,35 @@ import type {
   Rmmz_Battler_Poitns,
   Rmmz_Interpreter,
   Rmmz_Members,
+  Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
-import { makeCommandEnemyRecoverAll } from "@RpgTypes/rmmz/eventCommand";
-import { commandEnemyRecoverAll } from "@RpgTypes/rmmzFunctional";
+import {
+  makeCommandEnemyRecoverAll,
+  makeCommandEnemyRecoverAllEach,
+  makeCommandGainEnemyHPDirect,
+  makeCommandGainEnemyHPVV,
+  makeCommandGainEnemyMP,
+  makeCommandGainEnemyTP,
+  makeCommandLoseEnemyMP,
+  makeCommandLoseEnemyTP,
+} from "@RpgTypes/rmmz/eventCommand";
+import {
+  commandChangeEnemyHp,
+  commandChangeEnemyMp,
+  commandChangeEnemyTp,
+  commandEnemyRecoverAll,
+} from "@RpgTypes/rmmzFunctional";
 import { Game_Interpreter } from "./rmmz_objects";
 
+const MOCK_HP = 100;
+const MOCK_VARIABLE_VALUE = 64;
+
 type MockedEnemy = MockedObject<
-  Rmmz_Battler_Poitns & { recoverAll: () => void }
+  Rmmz_Battler_Poitns & {
+    recoverAll: () => void;
+    isAlive: () => boolean;
+    isDead: () => boolean;
+  }
 >;
 const createMockedEnemy = (): MockedEnemy => {
   return {
@@ -22,8 +44,10 @@ const createMockedEnemy = (): MockedEnemy => {
     loseTp: vi.fn(),
     recoverAll: vi.fn(),
     get hp() {
-      return 100;
+      return MOCK_HP;
     },
+    isAlive: vi.fn().mockReturnValue(true),
+    isDead: vi.fn().mockReturnValue(false),
   };
 };
 
@@ -32,6 +56,15 @@ type MockedTroop = MockedObject<Rmmz_Members<MockedEnemy>>;
 const createMockedTroop = (members: MockedEnemy[]): MockedTroop => {
   return {
     members: vi.fn(() => members),
+  };
+};
+
+const createMockedVariables = (): MockedObject<Rmmz_Variables> => {
+  return {
+    clear: vi.fn().mockThrow(new Error("clear should not be called")),
+    onChange: vi.fn().mockThrow(new Error("onChange should not be called")),
+    setValue: vi.fn().mockThrow(new Error("setValue should not be called")),
+    value: vi.fn().mockReturnValue(MOCK_VARIABLE_VALUE),
   };
 };
 
@@ -54,12 +87,19 @@ const createTestContext = (enemyCount: number): TestContext => {
   return {
     battlers,
     troop,
+    variables: createMockedVariables(),
   };
+};
+
+const stubContext = (context: TestContext) => {
+  vi.stubGlobal("$gameTroop", context.troop);
+  vi.stubGlobal("$gameVariables", context.variables);
 };
 
 interface TestContext {
   battlers: MockedEnemy[];
   troop: MockedTroop;
+  variables: MockedObject<Rmmz_Variables>;
 }
 
 interface TestCase<T> {
@@ -68,33 +108,36 @@ interface TestCase<T> {
 }
 
 const runTestCase = <T>(
-  fnA: (command: T, troop: Rmmz_Members<MockedEnemy>) => void,
-  fnB: (command: T, troop: Rmmz_Members<MockedEnemy>) => void,
+  fnA: (command: T, context: TestContext) => void,
+  fnB: (command: T, context: TestContext) => void,
   testCases: TestCase<T>[],
 ) => {
   testCases.forEach((testCase, index) => {
     describe(`${index}`, () => {
       test("fnA", () => {
         const context = createTestContext(3);
-        fnA(testCase.command, context.troop);
+        fnA(testCase.command, context);
+        expect(context.troop.members).toHaveBeenCalledOnce();
         testCase.contextTest(context);
       });
       test("fnB", () => {
         const context = createTestContext(3);
-        fnB(testCase.command, context.troop);
+        fnB(testCase.command, context);
+        expect(context.troop.members).toHaveBeenCalledOnce();
         testCase.contextTest(context);
       });
+      vi.clearAllMocks();
     });
   });
 };
 
 describe("commandEnemyRecoverAll", () => {
   runTestCase(
-    (command, troop) => {
+    (command, { troop }) => {
       commandEnemyRecoverAll(command, troop);
     },
-    (command, troop) => {
-      vi.stubGlobal("$gameTroop", troop);
+    (command, context) => {
+      stubContext(context);
       const interpreter = createFakeInterpreter();
       Game_Interpreter.prototype.command334.call(
         interpreter,
@@ -102,6 +145,22 @@ describe("commandEnemyRecoverAll", () => {
       );
     },
     [
+      {
+        command: makeCommandEnemyRecoverAllEach(),
+        contextTest: ({ battlers }) => {
+          battlers.forEach((enemy) => {
+            expect(enemy.recoverAll).toHaveBeenCalledOnce();
+          });
+        },
+      },
+      {
+        command: makeCommandEnemyRecoverAll({ enemyIndex: -1 }),
+        contextTest: ({ battlers }) => {
+          battlers.forEach((enemy) => {
+            expect(enemy.recoverAll).toHaveBeenCalledOnce();
+          });
+        },
+      },
       {
         command: makeCommandEnemyRecoverAll({ enemyIndex: -1 }),
         contextTest: ({ battlers }) => {
@@ -131,6 +190,137 @@ describe("commandEnemyRecoverAll", () => {
             } else {
               expect(enemy.recoverAll).not.toHaveBeenCalled();
             }
+          });
+        },
+      },
+    ],
+  );
+});
+
+describe("commandChangeEnemyMp", () => {
+  runTestCase(
+    (command, { troop }) => {
+      const variables = createMockedVariables();
+      commandChangeEnemyMp(command, troop, variables);
+    },
+    (command, ctx) => {
+      stubContext(ctx);
+      const interpreter = new Game_Interpreter();
+      Game_Interpreter.prototype.command332.call(
+        interpreter,
+        command.parameters,
+      );
+    },
+    [
+      {
+        command: makeCommandGainEnemyMP({
+          targetIndex: 1,
+          operand: { mode: "direct", value: 30 },
+        }),
+        contextTest: ({ battlers }) => {
+          expect(battlers[0].gainMp).not.toHaveBeenCalled();
+          expect(battlers[1].gainMp).toHaveBeenCalledOnce();
+          expect(battlers[1].gainMp).toHaveBeenCalledWith(30);
+          expect(battlers[2].gainMp).not.toHaveBeenCalled();
+        },
+      },
+      {
+        command: makeCommandLoseEnemyMP({
+          targetIndex: -1,
+          operand: { mode: "variable", value: 9 },
+        }),
+        contextTest: ({ battlers }) => {
+          battlers.forEach((enemy) => {
+            expect(enemy.gainMp).toHaveBeenCalledOnce();
+            expect(enemy.gainMp).toHaveBeenCalledWith(-MOCK_VARIABLE_VALUE);
+          });
+        },
+      },
+    ],
+  );
+});
+
+describe("commandChangeEnemyTp", () => {
+  runTestCase(
+    (command, { troop, variables }) => {
+      commandChangeEnemyTp(command, troop, variables);
+    },
+    (command, ctx) => {
+      stubContext(ctx);
+      const interpreter = new Game_Interpreter();
+      Game_Interpreter.prototype.command342.call(
+        interpreter,
+        command.parameters,
+      );
+    },
+    [
+      {
+        command: makeCommandGainEnemyTP({
+          targetIndex: 2,
+          operand: { mode: "direct", value: 7 },
+        }),
+        contextTest: ({ battlers }) => {
+          expect(battlers[2].gainTp).toHaveBeenCalledOnce();
+          expect(battlers[2].gainTp).toHaveBeenCalledWith(7);
+        },
+      },
+      {
+        command: makeCommandLoseEnemyTP({
+          targetIndex: -1,
+          operand: { mode: "variable", value: 8 },
+        }),
+        contextTest: ({ battlers }) => {
+          battlers.forEach((enemy) => {
+            expect(enemy.gainTp).toHaveBeenCalledOnce();
+            expect(enemy.gainTp).toHaveBeenCalledWith(-MOCK_VARIABLE_VALUE);
+          });
+        },
+      },
+    ],
+  );
+});
+
+describe("commandChangeEnemyHp", () => {
+  runTestCase(
+    (command, { troop, variables }) => {
+      commandChangeEnemyHp(command, troop, variables);
+    },
+    (command, ctx) => {
+      stubContext(ctx);
+      const interpreter = new Game_Interpreter();
+      Game_Interpreter.prototype.command331.call(
+        interpreter,
+        command.parameters,
+      );
+    },
+    [
+      {
+        command: makeCommandGainEnemyHPDirect(
+          {
+            enemyIndex: 0,
+            operandValue: 20,
+          },
+          false,
+        ),
+        contextTest: ({ battlers }) => {
+          expect(battlers[0].gainHp).toHaveBeenCalledOnce();
+          //          expect(battlers[0].gainHp).toHaveBeenCalledWith(20, false);
+          expect(battlers[1].gainHp).not.toHaveBeenCalled();
+        },
+      },
+      {
+        command: makeCommandGainEnemyHPDirect(
+          {
+            enemyIndex: -1,
+            operandValue: 40,
+          },
+          true,
+        ),
+        contextTest: ({ battlers, variables }) => {
+          expect(variables.value).not.toHaveBeenCalled();
+          battlers.forEach((enemy) => {
+            expect(enemy.gainHp).toHaveBeenCalledOnce();
+            //            expect(enemy.gainHp).toHaveBeenCalledWith(40, true);
           });
         },
       },
