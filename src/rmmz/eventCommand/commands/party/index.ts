@@ -7,11 +7,4 @@ export type {
   ParamArray_ChangePartyMember,
   ParamObject_ChangePartyMember,
 } from "./types/changeMember";
-export {
-  makeCommandAddPartyMember,
-  makeCommandGainGold,
-  makeCommandGainGoldByVariable,
-  makeCommandLoseGold,
-  makeCommandLoseGoldByVariable,
-  makeCommandRemovePartyMember,
-} from "./changeMember";
+export * from "./changeMember";

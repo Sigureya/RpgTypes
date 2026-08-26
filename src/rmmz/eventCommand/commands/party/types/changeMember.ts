@@ -14,6 +14,7 @@ export interface Command_ChangePartyMember extends EventCommandLike<
 export type ParamArray_ChangePartyMember = [
   operation: ValueOf<Operation_PlusMinus>,
   actorId: number,
+  requireActorInitialize: boolean,
 ];
 
 export interface ParamObject_ChangePartyMember {
