@@ -9,4 +9,6 @@ export interface Rmmz_Enemy extends Rmmz_Battler, Rmmz_EnemyBase {
   battlerName(): string;
   originalName(): string;
   enemy(): Data_Enemy;
+  appear(): void;
+  transform(enemyId: number): void;
 }
