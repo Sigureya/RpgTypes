@@ -5,6 +5,7 @@ import type { Rmmz_Battler } from "./battler";
 
 export interface Rmmz_Actor extends Rmmz_Battler, Rmmz_Level, Rmmz_ActorTexts {
   actorId(): number;
+  setup(actorId: number): void;
   changeEquipById(etypeId: number, itemId: number): void;
   setName(name: string): void;
   setCharacterImage(characterName: string, characterIndex: number): void;

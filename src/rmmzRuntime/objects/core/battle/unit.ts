@@ -19,6 +19,8 @@ export interface Rmmz_Party
   _actors: number[];
   size(): number;
   highestLevel(): number;
+  addActor(actorId: number): void;
+  removeActor(actorId: number): void;
 }
 
 export interface Rmmz_Troop
