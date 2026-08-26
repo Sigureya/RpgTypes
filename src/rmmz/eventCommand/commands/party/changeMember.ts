@@ -8,12 +8,24 @@ import type {
   ParamObject_ChangePartyMember,
 } from "./types/changeMember";
 
+export const isPartyRemoveCommand = (
+  command: Command_ChangePartyMember,
+): boolean => {
+  return command.parameters[0] === 1;
+};
+
+export const requiredActorInitialize = (
+  command: Command_ChangePartyMember,
+): boolean => {
+  return command.parameters[2];
+};
+
 export const makeCommandAddPartyMember = (
   param: ParamObject_ChangePartyMember,
   indent = 0,
 ): Command_ChangePartyMember => ({
   code: 129,
-  parameters: [0, param.actorId],
+  parameters: [0, param.actorId, !!param.initialize],
   indent,
 });
 
@@ -22,7 +34,7 @@ export const makeCommandRemovePartyMember = (
   indent = 0,
 ): Command_ChangePartyMember => ({
   code: 129,
-  parameters: [1, param.actorId],
+  parameters: [1, param.actorId, false],
   indent,
 });
 
