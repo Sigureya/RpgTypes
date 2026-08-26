@@ -17,6 +17,12 @@ import {
   CHANGE_TP,
   CHANGE_VICTORY_ME,
   CHANGE_WEAPONS,
+  FADEOUT_BGM,
+  FADEOUT_BGS,
+  PLAY_BGM,
+  PLAY_BGS,
+  PLAY_ME,
+  PLAY_SE,
   SAVE_BGM,
 } from "@RpgTypes/rmmz/eventCommand";
 import type { Rmmz_GameObjects } from "@RpgTypes/rmmzRuntime/objects/objects";
@@ -45,11 +51,20 @@ import {
   commandChangeActorProfile,
   commandChangeActorTp,
 } from "./actor";
-
+import type { Rmmz_Managers } from "@RpgTypes/rmmzRuntime/managers/manager";
+import {
+  commandFadeOutBgm,
+  commandFadeOutBgs,
+  commandPlayBgm,
+  commandPlayBgs,
+  commandPlayMe,
+  commandPlaySe,
+} from "./audio";
 export const executeSideEffectCommand = (
   command: EventCommand,
   objects: Rmmz_GameObjects,
   data: Provider_RpgData,
+  manaegers: Rmmz_Managers,
 ): boolean => {
   switch (command.code) {
     case CHANGE_GOLD:
@@ -128,7 +143,26 @@ export const executeSideEffectCommand = (
       return commandChangeActorClass(command, objects.actors);
     case CHANGE_ACTOR_IMAGES:
       return commandChangeActorImages(command, objects.actors, objects.player);
+    case PLAY_BGM:
+      commandPlayBgm(command, manaegers.audio);
+      return true;
+    case PLAY_BGS:
+      commandPlayBgs(command, manaegers.audio);
+      return true;
+    case PLAY_ME:
+      commandPlayMe(command, manaegers.audio);
+      return true;
+    case PLAY_SE:
+      commandPlaySe(command, manaegers.audio);
+      return true;
+    case FADEOUT_BGM:
+      commandFadeOutBgm(command, manaegers.audio);
+      return true;
+    case FADEOUT_BGS:
+      commandFadeOutBgs(command, manaegers.audio);
+      return true;
     default:
       return true;
   }
+  return true;
 };
