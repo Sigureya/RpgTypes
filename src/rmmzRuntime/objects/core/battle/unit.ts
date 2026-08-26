@@ -23,13 +23,9 @@ export interface Rmmz_Party
   removeActor(actorId: number): void;
 }
 
-export interface Rmmz_Troop
-  extends
-    Rmmz_Unit<Rmmz_Enemy>,
-    Rmmz_UnitEnemy,
-    Rmmz_TroopTurn,
-    Rmmz_BattleEventRunner {
-  members(): Rmmz_Enemy[];
+export interface Rmmz_Troop<T = Rmmz_Enemy>
+  extends Rmmz_Unit<T>, Rmmz_UnitEnemy, Rmmz_TroopTurn, Rmmz_BattleEventRunner {
+  members(): T[];
   setup(troopId: number): void;
   _turnCount: number;
 }
