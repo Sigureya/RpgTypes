@@ -19,4 +19,5 @@ export type ParamArray_ChangePartyMember = [
 
 export interface ParamObject_ChangePartyMember {
   actorId: number;
+  initialize?: boolean;
 }

@@ -25,7 +25,7 @@ export const makeCommandAddPartyMember = (
   indent = 0,
 ): Command_ChangePartyMember => ({
   code: 129,
-  parameters: [0, param.actorId, false],
+  parameters: [0, param.actorId, !!param.initialize],
   indent,
 });
 
