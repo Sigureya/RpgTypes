@@ -11,7 +11,7 @@ import type {
 export const isPartyRemoveCommand = (
   command: Command_ChangePartyMember,
 ): boolean => {
-  return command.parameters[1] === 1;
+  return command.parameters[0] === 1;
 };
 
 export const requiredActorInitialize = (
