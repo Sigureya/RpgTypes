@@ -76,6 +76,7 @@ interface TestContext {
 }
 
 interface TestCase {
+  name: string;
   action: Enemy_Action;
   expected: boolean;
   callXX: (context: TestContext) => void;
@@ -86,57 +87,60 @@ Game_Enemy.prototype.recoverAll = () => {};
 Game_Enemy.prototype.enemy = () => MOCK_ENEMY_DATA;
 
 const runTestCase = (testCase: TestCase) => {
-  describe("function", () => {
-    test("", () => {
-      const context = createContext();
-      const result = enemyActionMeetsCondition(
-        testCase.action,
-        context.enemy,
-        context.party,
-        context.switches,
-      );
-      expect(result).toBe(testCase.expected);
+  describe(testCase.name, () => {
+    describe("function", () => {
+      test("result", () => {
+        const context = createContext();
+        const result = enemyActionMeetsCondition(
+          testCase.action,
+          context.enemy,
+          context.party,
+          context.switches,
+        );
+        expect(result).toBe(testCase.expected);
+      });
+      test("call", () => {
+        const context = createContext();
+        enemyActionMeetsCondition(
+          testCase.action,
+          context.enemy,
+          context.party,
+          context.switches,
+        );
+        testCase.callXX(context);
+      });
     });
-    test("callXX", () => {
-      const context = createContext();
-      enemyActionMeetsCondition(
-        testCase.action,
-        context.enemy,
-        context.party,
-        context.switches,
-      );
-      testCase.callXX(context);
-    });
-  });
-  describe("Game_Enemy", () => {
-    test("", () => {
-      const context = createContext();
-      stubGlobal(context);
-      const enemy = new Game_Enemy(0, 0, 0);
-      vi.spyOn(enemy, "hpRate").mockImplementation(() =>
-        context.enemy.hpRate(),
-      );
-      vi.spyOn(enemy, "mpRate").mockImplementation(() =>
-        context.enemy.mpRate(),
-      );
-      vi.spyOn(enemy, "turnCount").mockImplementation(() =>
-        context.enemy.turnCount(),
-      );
-      vi.spyOn(enemy, "isStateAffected").mockImplementation((stateId) =>
-        context.enemy.isStateAffected(stateId),
-      );
-      vi.spyOn(enemy, "allTraits").mockImplementation(() =>
-        context.enemy.allTraits(),
-      );
-      const result = enemy.meetsCondition(testCase.action);
-      expect(result).toBe(testCase.expected);
-      testCase.callXX(context);
+    describe("Game_Enemy", () => {
+      test("Game_Enemy.meetsCondition", () => {
+        const context = createContext();
+        stubGlobal(context);
+        const enemy = new Game_Enemy(0, 0, 0);
+        vi.spyOn(enemy, "hpRate").mockImplementation(() =>
+          context.enemy.hpRate(),
+        );
+        vi.spyOn(enemy, "mpRate").mockImplementation(() =>
+          context.enemy.mpRate(),
+        );
+        vi.spyOn(enemy, "turnCount").mockImplementation(() =>
+          context.enemy.turnCount(),
+        );
+        vi.spyOn(enemy, "isStateAffected").mockImplementation((stateId) =>
+          context.enemy.isStateAffected(stateId),
+        );
+        vi.spyOn(enemy, "allTraits").mockImplementation(() =>
+          context.enemy.allTraits(),
+        );
+        const result = enemy.meetsCondition(testCase.action);
+        expect(result).toBe(testCase.expected);
+        testCase.callXX(context);
+      });
     });
   });
 };
 
 const testCases: TestCase[] = [
   {
+    name: "turn condition",
     expected: true,
     action: makeEnemyActionTurn({
       skillId: 1,
@@ -149,6 +153,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "turn condition not met",
     expected: false,
     action: makeEnemyActionTurn({
       skillId: 1,
@@ -161,6 +166,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "hp rate condition",
     expected: true,
     action: makeEnemyActionHpRate({
       skillId: 2,
@@ -173,6 +179,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "hp rate condition not met",
     expected: false,
     action: makeEnemyActionHpRate({
       skillId: 2,
@@ -185,6 +192,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "mp rate condition",
     expected: true,
     action: makeEnemyActionMpRate({
       skillId: 3,
@@ -197,6 +205,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "mp rate condition not met",
     expected: false,
     action: makeEnemyActionMpRate({
       skillId: 3,
@@ -209,6 +218,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "state condition",
     expected: true,
     action: makeEnemyActionState({ skillId: 4, rating: 9, stateId: 5 }),
     callXX: (context) => {
@@ -217,6 +227,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "state condition not met",
     expected: false,
     action: makeEnemyActionState({ skillId: 4, rating: 9, stateId: 9 }),
     callXX: (context) => {
@@ -225,6 +236,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "party level condition",
     expected: true,
     action: makeEnemyActionPartyLevel({
       skillId: 5,
@@ -236,6 +248,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "party level condition not met",
     expected: false,
     action: makeEnemyActionPartyLevel({
       skillId: 5,
@@ -247,6 +260,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "switch condition",
     expected: true,
     action: makeEnemyActionSwitch({
       skillId: 6,
@@ -261,6 +275,7 @@ const testCases: TestCase[] = [
     },
   },
   {
+    name: "switch condition not met",
     expected: false,
     action: makeEnemyActionSwitch({
       skillId: 6,
