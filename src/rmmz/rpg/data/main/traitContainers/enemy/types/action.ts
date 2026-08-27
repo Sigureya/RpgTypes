@@ -12,8 +12,8 @@ export interface Enemy_Action_Base {
 }
 
 export interface Enemy_Action_Turn extends Enemy_Action_Base {
-  turnA: number;
-  turnB: number;
+  turnStart: number;
+  turnInterval: number;
 }
 
 export interface Enemy_Action_HpRate extends Enemy_Action_Base {

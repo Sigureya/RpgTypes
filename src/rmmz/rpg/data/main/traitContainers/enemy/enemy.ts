@@ -38,8 +38,8 @@ export const makeEnemyAction = (
 
 export const makeEnemyActionTurn = (e: Enemy_Action_Turn): Enemy_Action => {
   return {
-    conditionParam1: e.turnA,
-    conditionParam2: e.turnB,
+    conditionParam1: e.turnStart,
+    conditionParam2: e.turnInterval,
     conditionType: ENEMY_ACTION_CONDITION_TURN,
     rating: e.rating,
     skillId: e.skillId,
