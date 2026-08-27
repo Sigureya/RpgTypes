@@ -6,6 +6,21 @@ import type {
   Data_ClassEx,
 } from "./types";
 
+export const classExpForLevel = (
+  classData: Data_Class,
+  level: number,
+): number => {
+  const basis = classData.expParams[0];
+  const extra = classData.expParams[1];
+  const acc_a = classData.expParams[2];
+  const acc_b = classData.expParams[3];
+  return Math.round(
+    (basis * Math.pow(level - 1, 0.9 + acc_a / 250) * level * (level + 1)) /
+      (6 + Math.pow(level, 2) / 50 / acc_b) +
+      (level - 1) * extra,
+  );
+};
+
 export const currentGlowParam = (
   table: ClassParamGlowTable,
   level: number,
