@@ -137,14 +137,24 @@ const runTestCase = (testCase: TestCase) => {
 const testCases: TestCase[] = [
   {
     expected: true,
-    action: makeEnemyActionTurn({ skillId: 1, rating: 5, turnA: 1, turnB: 0 }),
+    action: makeEnemyActionTurn({
+      skillId: 1,
+      rating: 5,
+      turnStart: 1,
+      turnInterval: 0,
+    }),
     callXX: (context) => {
       expect(context.enemy.turnCount).toHaveBeenCalledOnce();
     },
   },
   {
     expected: false,
-    action: makeEnemyActionTurn({ skillId: 1, rating: 5, turnA: 2, turnB: 0 }),
+    action: makeEnemyActionTurn({
+      skillId: 1,
+      rating: 5,
+      turnStart: 2,
+      turnInterval: 0,
+    }),
     callXX: (context) => {
       expect(context.enemy.turnCount).toHaveBeenCalledOnce();
     },
