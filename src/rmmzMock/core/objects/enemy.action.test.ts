@@ -83,6 +83,7 @@ interface TestCase {
 
 // $dataEnemiesを参照しようとするので、無効化しておく
 Game_Enemy.prototype.recoverAll = () => {};
+Game_Enemy.prototype.enemy = () => MOCK_ENEMY_DATA;
 
 const runTestCase = (testCase: TestCase) => {
   describe("function", () => {
@@ -127,7 +128,6 @@ const runTestCase = (testCase: TestCase) => {
       vi.spyOn(enemy, "allTraits").mockImplementation(() =>
         context.enemy.allTraits(),
       );
-      vi.spyOn(enemy, "enemy").mockImplementation(() => MOCK_ENEMY_DATA);
       const result = enemy.meetsCondition(testCase.action);
       expect(result).toBe(testCase.expected);
     });
@@ -143,12 +143,31 @@ const testCases: TestCase[] = [
     },
   },
   {
+    expected: false,
+    action: makeEnemyActionTurn({ skillId: 1, rating: 5, turnA: 2, turnB: 0 }),
+    callXX: (context) => {
+      expect(context.enemy.turnCount).toHaveBeenCalledOnce();
+    },
+  },
+  {
     expected: true,
     action: makeEnemyActionHpRate({
       skillId: 2,
       rating: 7,
       hpRateA: 0.25,
       hpRateB: 0.5,
+    }),
+    callXX: (context) => {
+      expect(context.enemy.hpRate).toHaveBeenCalledOnce();
+    },
+  },
+  {
+    expected: false,
+    action: makeEnemyActionHpRate({
+      skillId: 2,
+      rating: 7,
+      hpRateA: 0.8,
+      hpRateB: 1,
     }),
     callXX: (context) => {
       expect(context.enemy.hpRate).toHaveBeenCalledOnce();
@@ -167,10 +186,31 @@ const testCases: TestCase[] = [
     },
   },
   {
+    expected: false,
+    action: makeEnemyActionMpRate({
+      skillId: 3,
+      rating: 8,
+      mpRateA: 0.7,
+      mpRateB: 1,
+    }),
+    callXX: (context) => {
+      expect(context.enemy.mpRate).toHaveBeenCalledOnce();
+    },
+  },
+  {
     expected: true,
     action: makeEnemyActionState({ skillId: 4, rating: 9, stateId: 5 }),
     callXX: (context) => {
       expect(context.enemy.isStateAffected).toHaveBeenCalledOnce();
+      expect(context.enemy.isStateAffected).toHaveBeenCalledWith(5);
+    },
+  },
+  {
+    expected: false,
+    action: makeEnemyActionState({ skillId: 4, rating: 9, stateId: 9 }),
+    callXX: (context) => {
+      expect(context.enemy.isStateAffected).toHaveBeenCalledOnce();
+      expect(context.enemy.isStateAffected).toHaveBeenCalledWith(9);
     },
   },
   {
@@ -179,6 +219,17 @@ const testCases: TestCase[] = [
       skillId: 5,
       rating: 6,
       partyLevel: 11,
+    }),
+    callXX: (context) => {
+      expect(context.party.highestLevel).toHaveBeenCalledOnce();
+    },
+  },
+  {
+    expected: false,
+    action: makeEnemyActionPartyLevel({
+      skillId: 5,
+      rating: 6,
+      partyLevel: 99,
     }),
     callXX: (context) => {
       expect(context.party.highestLevel).toHaveBeenCalledOnce();
