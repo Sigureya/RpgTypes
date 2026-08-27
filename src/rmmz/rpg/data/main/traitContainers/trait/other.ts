@@ -1,9 +1,17 @@
 import {
+  FLAG_ID_AUTO_BATTLE,
   FLAG_ID_PRESERVE_TP,
   TRAIT_COLLAPSE_TYPE,
   TRAIT_SPECIAL_FLAG,
 } from "./core";
 import type { Trait } from "./types";
+
+export const traitsIsAutoBattle = (traits: ReadonlyArray<Trait>): boolean => {
+  return traits.some(
+    (trait) =>
+      trait.code === TRAIT_SPECIAL_FLAG && trait.dataId === FLAG_ID_AUTO_BATTLE,
+  );
+};
 
 export const traitIsPreserveTp = (trait: readonly Trait[]): boolean => {
   return trait.some(

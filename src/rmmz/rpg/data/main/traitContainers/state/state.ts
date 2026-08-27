@@ -32,6 +32,12 @@ export const hasConfusedState = (
   return states.some(isConfusedState);
 };
 
+export const canInputByStates = (
+  states: ReadonlyArray<Data_State>,
+): boolean => {
+  return states.every((state) => state.restriction <= 0);
+};
+
 export const confusionLevel = (states: ReadonlyArray<Data_State>): number => {
   return states.reduce(confusionLevelAcc, 0);
 };
