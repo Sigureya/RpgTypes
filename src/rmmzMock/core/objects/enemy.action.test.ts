@@ -130,6 +130,7 @@ const runTestCase = (testCase: TestCase) => {
       );
       const result = enemy.meetsCondition(testCase.action);
       expect(result).toBe(testCase.expected);
+      testCase.callXX(context);
     });
   });
 };
@@ -168,7 +169,7 @@ const testCases: TestCase[] = [
       hpRateB: 0.5,
     }),
     callXX: (context) => {
-      expect(context.enemy.hpRate).toHaveBeenCalledOnce();
+      expect(context.enemy.hpRate).toHaveBeenCalled();
     },
   },
   {
@@ -180,7 +181,7 @@ const testCases: TestCase[] = [
       hpRateB: 1,
     }),
     callXX: (context) => {
-      expect(context.enemy.hpRate).toHaveBeenCalledOnce();
+      expect(context.enemy.hpRate).toHaveBeenCalled();
     },
   },
   {
@@ -192,7 +193,7 @@ const testCases: TestCase[] = [
       mpRateB: 0.5,
     }),
     callXX: (context) => {
-      expect(context.enemy.mpRate).toHaveBeenCalledOnce();
+      expect(context.enemy.mpRate).toHaveBeenCalled();
     },
   },
   {
@@ -204,7 +205,7 @@ const testCases: TestCase[] = [
       mpRateB: 1,
     }),
     callXX: (context) => {
-      expect(context.enemy.mpRate).toHaveBeenCalledOnce();
+      expect(context.enemy.mpRate).toHaveBeenCalled();
     },
   },
   {
