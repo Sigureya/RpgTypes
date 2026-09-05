@@ -1,5 +1,20 @@
 import type { Command_TransferPlayer } from "@RpgTypes/rmmz/eventCommand";
-import type { Rmmz_Variables } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_Message,
+  Rmmz_Party,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
+
+/**
+ * @description 場所移動を実行してよいかを判定する。
+ * 元実装は戦闘中かメッセージ表示中なら false を返し、同じコマンドを次のフレームで再実行する。
+ */
+export const canTransferPlayer = (
+  party: Pick<Rmmz_Party, "inBattle">,
+  message: Pick<Rmmz_Message, "isBusy">,
+): boolean => {
+  return !party.inBattle() && !message.isBusy();
+};
 
 export interface Transfer {
   mapId: number;

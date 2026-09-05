@@ -10,8 +10,15 @@ export const commandGetLocationInfo = (
   sourceEventId: number,
   variables: Rmmz_Variables,
   map: Rmmz_MapLocationSource<Point>,
+  player: Point,
 ): void => {
-  const value = resolveLocationInfo(command, sourceEventId, variables, map);
+  const value = resolveLocationInfo(
+    command,
+    sourceEventId,
+    variables,
+    map,
+    player,
+  );
   variables.setValue(command.parameters[0], value);
 };
 
@@ -20,8 +27,15 @@ export const resolveLocationInfo = (
   sourceEventId: number,
   variables: Rmmz_Variables,
   map: Rmmz_MapLocationSource<Point>,
+  player: Point,
 ): number => {
-  const pos = resolveLocationPoint(command, sourceEventId, variables, map);
+  const pos = resolveLocationPoint(
+    command,
+    sourceEventId,
+    variables,
+    map,
+    player,
+  );
   return resolveValue(pos, command.parameters[1], map);
 };
 
@@ -45,11 +59,14 @@ const resolveValue = (
   }
 };
 
+const ORIGIN: Point = { x: 0, y: 0 };
+
 const resolveLocationPoint = (
   command: Command_GetLocationInfo,
   sourceEventId: number,
   variables: Rmmz_Variables,
   map: Rmmz_MapLocationSource<Point>,
+  player: Point,
 ): Point => {
   const xParam = command.parameters[3];
   const yParam = command.parameters[4];
@@ -63,9 +80,16 @@ const resolveLocationPoint = (
       y: variables.value(yParam),
     };
   }
+  // 元実装の Game_Interpreter.character() と同じ解決順。
+  // 負数はプレイヤー、0 は実行中のイベント、正数はその ID のイベントを指す。
+  if (xParam < 0) {
+    return player;
+  }
   const character = map.event(xParam > 0 ? xParam : sourceEventId);
   if (character) {
     return { x: character.x, y: character.y };
   }
-  return { x: 0, y: 0 };
+  // 元実装は該当キャラが無いと character.x で例外になる。
+  // ここでは原点を返して落とさない。
+  return ORIGIN;
 };

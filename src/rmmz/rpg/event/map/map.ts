@@ -94,7 +94,7 @@ export const selectMapEncounters = (
   return selectEncounters(
     map.encounterList,
     (e) => {
-      return e.regionSet.includes(regionId);
+      return e.regionSet.length === 0 || e.regionSet.includes(regionId);
     },
     random,
   );

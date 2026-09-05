@@ -61,7 +61,7 @@ export const evaluteBranchByTimer = (
   if (!timer.isWorking()) {
     return false;
   }
-  const sec = timer.seconds() / 60;
+  const sec = timer.frames() / 60;
   if (parameters[2] === 0) {
     return sec >= parameters[1];
   }
