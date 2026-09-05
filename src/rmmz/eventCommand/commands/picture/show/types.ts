@@ -3,6 +3,10 @@ import type {
   MOVE_PICTURE,
   SHOW_PICTURE,
 } from "@RpgTypes/libs/eventCommand";
+import type {
+  PICTURE_POINT_DIRECT,
+  PICTURE_POINT_VARIABLE,
+} from "./constants";
 
 export interface Command_ShowPicture extends EventCommandLike<
   typeof SHOW_PICTURE
@@ -20,11 +24,10 @@ export type PicutureBlendModeV2 = 0 | 1 | 2 | 3;
 
 export type PictureOrigin = 0 | 1;
 
-/**
- * 座標の指定方法。
- * 1 の場合、x/y には変数番号が入る (Game_Interpreter.picturePoint)。
- */
-export type PicturePointDesignation = 0 | 1;
+/** 座標の指定方法。 */
+export type PicturePointDesignation =
+  | typeof PICTURE_POINT_DIRECT
+  | typeof PICTURE_POINT_VARIABLE;
 
 export type ParamsArray_ShowPicture = [
   pictureId: number,
