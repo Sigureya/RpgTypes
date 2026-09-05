@@ -4,11 +4,13 @@ import type {
   Rmmz_Message,
   Rmmz_Party,
   Rmmz_PlayerCharactor,
+  Rmmz_Screen,
   Rmmz_SelfSwitches,
   Rmmz_Switches,
   Rmmz_System,
   Rmmz_Temp,
   Rmmz_Timer,
+  Rmmz_Troop,
   Rmmz_Variables,
 } from "./core";
 
@@ -24,4 +26,6 @@ export interface Rmmz_GameObjects {
   selfSwitches: Rmmz_SelfSwitches;
   message: Rmmz_Message;
   temp: Rmmz_Temp;
+  screen: Rmmz_Screen;
+  troop: Rmmz_Troop;
 }
