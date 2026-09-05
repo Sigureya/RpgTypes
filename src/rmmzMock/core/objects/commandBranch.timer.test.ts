@@ -35,8 +35,9 @@ const callOriginal = (
   interpreter.setup([command, { code: 0, indent: 0, parameters: [] }], 0);
   vi.spyOn(interpreter, "skipBranch").mockImplementation(() => {});
   interpreter.command111(command.parameters);
-  return (interpreter.skipBranch as ReturnType<typeof vi.fn>).mock.calls
-    .length === 0;
+  return (
+    (interpreter.skipBranch as ReturnType<typeof vi.fn>).mock.calls.length === 0
+  );
 };
 
 interface TestCase {
@@ -46,6 +47,23 @@ interface TestCase {
   working: boolean;
   expected: boolean;
 }
+
+describe("evaluteBranchByTimer", () => {
+  testCases.forEach((testCase) => {
+    describe(testCase.caseName, () => {
+      test("Game_Interpreter.command111", () => {
+        const timer = createMockTimer(testCase.frames, testCase.working);
+        expect(callOriginal(testCase.command, timer)).toBe(testCase.expected);
+      });
+      test("function", () => {
+        const timer = createMockTimer(testCase.frames, testCase.working);
+        expect(evaluteBranchByTimer(testCase.command.parameters, timer)).toBe(
+          testCase.expected,
+        );
+      });
+    });
+  });
+});
 
 const testCases: TestCase[] = [
   {
@@ -105,20 +123,3 @@ const testCases: TestCase[] = [
     expected: true,
   },
 ];
-
-describe("evaluteBranchByTimer", () => {
-  testCases.forEach((testCase) => {
-    describe(testCase.caseName, () => {
-      test("Game_Interpreter.command111", () => {
-        const timer = createMockTimer(testCase.frames, testCase.working);
-        expect(callOriginal(testCase.command, timer)).toBe(testCase.expected);
-      });
-      test("function", () => {
-        const timer = createMockTimer(testCase.frames, testCase.working);
-        expect(
-          evaluteBranchByTimer(testCase.command.parameters, timer),
-        ).toBe(testCase.expected);
-      });
-    });
-  });
-});

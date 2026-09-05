@@ -16,9 +16,7 @@ const createMapData = (
   regions: ReadonlyArray<readonly [number, number, number]>,
   encounterList: Encounter[],
 ): Map_EncounterSoucre => {
-  const data = new Array<number>(
-    LAYER_COUNT * MAP_HEIGHT * MAP_WIDTH,
-  ).fill(0);
+  const data = new Array<number>(LAYER_COUNT * MAP_HEIGHT * MAP_WIDTH).fill(0);
   regions.forEach(([x, y, regionId]) => {
     data[(REGION_LAYER * MAP_HEIGHT + y) * MAP_WIDTH + x] = regionId;
   });
@@ -78,6 +76,63 @@ interface TestCase {
   /** 重み合計が 0 のときは乱数を引かないので undefined になる */
   expectedWeightSum: number | undefined;
 }
+
+const createRandomFn = (
+  value: number,
+): ((max: number) => number) & { calls: number[] } => {
+  const calls: number[] = [];
+  const fn = (max: number): number => {
+    calls.push(max);
+    return value;
+  };
+  return Object.assign(fn, { calls });
+};
+
+describe("selectMapEncounters", () => {
+  testCases.forEach((testCase) => {
+    describe(testCase.caseName, () => {
+      const map = createMapData(testCase.regions, testCase.encounterList);
+
+      test("Game_Player.makeEncounterTroopId", () => {
+        const randomFn = createRandomFn(testCase.randomValue);
+        const result = callOriginal(map, testCase.x, testCase.y, randomFn);
+        expect(result).toBe(testCase.expectedTroopId);
+        expect(randomFn.calls).toStrictEqual(
+          testCase.expectedWeightSum === undefined
+            ? []
+            : [testCase.expectedWeightSum],
+        );
+      });
+
+      test("function", () => {
+        const randomFn = createRandomFn(testCase.randomValue);
+        const result = callFunction(map, testCase.x, testCase.y, randomFn);
+        expect(result).toBe(testCase.expectedTroopId);
+        expect(randomFn.calls).toStrictEqual(
+          testCase.expectedWeightSum === undefined
+            ? []
+            : [testCase.expectedWeightSum],
+        );
+      });
+
+      test("同値", () => {
+        const originalResult = callOriginal(
+          map,
+          testCase.x,
+          testCase.y,
+          createRandomFn(testCase.randomValue),
+        );
+        const functionResult = callFunction(
+          map,
+          testCase.x,
+          testCase.y,
+          createRandomFn(testCase.randomValue),
+        );
+        expect(functionResult).toBe(originalResult);
+      });
+    });
+  });
+});
 
 const testCases: TestCase[] = [
   {
@@ -184,70 +239,3 @@ const testCases: TestCase[] = [
     expectedWeightSum: undefined,
   },
 ];
-
-const createRandomFn = (
-  value: number,
-): ((max: number) => number) & { calls: number[] } => {
-  const calls: number[] = [];
-  const fn = (max: number): number => {
-    calls.push(max);
-    return value;
-  };
-  return Object.assign(fn, { calls });
-};
-
-describe("selectMapEncounters", () => {
-  testCases.forEach((testCase) => {
-    describe(testCase.caseName, () => {
-      const map = createMapData(testCase.regions, testCase.encounterList);
-
-      test("Game_Player.makeEncounterTroopId", () => {
-        const randomFn = createRandomFn(testCase.randomValue);
-        const result = callOriginal(
-          map,
-          testCase.x,
-          testCase.y,
-          randomFn,
-        );
-        expect(result).toBe(testCase.expectedTroopId);
-        expect(randomFn.calls).toStrictEqual(
-          testCase.expectedWeightSum === undefined
-            ? []
-            : [testCase.expectedWeightSum],
-        );
-      });
-
-      test("function", () => {
-        const randomFn = createRandomFn(testCase.randomValue);
-        const result = callFunction(
-          map,
-          testCase.x,
-          testCase.y,
-          randomFn,
-        );
-        expect(result).toBe(testCase.expectedTroopId);
-        expect(randomFn.calls).toStrictEqual(
-          testCase.expectedWeightSum === undefined
-            ? []
-            : [testCase.expectedWeightSum],
-        );
-      });
-
-      test("同値", () => {
-        const originalResult = callOriginal(
-          map,
-          testCase.x,
-          testCase.y,
-          createRandomFn(testCase.randomValue),
-        );
-        const functionResult = callFunction(
-          map,
-          testCase.x,
-          testCase.y,
-          createRandomFn(testCase.randomValue),
-        );
-        expect(functionResult).toBe(originalResult);
-      });
-    });
-  });
-});
