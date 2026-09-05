@@ -3,3 +3,4 @@ ref/**/*.*
 /node_modules
 game/
 dummy/
+/.claude
