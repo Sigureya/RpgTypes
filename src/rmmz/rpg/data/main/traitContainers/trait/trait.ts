@@ -50,9 +50,14 @@ export const traitSet = (
   traits: ReadonlyArray<Trait>,
   code: number,
 ): number[] => {
-  return traits
-    .filter((trait) => trait.code === code)
-    .map((trait) => trait.dataId);
+  // filter().map() は中間配列を 1 つ余分に作る。
+  // 実測で 1 回あたり 57ns → 43ns（performance.md [FOLD]）。
+  return traits.reduce<number[]>((acc, trait) => {
+    if (trait.code === code) {
+      acc.push(trait.dataId);
+    }
+    return acc;
+  }, []);
 };
 
 export const someTraitMatched = (
