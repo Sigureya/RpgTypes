@@ -20,19 +20,11 @@ export const battlersDecideRandomTarget = <T extends Targetable>(
   return battlersRandomAliveTarget(units.opponentsUnit(), randomValue);
 };
 
-interface TgrPair<T> {
-  battler: T;
-  tgr: number;
-}
-
-const makeTgrPair = <T extends Targetable>(battler: T): TgrPair<T> => ({
-  tgr: battler.tgr,
-  battler: battler,
-});
-
-const accumulateTgr = (acc: number, pair: TgrPair<unknown>): number => {
-  return acc + pair.tgr;
+const accumulateTgr = (acc: number, tgr: number): number => {
+  return acc + tgr;
 };
+
+const readTgr = (battler: Targetable): number => battler.tgr;
 
 export const battlersRandomTarget = <T extends Targetable>(
   battlers: ReadonlyArray<T>,
@@ -42,32 +34,40 @@ export const battlersRandomTarget = <T extends Targetable>(
   if (battlers.length === 0) {
     return [];
   }
-  if (battlers.length === 1) {
-    return Array(repeat).fill(battlers[0]);
-  }
-  const tgrPairs = battlers.map(makeTgrPair);
-  const tgrSum: number = tgrPairs.reduce(accumulateTgr, 0);
   const result: T[] = [];
+  if (battlers.length === 1) {
+    for (let i = 0; i < repeat; i++) {
+      result.push(battlers[0]);
+    }
+    return result;
+  }
+  // tgr は値ではなく計算である。コアスクリプトでは
+  // tgr -> sparam(0) -> traitsPi -> allTraits() と辿り、1 回読むだけで
+  // traitObjects を concat で畳んで配列を複数作る。
+  // したがって 1 人につき 1 回だけ読み、数値の配列に控える。
+  // 実測 (味方 8 人 / 特徴を持つ物 8 個): 読み直す形 9610ns → 6901ns。
+  // repeat=3 では 18205ns → 6781ns。performance.md [GETR]
+  const tgrList: number[] = battlers.map(readTgr);
+  const tgrSum: number = tgrList.reduce(accumulateTgr, 0);
   for (let i = 0; i < repeat; i++) {
-    const target = randomSelect(tgrPairs, randomFn() * tgrSum);
-    result.push(target);
+    result.push(randomSelect(battlers, tgrList, randomFn() * tgrSum));
   }
   return result;
 };
 
-const randomSelect = <T>(
-  list: readonly TgrPair<T>[],
+const randomSelect = <T extends Targetable>(
+  battlers: ReadonlyArray<T>,
+  tgrList: ReadonlyArray<number>,
   remainingTgr: number,
 ): T => {
   let targetTgr = remainingTgr;
-  for (const pair of list) {
-    targetTgr -= pair.tgr;
+  for (let i = 0; i < tgrList.length; i++) {
+    targetTgr -= tgrList[i];
     if (targetTgr <= 0) {
-      return pair.battler;
+      return battlers[i];
     }
   }
-  const last = list[list.length - 1];
-  return last.battler;
+  return battlers[battlers.length - 1];
 };
 
 export const battlersRandomDeadTarget = <T extends Targetable>(
