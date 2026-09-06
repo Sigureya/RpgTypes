@@ -52,6 +52,15 @@ const isEventStartable = (
   return event.isTriggerIn(triggers);
 };
 
+/**
+ * セルフスイッチの読み出し。対象のイベント 1 つに固定した形で渡す。
+ *
+ * コアは `$gameSelfSwitches.value([mapId, eventId, ch])` を見る。
+ * どのイベントかを知っているのは呼び出し元なので、ここへは
+ * 「文字 (A/B/C/D) を渡すと真偽が返る」形だけを渡す。
+ */
+export type MapEvent_SelfSwitchReader = (selfSwitchCh: string) => boolean;
+
 export const mapEventFindProperPageIndex = (
   pages: ReadonlyArray<MapEventPage>,
   gameObjects: Pick<
@@ -59,6 +68,7 @@ export const mapEventFindProperPageIndex = (
     "actors" | "party" | "variables" | "switches"
   >,
   itemProvider: Provider_RpgItems,
+  selfSwitch: MapEvent_SelfSwitchReader,
 ): number => {
   const { actors, party, variables, switches } = gameObjects;
   return pages.findLastIndex((page): boolean => {
@@ -69,6 +79,7 @@ export const mapEventFindProperPageIndex = (
       party,
       variables,
       switches,
+      selfSwitch,
     );
   });
 };
@@ -80,6 +91,7 @@ export const mapEventMeetsCondition = <T>(
   party: Rmmz_BranchSourceParty<T>,
   variables: Rmmz_Variables,
   switches: Rmmz_Switches,
+  selfSwitch: MapEvent_SelfSwitchReader,
 ): boolean => {
   if (condition.switch1Valid && !switches.value(condition.switch1Id)) {
     return false;
@@ -90,6 +102,11 @@ export const mapEventMeetsCondition = <T>(
   if (condition.variableValid) {
     const variableValue = variables.value(condition.variableId);
     if (variableValue < condition.variableValue) {
+      return false;
+    }
+  }
+  if (condition.selfSwitchValid) {
+    if (!selfSwitch(condition.selfSwitchCh)) {
       return false;
     }
   }
