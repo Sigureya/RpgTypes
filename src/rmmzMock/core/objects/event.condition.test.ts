@@ -195,26 +195,43 @@ afterEach(() => {
   });
 });
 
+type ConditionKey =
+  | "none"
+  | "switch1Ok"
+  | "switch1Ng"
+  | "switch2Ng"
+  | "variableOk"
+  | "variableNg"
+  | "selfSwitch"
+  | "item"
+  | "actor"
+  | "all";
+
 interface ConditionCase {
+  key: ConditionKey;
   name: string;
   condition: MapEvent_PageCondition;
 }
 
 const conditionCases: ConditionCase[] = [
-  { name: "条件なし", condition: makeEventPageCondition({}) },
+  { key: "none", name: "条件なし", condition: makeEventPageCondition({}) },
   {
+    key: "switch1Ok",
     name: "スイッチ 1 (成立)",
     condition: makeEventPageCondition({ switch1Id: TRUE_SWITCH }),
   },
   {
+    key: "switch1Ng",
     name: "スイッチ 1 (不成立)",
     condition: makeEventPageCondition({ switch1Id: 99 }),
   },
   {
+    key: "switch2Ng",
     name: "スイッチ 2 (不成立)",
     condition: makeEventPageCondition({ switch2Id: 99 }),
   },
   {
+    key: "variableOk",
     name: "変数 (以上で成立)",
     condition: makeEventPageCondition({
       variableId: 1,
@@ -222,6 +239,7 @@ const conditionCases: ConditionCase[] = [
     }),
   },
   {
+    key: "variableNg",
     name: "変数 (不足)",
     condition: makeEventPageCondition({
       variableId: 1,
@@ -229,12 +247,14 @@ const conditionCases: ConditionCase[] = [
     }),
   },
   {
+    key: "selfSwitch",
     name: "セルフスイッチ A",
     condition: makeEventPageCondition({ selfSwitchCh: "A" }),
   },
-  { name: "アイテム", condition: makeEventPageCondition({ itemId: ITEM.id }) },
-  { name: "アクター", condition: makeEventPageCondition({ actorId: ACTOR_ID }) },
+  { key: "item", name: "アイテム", condition: makeEventPageCondition({ itemId: ITEM.id }) },
+  { key: "actor", name: "アクター", condition: makeEventPageCondition({ actorId: ACTOR_ID }) },
   {
+    key: "all",
     name: "全部",
     condition: makeEventPageCondition({
       switch1Id: TRUE_SWITCH,
@@ -250,43 +270,109 @@ const conditionCases: ConditionCase[] = [
 interface WorldCase {
   name: string;
   world: World;
+  expected: Record<ConditionKey, boolean>;
 }
 
+/** 条件を 1 つも満たさない世界でも成立するもの (条件が無い / 不足しない変数) */
+const ALWAYS_TRUE = {
+  none: true,
+  switch1Ng: false,
+  switch2Ng: false,
+  variableOk: true,
+  variableNg: false,
+} as const;
+
 const worldCases: WorldCase[] = [
-  { name: "全部そろっている", world: DEFAULT_WORLD },
+  {
+    name: "全部そろっている",
+    world: DEFAULT_WORLD,
+    expected: {
+      ...ALWAYS_TRUE,
+      switch1Ok: true,
+      selfSwitch: true,
+      item: true,
+      actor: true,
+      all: true,
+    },
+  },
   {
     name: "セルフスイッチが立っていない",
     world: { ...DEFAULT_WORLD, selfSwitchOn: false },
+    expected: {
+      ...ALWAYS_TRUE,
+      switch1Ok: true,
+      selfSwitch: false,
+      item: true,
+      actor: true,
+      all: false,
+    },
   },
   {
     name: "アイテムを持っていない",
     world: { ...DEFAULT_WORLD, hasItem: false },
+    expected: {
+      ...ALWAYS_TRUE,
+      switch1Ok: true,
+      selfSwitch: true,
+      item: false,
+      actor: true,
+      all: false,
+    },
   },
   {
     name: "アクターが仲間にいない",
     world: { ...DEFAULT_WORLD, inParty: false },
+    expected: {
+      ...ALWAYS_TRUE,
+      switch1Ok: true,
+      selfSwitch: true,
+      item: true,
+      actor: false,
+      all: false,
+    },
   },
-  { name: "スイッチが全部オフ", world: { ...DEFAULT_WORLD, trueSwitchIds: [] } },
+  {
+    name: "スイッチが全部オフ",
+    world: { ...DEFAULT_WORLD, trueSwitchIds: [] },
+    expected: {
+      ...ALWAYS_TRUE,
+      switch1Ok: false,
+      selfSwitch: true,
+      item: true,
+      actor: true,
+      all: false,
+    },
+  },
 ];
 
-describe("ページ条件がコアスクリプトと一致する", () => {
-  worldCases.forEach(({ name: worldName, world }) => {
-    describe(worldName, () => {
-      conditionCases.forEach(({ name, condition }) => {
-        test(name, () => {
-          const expected: boolean = createCoreEvent(world).meetsConditions(
-            page(condition),
-          );
+const runTestCase = ({ name, world, expected }: WorldCase): void => {
+  describe(name, () => {
+    describe("function", () => {
+      conditionCases.forEach((conditionCase) => {
+        test(conditionCase.name, () => {
           const result: boolean = meetsCondition(
-            condition,
+            conditionCase.condition,
             createTestContext(world),
           );
-          expect(result).toBe(expected);
+          expect(result).toBe(expected[conditionCase.key]);
+        });
+      });
+    });
+
+    describe("Event", () => {
+      conditionCases.forEach((conditionCase) => {
+        test(conditionCase.name, () => {
+          const result: boolean = createCoreEvent(world).meetsConditions(
+            page(conditionCase.condition),
+          );
+          expect(result).toBe(expected[conditionCase.key]);
         });
       });
     });
   });
-});
+};
+
+worldCases.forEach(runTestCase);
 
 describe("条件に無いものは読まない", () => {
   test("条件なしなら何も引かない", () => {
