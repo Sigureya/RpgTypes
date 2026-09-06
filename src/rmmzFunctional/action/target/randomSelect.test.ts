@@ -61,7 +61,7 @@ describe("battlersRandomTarget", () => {
 
   test("tgr は 1 人につき 1 回しか読まない", () => {
     // tgr は値ではなく計算 (sparam -> traitsPi -> allTraits)。
-    // 読み直すと戦闘者ごとに配列を作り直すことになる。
+    // 読み直すとバトラーごとに配列を作り直すことになる。
     const counts: number[] = [0, 0, 0];
     const counted = counts.map((_, index) =>
       Object.defineProperty(battler(`b${index}`, 1), "tgr", {
