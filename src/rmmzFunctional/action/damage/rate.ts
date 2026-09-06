@@ -8,7 +8,7 @@ import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
  */
 export const actionCalcElementRate = (
   skill: Data_Skill,
-  target: Rmmz_BattlerBase,
+  target: Pick<Rmmz_BattlerBase, "allTraits">,
 ): number => {
   return traitsCalcElementRate(target.allTraits(), skill.damage.elementId);
 };
