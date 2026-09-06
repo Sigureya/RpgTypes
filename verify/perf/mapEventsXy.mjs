@@ -66,6 +66,31 @@ const impls = {
   },
 };
 
+// すり抜けないイベントがいるか (コアの isCollidedWithEvents 相当)
+impls["nt-array"] = (map, x, y, activePage) => {
+  const list = map.events.reduce((acc, event) => {
+    if (!event || event.x !== x || event.y !== y) {
+      return acc;
+    }
+    const page = activePage(event);
+    if (page && !page.through) {
+      acc.push(event);
+    }
+    return acc;
+  }, []);
+  return list.some((event) => activePage(event).priorityType === 1);
+};
+
+// 配列を作らずに真偽値だけ返す
+impls["nt-some"] = (map, x, y, activePage) =>
+  map.events.some((event) => {
+    if (!event || event.x !== x || event.y !== y) {
+      return false;
+    }
+    const page = activePage(event);
+    return !!page && !page.through && page.priorityType === 1;
+  });
+
 const EMPTY = [];
 
 const makeMap = (count, size) => {
@@ -104,7 +129,8 @@ const run = () => {
   let sink = 0;
   const started = process.hrtime.bigint();
   for (let i = 0; i < N; i++) {
-    sink += fn(map, i & 31, (i >> 2) & 31, activePage).length;
+    const r = fn(map, i & 31, (i >> 2) & 31, activePage);
+    sink += typeof r === "boolean" ? (r ? 1 : 0) : r.length;
   }
   return { elapsed: Number(process.hrtime.bigint() - started) / 1e6, sink };
 };

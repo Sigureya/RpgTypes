@@ -15,6 +15,9 @@ import type {
   Provider_MapPassage,
 } from "@RpgTypes/rmmzFunctional/map/providerType";
 
+/** 通常キャラと同じ高さ。この高さのイベントだけが移動を妨げる */
+const NORMAL_PRIORITY = 1;
+
 export const mapEventsXyNt = <
   CommandType extends EventCommandUnknown,
   MoveRoute extends MoveRouteCommandUnknown,
@@ -38,6 +41,55 @@ export const mapEventsXyNt = <
     },
     [],
   );
+};
+
+/**
+ * その位置に、通行を妨げるイベントがいるか。
+ * コアの Game_CharacterBase.isCollidedWithEvents に対応する。
+ *
+ * コアは eventsXyNt で配列を作ってから some(isNormalPriority) を見るが、
+ * 要るのは真偽値だけなので配列を作らない。
+ * 該当するイベントごとに activePage を 2 回引くことも避けられる。
+ * 実測 (イベント 40 個): 91ns → 81ns。performance.md [SCAN]
+ */
+export const mapIsCollidedWithEvents = <
+  CommandType extends EventCommandUnknown,
+  MoveRoute extends MoveRouteCommandUnknown,
+>(
+  map: Pick<Data_MapUnknown<CommandType, MoveRoute>, "events">,
+  x: number,
+  y: number,
+  provider: Provider_MapEventPageResolver<CommandType, MoveRoute>,
+): boolean => {
+  return map.events.some((event) => {
+    if (!event || event.x !== x || event.y !== y) {
+      return false;
+    }
+    const page = provider.activePage(event);
+    return !!page && !page.through && page.priorityType === NORMAL_PRIORITY;
+  });
+};
+
+/**
+ * その位置に、すり抜けないイベントが 1 つでもいるか。
+ * コアの Game_Event.isCollidedWithEvents (eventsXyNt の長さを見る) に対応する。
+ */
+export const mapHasEventNt = <
+  CommandType extends EventCommandUnknown,
+  MoveRoute extends MoveRouteCommandUnknown,
+>(
+  map: Pick<Data_MapUnknown<CommandType, MoveRoute>, "events">,
+  x: number,
+  y: number,
+  provider: Provider_MapEventPageResolver<CommandType, MoveRoute>,
+): boolean => {
+  return map.events.some((event) => {
+    if (!event || event.x !== x || event.y !== y) {
+      return false;
+    }
+    const page = provider.activePage(event);
+    return !!page && !page.through;
+  });
 };
 
 export const mapTileEventTileIds = <

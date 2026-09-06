@@ -1,6 +1,11 @@
 import { describe, expect, test, vi } from "vitest";
 import type { MapEvent, MapEventPage } from "@RpgTypes/rmmz/rpg";
-import { mapEventsXyNt, mapTileEventTileIds } from "./map";
+import {
+  mapEventsXyNt,
+  mapHasEventNt,
+  mapIsCollidedWithEvents,
+  mapTileEventTileIds,
+} from "./map";
 import type { Provider_MapEventPageResolver } from "./providerType";
 
 /**
@@ -47,6 +52,10 @@ interface TestCase {
     notThroughIds: number[];
     /** タイルとして扱われるタイル番号 */
     tileIds: number[];
+    /** 通行を妨げるイベントがいるか (通常キャラの高さ) */
+    collided: boolean;
+    /** すり抜けないイベントが 1 つでもいるか */
+    hasEventNt: boolean;
   };
 }
 
@@ -89,6 +98,26 @@ const runTestCase = (testCase: TestCase): void => {
       expect(result).toEqual(expected.tileIds);
     });
 
+    test("mapIsCollidedWithEvents", () => {
+      const result = mapIsCollidedWithEvents(
+        createMap(sources),
+        POINT.x,
+        POINT.y,
+        createProvider(sources),
+      );
+      expect(result).toBe(expected.collided);
+    });
+
+    test("mapHasEventNt", () => {
+      const result = mapHasEventNt(
+        createMap(sources),
+        POINT.x,
+        POINT.y,
+        createProvider(sources),
+      );
+      expect(result).toBe(expected.hasEventNt);
+    });
+
     test("有効なページを引くのはイベント 1 つにつき 1 回", () => {
       // 毎フレームの通行判定から呼ばれる。ここが増えると全体に効く
       const provider = createProvider(sources);
@@ -105,39 +134,76 @@ const testCases: TestCase[] = [
   {
     name: "イベントなし",
     sources: [],
-    expected: { notThroughIds: [], tileIds: [] },
+    expected: {
+      notThroughIds: [],
+      tileIds: [],
+      collided: false,
+      hasEventNt: false,
+    },
   },
   {
     name: "別の場所にいる",
     sources: [{ id: 1, x: 5, y: 5, page: page(false, 0, 100) }],
-    expected: { notThroughIds: [], tileIds: [] },
+    expected: {
+      notThroughIds: [],
+      tileIds: [],
+      collided: false,
+      hasEventNt: false,
+    },
   },
   {
     name: "タイルとして扱われる",
     sources: [{ id: 1, x: POINT.x, y: POINT.y, page: page(false, 0, 100) }],
-    expected: { notThroughIds: [1], tileIds: [100] },
+    expected: {
+      notThroughIds: [1],
+      tileIds: [100],
+      // タイルの高さ (0) なので、移動は妨げない
+      collided: false,
+      hasEventNt: true,
+    },
   },
   {
     name: "すり抜けるページ",
     sources: [{ id: 1, x: POINT.x, y: POINT.y, page: page(true, 0, 100) }],
     // すり抜けても、タイルとしての扱いは変わらない
-    expected: { notThroughIds: [], tileIds: [100] },
+    expected: {
+      notThroughIds: [],
+      tileIds: [100],
+      collided: false,
+      hasEventNt: false,
+    },
   },
   {
     name: "通常キャラと同じ高さ",
     sources: [{ id: 1, x: POINT.x, y: POINT.y, page: page(false, 1, 100) }],
     // priorityType が 0 でなければタイルにならない
-    expected: { notThroughIds: [1], tileIds: [] },
+    expected: {
+      notThroughIds: [1],
+      tileIds: [],
+      // 通常キャラの高さなので移動を妨げる
+      collided: true,
+      hasEventNt: true,
+    },
   },
   {
     name: "画像が無い",
     sources: [{ id: 1, x: POINT.x, y: POINT.y, page: page(false, 0, 0) }],
-    expected: { notThroughIds: [1], tileIds: [] },
+    expected: {
+      notThroughIds: [1],
+      tileIds: [],
+      collided: false,
+      hasEventNt: true,
+    },
   },
   {
     name: "有効なページが無い",
     sources: [{ id: 1, x: POINT.x, y: POINT.y, page: null }],
-    expected: { notThroughIds: [], tileIds: [] },
+    expected: {
+      notThroughIds: [],
+      tileIds: [],
+      collided: false,
+      hasEventNt: false,
+    },
   },
   {
     name: "同じ場所に複数",
@@ -150,6 +216,9 @@ const testCases: TestCase[] = [
     expected: {
       notThroughIds: [1, 3],
       tileIds: [100, 200],
+      // id:3 が通常キャラの高さ
+      collided: true,
+      hasEventNt: true,
     },
   },
 ];
