@@ -12,8 +12,12 @@ export interface Rmmz_CharacterBase extends Rmmz_MapCharacter {
   _moveSpeed: number;
   _jumpPeak: number;
   _jumpCount: number;
+  _direction: number;
+  _directionFix: boolean;
 
   setDirection(direction: number): void;
+  isDirectionFixed(): boolean;
+  resetStopCount(): void;
   isDashing(): boolean;
   isThrough(): boolean;
   isDebugThrough(): boolean;
@@ -45,4 +49,20 @@ export interface Rmmz_CharacterBase extends Rmmz_MapCharacter {
 export interface Rmmz_CharacterBase_Constructor {
   new (): Rmmz_CharacterBase;
   prototype: Rmmz_CharacterBase;
+}
+
+/** Game_Character。向きの変更を持つ */
+export interface Rmmz_Character extends Rmmz_CharacterBase {
+  turnRight90(): void;
+  turnLeft90(): void;
+  turn180(): void;
+  turnRightOrLeft90(): void;
+  turnRandom(): void;
+  turnTowardCharacter(character: Rmmz_MapCharacter): void;
+  turnAwayFromCharacter(character: Rmmz_MapCharacter): void;
+}
+
+export interface Rmmz_Character_Constructor {
+  new (): Rmmz_Character;
+  prototype: Rmmz_Character;
 }
