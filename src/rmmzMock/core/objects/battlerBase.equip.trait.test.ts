@@ -15,6 +15,7 @@ import {
   traitActionPlusSet,
   traitsAddedSkillTypes,
   traitsIsStateResist,
+  traitsStateResistSet,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import { Game_BattlerBase } from "./rmmz_objects";
@@ -104,14 +105,19 @@ describe("集合を返すもの", () => {
 });
 
 describe("ステート無効化", () => {
-  // traitsIsStateResist は「無効化されていない」を返す。
-  // コアの isStateResist とは真偽が逆なので、否定して突き合わせる。
   ids.forEach((id) => {
     test(`stateId: ${id}`, () => {
       const battlerBase = createMockedBattlerBase(traits);
       const expected: boolean = battlerBase.isStateResist(id);
       const result: boolean = traitsIsStateResist(traits, id);
-      expect(result).toBe(!expected);
+      expect(result).toBe(expected);
     });
+  });
+
+  test("stateResistSet", () => {
+    const battlerBase = createMockedBattlerBase(traits);
+    const expected: number[] = battlerBase.stateResistSet();
+    const result: number[] = traitsStateResistSet(traits);
+    expect(result).toEqual(expected);
   });
 });
