@@ -29,13 +29,20 @@ export const startMapEvent = <T extends MapEvent>(
   if (map.isEventRunning()) {
     return;
   }
-  for (const event of map.events()) {
+  map.events().forEach((event) => {
     if (isEventStartable(event, x, y, triggers, normalPriority)) {
       event.start();
     }
-  }
+  });
 };
 
+/**
+ * 位置 → 優先度 → トリガーの順に見る。
+ *
+ * 位置がいちばん選択的で (ほとんどのイベントは別の場所にいる)、
+ * トリガーの判定がいちばん重い (配列の includes)。
+ * 実測 (イベント 30 個): 81ns → 66ns。performance.md [ORDR]
+ */
 const isEventStartable = (
   event: MapEvent,
   x: number,
@@ -43,10 +50,10 @@ const isEventStartable = (
   triggers: ReadonlyArray<number>,
   normalPriority: boolean,
 ): boolean => {
-  if (event.isNormalPriority() !== normalPriority) {
+  if (!event.pos(x, y)) {
     return false;
   }
-  if (!event.pos(x, y)) {
+  if (event.isNormalPriority() !== normalPriority) {
     return false;
   }
   return event.isTriggerIn(triggers);
