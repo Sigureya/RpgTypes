@@ -18,7 +18,7 @@ const makeTraits = (seed, count) => {
   return traits;
 };
 
-/** コアスクリプトと同じ形で tgr を計算する getter を持つ戦闘者 */
+/** コアスクリプトと同じ形で tgr を計算する getter を持つバトラー */
 const makeBattler = (seed, objectCount) => {
   const objects = [];
   for (let i = 0; i < objectCount; i++) {
