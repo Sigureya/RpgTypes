@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, test } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import type {
   CharacterScreenState,
   GraphicsSize,
@@ -72,10 +72,8 @@ interface CharacterSource {
 const proto = Game_CharacterBase.prototype;
 
 const createCoreCharacter = (source: CharacterSource): FakeCharacterBase => {
-  Object.assign(globalThis, {
-    $gameMap: createMapProvider(),
-    Graphics: GRAPHICS,
-  });
+  vi.stubGlobal("$gameMap", createMapProvider());
+  vi.stubGlobal("Graphics", GRAPHICS);
   return {
     _realX: source.realX,
     _realY: source.realY,
@@ -105,9 +103,7 @@ const createScreenState = (source: CharacterSource): CharacterScreenState => {
 };
 
 afterEach(() => {
-  const g = globalThis as unknown as Record<string, unknown>;
-  delete g.$gameMap;
-  delete g.Graphics;
+  vi.unstubAllGlobals();
 });
 
 interface TestCase {

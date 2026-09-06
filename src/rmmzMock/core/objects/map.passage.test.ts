@@ -1,5 +1,4 @@
-import { afterAll, beforeAll, describe, expect, test } from "vitest";
-import type { Data_Map } from "@RpgTypes/rmmz/events";
+import { afterAll, beforeAll, describe, expect, test, vi } from "vitest";
 import { mapLayeredTiles } from "@RpgTypes/rmmz/rpg/event/map/tiles";
 import {
   mapAllTiles,
@@ -13,6 +12,7 @@ import type {
   Data_MapPassage,
   Provider_MapPassage,
 } from "@RpgTypes/rmmzFunctional/map/providerType";
+import type { Rmmz_Map, Rmmz_MapTileEvent } from "@RpgTypes/rmmzRuntime";
 import { Game_Map } from "./rmmz_objects";
 
 const WIDTH = 3;
@@ -98,49 +98,52 @@ const provider: Provider_MapPassage<Data_MapPassage> = {
     TILE_EVENT.x === x && TILE_EVENT.y === y ? [TILE_EVENT.tile] : [],
 };
 
-interface CoreTileEvent {
-  posNt(x: number, y: number): boolean;
-  tileId(): number;
+/** allTiles が読むタイルイベントの範囲。位置とタイル番号だけあればよい */
+type FakeTileEvent = Rmmz_MapTileEvent;
+
+/**
+ * Game_Map のうち、この検証で呼ぶものだけ。
+ * tileEventsXy は自前で返すので、Rmmz_Map からは取らない
+ * (コアの型は Game_Event の一覧を返す約束になっている)。
+ */
+interface FakeMap
+  extends Pick<
+    Rmmz_Map,
+    | "tilesetFlags"
+    | "tileId"
+    | "width"
+    | "height"
+    | "isValid"
+    | "layeredTiles"
+    | "allTiles"
+    | "checkPassage"
+    | "checkLayeredTilesFlags"
+    | "isPassable"
+    | "isLadder"
+    | "isBush"
+    | "terrainTag"
+  > {
+  tileEventsXy(x: number, y: number): FakeTileEvent[];
 }
 
-/** Game_Map のうち、この検証で呼ぶものだけ */
-interface CoreMapLike {
-  _tileEvents: CoreTileEvent[];
-  tilesetFlags(): ReadonlyArray<number>;
-  tileId(x: number, y: number, z: number): number;
-  width(): number;
-  height(): number;
-  isValid(x: number, y: number): boolean;
-  layeredTiles(x: number, y: number): number[];
-  tileEventsXy(x: number, y: number): CoreTileEvent[];
-  allTiles(x: number, y: number): number[];
-  checkPassage(x: number, y: number, bit: number): boolean;
-  checkLayeredTilesFlags(x: number, y: number, bit: number): boolean;
-  isPassable(x: number, y: number, direction: number): boolean;
-  isLadder(x: number, y: number): boolean;
-  isBush(x: number, y: number): boolean;
-  terrainTag(x: number, y: number): number;
-}
+const proto = Game_Map.prototype;
 
-const proto = Game_Map.prototype as unknown as CoreMapLike;
-
-const createCoreMap = (): CoreMapLike => {
+const createCoreMap = (): FakeMap => {
+  const tileEvents: FakeTileEvent[] = [
+    {
+      posNt: (x: number, y: number) => TILE_EVENT.x === x && TILE_EVENT.y === y,
+      tileId: () => TILE_EVENT.tile,
+    },
+  ];
   return {
-    ...proto,
-    _tileEvents: [
-      {
-        posNt: (x: number, y: number) =>
-          TILE_EVENT.x === x && TILE_EVENT.y === y,
-        tileId: () => TILE_EVENT.tile,
-      },
-    ],
     tilesetFlags: () => flags,
+    tileEventsXy: (x: number, y: number) =>
+      tileEvents.filter((event) => event.posNt(x, y)),
     tileId: proto.tileId,
     width: proto.width,
     height: proto.height,
     isValid: proto.isValid,
     layeredTiles: proto.layeredTiles,
-    tileEventsXy: proto.tileEventsXy,
     allTiles: proto.allTiles,
     checkPassage: proto.checkPassage,
     checkLayeredTilesFlags: proto.checkLayeredTilesFlags,
@@ -153,11 +156,11 @@ const createCoreMap = (): CoreMapLike => {
 
 beforeAll(() => {
   // コアの tileId は $dataMap の width / height / data しか読まない
-  globalThis.$dataMap = map as Data_Map;
+  vi.stubGlobal("$dataMap", map);
 });
 
 afterAll(() => {
-  globalThis.$dataMap = undefined as unknown as Data_Map;
+  vi.unstubAllGlobals();
 });
 
 /** 下 / 左。bit は (1 << (d / 2 - 1)) & 0x0f */

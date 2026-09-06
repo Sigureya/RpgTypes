@@ -152,15 +152,6 @@ interface FakeGlobals {
   $dataItems: Record<number, Data_Item>;
 }
 
-const GLOBAL_KEYS: (keyof FakeGlobals)[] = [
-  "$gameSwitches",
-  "$gameVariables",
-  "$gameSelfSwitches",
-  "$gameParty",
-  "$gameActors",
-  "$dataItems",
-];
-
 const createGlobals = (world: World): FakeGlobals => {
   const members = world.inParty ? [MOCK_ACTOR] : [];
   return {
@@ -181,7 +172,10 @@ interface FakeEvent {
 }
 
 const createCoreEvent = (world: World): FakeEvent => {
-  Object.assign(globalThis, createGlobals(world));
+  const globals = createGlobals(world);
+  Object.entries(globals).forEach(([name, value]) => {
+    vi.stubGlobal(name, value);
+  });
   return {
     _mapId: MAP_ID,
     _eventId: EVENT_ID,
@@ -190,9 +184,7 @@ const createCoreEvent = (world: World): FakeEvent => {
 };
 
 afterEach(() => {
-  GLOBAL_KEYS.forEach((key) => {
-    delete (globalThis as unknown as Record<string, unknown>)[key];
-  });
+  vi.unstubAllGlobals();
 });
 
 type ConditionKey =

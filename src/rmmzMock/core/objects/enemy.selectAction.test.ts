@@ -5,37 +5,34 @@ import {
   filterEnemyActionsByRating,
   selectEnemyActionByWeight,
 } from "@RpgTypes/rmmzFunctional";
+import type { Rmmz_Enemy } from "@RpgTypes/rmmzRuntime";
 import { Game_Enemy } from "./rmmz_objects";
 
-/** Game_Enemy.selectAction は this を使わないので、実体を作らずに呼べる */
+/** Game_Enemy.selectAction は this を読まないので、実体を作らずに呼べる */
+type FakeEnemy = Pick<Rmmz_Enemy, "selectAction">;
+
 const coreSelectAction = (
   actionList: Enemy_Action[],
   ratingZero: number,
 ): Enemy_Action | null => {
-  return (
-    Game_Enemy as unknown as {
-      prototype: {
-        selectAction(
-          actionList: Enemy_Action[],
-          ratingZero: number,
-        ): Enemy_Action | null;
-      };
-    }
-  ).prototype.selectAction.call(null, actionList, ratingZero);
+  const enemy: FakeEnemy = { selectAction: Game_Enemy.prototype.selectAction };
+  return enemy.selectAction(actionList, ratingZero);
 };
 
 let randomValue = 0;
-let originalRandomInt: unknown;
+let originalRandomInt: (max: number) => number;
 
 beforeAll(() => {
-  // rmmz_core.js の拡張。乱数は差し替えて決め打ちにする
-  const math = Math as unknown as Record<string, unknown>;
-  originalRandomInt = math.randomInt;
-  math.randomInt = () => randomValue;
+  // 乱数は差し替えて決め打ちにする
+  // @ts-expect-error Math.randomInt はツクールが足す拡張
+  originalRandomInt = Math.randomInt;
+  // @ts-expect-error Math.randomInt はツクールが足す拡張
+  Math.randomInt = () => randomValue;
 });
 
 afterAll(() => {
-  (Math as unknown as Record<string, unknown>).randomInt = originalRandomInt;
+  // @ts-expect-error Math.randomInt はツクールが足す拡張
+  Math.randomInt = originalRandomInt;
 });
 
 const action = (skillId: number, rating: number): Enemy_Action => ({

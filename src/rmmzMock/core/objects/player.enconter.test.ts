@@ -87,7 +87,7 @@ const runTestCase = (testCase: TestCase): void => {
     });
     describe("Game_Player", () => {
       test("result", () => {
-        // @ts-expect-error
+        // @ts-expect-error Math.randomInt はツクールが足す拡張
         Math.randomInt = (): number => {
           return testCase.randomValue;
         };
@@ -103,7 +103,7 @@ const runTestCase = (testCase: TestCase): void => {
           expect(max).toBe(total);
           return testCase.randomValue;
         });
-        // @ts-expect-error
+        // @ts-expect-error Math.randomInt はツクールが足す拡張
         Math.randomInt = randomFn;
         const map = createMockMap(testCase.list);
         vi.stubGlobal("$gameMap", map);
