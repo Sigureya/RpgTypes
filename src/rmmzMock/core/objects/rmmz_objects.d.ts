@@ -15,6 +15,7 @@ import type {
   Rmmz_Map_Constructor,
   Rmmz_Event_Constructor,
   Rmmz_Picture_Constructor,
+  Rmmz_CharacterBase_Constructor,
 } from "@RpgTypes/rmmzRuntime";
 
 export declare var Game_Action: Rmmz_Action_Constructor;
@@ -34,3 +35,4 @@ export declare var Game_Player: Rmmz_Player_Constructor;
 export declare var Game_Map: Rmmz_Map_Constructor;
 export declare var Game_Event: Rmmz_Event_Constructor;
 export declare var Game_Picture: Rmmz_Picture_Constructor;
+export declare var Game_CharacterBase: Rmmz_CharacterBase_Constructor;
