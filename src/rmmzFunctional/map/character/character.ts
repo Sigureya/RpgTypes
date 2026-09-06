@@ -211,11 +211,18 @@ export const turnRandom = (randomInt: (max: number) => number): Direction8 => {
   return CARDINAL_DIRECTIONS[randomInt(4)] ?? DIRECTION.DOWN;
 };
 
+/**
+ * 相手のほうを向く向き。同じ位置なら null。
+ *
+ * コアの turnTowardCharacter は、縦横の差がどちらも 0 のとき
+ * setDirection を呼ばず、今の向きのままにする。
+ * ここでは向きを返すだけなので、「変えない」を null で表す。
+ */
 export const directionTowardTarget = (
   self: CharacterPositionLike,
   target: CharacterPositionLike,
   map: Pick<Rmmz_CharacterMapProvider, "deltaX" | "deltaY">,
-): Direction8 => {
+): Direction8 | null => {
   const sx = deltaXFrom(self.x, target.x, map);
   const sy = deltaYFrom(self.y, target.y, map);
   if (Math.abs(sx) > Math.abs(sy)) {
@@ -224,16 +231,17 @@ export const directionTowardTarget = (
   if (sy !== 0) {
     return sy > 0 ? DIRECTION.UP : DIRECTION.DOWN;
   }
-  return DIRECTION.DOWN;
+  return null;
 };
 
+/** 相手と反対を向く向き。同じ位置なら null。 */
 export const directionAwayFromTarget = (
   self: CharacterPositionLike,
   target: CharacterPositionLike,
   map: Pick<Rmmz_CharacterMapProvider, "deltaX" | "deltaY">,
-): Direction8 => {
+): Direction8 | null => {
   const toward = directionTowardTarget(self, target, map);
-  return reverseDirection(toward);
+  return toward === null ? null : reverseDirection(toward);
 };
 
 export const searchLimit = (): number => {
