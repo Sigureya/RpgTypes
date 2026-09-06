@@ -34,7 +34,16 @@ export const mapEventsXy = <
   x: number,
   y: number,
 ): MapEvent<CommandType, MoveRoute>[] => {
-  return mapEvents(map).filter((event) => event.x === x && event.y === y);
+  // mapEvents で null を除いてから絞ると、配列を 1 本余分に作る。
+  // 毎フレームの通行判定から呼ばれるので 1 回の走査にまとめる。
+  // また多数の要素がfalse判定になるので、reduceの方が速くなるらしい
+  // 実測 (イベント 40 個): 220ns → 82ns。performance.md [SCAN]
+  return map.events.reduce<MapEvent<CommandType, MoveRoute>[]>((acc, event) => {
+    if (event && event.x === x && event.y === y) {
+      acc.push(event);
+    }
+    return acc;
+  }, []);
 };
 
 export const mapEventIdXy = <
@@ -45,5 +54,9 @@ export const mapEventIdXy = <
   x: number,
   y: number,
 ): number => {
-  return mapEventsXy(map, x, y)[0]?.id ?? 0;
+  // 先頭の 1 つしか要らないので、配列を作らずに探す
+  const found = map.events.find(
+    (event) => event && event.x === x && event.y === y,
+  );
+  return found?.id ?? 0;
 };
