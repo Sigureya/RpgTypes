@@ -1,5 +1,6 @@
 import { beforeAll, describe, expect, test } from "vitest";
 import type { ColorRGBA } from "@RpgTypes/libs";
+import type { Rmmz_Picture } from "@RpgTypes/rmmzRuntime";
 import {
   makeCommandMovePicture,
   makeCommandShowPicture,
@@ -19,7 +20,6 @@ import {
   tintPicture,
   updatePicture,
 } from "@RpgTypes/rpgNext/picture";
-// @ts-expect-error 型定義のない移植元
 import { Game_Picture } from "./rmmz_objects";
 
 beforeAll(() => {
@@ -46,7 +46,7 @@ interface Snapshot {
   tone: number[] | null;
 }
 
-const fromOriginal = (picture: any): Snapshot => ({
+const fromOriginal = (picture: Rmmz_Picture): Snapshot => ({
   name: picture.name(),
   origin: picture.origin(),
   blendMode: picture.blendMode(),
@@ -97,7 +97,7 @@ const moveArgs = {
 describe("Game_Picture と store の一致", () => {
   const easingTypes: Picture_EasingKind[] = [0, 1, 2, 3];
   test.each(easingTypes)("easingType=%i の移動が全フレーム一致する", (kind) => {
-    const original = new (Game_Picture as any)();
+    const original: Rmmz_Picture = new Game_Picture();
     original.show(
       showArgs.name,
       showArgs.origin,
@@ -139,14 +139,14 @@ describe("Game_Picture と store の一致", () => {
 
   test("duration が 0 の tint は即座に適用される", () => {
     const tone: ColorRGBA = [10, 20, 30, 40];
-    const original = new (Game_Picture as any)();
+    const original: Rmmz_Picture = new Game_Picture();
     original.tint(tone, 0);
     const store = tintPicture(createPictureStore(1), tone, 0);
     expect(fromStore(store).tone).toEqual(fromOriginal(original).tone);
   });
 
   test("duration が 0 の移動は適用されない", () => {
-    const original = new (Game_Picture as any)();
+    const original: Rmmz_Picture = new Game_Picture();
     original.move(0, 300, 400, 50, 150, 128, 1, 0, 0);
     original.update();
     let store = movePicture(createPictureStore(1), {
@@ -159,7 +159,7 @@ describe("Game_Picture と store の一致", () => {
   });
 
   test("show は移動・色調・回転を初期化する", () => {
-    const original = new (Game_Picture as any)();
+    const original: Rmmz_Picture = new Game_Picture();
     original.rotate(6);
     original.tint([64, 0, 0, 0], 10);
     original.move(0, 300, 400, 50, 150, 128, 1, 20, 0);
@@ -202,7 +202,7 @@ describe("イベントコマンドから Game_Picture と同じ結果になる",
   const readVariable = (id: number) => id * 100;
 
   test("231 は Game_Picture.show と一致する", () => {
-    const original = new (Game_Picture as any)();
+    const original: Rmmz_Picture = new Game_Picture();
     original.show("actor1", 1, 10, 20, 80, 90, 200, 2);
     const store = applyShowPictureCommand(
       createPictureStore(3),
@@ -227,7 +227,7 @@ describe("イベントコマンドから Game_Picture と同じ結果になる",
       wait: true,
       easingType: 2,
     });
-    const original = new (Game_Picture as any)();
+    const original: Rmmz_Picture = new Game_Picture();
     original.show("actor1", 1, 10, 20, 80, 90, 200, 2);
     original.move(0, 300, 400, 50, 150, 128, 1, 20, 2);
 
