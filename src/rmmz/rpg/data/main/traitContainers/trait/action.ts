@@ -51,9 +51,14 @@ const skillIdAcc = (skillId: number, trait: Trait): number => {
 };
 
 export const traitActionPlusSet = (traits: ReadonlyArray<Trait>): number[] => {
-  return traits
-    .filter((trait) => trait.code === TRAIT_ACTION_PLUS)
-    .map((trait) => trait.value);
+  // filter().map() は中間配列を 1 つ余分に作る。
+  // 実測で 105ns → 45ns (特徴 24 個)。performance.md [FOLD]
+  return traits.reduce<number[]>((acc, trait) => {
+    if (trait.code === TRAIT_ACTION_PLUS) {
+      acc.push(trait.value);
+    }
+    return acc;
+  }, []);
 };
 
 export const traitIsAutoBattle = (traits: ReadonlyArray<Trait>): boolean => {
