@@ -5,7 +5,7 @@ import {
   TRAIT_STATE_RATE,
   TRAIT_STATE_RESIST,
 } from "@RpgTypes/rmmz/rpg";
-import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
+import type { Battler_StateRateSource } from "./effectRate";
 import {
   actionCalcAttackStateRate,
   actionCalcNormalStateRate,
@@ -104,8 +104,13 @@ describe("バトラーを受ける層", () => {
   const makeBattler = (traits: Trait[], luk: number) => {
     const allTraits = vi.fn(() => traits);
     const lukGetter = vi.fn(() => luk);
-    const battler = { allTraits } as unknown as Rmmz_BattlerBase;
-    Object.defineProperty(battler, "luk", { get: lukGetter });
+    // luk はゲッターなので、読んだ回数を数えるために get で定義する
+    const battler: Battler_StateRateSource = {
+      allTraits,
+      get luk() {
+        return lukGetter();
+      },
+    };
     return { battler, allTraits, lukGetter };
   };
 

@@ -15,4 +15,8 @@ export interface Rmmz_Event extends Rmmz_MapCharacter {
   lock(): void;
   isTriggerIn(triggers: ReadonlyArray<number>): boolean;
   isNormalPriority(): boolean;
+  meetsConditions(
+    page: MapEventPage<EventCommand, MoveRouteCommandUnknown>,
+  ): boolean;
+  findProperPageIndex(): number;
 }

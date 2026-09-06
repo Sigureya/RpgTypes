@@ -1,6 +1,11 @@
 import { describe, expect, test, vi } from "vitest";
 import type { Data_Skill, Trait } from "@RpgTypes/rmmz/rpg";
-import { TRAIT_ATTACK_ELEMENT, TRAIT_ELEMENT_RATE } from "@RpgTypes/rmmz/rpg";
+import {
+  makeDamage,
+  makeSkillData,
+  TRAIT_ATTACK_ELEMENT,
+  TRAIT_ELEMENT_RATE,
+} from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import { actionCalcElementRate } from "./rate";
 
@@ -15,14 +20,17 @@ const traits: Trait[] = [
   { code: TRAIT_ATTACK_ELEMENT, dataId: 2, value: 0 },
 ];
 
-const skill = (elementId: number) =>
-  ({ damage: { elementId } }) as unknown as Data_Skill;
+/** 特徴の一覧だけを持つ偽物。actionCalcElementRate はこれしか読まない */
+type FakeTarget = Pick<Rmmz_BattlerBase, "allTraits">;
+
+const skill = (elementId: number): Data_Skill =>
+  makeSkillData({ damage: makeDamage({ elementId }) });
 
 describe("actionCalcElementRate", () => {
   test("allTraits は 1 回しか呼ばない", () => {
     // allTraits() は traitObjects を concat で畳むため、呼ぶたびに配列を作る
     const allTraits = vi.fn(() => traits);
-    const target = { allTraits } as unknown as Rmmz_BattlerBase;
+    const target: FakeTarget = { allTraits };
 
     expect(actionCalcElementRate(skill(-1), target)).toBe(2);
     expect(allTraits).toHaveBeenCalledTimes(1);
@@ -30,7 +38,7 @@ describe("actionCalcElementRate", () => {
 
   test("属性指定でも 1 回", () => {
     const allTraits = vi.fn(() => traits);
-    const target = { allTraits } as unknown as Rmmz_BattlerBase;
+    const target: FakeTarget = { allTraits };
 
     expect(actionCalcElementRate(skill(1), target)).toBe(0.5);
     expect(allTraits).toHaveBeenCalledTimes(1);

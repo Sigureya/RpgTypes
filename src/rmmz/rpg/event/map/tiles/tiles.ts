@@ -27,12 +27,19 @@ export const mapRegionId = (
   return isValidMapPosition(map, x, y) ? mapTileId(map, x, y, 5) : 0;
 };
 
+/**
+ * レイヤーを見る順。上から下へ。
+ * 毎フレームの通行判定で使うので、呼ぶたびに配列を作らないよう定数にする。
+ * 走査だけなら mapLayeredTiles を呼ばず、この定数を直接回す。
+ */
+export const LAYER_Z_ORDER = [3, 2, 1, 0] as const;
+
 export const mapLayeredTiles = (
   map: Data_MapTiles,
   x: number,
   y: number,
 ): number[] => {
-  return [3, 2, 1, 0].map((z) => mapTileId(map, x, y, z));
+  return LAYER_Z_ORDER.map((z) => mapTileId(map, x, y, z));
 };
 
 export const mapAutotileType = (

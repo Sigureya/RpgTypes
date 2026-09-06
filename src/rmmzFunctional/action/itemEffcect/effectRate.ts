@@ -8,6 +8,15 @@ import {
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 
 /**
+ * ステート付与率の計算で読むもの。どちらも allTraits() を辿るので重い。
+ * 読む範囲を型で言い切っておくと、偽物も 2 つ用意すれば足りる。
+ */
+export type Battler_StateRateSource = Pick<
+  Rmmz_BattlerBase,
+  "allTraits" | "luk"
+>;
+
+/**
  * 運の差による補正。luk は param() 経由なので読むだけで重い。
  * 数値で受け取り、読むのは呼び出し元の 1 回だけにする。
  */
@@ -62,8 +71,8 @@ export const traitsCalcNormalStateRate = (
  */
 export const actionCalcAttackStateRate = (
   stateId: number,
-  subject: Rmmz_BattlerBase,
-  target: Rmmz_BattlerBase,
+  subject: Battler_StateRateSource,
+  target: Battler_StateRateSource,
   effect: ItemEffect,
 ): number => {
   return traitsCalcAttackStateRate(
@@ -76,8 +85,8 @@ export const actionCalcAttackStateRate = (
 };
 
 export const actionCalcNormalStateRate = (
-  subject: Rmmz_BattlerBase,
-  target: Rmmz_BattlerBase,
+  subject: Battler_StateRateSource,
+  target: Battler_StateRateSource,
   effect: ItemEffect,
 ): number => {
   return traitsCalcNormalStateRate(

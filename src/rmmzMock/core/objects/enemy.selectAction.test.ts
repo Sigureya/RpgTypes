@@ -5,43 +5,34 @@ import {
   filterEnemyActionsByRating,
   selectEnemyActionByWeight,
 } from "@RpgTypes/rmmzFunctional";
+import type { Rmmz_Enemy } from "@RpgTypes/rmmzRuntime";
 import { Game_Enemy } from "./rmmz_objects";
 
-/** Game_Enemy.selectAction は this を使わないので、実体を作らずに呼べる */
+/** Game_Enemy.selectAction は this を読まないので、実体を作らずに呼べる */
+type FakeEnemy = Pick<Rmmz_Enemy, "selectAction">;
+
 const coreSelectAction = (
   actionList: Enemy_Action[],
   ratingZero: number,
 ): Enemy_Action | null => {
-  return (Game_Enemy as any).prototype.selectAction.call(
-    null,
-    actionList,
-    ratingZero,
-  );
-};
-
-/** Game_Enemy.selectAllActions の前半 (絞り込み) をそのまま写したもの */
-const coreRatingZero = (actionList: Enemy_Action[]): number => {
-  return Math.max(...actionList.map((a) => a.rating)) - 3;
-};
-
-const coreFilter = (
-  actionList: Enemy_Action[],
-  ratingZero: number,
-): Enemy_Action[] => {
-  return actionList.filter((a) => a.rating > ratingZero);
+  const enemy: FakeEnemy = { selectAction: Game_Enemy.prototype.selectAction };
+  return enemy.selectAction(actionList, ratingZero);
 };
 
 let randomValue = 0;
-let originalRandomInt: unknown;
+let originalRandomInt: (max: number) => number;
 
 beforeAll(() => {
-  // rmmz_core.js の拡張。乱数は差し替えて決め打ちにする
-  originalRandomInt = (Math as any).randomInt;
-  (Math as any).randomInt = () => randomValue;
+  // 乱数は差し替えて決め打ちにする
+  // @ts-expect-error Math.randomInt はツクールが足す拡張
+  originalRandomInt = Math.randomInt;
+  // @ts-expect-error Math.randomInt はツクールが足す拡張
+  Math.randomInt = () => randomValue;
 });
 
 afterAll(() => {
-  (Math as any).randomInt = originalRandomInt;
+  // @ts-expect-error Math.randomInt はツクールが足す拡張
+  Math.randomInt = originalRandomInt;
 });
 
 const action = (skillId: number, rating: number): Enemy_Action => ({
@@ -52,65 +43,140 @@ const action = (skillId: number, rating: number): Enemy_Action => ({
   conditionParam2: 0,
 });
 
-const cases: { name: string; actions: Enemy_Action[] }[] = [
-  { name: "1 つだけ", actions: [action(1, 5)] },
-  { name: "同じ rating", actions: [action(1, 5), action(2, 5)] },
+interface TestCase {
+  name: string;
+  actions: Enemy_Action[];
+  expected: {
+    /** 最大 rating - 3 */
+    ratingZero: number;
+    /** 絞り込みで残る skillId */
+    ratedSkillIds: number[];
+    /** 重みの合計 */
+    weightSum: number;
+    /** 乱数 0..weightSum-1 のときに選ばれる skillId */
+    picked: number[];
+  };
+}
+
+const runTestCase = (testCase: TestCase): void => {
+  describe(testCase.name, () => {
+    const { actions, expected } = testCase;
+    const ratingZero = expected.ratingZero;
+    const rated = filterEnemyActionsByRating(actions, ratingZero);
+
+    describe("function", () => {
+      test("enemyActionRatingZero", () => {
+        expect(enemyActionRatingZero(actions)).toBe(expected.ratingZero);
+      });
+
+      test("filterEnemyActionsByRating", () => {
+        const result = filterEnemyActionsByRating(actions, ratingZero);
+        expect(result.map((a) => a.skillId)).toEqual(expected.ratedSkillIds);
+      });
+
+      test("selectEnemyActionByWeight", () => {
+        const result = expected.picked.map((_, value) => {
+          return selectEnemyActionByWeight(rated, ratingZero, () => value)
+            ?.skillId;
+        });
+        expect(result).toEqual(expected.picked);
+      });
+
+      test("重みの合計を上限として乱数を引く", () => {
+        const maxValues: number[] = [];
+        selectEnemyActionByWeight(rated, ratingZero, (max) => {
+          maxValues.push(max);
+          return 0;
+        });
+        expect(maxValues).toEqual([expected.weightSum]);
+      });
+    });
+
+    describe("Enemy", () => {
+      test("ratingZero", () => {
+        const ratingMax = Math.max(...actions.map((a) => a.rating));
+        expect(ratingMax - 3).toBe(expected.ratingZero);
+      });
+
+      test("絞り込み", () => {
+        const result = actions.filter((a) => a.rating > ratingZero);
+        expect(result.map((a) => a.skillId)).toEqual(expected.ratedSkillIds);
+      });
+
+      test("selectAction", () => {
+        const result = expected.picked.map((_, value) => {
+          randomValue = value;
+          return coreSelectAction(rated, ratingZero)?.skillId;
+        });
+        expect(result).toEqual(expected.picked);
+      });
+
+      test("重みの合計", () => {
+        const sum = rated.reduce((r, a) => r + a.rating - ratingZero, 0);
+        expect(sum).toBe(expected.weightSum);
+      });
+    });
+  });
+};
+
+const testCases: TestCase[] = [
+  {
+    name: "1 つだけ",
+    actions: [action(1, 5)],
+    expected: {
+      ratingZero: 2,
+      ratedSkillIds: [1],
+      // 5 - 2
+      weightSum: 3,
+      picked: [1, 1, 1],
+    },
+  },
+  {
+    name: "同じ rating",
+    actions: [action(1, 5), action(2, 5)],
+    expected: {
+      ratingZero: 2,
+      ratedSkillIds: [1, 2],
+      // 3 + 3
+      weightSum: 6,
+      picked: [1, 1, 1, 2, 2, 2],
+    },
+  },
   {
     name: "ばらけた rating",
     actions: [action(1, 5), action(2, 4), action(3, 2), action(4, 1)],
+    expected: {
+      ratingZero: 2,
+      // rating 2 以下は候補から外れる
+      ratedSkillIds: [1, 2],
+      // 3 + 2
+      weightSum: 5,
+      picked: [1, 1, 1, 2, 2],
+    },
   },
   {
     name: "最大が後ろ",
     actions: [action(1, 1), action(2, 3), action(3, 9)],
+    expected: {
+      ratingZero: 6,
+      ratedSkillIds: [3],
+      // 9 - 6
+      weightSum: 3,
+      picked: [3, 3, 3],
+    },
   },
   {
     name: "rating 1 のみ",
     actions: [action(1, 1), action(2, 1), action(3, 1)],
+    expected: {
+      // 1 - 3
+      ratingZero: -2,
+      ratedSkillIds: [1, 2, 3],
+      // 3 + 3 + 3
+      weightSum: 9,
+      picked: [1, 1, 1, 2, 2, 2, 3, 3, 3],
+    },
   },
 ];
 
-describe("行動の絞り込みがコアスクリプトと一致する", () => {
-  cases.forEach(({ name, actions }) => {
-    describe(name, () => {
-      test("ratingZero", () => {
-        const expected: number = coreRatingZero(actions);
-        const result: number = enemyActionRatingZero(actions);
-        expect(result).toBe(expected);
-      });
-
-      test("絞り込みの結果", () => {
-        const ratingZero = coreRatingZero(actions);
-        const expected: Enemy_Action[] = coreFilter(actions, ratingZero);
-        const result: Enemy_Action[] = filterEnemyActionsByRating(
-          actions,
-          ratingZero,
-        );
-        expect(result).toEqual(expected);
-      });
-    });
-  });
-});
-
-describe("重み付き抽選がコアスクリプトと一致する", () => {
-  cases.forEach(({ name, actions }) => {
-    const ratingZero = coreRatingZero(actions);
-    const rated = coreFilter(actions, ratingZero);
-    const sum = rated.reduce((r, a) => r + a.rating - ratingZero, 0);
-
-    describe(name, () => {
-      // 取りうる乱数を全部試す
-      for (let value = 0; value < sum; value++) {
-        test(`乱数 ${value} / ${sum}`, () => {
-          randomValue = value;
-          const expected = coreSelectAction(rated, ratingZero);
-          const result = selectEnemyActionByWeight(
-            rated,
-            ratingZero,
-            () => value,
-          );
-          expect(result).toBe(expected);
-        });
-      }
-    });
-  });
-});
+testCases.forEach(runTestCase);

@@ -4,6 +4,12 @@ import type { Direction8 } from "@RpgTypes/rmmz/utils";
 import type { Rmmz_Event } from "./event";
 import type { Rmmz_Vehicle } from "./vehicle";
 
+/** Game_Map.allTiles が読むタイルイベントの範囲 */
+export interface Rmmz_MapTileEvent {
+  posNt(x: number, y: number): boolean;
+  tileId(): number;
+}
+
 export interface Rmmz_MapId {
   mapId(): number;
 }
@@ -73,11 +79,11 @@ export interface Rmmz_Map
   parallaxOx(): number;
   parallaxOy(): number;
   tileset(): Data_Tileset;
-  tilesetFlags(): [];
+  tilesetFlags(): ReadonlyArray<number>;
   displayName(): string;
   width(): number;
   height(): number;
-  data(): [];
+  data(): number[];
   isLoopHorizontal(): boolean;
   isLoopVertical(): boolean;
   isDashDisabled(): boolean;
@@ -111,8 +117,8 @@ export interface Rmmz_Map
   isValid(x: number, y: number): boolean;
   checkPassage(x: number, y: number, bit: number): boolean;
   tileId(x: number, y: number, z: number): number;
-  layeredTiles(x: number, y: number): [];
-  allTiles(x: number, y: number): [];
+  layeredTiles(x: number, y: number): number[];
+  allTiles(x: number, y: number): number[];
   autotileType(x: number, y: number, z: number): number;
   isPassable(x: number, y: number, d: number): boolean;
   isBoatPassable(x: number, y: number): boolean;

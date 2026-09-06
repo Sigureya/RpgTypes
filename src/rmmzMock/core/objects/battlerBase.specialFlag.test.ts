@@ -5,6 +5,7 @@ import {
   FLAG_ID_GUARD,
   FLAG_ID_PRESERVE_TP,
   FLAG_ID_SUBSTITUTE,
+  TRAIT_COLLAPSE_TYPE,
   TRAIT_SPECIAL_FLAG,
   traitCollapseType,
   traitIsPreserveTp,
@@ -12,7 +13,6 @@ import {
   traitsIsGuard,
   traitsIsSubstitute,
   traitsSpecialFlag,
-  TRAIT_COLLAPSE_TYPE,
 } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_BattlerBase } from "@RpgTypes/rmmzRuntime";
 import { Game_BattlerBase } from "./rmmz_objects";
@@ -45,14 +45,133 @@ const collapse = (dataId: number): Trait => ({
 interface TestCase {
   name: string;
   traits: Trait[];
+  expected: {
+    autoBattle: boolean;
+    guard: boolean;
+    substitute: boolean;
+    preserveTp: boolean;
+    collapseType: number;
+  };
 }
 
-const cases: TestCase[] = [
-  { name: "特徴なし", traits: [] },
-  { name: "自動戦闘", traits: [flag(FLAG_ID_AUTO_BATTLE)] },
-  { name: "防御", traits: [flag(FLAG_ID_GUARD)] },
-  { name: "身代わり", traits: [flag(FLAG_ID_SUBSTITUTE)] },
-  { name: "TP持ち越し", traits: [flag(FLAG_ID_PRESERVE_TP)] },
+const runTestCase = (testCase: TestCase): void => {
+  describe(testCase.name, () => {
+    const { traits, expected } = testCase;
+
+    describe("function", () => {
+      test("traitsIsAutoBattle", () => {
+        expect(traitsIsAutoBattle(traits)).toBe(expected.autoBattle);
+      });
+      test("traitsIsGuard", () => {
+        expect(traitsIsGuard(traits)).toBe(expected.guard);
+      });
+      test("traitsIsSubstitute", () => {
+        expect(traitsIsSubstitute(traits)).toBe(expected.substitute);
+      });
+      test("traitIsPreserveTp", () => {
+        expect(traitIsPreserveTp(traits)).toBe(expected.preserveTp);
+      });
+      test("traitsSpecialFlag", () => {
+        expect(traitsSpecialFlag(traits, FLAG_ID_AUTO_BATTLE)).toBe(
+          expected.autoBattle,
+        );
+        expect(traitsSpecialFlag(traits, FLAG_ID_GUARD)).toBe(expected.guard);
+        expect(traitsSpecialFlag(traits, FLAG_ID_SUBSTITUTE)).toBe(
+          expected.substitute,
+        );
+        expect(traitsSpecialFlag(traits, FLAG_ID_PRESERVE_TP)).toBe(
+          expected.preserveTp,
+        );
+      });
+      test("traitCollapseType", () => {
+        expect(traitCollapseType(traits)).toBe(expected.collapseType);
+      });
+    });
+
+    describe("BattlerBase", () => {
+      test("isAutoBattle", () => {
+        const battlerBase = createMockedBattlerBase(traits);
+        expect(battlerBase.isAutoBattle()).toBe(expected.autoBattle);
+      });
+      // isGuard / isSubstitute は canMove() も見るので、特徴の判定だけを比べる
+      test("specialFlag(GUARD)", () => {
+        const battlerBase = createMockedBattlerBase(traits);
+        expect(battlerBase.specialFlag(FLAG_ID_GUARD)).toBe(expected.guard);
+      });
+      test("specialFlag(SUBSTITUTE)", () => {
+        const battlerBase = createMockedBattlerBase(traits);
+        expect(battlerBase.specialFlag(FLAG_ID_SUBSTITUTE)).toBe(
+          expected.substitute,
+        );
+      });
+      test("isPreserveTp", () => {
+        const battlerBase = createMockedBattlerBase(traits);
+        expect(battlerBase.isPreserveTp()).toBe(expected.preserveTp);
+      });
+      test("collapseType", () => {
+        const battlerBase = createMockedBattlerBase(traits);
+        expect(battlerBase.collapseType()).toBe(expected.collapseType);
+      });
+    });
+  });
+};
+
+const testCases: TestCase[] = [
+  {
+    name: "特徴なし",
+    traits: [],
+    expected: {
+      autoBattle: false,
+      guard: false,
+      substitute: false,
+      preserveTp: false,
+      collapseType: 0,
+    },
+  },
+  {
+    name: "自動戦闘",
+    traits: [flag(FLAG_ID_AUTO_BATTLE)],
+    expected: {
+      autoBattle: true,
+      guard: false,
+      substitute: false,
+      preserveTp: false,
+      collapseType: 0,
+    },
+  },
+  {
+    name: "防御",
+    traits: [flag(FLAG_ID_GUARD)],
+    expected: {
+      autoBattle: false,
+      guard: true,
+      substitute: false,
+      preserveTp: false,
+      collapseType: 0,
+    },
+  },
+  {
+    name: "身代わり",
+    traits: [flag(FLAG_ID_SUBSTITUTE)],
+    expected: {
+      autoBattle: false,
+      guard: false,
+      substitute: true,
+      preserveTp: false,
+      collapseType: 0,
+    },
+  },
+  {
+    name: "TP 持ち越し",
+    traits: [flag(FLAG_ID_PRESERVE_TP)],
+    expected: {
+      autoBattle: false,
+      guard: false,
+      substitute: false,
+      preserveTp: true,
+      collapseType: 0,
+    },
+  },
   {
     name: "全部",
     traits: [
@@ -61,70 +180,64 @@ const cases: TestCase[] = [
       flag(FLAG_ID_SUBSTITUTE),
       flag(FLAG_ID_PRESERVE_TP),
     ],
+    expected: {
+      autoBattle: true,
+      guard: true,
+      substitute: true,
+      preserveTp: true,
+      collapseType: 0,
+    },
   },
-  { name: "value に入っているだけ", traits: [flagInValue(FLAG_ID_GUARD)] },
-  { name: "無関係なフラグ", traits: [flag(99)] },
+  {
+    name: "value にだけ flagId が入っている",
+    // 判定は dataId で行う。value を見る実装なら全て true になってしまう
+    traits: [
+      flagInValue(FLAG_ID_AUTO_BATTLE),
+      flagInValue(FLAG_ID_GUARD),
+      flagInValue(FLAG_ID_SUBSTITUTE),
+      flagInValue(FLAG_ID_PRESERVE_TP),
+    ],
+    expected: {
+      autoBattle: false,
+      guard: false,
+      substitute: false,
+      preserveTp: false,
+      collapseType: 0,
+    },
+  },
+  {
+    name: "無関係なフラグ",
+    traits: [flag(99)],
+    expected: {
+      autoBattle: false,
+      guard: false,
+      substitute: false,
+      preserveTp: false,
+      collapseType: 0,
+    },
+  },
+  {
+    name: "消滅方法 (1 つ)",
+    traits: [collapse(1)],
+    expected: {
+      autoBattle: false,
+      guard: false,
+      substitute: false,
+      preserveTp: false,
+      collapseType: 1,
+    },
+  },
+  {
+    name: "消滅方法 (大きいほうを採る)",
+    traits: [collapse(3), collapse(1)],
+    expected: {
+      autoBattle: false,
+      guard: false,
+      substitute: false,
+      preserveTp: false,
+      collapseType: 3,
+    },
+  },
 ];
 
-describe("specialFlag がコアスクリプトと一致する", () => {
-  cases.forEach(({ name, traits }) => {
-    describe(name, () => {
-      const flagIds = [
-        FLAG_ID_AUTO_BATTLE,
-        FLAG_ID_GUARD,
-        FLAG_ID_SUBSTITUTE,
-        FLAG_ID_PRESERVE_TP,
-      ];
-      flagIds.forEach((flagId) => {
-        test(`flagId: ${flagId}`, () => {
-          const battlerBase = createMockedBattlerBase(traits);
-          const expected: boolean = battlerBase.specialFlag(flagId);
-          const result: boolean = traitsSpecialFlag(traits, flagId);
-          expect(result).toBe(expected);
-        });
-      });
-
-      test("isAutoBattle", () => {
-        const battlerBase = createMockedBattlerBase(traits);
-        expect(traitsIsAutoBattle(traits)).toBe(battlerBase.isAutoBattle());
-      });
-
-      test("isGuard", () => {
-        const battlerBase = createMockedBattlerBase(traits);
-        // isGuard は入力可能かどうかも見るので、特徴の判定だけを比べる
-        expect(traitsIsGuard(traits)).toBe(
-          battlerBase.specialFlag(FLAG_ID_GUARD),
-        );
-      });
-
-      test("isSubstitute", () => {
-        const battlerBase = createMockedBattlerBase(traits);
-        expect(traitsIsSubstitute(traits)).toBe(
-          battlerBase.specialFlag(FLAG_ID_SUBSTITUTE),
-        );
-      });
-
-      test("isPreserveTp", () => {
-        const battlerBase = createMockedBattlerBase(traits);
-        expect(traitIsPreserveTp(traits)).toBe(battlerBase.isPreserveTp());
-      });
-    });
-  });
-});
-
-describe("collapseType がコアスクリプトと一致する", () => {
-  const collapseCases: Trait[][] = [
-    [],
-    [collapse(1)],
-    [collapse(1), collapse(3)],
-    [collapse(3), collapse(1)],
-  ];
-  collapseCases.forEach((traits, index) => {
-    test(`case ${index}`, () => {
-      const battlerBase = createMockedBattlerBase(traits);
-      const expected: number = battlerBase.collapseType();
-      const result: number = traitCollapseType(traits);
-      expect(result).toBe(expected);
-    });
-  });
-});
+testCases.forEach(runTestCase);

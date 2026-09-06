@@ -16,4 +16,10 @@ export interface Rmmz_Enemy extends Rmmz_Battler, Rmmz_EnemyBase {
   appear(): void;
   transform(enemyId: number): void;
   meetsCondition(action: Enemy_Action): boolean;
+  /** 重み付きで 1 つ選ぶ。this を読まない */
+  selectAction(
+    actionList: ReadonlyArray<Enemy_Action>,
+    ratingZero: number,
+  ): Enemy_Action | null;
+  selectAllActions(actionList: ReadonlyArray<Enemy_Action>): void;
 }

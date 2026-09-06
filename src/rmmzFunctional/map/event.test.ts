@@ -12,9 +12,11 @@ import type {
 } from "@RpgTypes/rmmzRuntime";
 import type { MockedObject } from "vitest";
 import { vi, describe, test, expect } from "vitest";
+import type { MapEvent_SelfSwitchReader } from "./event";
 import { mapEventMeetsCondition } from "./event";
 
 interface TestContext {
+  selfSwitch: MockedObject<MapEvent_SelfSwitchReader>;
   itemProvider: MockedObject<Provider_RpgItems>;
   actors: MockedObject<Rmmz_ActorsReadonly<unknown>>;
   party: Rmmz_BranchSourceParty<unknown>;
@@ -87,6 +89,9 @@ const createTestContext = <T>({
   trueSwitchIds,
 }: ContextSource<T>): TestContext => {
   return {
+    // 既定では立っていない。セルフスイッチ単体の検証は
+    // rmmzMock/core/objects/event.condition.test.ts で行う
+    selfSwitch: vi.fn(() => false),
     itemProvider: createItemProvider(item),
     actors: createActors(actor),
     party: createParty(member, hasItem),
@@ -113,6 +118,7 @@ const runTestCase = (testCase: TestCase): void => {
         context.party,
         context.variables,
         context.switches,
+        context.selfSwitch,
       );
       expect(result).toBe(true);
     });
@@ -127,6 +133,7 @@ const runTestCase = (testCase: TestCase): void => {
             context.party,
             context.variables,
             context.switches,
+            context.selfSwitch,
           );
           expect(result).toBe(true);
         });
