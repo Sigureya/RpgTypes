@@ -34,12 +34,8 @@ export const battlersRandomTarget = <T extends Targetable>(
   if (battlers.length === 0) {
     return [];
   }
-  const result: T[] = [];
   if (battlers.length === 1) {
-    for (let i = 0; i < repeat; i++) {
-      result.push(battlers[0]);
-    }
-    return result;
+    return new Array<T>(repeat).fill(battlers[0]);
   }
   // tgr は値ではなく計算である。コアスクリプトでは
   // tgr -> sparam(0) -> traitsPi -> allTraits() と辿り、1 回読むだけで
@@ -49,12 +45,18 @@ export const battlersRandomTarget = <T extends Targetable>(
   // repeat=3 では 18205ns → 6781ns。performance.md [GETR]
   const tgrList: number[] = battlers.map(readTgr);
   const tgrSum: number = tgrList.reduce(accumulateTgr, 0);
-  for (let i = 0; i < repeat; i++) {
-    result.push(randomSelect(battlers, tgrList, randomFn() * tgrSum));
-  }
-  return result;
+  return new Array<null>(repeat)
+    .fill(null)
+    .map(() => randomSelect(battlers, tgrList, randomFn() * tgrSum));
 };
 
+/**
+ * 重みの合計から引いていき、0 を下回った時点の 1 人を返す。
+ *
+ * 見つけた時点で抜けるので for のまま残す (style.md [LOOP] の例外)。
+ * reduce へ直すと最後まで走ることになり、実測でこの部分だけ 2 倍近く遅い。
+ * 全体では tgr の読み出しが支配的なので差は 1% 程度だが、速くはならない。
+ */
 const randomSelect = <T extends Targetable>(
   battlers: ReadonlyArray<T>,
   tgrList: ReadonlyArray<number>,
