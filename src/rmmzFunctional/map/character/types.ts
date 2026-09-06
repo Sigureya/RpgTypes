@@ -17,8 +17,17 @@ export interface Rmmz_CharacterCollisionProvider {
   isCollidedWithCharacters(x: number, y: number): boolean;
 }
 
+/** タイルの通行可否だけを見る範囲 */
+export type Rmmz_CharacterTilePassage = Pick<
+  Rmmz_CharacterMapProvider,
+  "roundXWithDirection" | "roundYWithDirection" | "isPassable"
+>;
+
+/** 移動できるかを見る範囲。タイルに加えて範囲内かと衝突を見る */
 export interface Rmmz_CharacterPassabilityProvider
-  extends Rmmz_CharacterMapProvider, Rmmz_CharacterCollisionProvider {}
+  extends Rmmz_CharacterTilePassage,
+    Pick<Rmmz_CharacterMapProvider, "isValid">,
+    Rmmz_CharacterCollisionProvider {}
 
 export interface CharacterPassabilityState {
   through: boolean;

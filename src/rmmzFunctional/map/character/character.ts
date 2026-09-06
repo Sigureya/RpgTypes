@@ -8,6 +8,7 @@ import {
   TURN_RIGHT_90_TABLE,
 } from "./constants";
 import type {
+  Rmmz_CharacterTilePassage,
   CharacterPassabilityState,
   CharacterPositionLike,
   CharacterScreenState,
@@ -17,6 +18,7 @@ import type {
 } from "./types";
 
 export type {
+  Rmmz_CharacterTilePassage,
   CharacterPassabilityState,
   CharacterPositionLike,
   CharacterScreenState,
@@ -62,7 +64,7 @@ export const isMapPassable = (
   x: number,
   y: number,
   direction: Direction8,
-  provider: Rmmz_CharacterMapProvider,
+  provider: Rmmz_CharacterTilePassage,
 ): boolean => {
   const x2 = provider.roundXWithDirection(x, direction);
   const y2 = provider.roundYWithDirection(y, direction);
