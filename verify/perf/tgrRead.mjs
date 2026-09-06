@@ -107,6 +107,44 @@ const impls = {
     }
     return result;
   },
+  // 採用候補: 外側だけ fill().map()、選択は早期に抜ける for のまま
+  "rnd-mixed": (battlers, randomFn, repeat) => {
+    if (battlers.length === 0) return [];
+    if (battlers.length === 1) return new Array(repeat).fill(battlers[0]);
+    const tgrList = battlers.map((b) => b.tgr);
+    const tgrSum = tgrList.reduce((acc, tgr) => acc + tgr, 0);
+    return new Array(repeat).fill(null).map(() => {
+      let rest = randomFn() * tgrSum;
+      for (let i = 0; i < tgrList.length; i++) {
+        rest -= tgrList[i];
+        if (rest <= 0) return battlers[i];
+      }
+      return battlers[battlers.length - 1];
+    });
+  },
+
+  // 採用候補: tgr を控えたうえで、選択を reduce + 状態 1 個にする
+  "rnd-reduce": (battlers, randomFn, repeat) => {
+    if (battlers.length === 0) return [];
+    if (battlers.length === 1) {
+      return new Array(repeat).fill(battlers[0]);
+    }
+    const tgrList = battlers.map((b) => b.tgr);
+    const tgrSum = tgrList.reduce((acc, tgr) => acc + tgr, 0);
+    return new Array(repeat).fill(null).map(() => {
+      const state = battlers.reduce(
+        (acc, battler, index) => {
+          if (acc.selected === null) {
+            acc.rest -= tgrList[index];
+            if (acc.rest <= 0) acc.selected = battler;
+          }
+          return acc;
+        },
+        { rest: randomFn() * tgrSum, selected: null },
+      );
+      return state.selected ?? battlers[battlers.length - 1];
+    });
+  },
 };
 
 // plain = 素のプロパティ（前回の計測条件）/ enemy = 特徴を持つ物 2 個 / actor = 8 個
