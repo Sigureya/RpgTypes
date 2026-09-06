@@ -1,6 +1,4 @@
 import {
-  FLAG_ID_AUTO_BATTLE,
-  FLAG_ID_GUARD,
   TRAIT_ACTION_PLUS,
   TRAIT_ATTACK_ELEMENT,
   TRAIT_ATTACK_SKILL,
@@ -11,7 +9,6 @@ import {
   TRAIT_SKILL_SEAL,
   TRAIT_SKILL_TYPE_ADD,
   TRAIT_SKILL_TYPE_SEAL,
-  TRAIT_SPECIAL_FLAG,
 } from "./core";
 import { someTraitMatched, traitSet, traitSum, traitSumAll } from "./trait";
 import type { Trait } from "./types";
@@ -59,20 +56,6 @@ export const traitActionPlusSet = (traits: ReadonlyArray<Trait>): number[] => {
     }
     return acc;
   }, []);
-};
-
-export const traitIsAutoBattle = (traits: ReadonlyArray<Trait>): boolean => {
-  return traits.some(
-    (trait) =>
-      trait.code === TRAIT_SPECIAL_FLAG && trait.value === FLAG_ID_AUTO_BATTLE,
-  );
-};
-
-export const traitIsGuardTrait = (traits: ReadonlyArray<Trait>): boolean => {
-  return traits.some(
-    (trait) =>
-      trait.code === TRAIT_SPECIAL_FLAG && trait.value === FLAG_ID_GUARD,
-  );
 };
 
 export const traitsAddedSkillTypes = (
