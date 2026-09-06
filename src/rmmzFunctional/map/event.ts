@@ -61,16 +61,15 @@ const isEventStartable = (
  */
 export type MapEvent_SelfSwitchReader = (selfSwitchCh: string) => boolean;
 
-export const mapEventFindProperPageIndex = (
+export const mapEventFindProperPageIndex = <T>(
   pages: ReadonlyArray<MapEventPage>,
-  gameObjects: Pick<
-    Rmmz_GameObjects,
-    "actors" | "party" | "variables" | "switches"
-  >,
   itemProvider: Provider_RpgItems,
+  actors: Rmmz_ActorsReadonly<T>,
+  party: Rmmz_BranchSourceParty<T>,
+  variables: Rmmz_Variables,
+  switches: Rmmz_Switches,
   selfSwitch: MapEvent_SelfSwitchReader,
 ): number => {
-  const { actors, party, variables, switches } = gameObjects;
   return pages.findLastIndex((page): boolean => {
     return mapEventMeetsCondition(
       page.conditions,
@@ -82,6 +81,34 @@ export const mapEventFindProperPageIndex = (
       selfSwitch,
     );
   });
+};
+
+/**
+ * $gameObjects をそのまま渡せる窓口。引数を流すだけで、判定は本体が行う。
+ *
+ * セルフスイッチの鍵はここで組み立てる。どのイベントかを知っているのは
+ * この層なので、純粋関数側はマップ ID もイベント ID も知らずに済む。
+ */
+export const mapEventFindProperPageIndexByObjects = (
+  pages: ReadonlyArray<MapEventPage>,
+  itemProvider: Provider_RpgItems,
+  gameObjects: Pick<
+    Rmmz_GameObjects,
+    "actors" | "party" | "variables" | "switches" | "selfSwitches"
+  >,
+  mapId: number,
+  eventId: number,
+): number => {
+  return mapEventFindProperPageIndex(
+    pages,
+    itemProvider,
+    gameObjects.actors,
+    gameObjects.party,
+    gameObjects.variables,
+    gameObjects.switches,
+    (selfSwitchCh) =>
+      gameObjects.selfSwitches.value([mapId, eventId, selfSwitchCh]) === true,
+  );
 };
 
 export const mapEventMeetsCondition = <T>(
