@@ -1,4 +1,5 @@
 import type { ColorRGBA } from "@RpgTypes/libs";
+import type { Rmmz_Picture } from "./picture";
 
 export interface Rmmz_ScreenProperties {
   // プロパティ
@@ -94,9 +95,4 @@ export interface Rmmz_Screen {
   rotatePicture(pictureId: number, speed: number): void;
   tintPicture(pictureId: number, tone: ColorRGBA, duration: number): void;
   erasePicture(pictureId: number): void;
-}
-
-// 依存する型
-interface Rmmz_Picture {
-  // 必要に応じて定義
 }

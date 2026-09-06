@@ -3,6 +3,7 @@ export type * from "./battle/item";
 export * from "./interpreter";
 export type * from "./map";
 export * from "./message";
+export type * from "./picture";
 export type * from "./screeen";
 export type * from "./system/system";
 export type * from "./temp";
