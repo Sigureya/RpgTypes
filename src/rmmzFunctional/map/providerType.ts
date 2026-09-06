@@ -4,17 +4,29 @@ import type {
 } from "@RpgTypes/libs";
 import type { Data_Map } from "@RpgTypes/rmmz/events";
 import type { MapEvent, MapEventPage } from "@RpgTypes/rmmz/rpg";
+import type { Data_MapTiles } from "@RpgTypes/rmmz/rpg/event/map/tiles";
 
-export interface Provider_MapTilesetFlags {
-  tilesetFlags(map: Pick<Data_Map, "tilesetId">): ReadonlyArray<number>;
+/**
+ * 通行判定が読むのはタイルとタイルセット番号だけ。
+ * provider にはこの範囲しか渡らないので、テストでは Data_Map を丸ごと
+ * 用意しなくてよい (any / unknown へ落とさずに済む)。
+ */
+export type Data_MapPassage = Data_MapTiles & Pick<Data_Map, "tilesetId">;
+
+export interface Provider_MapTilesetFlags<
+  M extends Data_MapPassage = Data_Map,
+> {
+  tilesetFlags(map: M): ReadonlyArray<number>;
 }
 
-export interface Provider_MapTileEventTileIds {
-  tileEventTileIds(map: Data_Map, x: number, y: number): ReadonlyArray<number>;
+export interface Provider_MapTileEventTileIds<
+  M extends Data_MapPassage = Data_Map,
+> {
+  tileEventTileIds(map: M, x: number, y: number): ReadonlyArray<number>;
 }
 
-export type Provider_MapPassage = Provider_MapTilesetFlags &
-  Provider_MapTileEventTileIds;
+export type Provider_MapPassage<M extends Data_MapPassage = Data_Map> =
+  Provider_MapTilesetFlags<M> & Provider_MapTileEventTileIds<M>;
 
 export interface Provider_MapEventPageResolver<
   CommandType extends EventCommandUnknown = EventCommandUnknown,
