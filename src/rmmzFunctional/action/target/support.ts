@@ -12,7 +12,22 @@ export const repeatTargets = <T>(
   battlers: ReadonlyArray<T>,
   repeat: number,
 ): T[] => {
-  return battlers.flatMap((b) => Array(repeat).fill(b));
+  // flatMap + Array(n).fill は対象 1 体につき配列を 1 つ作る。
+  // 実測で 549ns → 14ns (repeat=1) / 874ns → 68ns (repeat=3)。
+  // performance.md [FLAT]
+  if (repeat <= 0) {
+    return [];
+  }
+  if (repeat === 1) {
+    return Array.from(battlers);
+  }
+  const result: T[] = [];
+  for (const battler of battlers) {
+    for (let i = 0; i < repeat; i++) {
+      result.push(battler);
+    }
+  }
+  return result;
 };
 
 export const smoothTarget = <T>(

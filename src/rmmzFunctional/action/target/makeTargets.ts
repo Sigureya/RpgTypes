@@ -108,8 +108,11 @@ const normalTarget = <T extends Targetable, S extends Targetable>(
 const actionTargetsEveryone = <T extends Targetable>(
   provider: Provider_Battlers<T>,
 ): T[] => {
-  // 最適化のためにforループ。
-  const result = [];
+  // 2 つの隊列を 1 つの配列へ集める。
+  // filter した配列を spread / concat で繋ぐと配列を 2〜3 個作ることになり、
+  // 実測で 62ns → 109ns / 180ns と遅くなる (performance.md [JOIN])。
+  // for である必要は無く、reduce でも同じ速さ。配列を 1 つしか作らないことが要点。
+  const result: T[] = [];
   for (const battler of provider.friendsUnit()) {
     if (battlerIsAlive(battler)) {
       result.push(battler);
