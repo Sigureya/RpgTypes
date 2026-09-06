@@ -42,8 +42,6 @@ export interface Rmmz_CharacterBase extends Rmmz_MapCharacter {
   scrolledY(): number;
   isNearTheScreen(): boolean;
 
-  deltaXFrom(x: number): number;
-  deltaYFrom(y: number): number;
 }
 
 export interface Rmmz_CharacterBase_Constructor {
@@ -53,6 +51,8 @@ export interface Rmmz_CharacterBase_Constructor {
 
 /** Game_Character。向きの変更を持つ */
 export interface Rmmz_Character extends Rmmz_CharacterBase {
+  deltaXFrom(x: number): number;
+  deltaYFrom(y: number): number;
   turnRight90(): void;
   turnLeft90(): void;
   turn180(): void;
