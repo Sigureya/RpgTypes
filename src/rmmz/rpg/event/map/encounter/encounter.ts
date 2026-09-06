@@ -29,15 +29,6 @@ export const selectEncounters = (
   return selectByWeight(randomFn(selected.totalWeight), selected.list);
 };
 
-/**
- * 走査中の状態。最初に 1 つだけ作り、書き足していく。
- * 要素ごとに作り直す (spread で畳む) と実測で 4.4 倍遅くなる。
- */
-interface SelectionState {
-  list: Encounter[];
-  totalWeight: number;
-}
-
 const pickValid =
   (
     isEncounterValid: (
@@ -58,6 +49,15 @@ const pickValid =
     }
     return acc;
   };
+
+/**
+ * 走査中の状態。最初に 1 つだけ作り、書き足していく。
+ * 要素ごとに作り直す (spread で畳む) と実測で 4.4 倍遅くなる。
+ */
+interface SelectionState {
+  list: Encounter[];
+  totalWeight: number;
+}
 
 const selectByWeight = (
   w: number,
