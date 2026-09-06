@@ -25,8 +25,9 @@ export const lukEffectRate = (subjectLuk: number, targetLuk: number): number => 
  * 実測: ステート 6 個で 19823ns → 4025ns。performance.md [HOTL]
  *
  * 無効化されているステートは 0 が返る。呼び出し元はそこで打ち切ってよい。
- * ただしコアスクリプトは倍率を出してから乱数を引き、addState 側で
- * 無効化を弾く。乱数を引く前に打ち切ると、乱数の消費列がコアとずれる。
+ * コアスクリプトは倍率を出してから乱数を引き、addState 側で無効化を弾くため、
+ * 乱数の消費回数はコアとずれる。ここでは呼び出し回数の削減を優先し、
+ * ずれを許容する (再構成であり、乱数列の再現は目的にしていない)。
  */
 export const traitsCalcAttackStateRate = (
   stateId: number,
