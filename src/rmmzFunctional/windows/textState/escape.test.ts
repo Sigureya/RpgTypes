@@ -138,7 +138,7 @@ const testCases: TestCase[] = [
   {
     input: "Text Position \\X[20]",
     calls: [{ ctrl: "X", value: 20 }],
-    expected: "Text Position \\X[20]",
+    expected: "Text Position \x1bX[20]",
     expected2: "Text Position @X:20",
     usedValiableIds: [],
   },
@@ -222,8 +222,8 @@ const testCases: TestCase[] = [
   {
     input: "\\v[\\v[\\v[1]]]",
     calls: [],
-    expected: "\\v[4]",
-    expected2: "\\v[4]",
+    expected: "\x1bv[4]",
+    expected2: "\x1bv[4]",
     usedValiableIds: [1, 2],
   },
   {
