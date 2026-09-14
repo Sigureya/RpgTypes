@@ -21,6 +21,9 @@ export const convertEscapeCharactersMzStyle = (
   variables: Rmmz_Variables,
   currncyUnit: string = "",
 ): string => {
+  if (!text.includes("\\")) {
+    return text;
+  }
   return convertEscapeCharacters(
     text,
     (value) => variables.value(value),
