@@ -5,8 +5,8 @@ import type {
   Rmmz_Members,
   Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
-import { convertEscapeCharactersMzStyle } from "@RpgTypes/rpgNext/window";
 import { Window_Base } from "./rmmz_windows";
+import { convertEscapeCharactersMzStyle } from "@RpgTypes/rmmzFunctional/windows";
 
 interface FakeWindowBase {
   actorName(n: number): string;
