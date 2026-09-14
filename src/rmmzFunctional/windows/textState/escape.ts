@@ -4,6 +4,8 @@ import type {
   Rmmz_Variables,
 } from "@RpgTypes/rmmzRuntime";
 
+// ここで型を定義しているが、エディタ上の表示の都合で内部に閉じ込めている
+// 公開関数で型を直書きしているのは意図的
 interface HasName {
   name(): string;
 }
@@ -19,11 +21,14 @@ export const convertEscapeCharactersMzStyle = (
   variables: Rmmz_Variables,
   currncyUnit: string = "",
 ): string => {
+  if (!text.includes("\\")) {
+    return text;
+  }
   return convertEscapeCharacters(
     text,
     (value) => variables.value(value),
-    (ctrl, value) =>
-      rmmzObjectsHandling(ctrl, value, actors, variables, party, currncyUnit),
+    (ctrl, value) => rmmzObjectsHandling(ctrl, value, actors, variables, party),
+    currncyUnit,
   );
 };
 
@@ -33,24 +38,31 @@ const rmmzObjectsHandling = (
   actors: Rmmz_ActorsReadonly<HasName>,
   variables: Rmmz_Variables,
   party: Rmmz_Members<HasName>,
-  currncyUnit: string,
 ): string | undefined => {
   if (ctrl === "N") {
-    const actor = actors.actor(value);
-    return actor ? actor.name() : "";
+    return actorName(value, actors);
   }
   if (ctrl === "V") {
-    const variable = variables.value(value);
-    return variable !== undefined ? String(variable) : "";
+    return variebleText(value, variables);
   }
   if (ctrl === "P") {
     return resolvePartyMemberName(value, party);
   }
-  if (ctrl === "G") {
-    return currncyUnit;
-  }
 
   return undefined;
+};
+
+const actorName = (
+  value: number,
+  actors: Rmmz_ActorsReadonly<HasName>,
+): string => {
+  const actor = actors.actor(value);
+  return actor ? actor.name() : "";
+};
+
+const variebleText = (value: number, variables: Rmmz_Variables): string => {
+  const variable = variables.value(value);
+  return variable !== undefined ? String(variable) : "";
 };
 
 const resolvePartyMemberName = (
@@ -73,6 +85,7 @@ export const convertEscapeCharacters = (
   text: string,
   variableFn: (valiableId: number) => string | number,
   textFn: (ctrl: string, value: number) => string | undefined,
+  currncyUnit: string = "",
 ): string => {
   const backSlashEscaped: string = text
     .replace(/\\/g, "\x1b")
@@ -81,13 +94,17 @@ export const convertEscapeCharacters = (
     backSlashEscaped,
     variableFn,
   );
-  return replaceName(variableConverted, textFn).replace(/\x1b/g, "\\");
+  // コアと同じく \x1bG を前方一致で一括して置き換える。textFn より先に処理するので G は textFn へ渡らない
+  const currencyConverted = variableConverted.replace(/\x1bG/gi, currncyUnit);
+  // コアと同じく、処理しなかった制御文字は \x1b のまま返す
+  return replaceName(currencyConverted, textFn);
 };
 
 const replaceName = (
   text: string,
   fn: (ctrl: string, value: number) => string | undefined,
 ): string => {
+  // 制御文字の長さは16文字に制限。無限だと何か問題が起こる
   return text.replace(
     /\x1b(?!V\b)([A-Z]{1,16})\[(\d+)\]/gi,
     (match, ctrl: string, value: string) => {
@@ -110,6 +127,7 @@ const replaceVariableTextFixedTwice = (
   text: string,
   fn: (value: number) => string | number,
 ): string => {
+  // オリジナル実装と異なるが、置き換えを2回に制限している
   const t1 = replaceVariableTextOnce(text, fn);
   return replaceVariableTextOnce(t1, fn);
 };

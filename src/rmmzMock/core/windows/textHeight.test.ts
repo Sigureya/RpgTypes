@@ -1,7 +1,7 @@
 import type { MockedObject } from "vitest";
 import { describe, expect, test, vi } from "vitest";
-import { calcMaxFontSizeInLineMZ } from "@RpgTypes/rpgNext/window";
 import { Window_Base } from "./rmmz_windows";
+import { calcMaxFontSizeInLineMZ } from "@RpgTypes/rmmzFunctional/windows";
 
 interface MockWindowBase {
   makeFontBigger(): void;
