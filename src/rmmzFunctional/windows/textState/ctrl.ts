@@ -1,10 +1,3 @@
-import type {
-  Rmmz_Bitmap,
-  Rmmz_TextState,
-  Rmmz_Window_Base,
-} from "@RpgTypes/rmmzRuntime";
-import { convertEscapeCharacters } from "./escape";
-
 export const processControlCharacter = (
   text: string,
   fn: (ctrl: string) => void,
