@@ -1,9 +1,19 @@
-import type { Rmmz_TextState, Rmmz_Bitmap } from "@RpgTypes/rmmzRuntime";
+import type {
+  Rmmz_TextState,
+  Rmmz_Bitmap,
+  Rmmz_System,
+  Rmmz_Members,
+  Rmmz_ActorsReadonly,
+  Rmmz_Variables,
+} from "@RpgTypes/rmmzRuntime";
 import {
   BUFFER_INITIAL_TEXT_RTL_TURE,
   BUFFER_INITIAL_TEXT_RTL_FALSE,
 } from "./constants";
-import { convertEscapeCharacters } from "./escape";
+import {
+  convertEscapeCharacters,
+  convertEscapeCharactersMzStyle,
+} from "./escape";
 
 const containsArabic = function (str: string): boolean {
   const regExp = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/;
@@ -14,12 +24,52 @@ export const createTextBuffer = (rtl: boolean) => {
   return rtl ? BUFFER_INITIAL_TEXT_RTL_TURE : BUFFER_INITIAL_TEXT_RTL_FALSE;
 };
 
+export const createTextStateMz = (
+  text: string,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  system: Rmmz_System,
+  actors: Rmmz_ActorsReadonly<{
+    name(): string;
+  }>,
+  party: Rmmz_Members<{
+    name(): string;
+  }>,
+  variables: Rmmz_Variables,
+): Rmmz_TextState => {
+  const rtl = containsArabic(text);
+  return {
+    buffer: createTextBuffer(rtl),
+    rtl: rtl,
+    text: convertEscapeCharactersMzStyle(
+      text,
+      actors,
+      party,
+      variables,
+      system.mainFontFace(),
+    ),
+    drawing: true,
+    index: 0,
+    x: x,
+    y: y,
+    width: width,
+    height: height,
+    startX: x,
+    startY: y,
+    outputHeight: 0,
+    outputWidth: 0,
+  };
+};
+
 export const createTextState = (
   text: string,
   x: number,
   y: number,
   width: number,
   height: number,
+  currncyUnit: string,
   variableFn: (valiableId: number) => string | number,
   textFn: (ctrl: string, value: number) => string | undefined,
 ): Rmmz_TextState => {
@@ -27,7 +77,7 @@ export const createTextState = (
   return {
     buffer: createTextBuffer(rtl),
     rtl: rtl,
-    text: convertEscapeCharacters(text, variableFn, textFn),
+    text: convertEscapeCharacters(text, variableFn, textFn, currncyUnit),
     index: 0,
     x: x,
     y: y,
