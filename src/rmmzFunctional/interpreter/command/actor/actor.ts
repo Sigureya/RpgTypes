@@ -7,10 +7,11 @@ import type {
   Rmmz_ActorsReadonly,
   Rmmz_PlayerCharactor,
 } from "@RpgTypes/rmmzRuntime";
+import type { Rmmz_ActorImages } from "@RpgTypes/rmmzRuntime/objects/core/battle/battler/actorBase";
 
 export const commandChangeActorClass = (
   command: Command_ChangeClaass,
-  provider: Rmmz_ActorsReadonly<Rmmz_Actor>,
+  provider: Rmmz_ActorsReadonly<Pick<Rmmz_Actor, "changeClass">>,
 ): void => {
   const actor = provider.actor(command.parameters[0]);
   if (actor) {
@@ -22,8 +23,8 @@ export const commandChangeActorClass = (
 
 export const commandChangeActorImages = (
   { parameters }: Command_ChangeActorImages,
-  provider: Rmmz_ActorsReadonly<Rmmz_Actor>,
-  gamePlayer: Rmmz_PlayerCharactor,
+  provider: Rmmz_ActorsReadonly<Rmmz_ActorImages>,
+  gamePlayer: Pick<Rmmz_PlayerCharactor, "refresh">,
 ): void => {
   const actor = provider.actor(parameters[0]);
   if (actor) {
