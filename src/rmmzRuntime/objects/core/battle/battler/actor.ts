@@ -2,8 +2,10 @@ import type { Data_Armor, Data_Class, Data_Weapon } from "@RpgTypes/rmmz/rpg";
 import type { Rmmz_ActorTexts } from "./actorBase/text";
 import type { Rmmz_Level } from "./base/level";
 import type { Rmmz_Battler } from "./battler";
+import type { Rmmz_ActorImages } from "./actorBase";
 
-export interface Rmmz_Actor extends Rmmz_Battler, Rmmz_Level, Rmmz_ActorTexts {
+export interface Rmmz_Actor
+  extends Rmmz_Battler, Rmmz_Level, Rmmz_ActorTexts, Rmmz_ActorImages {
   actorId(): number;
   setup(actorId: number): void;
   changeEquipById(etypeId: number, itemId: number): void;
